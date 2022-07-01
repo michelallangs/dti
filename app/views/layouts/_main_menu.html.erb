@@ -1,0 +1,25 @@
+<aside class="menu main-sidebar">
+	<header class="sidebar-header">
+		<%= link_to image_tag("logo-dti-branco.png"), home_path, class: 'logo-dti' %>
+
+		<h3 class="header-title">SISTEMA DE <br>GERENCIAMENTO DE <br>CHAMADOS TÉCNICOS</h3>
+	</header>
+	
+	<nav class="sidebar-nav">
+		<h6 class="nav-title">Navegação principal</h6>
+		<ul>
+			<li><%= link_to home_path, class: current?(home_path) do %><i class="home"></i>Página inicial<% end %></li>
+			<li><%= link_to orders_path, class: current?(orders_path) do %><i class="orders"></i>Chamados<% end %></li>
+			<li><%= link_to "#" do %><i class="equipments"></i>Equipamentos<% end %></li>
+			<li><%= link_to "#" do %><i class="schools"></i>Unidades<% end %></li>
+			<li><%= link_to "#" do %><i class="users"></i>Usuários<% end %></li>
+			<li><%= link_to "#" do %><i class="settings"></i>Configurações<% end %></li>
+		</ul>
+	</nav>
+
+	<footer class="sidebar-footer">
+		<p class="welcome">Bem vindo,</p>
+    <p class="welcome-user"><%= username %>!</p>
+		<%= link_to destroy_user_session_path, method: :delete do %><i class="sign-out"></i>Sair<% end %>
+	</footer>
+</aside>

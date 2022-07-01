@@ -1,0 +1,34 @@
+h1 {
+  font-size: 3em;
+}
+
+p, span {
+	line-height: 1.5em;
+	font-size: 1em;
+	font-family: $font;
+	font-weight: 300;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}

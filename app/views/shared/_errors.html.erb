@@ -1,0 +1,13 @@
+<% if object.errors.any? %>
+  <div id="error_explanation">
+   <div class="alert alert-error">
+     Por favor, corrija os erros a seguir:
+   </div>
+
+    <ul>
+      <% object.errors.messages.each do |msg| %>
+        <li><%= msg[1].to_sentence %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

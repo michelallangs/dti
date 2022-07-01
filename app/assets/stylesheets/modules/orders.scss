@@ -1,0 +1,240 @@
+#orders {
+	&.new, &.create, &.edit, &.update {
+		.main-panel .main-container {
+			.container-header {
+				.header-title {
+					text-transform: uppercase;
+					span {
+						font-style: initial;
+					}
+				}
+			}
+
+			.container-body {
+				padding-top: 0;
+			}
+		}
+	}
+
+	&.index {
+		.main-panel .main-container .container-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.right-content {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+		}
+
+		.container-body {
+			.order-cards {
+				display: grid;
+				grid-gap: 25px;
+				grid-template-columns: 1fr 1fr 1fr 1fr;
+
+				.order-card {
+				  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+				  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+				  border-radius: 5px;
+				  min-width: 200px;
+
+					&:hover {
+					  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					}
+
+					.order-card-header {
+						padding: 15px;
+
+						.left-content {
+							display: flex;
+							flex-direction: column;
+
+							.order-id {
+								font-size: .9em;
+								font-weight: 700;
+							}
+
+							.order-spot {
+								font-style: italic;
+							}
+						}
+
+						.left-content .order-spot, .right-content .order-creation-date {
+							font-size: .75em;
+							color: $grey;
+						}
+					}
+
+					.order-card-header {
+						display: flex;
+						align-items: start;
+						justify-content: space-between;
+					}
+
+					.order-card-body {
+						padding: 5px 15px 25px 15px;
+				    text-align: center;
+
+				    p {
+				    	text-overflow: ellipsis;
+				    	overflow: hidden;
+				    	white-space: nowrap;
+				    	font-size: .9em;
+				    }
+					}
+
+					.order-card-footer {
+						width: 100%;
+						height: 10px;
+						margin-bottom: 10px;
+
+						&.aberto {
+							background-color: #2dccff;							
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.edit, &.update {
+		.order-tabs {
+			position: relative;
+
+			&:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #d6d6d6;
+				display: inline-block;
+				height: 5px;
+			}
+
+			.order-tab button {
+				background-color: $primary-color;
+				border-bottom: solid 5px #d6d6d6;
+				padding: 10px 20px;
+				cursor: pointer;
+				@include prefix(transition, all .5s cubic-bezier(.075,.82,.165,1));
+				position: relative;
+				z-index: 2;
+
+				&:hover, &.current {
+					border-color: $info;
+				}
+			}
+		}
+
+		.order-data {
+			width: 100%;
+			display: none;
+
+			&.current {
+				display: block;
+			}
+		}
+	}
+
+	.main-panel {
+		.main-container {
+			.form {
+				.equipment-category {
+					font-size: .9em;
+					font-weight: 600;
+				}
+
+				.custom-radio {
+					justify-content: center;
+					align-items: start;
+					grid-gap: 0;
+					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+					span.radio {
+						label {
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							border: none;
+							position: relative;
+							line-height: 1em;
+
+							&:before, &:after {
+								content: "";
+								border-radius: 50%;
+								margin-bottom: 20px;
+							}
+
+							&:before {
+								width: 90px;
+								height: 90px;
+								background-color: #d6d6d6;
+								position: relative;
+								z-index: 2;
+							}
+
+							&:after {
+								position: absolute;
+								top: 0;
+								left: 50%;
+								@include prefix(transform, translateX(-50%));
+								width: 100px;
+								height: 100px;
+								background-color: #f4f4f4;
+							}
+
+							&.checked, &:hover {
+								color: #2dccff !important;
+
+								&:before {
+									background-color: #2dccff;
+								}
+
+								&:after {
+									background-color: rgba(#2dccff, 0.25);
+								}
+							}
+
+							&[for="order_stuff_attributes_category_cpu"]:before {
+								@include background("icons/cpu.svg", 48px);
+							}
+
+							&[for="order_stuff_attributes_category_monitor"]:before {
+								@include background("icons/monitor.svg", 32px);
+							}
+
+							&[for="order_stuff_attributes_category_impressora"]:before {
+								@include background("icons/printer.svg", 32px);
+							}
+
+							&[for="order_stuff_attributes_category_estabilizadorno-break"]:before {
+								@include background("icons/nobreak.svg", 32px);
+							}
+
+							&[for="order_stuff_attributes_category_outro"]:before {
+								@include background("icons/dots.svg", 32px);
+							}
+						}
+					}
+				}
+
+				.input .numeric {
+					width: 150px !important;
+				}
+
+				.input:not(.submit):not(.boolean), textarea {
+					width: 100%;
+				}
+
+				.actions {
+					display: flex;
+					gap: 25px;
+				}
+			}
+		}
+	}
+}

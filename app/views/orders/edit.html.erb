@@ -1,0 +1,82 @@
+<div class="box main-panel">
+	<%= render "layouts/main_menu" %>
+
+	<div class="container main-container">
+		<header class="container-header">
+			<h1 class="header-title text-center">Editar dados do <span>chamado</span></h1>
+		</header>
+
+		<section class="container-body">
+			<% if is_admin? %>
+				<div class="order-tabs flex-row h-centered m-b-25">
+					<div class="order-tab text-center">
+						<button class="btn-data" order-data="school-data">Informações do chamado</button>
+					</div>
+				  
+					<div class="order-tab text-center">
+				  	<button class="btn-data current" order-data="admin-data">Relatório</button>
+					</div>
+				</div>
+			<% end %>
+
+			<%= simple_form_for @order, url: edit_order_path, html: { class: "form" } do |f| %>
+	      <%= f.simple_fields_for :stuff do |s| %>
+					<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
+	      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
+
+	      		<section class="bordered">
+			      	<div class="flex-row h-centered text-center">
+			      		<div class="flex-col flex-col-4 h-centered">
+		      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
+								</div>	      		
+			      	</div>
+	      		</section>
+			      		
+	      		<section class="bordered">
+			      	<div class="flex-row h-centered">
+								<div class="flex-col flex-col-10">
+					      	<p class="equipment-category text-center">Selecione a categoria do equipamento</p>
+				          <%= s.input :category, label: false, as: :radio_buttons, collection: ['CPU', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro'], wrapper_html: { class: "custom-radio" } %>
+								</div>	      		
+			      	</div>
+	      		</section>
+
+	      		<section class="bordered">
+		          <div class="flex-row gap-50">
+		          	<div class="flex-col flex-col-4">
+									<%= s.input :patrimony, required: false, as: :numeric, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+
+		        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: ['Oro', 'Neologic', 'Microsoft', 'LG', 'Acer'], prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+
+		        			<%= f.input :spot, required: false, label: "Local de instalação", collection: ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca'], prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>
+
+		          	<div class="flex-col flex-col-8">
+		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+		          	</div>
+		          </div>
+	      		</section>
+    			</div>
+
+    			<% if is_admin? %>
+	    			<div id="admin-data" class="order-data current">
+				    	<section class="bordered">
+				      	<div class="flex-row h-centered text-center">
+				      		<div class="flex-col flex-col-12 h-centered">
+			      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean" } %>
+									</div>	      		
+				      	</div>
+		      		</section>
+				    </div>
+				  <% end %>
+
+	        <div class="actions m-t-25">
+	          <%= f.submit "Atualizar dados", data: { disable_with: "Aguarde..." }, class: "btn" %>
+	          <%= link_to "Voltar", :back, class: "btn-cancel" %>
+	          <%= link_to "Excluir chamado", destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert" %>
+	        </div>
+	      <% end %>
+	    <% end %>
+		</section>
+	</div>
+</div>

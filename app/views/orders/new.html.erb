@@ -1,0 +1,49 @@
+<div class="box main-panel">
+	<%= render "layouts/main_menu" %>
+
+	<div class="container main-container">
+		<header class="container-header">
+			<h1 class="header-title text-center">Abertura de <span>chamado</span></h1>
+		</header>
+
+		<section class="container-body">
+			<%= simple_form_for @order, url: new_order_path, html: { class: "form" } do |f| %>
+	      <%= f.simple_fields_for :stuff do |s| %>
+	      	<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
+
+	      	<div class="flex-row h-centered text-center">
+	      		<div class="flex-col flex-col-4 h-centered">
+      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
+						</div>	      		
+	      	</div>
+	      		
+	      	<div class="flex-row h-centered m-t-50">
+						<div class="flex-col flex-col-10">
+			      	<p class="equipment-category text-center">Selecione a categoria do equipamento</p>
+		          <%= s.input :category, label: false, as: :radio_buttons, collection: ['CPU', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro'], wrapper_html: { class: "custom-radio" } %>
+						</div>	      		
+	      	</div>
+
+          <div class="flex-row gap-50 m-t-50">
+          	<div class="flex-col flex-col-4">
+							<%= s.input :patrimony, required: false, as: :numeric, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+
+        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: ['Oro', 'Neologic', 'Microsoft', 'LG', 'Acer'], prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+
+        			<%= f.input :spot, required: false, label: "Local de instalação", collection: ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca'], prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+          	</div>
+
+          	<div class="flex-col flex-col-8">
+          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+          	</div>
+          </div>
+
+	        <div class="actions m-t-50">
+	          <%= f.submit "Finalizar", data: { disable_with: "Aguarde..." }, class: "btn" %>
+	          <%= link_to "Voltar", :back, class: "btn-cancel" %>
+	        </div>
+	      <% end %>
+	    <% end %>
+		</section>
+	</div>
+</div>

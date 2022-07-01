@@ -1,0 +1,151 @@
+.main-sidebar {
+	width: 300px;
+	display: flex;
+	flex-direction: column;
+	background-color: $secondary-color;
+
+	.sidebar-header {
+		display: grid;
+		grid-auto-flow: column;
+		align-items: center;
+		justify-content: center;
+		grid-gap: 15px;
+		padding: 25px;
+
+		.logo-dti img {
+			width: 60px;
+		}
+
+		h3 {
+			font-size: .6em;
+			color: $primary-color;
+		}
+	}
+
+	.sidebar-nav {
+		height: 100%;
+
+		h6 {
+			opacity: .75;
+			color: $grey;
+			padding: 0 25px;
+			text-transform: uppercase;
+		}
+
+		ul {
+			margin: 15px 0;
+			list-style: none;
+
+			li {
+				a {
+					padding: 25px;
+					display: block;
+					color: $primary-color;
+					text-decoration: none;
+					font-size: .75em;
+					position: relative;
+
+					&, &:before {
+						@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
+					}
+
+					&:before {
+						content: "";
+						width: 5px;
+						display: inline-block;
+						position: absolute;
+						left: 0;
+						top: 0;
+						bottom: 0;
+						background-color: $primary-color;
+						opacity: 0;
+					}
+
+					&:hover {
+						opacity: .75;
+						@include prefix(transform, translateY(-3px));
+					}
+
+					i {
+						width: 20px;
+						height: 20px;
+						display: inline-block;
+						margin-right: 20px;
+						vertical-align: middle;
+						@include prefix(filter, invert(100%));
+
+						&.home {
+					    @include background("icons/home.svg", "icon");
+						}
+
+						&.orders {
+					    @include background("icons/document.svg", "icon");
+						}
+
+						&.equipments {
+					    @include background("icons/laptop.svg", "icon");
+						}
+
+						&.schools {
+					    @include background("icons/school.svg", "icon");
+						}
+
+						&.users {
+					    @include background("icons/users.svg", "icon");
+						}
+
+						&.settings {
+					    @include background("icons/settings.svg", "icon");
+						}
+					}
+				}
+
+				a.active:before, a:hover:before {
+					opacity: 1;
+				}
+			}
+		}
+	}
+
+	.sidebar-footer {
+		.welcome, .welcome-user {
+			color: $primary-color;
+			padding: 0 25px;
+		}
+
+		.welcome {
+			font-size: .75em;
+	    color: #9ea7ad;
+	    margin-bottom: -5px;
+		}
+
+		.welcome-user {
+			font-weight: 600;
+    	font-style: italic;
+		}
+
+		a {
+			padding: 25px;
+			display: block;
+			color: $primary-color;
+			text-decoration: none;
+			font-size: .75em;
+
+			&:hover {
+				opacity: .75;
+				@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
+				@include prefix(transform, translateY(-3px));
+			}
+
+			.sign-out {
+				width: 20px;
+				height: 20px;
+				display: inline-block;
+				margin-right: 20px;
+				vertical-align: middle;
+				@include prefix(filter, invert(100%));
+				@include background("icons/sign-out.svg", "icon");
+			}
+		}
+	}
+}

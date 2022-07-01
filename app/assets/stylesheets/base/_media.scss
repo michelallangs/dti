@@ -1,0 +1,46 @@
+@media only screen and (max-width: 1999px){
+  html, body {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 991px){
+  html, body {
+    font-size: 15px;
+
+    @for $i from 1 through 12 {
+      .col-md-#{$i} {
+        @include span-columns($i);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 767px){
+  html, body {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 639px){
+  html, body {
+    @for $i from 1 through 12 {
+      .col-sm-#{$i} {
+        @include span-columns($i);
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 479px){
+  html, body {
+    font-size: 14px;
+  }
+}
+
+//fix for iPhone
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
