@@ -18,22 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def user_params
-    params.require(:user).permit(
-      :username,
-      :email,
-      :password,
-      :password_confirmation,
-      :user_level,
-      school_attributes: [
-        :segment, 
-        :name, 
-        :address, 
-        :address_number, 
-        :district,
-        :zip_code,
-        :phone,
-      ]
-    )
+    params.require(:user).permit!
   end
 
   def load_schools

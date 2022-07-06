@@ -90,8 +90,7 @@
 }
 
 .search {
-	display: flex;
-	align-items: center;
+	display: inline-block;
 	position: relative;
 
 	&:before {
@@ -107,17 +106,21 @@
 	input[type="text"], input[type="number"] {
 		padding: 10px 130px 10px 46px;
 		border: solid 1px #d6d6d6;
-		border-radius: 20px;
+		border-radius: 50px;
 		font-size: .75em;
+		max-width: 100%;
 		width: 400px;
 	}
 
 	input[type="submit"] {
+		position: absolute;
+		right: 1px;
+		top: 50%;
+		height: calc(100% - 2px);
 		cursor: pointer;
 		width: 120px;
-		padding: 9px 0;
-		@include prefix(transform, translateX(-121px));
-		border-radius: 20px;
+		@include prefix(transform, translateY(-50%));
+		border-radius: 50px;
 		text-transform: uppercase;
 		font-weight: 600;
 		@include prefix(transition, all 250ms);
@@ -222,9 +225,34 @@
 section.bordered {
 	border: solid 1px #eaeaea;
   border-radius: 5px;
-  padding: 25px 15px;
+  padding: 25px;
 
   &:nth-of-type(n+2) {
   	margin-top: 15px;
   }
+}
+
+dl {
+	width: 100%;
+	display: flex;
+	gap: 15px;
+
+	&.as-block {
+		flex-direction: column;
+	}
+
+	&:nth-of-type(n+2) {
+		margin-top: 15px;
+	}
+
+	dt {
+		width: 200px;
+		color: $grey;
+		font-weight: 300;
+		font-size: .9em;
+	}
+
+	dd {
+		width: calc(100% - 200px);
+	}
 }

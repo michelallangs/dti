@@ -1,3 +1,2 @@
 class StuffsController < ApplicationController
-	
 end

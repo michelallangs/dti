@@ -4,14 +4,15 @@ class CreateOrders < ActiveRecord::Migration[7.0]
       t.string :requester
       t.string :spot
       t.text :defect
-      t.boolean :backup
+      t.string :backup, default: "Não"
       t.text :performed_service
       t.text :obs
       t.integer :removal_technician
       t.integer :maintenance_technician
+      t.integer :updated_by
       t.date :start_date
       t.date :end_date
-      t.string :status, default: "Aberto"
+      t.string :status, default: "Em aberto"
 
       t.timestamps
     end

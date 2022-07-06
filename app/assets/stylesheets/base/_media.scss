@@ -13,12 +13,88 @@
         @include span-columns($i);
       }
     }
+
+    .main-sidebar {
+      width: 70px;
+
+      .sidebar-header {
+        .logo-dti img {
+          width: 35px;
+        }
+
+        .header-title {
+          display: none;
+        }
+      }
+
+      .sidebar-nav {
+        .nav-title {
+          display: none;
+        }
+
+        ul li a {
+          font-size: 0;
+
+          &:before {
+            display: none;
+          }
+        }
+      }
+
+      .sidebar-footer {
+        .welcome, .welcome-user {
+          display: none;
+        }
+
+        a {
+          font-size: 0;
+        }
+      }
+    }
+
+    .main-panel .main-container .container-header {
+      flex-direction: column;
+      gap: 15px;
+
+      .as-grid, .as-list {
+        display: none;
+      }
+    }
+
+    .order-cards {
+      grid-template-columns: 1fr 1fr !important;
+    }
   }
 }
 
 @media only screen and (max-width: 767px){
   html, body {
     font-size: 14px;
+
+    .flex-row:not(.order-tabs) {
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form .actions {
+      flex-direction: column;
+    }
+
+    .order-cards {
+      grid-template-columns: 1fr !important;
+    }
+
+    #orders .main-panel .main-container .form .custom-radio {
+      grid-template-columns: auto;
+    }
+
+    dl {
+      flex-direction: column;
+
+      dt, dd {
+        width: 100%;
+      }
+    }
   }
 }
 
@@ -27,6 +103,29 @@
     @for $i from 1 through 12 {
       .col-sm-#{$i} {
         @include span-columns($i);
+      }
+    }
+
+    .main-panel .main-container {
+      padding: 15px;
+
+      .container-header {
+        .left-content, .right-content {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      .search {
+        display: block;
+
+        input[type="text"] {
+          padding: 10px 15px 10px 46px;
+        }
+
+        input[type="submit"] {
+          display: none;
+        }
       }
     }
   }

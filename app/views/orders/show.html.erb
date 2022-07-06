@@ -1,0 +1,92 @@
+<div class="box main-panel">
+	<%= render "layouts/main_menu" %>
+
+	<div class="container main-container">
+		<header class="container-header">
+			<h1 class="header-title text-center">Detalhes do <span>chamado</span></h1>
+		</header>
+
+		<section class="container-body">
+    	<div class="flex-row order-info m-b-5">
+    		<div class="flex-col flex-col-12 order-id text-center">
+    			<%= content_tag :h6 do %>
+    				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
+    				<%= content_tag :span, " - #{order_creator(@order.user_id)}" if is_admin? %>
+    			<% end %>
+    		</div>
+    	</div>
+
+  		<section class="bordered">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Nome do(a) solicitante:" %>
+  				<%= content_tag :dd, @order.requester %>
+  			<% end %>
+  		</section>
+      		
+  		<section class="bordered">
+  			<h3 class="m-b-25">Informações do equipamento</h3>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Categoria:" %>
+  				<%= content_tag :dd, @order.stuff.category %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Número de patrimônio:" %>
+  				<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Marca/modelo:" %>
+  				<%= content_tag :dd, @order.stuff.brand %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Local de instalação:" %>
+  				<%= content_tag :dd, @order.spot %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Defeito apresentado:" %>
+  				<%= content_tag :dd, @order.defect %>
+  			<% end %>
+  		</section>
+
+  		<section class="bordered">
+  			<h3 class="m-b-25">Relatório</h3>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Necessário backup?" %>
+  				<%= content_tag :dd, @order.backup %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Status:" %>
+  				<%= content_tag :dd, @order.status %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Serviço realizado:" %>
+  				<%= content_tag :dd, @order.performed_service %>
+  			<% end %>
+
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Observações:" %>
+  				<%= content_tag :dd, @order.obs %>
+  			<% end %>
+
+    		<% if !@order.start_date.nil? || !@order.removal_technician.nil? %>
+      		<%= content_tag :p, class: "m-t-50 text-center" do %>
+    				<%= "Retirado em #{@order.start_date.strftime("%d/%m/%Y")} por #{get_user(@order.removal_technician)}" %>
+    			<% end %>
+  			<% end %>
+
+  			<% if !@order.end_date.nil? || !@order.maintenance_technician.nil? %>
+      		<%= content_tag :p, class: "m-t-5 text-center" do %>
+    				<%= "Manutenção feita por #{get_user(@order.maintenance_technician)} e entregue em #{@order.end_date.strftime("%d/%m/%Y")}" %>
+  				<% end %>
+  			<% end %>
+  		</section>
+		</section>
+	</div>
+</div>

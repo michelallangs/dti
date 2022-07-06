@@ -3,6 +3,40 @@
 	flex-direction: column;
 	align-items: center;
 
+	fieldset {
+		width: 100%;
+	}
+
+	fieldset[disabled="disabled"] {
+		input, select, textarea, .select-selected {
+			border: none !important;
+			padding-left: 0 !important;
+			padding-right: 0 !important;
+			resize: none;
+		}
+
+		.select-selected:after {
+			display: none;
+		}
+
+		label {
+			opacity: 1 !important;
+			color: $secondary-color !important;
+		}
+
+		* {
+			pointer-events: none;
+		}
+
+		.custom-radio {
+			grid-template-columns: auto !important;
+
+			.radio label:not(.checked) {
+				display: none !important;
+			}
+		}
+	}
+
 	.form-label {
 		font-weight: 600;
 		opacity: .5;
@@ -17,13 +51,17 @@
 		display: grid;
 	  grid-gap: 8px;
 
+	  &.inline-radio {
+	  	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+	  }
+
 		span.radio label {
 			border: solid 2px #d6d6d6;
 			border-radius: 30px;
 			padding: 5px 15px;
 			font-size: .75em;
 			font-weight: 600;
-			min-width: 150px;
+			min-width: 11em;
 			text-align: center;
 			cursor: pointer;
 			color: $grey;
@@ -42,8 +80,8 @@
 	}
 
 	.input:not(.submit):not(.boolean) {
-		max-width: 100%;
 		width: 400px;
+		max-width: 100%;
 
 		&:nth-child(n+2) {
 			margin-top: 25px;
@@ -52,6 +90,16 @@
 		label, input, select, textarea {
 			display: block;
 			width: 100%;
+			margin: 0 auto;
+		}
+
+		input[type="date"] {
+			cursor: pointer;
+			max-width: 150px;
+		}
+
+		input:not([type="radio"]) {
+			min-height: 40px;
 		}
 
 		label {
@@ -80,7 +128,7 @@
 			color: $grey;
 			display: flex;
 			align-items: center;
-			font-size: .9em;
+			font-weight: 600;
 		}
 
 		> label input {
@@ -143,20 +191,24 @@
 					@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
 				}
 
+				&:hover:after, &.checked:after {
+					opacity: 1;
+				}
+
 				&:after {
+					background-color: #d6d6d6;
+					opacity: 0;
 					position: absolute;
 					left: 3px;
 					top: 50%;
 					margin-top: -5px;
-					background-color: $info;
 					width: 10px;
 					height: 10px;
-					opacity: 0;
 					border: none;
 				}
 
 				&.checked:after {
-					opacity: 1;
+					background-color: $info;
 				}
 			}
 		}
@@ -186,18 +238,27 @@
 	  display: none !important; /*hide original SELECT element: */
 	}
 
+	.text-center {
+		.select-selected, .select-items {
+			margin: 0 auto;
+		}
+	}
+
 	.select-selected {
 	  background-color: transparent;
 	  color: #000000;
 	  padding-right: 20px;
 	  font-size: .75em;
-	  white-space: nowrap;
 	  overflow: hidden;
+	  white-space: nowrap;
 	  text-overflow: ellipsis;
 	  border: 1px solid transparent;
 	  border-color: transparent transparent $grey transparent;
 	  opacity: .5;
 	  position: relative;
+	  min-height: 40px;
+	  max-width: 300px;
+	  text-align: left;
 
 	  &:hover {
 	  	opacity: 1;
@@ -250,6 +311,8 @@
 	  border: solid 1px transparent;
 	  border-color: transparent #d6d6d6 #d6d6d6 #d6d6d6;
 	  font-size: .75em;
+	  max-width: 300px;
+	  text-align: left;
 	}
 
 	/* Hide the items when the select box is closed: */

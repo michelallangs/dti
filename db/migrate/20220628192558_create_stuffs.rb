@@ -3,7 +3,7 @@ class CreateStuffs < ActiveRecord::Migration[7.0]
     create_table :stuffs do |t|
       t.string :category
       t.string :brand
-      t.integer :patrimony
+      t.string :patrimony
 
       t.timestamps
     end

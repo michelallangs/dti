@@ -7,74 +7,133 @@
 		</header>
 
 		<section class="container-body">
-			<% if is_admin? %>
-				<div class="order-tabs flex-row h-centered m-b-25">
-					<div class="order-tab text-center">
-						<button class="btn-data" order-data="school-data">Informações do chamado</button>
-					</div>
-				  
-					<div class="order-tab text-center">
-				  	<button class="btn-data current" order-data="admin-data">Relatório</button>
-					</div>
+			<div class="order-tabs flex-row h-centered m-b-25">
+				<div class="order-tab text-center">
+					<button class="btn-data <%= 'current' if !is_admin?%>" order-data="school-data">Informações do chamado</button>
 				</div>
-			<% end %>
+			  
+				<div class="order-tab text-center">
+			  	<button class="btn-data <%= 'current' if is_admin?%>" order-data="admin-data">Ordem de serviço</button>
+				</div>
+			</div>
 
 			<%= simple_form_for @order, url: edit_order_path, html: { class: "form" } do |f| %>
 	      <%= f.simple_fields_for :stuff do |s| %>
-					<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
-	      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
+	      	<div class="flex-row order-info m-b-5">
+	      		<div class="flex-col flex-col-6 order-id">
+	      			<%= content_tag :h6 do %>
+	      				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
+	      				<%= content_tag :span, " - #{order_creator(@order.user_id)}" if is_admin? %>
+	      			<% end %>
+	      		</div>
 
-	      		<section class="bordered">
-			      	<div class="flex-row h-centered text-center">
-			      		<div class="flex-col flex-col-4 h-centered">
-		      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
-								</div>	      		
-			      	</div>
-	      		</section>
-			      		
-	      		<section class="bordered">
-			      	<div class="flex-row h-centered">
-								<div class="flex-col flex-col-10">
-					      	<p class="equipment-category text-center">Selecione a categoria do equipamento</p>
-				          <%= s.input :category, label: false, as: :radio_buttons, collection: ['CPU', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro'], wrapper_html: { class: "custom-radio" } %>
-								</div>	      		
-			      	</div>
-	      		</section>
+	      		<div class="flex-col flex-col-6 text-right updated-at">
+	      			<%= content_tag :span, order_updated_at(@order.updated_at, @order.updated_by) %>
+	      		</div>
+	      	</div>
 
-	      		<section class="bordered">
-		          <div class="flex-row gap-50">
-		          	<div class="flex-col flex-col-4">
-									<%= s.input :patrimony, required: false, as: :numeric, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+	      	<fieldset <%= "disabled=disabled" if is_admin? || @order.status != "Em aberto" %>>
+						<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
+		      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
 
-		        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: ['Oro', 'Neologic', 'Microsoft', 'LG', 'Acer'], prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-
-		        			<%= f.input :spot, required: false, label: "Local de instalação", collection: ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca'], prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-		          	</div>
-
-		          	<div class="flex-col flex-col-8">
-		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
-		          	</div>
-		          </div>
-	      		</section>
-    			</div>
-
-    			<% if is_admin? %>
-	    			<div id="admin-data" class="order-data current">
-				    	<section class="bordered">
+		      		<section class="bordered">
 				      	<div class="flex-row h-centered text-center">
-				      		<div class="flex-col flex-col-12 h-centered">
-			      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean" } %>
+				      		<div class="flex-col flex-col-4 h-centered">
+			      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" }, input_html: { class: "text-center" } %>
 									</div>	      		
 				      	</div>
 		      		</section>
-				    </div>
-				  <% end %>
+				      		
+		      		<section class="bordered">
+				      	<div class="flex-row h-centered">
+									<div class="flex-col flex-col-10">
+						      	<p class="equipment-category text-center"><%= @stuff_category %></p>
+					          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
+									</div>	      		
+				      	</div>
+		      		</section>
 
-	        <div class="actions m-t-25">
-	          <%= f.submit "Atualizar dados", data: { disable_with: "Aguarde..." }, class: "btn" %>
-	          <%= link_to "Voltar", :back, class: "btn-cancel" %>
-	          <%= link_to "Excluir chamado", destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert" %>
-	        </div>
+		      		<section class="bordered">
+			          <div class="flex-row gap-50">
+			          	<div class="flex-col flex-col-4">
+										<%= s.input :patrimony, required: false, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+
+			        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+
+			        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+			          	</div>
+
+			          	<div class="flex-col flex-col-8">
+			          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+			          	</div>
+			          </div>
+		      		</section>
+	    			</div>
+	    		</fieldset>
+
+    			<fieldset <%= "disabled=disabled" if !is_admin? %>>
+	    			<div id="admin-data" class="order-data <%= 'current' if is_admin?%>">
+				    	<section class="bordered">
+				      	<div class="flex-row">
+				      		<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
+					      		<div class="flex-col flex-col-4">
+				      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean" } %>
+										</div>	      		
+									<% end %>
+
+									<div class="flex-col flex-col-8">
+										<%= f.input :status, required: false, label: "Status", collection: list_status, prompt: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+									</div>
+				      	</div>
+		      		</section>
+
+		      		<section class="bordered">
+				      	<div class="flex-row gap-25">
+				      		<div class="flex-col flex-col-8">
+			          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" } %>
+			          	</div>     		
+
+									<div class="flex-col flex-col-4">
+			          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" } %>
+			          	</div>    
+				      	</div>
+		      		</section>
+
+		      		<section class="bordered">
+				      	<div class="flex-row gap-25 h-centered text-center">
+				      		<div class="flex-col flex-col-6">
+										<%= f.input :removal_technician, required: false, label: "Técnico responsável pela retirada", collection: @technicians, prompt: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+									</div>   		
+
+									<div class="flex-col flex-col-6">
+			          		<%= f.input :maintenance_technician, required: false, label: "Técnico responsável pela manutenção", collection: @technicians, prompt: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+			          	</div>   
+				      	</div>
+		      		</section>
+
+		      		<section class="bordered">
+				      	<div class="flex-row gap-25 h-centered text-center">
+			          	<div class="flex-col flex-col-3">
+										<%= f.input :start_date, required: false, html5: true, label: "Data da retirada", label_html: { class: "form-label" } %>
+									</div> 
+
+									<div class="flex-col flex-col-3">
+										<%= f.input :end_date, required: false, html5: true, label: "Data da entrega", label_html: { class: "form-label" } %>
+									</div>
+				      	</div>
+		      		</section>
+				    </div>
+	    		</fieldset>
+
+	    		<% if is_admin? || @order.status == "Em aberto" %>
+		        <div class="actions m-t-25">
+		          <%= f.submit "Atualizar dados", data: { disable_with: "Aguarde..." }, class: "btn" %>
+		          <%= link_to "Voltar", :back, class: "btn-cancel" %>
+		          <%= link_to "Cancelar chamado", destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert" %>
+		        </div>
+		      <% else %>
+		      	<%= content_tag :p, "Este chamado está sendo ou já foi atendido, portanto não é mais possível fazer alterações.", class: "m-t-25 error alert" %>
+		      <% end %>
 	      <% end %>
 	    <% end %>
 		</section>

@@ -13,24 +13,24 @@
 
 	      	<div class="flex-row h-centered text-center">
 	      		<div class="flex-col flex-col-4 h-centered">
-      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
+      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" }, input_html: { class: "text-center" } %>
 						</div>	      		
 	      	</div>
 	      		
 	      	<div class="flex-row h-centered m-t-50">
 						<div class="flex-col flex-col-10">
 			      	<p class="equipment-category text-center">Selecione a categoria do equipamento</p>
-		          <%= s.input :category, label: false, as: :radio_buttons, collection: ['CPU', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro'], wrapper_html: { class: "custom-radio" } %>
+		          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
 						</div>	      		
 	      	</div>
 
           <div class="flex-row gap-50 m-t-50">
           	<div class="flex-col flex-col-4">
-							<%= s.input :patrimony, required: false, as: :numeric, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+							<%= s.input :patrimony, required: false, label: "Nº patrimônio", label_html: { class: "form-label" } %>
 
-        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: ['Oro', 'Neologic', 'Microsoft', 'LG', 'Acer'], prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, prompt: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 
-        			<%= f.input :spot, required: false, label: "Local de instalação", collection: ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca'], prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, prompt: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
           	</div>
 
           	<div class="flex-col flex-col-8">

@@ -1,0 +1,40 @@
+<% unless orders.nil? || orders.blank? %>
+	<%= content_tag :div, class: "order-container #{get_status(status)}" do %>
+		<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
+
+		<div class="order-cards">
+			<% orders.each do |order| %>
+				<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
+					<%= link_to "", edit_order_path(order), title: order.defect, class: "order-card-link" %>
+
+					<header class="order-card-header">
+						<div class="left-content">
+							<%= content_tag :span, "##{order.id.to_s.rjust(3, '0')}", class: "order-id" %>
+							<%= content_tag :span, order.spot, class: "order-spot" %>
+						</div>
+
+						<div class="right-content">
+							<%= content_tag :span, order.created_at.strftime("%d/%m/%Y"), class: "order-creation-date" %>
+						</div>
+					</header>
+
+					<div class="order-card-body">
+						<%= content_tag :h4, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
+						<%= content_tag :p, order.defect %>
+					</div>
+
+					<%= content_tag :footer, class: "order-card-footer" do %>
+						<%= content_tag :span, order_creator(order.user_id) if is_admin? %>
+						<div class="options">
+							<%= link_to "", "#", class: "options-btn" %>
+							<ul>
+								<li><%= link_to "Ver detalhes", order_path(order) %></li>
+								<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
+							</ul>
+						</div>
+					<% end %>
+				<% end %>
+			<% end %>
+		</div>
+	<% end %>
+<% end %>

@@ -4,52 +4,40 @@
 	<div class="container main-container">
 		<%= flash_message %>
 
-		<%= form_tag(orders_path, method: :get) do %>
-			<div class="search">
-				<%= text_field_tag(:search, params[:search], placeholder: "Insira o número de patrimônio") %>
-				<%= submit_tag ("Buscar") %>
-			</div>
-		<% end %>
-
 		<header class="container-header">
 			<div class="left-content">
-				<p class="header-subtitle">Bem vindo,</p>
-				<h1 class="header-title"><span><%= username %>!</span></h1>
+				<%= form_tag(orders_path, method: :get) do %>
+					<div class="search">
+						<%= text_field_tag(:search, params[:search], placeholder: "Insira o número de patrimônio") %>
+						<%= submit_tag ("Buscar") %>
+					</div>
+				<% end %>
+
+				<%= form_tag(orders_path, method: :get) do %>
+					<div class="sp">
+						<%= hidden_field_tag(:sp, params[:sp]) %>
+						<%= submit_tag ("Sem patrimônio") %>
+					</div>
+				<% end %>
 			</div>
 
 			<div class="right-content">
+				<div class="action-buttons">
+					<%= link_to image_tag("icons/grid.png"), "#", class: "as-grid btn-icon" %>
+					<%= link_to image_tag("icons/list.svg"), "#", class: "as-list btn-icon" %>
+					<%= link_to image_tag("icons/filter.svg"), "#", class: "btn-icon" %>
+				</div>
 				<%= link_to "Abrir chamado", new_order_path, class: "btn" %>
-				<%= link_to image_tag("icons/filter.svg"), "#", class: "btn-icon" %>
 			</div>
 		</header>
 
 		<section class="container-body">
 			<% if @orders.nil? || @orders.blank? %>
-				<p>Nenhum chamado encontrado.</p>
+				<h3 class="text-center">Nenhum chamado encontrado.</h3>
 			<% else %>
-				<div class="order-cards">
-					<% @orders.each do |order| %>
-						<%= link_to edit_order_path(order), title: order.defect, class: "order-card" do %>
-							<header class="order-card-header">
-								<div class="left-content">
-									<%= content_tag :span, "##{order.id.to_s.rjust(3, '0')}", class: "order-id" %>
-									<%= content_tag :span, order.spot, class: "order-spot" %>
-								</div>
-
-								<div class="right-content">
-									<%= content_tag :span, order.created_at.strftime("%d/%m/%Y"), class: "order-creation-date" %>
-								</div>
-							</header>
-
-							<div class="order-card-body">
-								<%= content_tag :h4, "#{order.stuff.category} #{order.stuff.patrimony}" %>
-								<%= content_tag :p, order.defect %>
-							</div>
-
-							<%= content_tag :footer, "", class: "order-card-footer #{order.status.downcase}" %>
-						<% end %>
-					<% end %>
-				</div>
+				<% list_status.each do |status| %>
+					<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
+				<% end %>
 			<% end %>
 		</section>
 	</div>

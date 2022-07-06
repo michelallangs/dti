@@ -42,4 +42,32 @@ module ApplicationHelper
       'active'
     end
   end
+
+  def list_categories
+    categories = ['PC/Notebook', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro']
+    return categories
+  end
+
+  def list_brands
+    brands = ['Asus', 'Acer', 'AOC', 'APC', 'BenQ',  'Brother', 
+              'Cisco', 'Dell', 'D-Link', 'Epson', 'HP', 'Intelbras', 
+              'Lenovo', 'Lexmark', 'LG', 'Microsoft', 'Multilaser', 'Neologic', 
+              'Oro', 'Philips', 'Positivo', 'Samsung', 'SMS', 'Toshiba', 'TP-Link']
+    return brands
+  end
+
+  def list_spots
+    spots = ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca']
+    return spots
+  end
+
+  def list_status
+    status = ['Em aberto', 'Em manutenção', 'Para retirada', 
+              'Saiu para entrega', 'Aguardando peça(s)', 'Concluído']
+    return status
+  end
+
+  def get_status(status)
+    return I18n.transliterate(status).gsub(/\s+/, '-').delete('()').downcase
+  end
 end

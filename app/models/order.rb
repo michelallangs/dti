@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-	belongs_to :stuff  
+	belongs_to :stuff, optional: true
 	accepts_nested_attributes_for :stuff
 
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]

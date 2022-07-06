@@ -15,14 +15,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_192624) do
     t.string "requester"
     t.string "spot"
     t.text "defect"
-    t.boolean "backup"
+    t.string "backup"
     t.text "performed_service"
     t.text "obs"
     t.integer "removal_technician"
     t.integer "maintenance_technician"
+    t.integer "updated_by"
     t.date "start_date"
     t.date "end_date"
-    t.string "status", default: "Aberto"
+    t.string "status", default: "Em aberto"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
@@ -48,7 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_192624) do
   create_table "stuffs", force: :cascade do |t|
     t.string "category"
     t.string "brand"
-    t.integer "patrimony"
+    t.string "patrimony"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

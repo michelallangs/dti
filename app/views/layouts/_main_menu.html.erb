@@ -11,8 +11,8 @@
 			<li><%= link_to home_path, class: current?(home_path) do %><i class="home"></i>Página inicial<% end %></li>
 			<li><%= link_to orders_path, class: current?(orders_path) do %><i class="orders"></i>Chamados<% end %></li>
 			<li><%= link_to "#" do %><i class="equipments"></i>Equipamentos<% end %></li>
-			<li><%= link_to "#" do %><i class="schools"></i>Unidades<% end %></li>
-			<li><%= link_to "#" do %><i class="users"></i>Usuários<% end %></li>
+			<% if is_admin? %><li><%= link_to "#" do %><i class="schools"></i>Unidades<% end %></li><% end %>
+			<% if is_admin? %><li><%= link_to "#" do %><i class="users"></i>Usuários<% end %></li><% end %>
 			<li><%= link_to "#" do %><i class="settings"></i>Configurações<% end %></li>
 		</ul>
 	</nav>

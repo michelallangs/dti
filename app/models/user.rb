@@ -7,6 +7,7 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: true, presence: { message: "Por favor, digite o e-mail" }, on: [:create, :update]
   validates :password, presence: { message: "Por favor, digite uma senha" }, on: [:create, :update]
+  validates_confirmation_of :password, message: "Digite a mesma senha nos dois campos"
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
