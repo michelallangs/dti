@@ -5,30 +5,27 @@
   border: none;
   cursor: pointer;
   display: inline-block;
-  color: #fff;
-  background-color: #000000;
+  color: $secondary-color;
+  background-color: $primary-color;
   font-family: $font;
   font-size: 14px;
   font-weight: 600;
   line-height: 18px;
   border-radius: 50px;
   min-width: 120px;
-  @include prefix(box-shadow, rgba(0, 0, 0, 0.02) 0 1px 3px 0);
+  @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
   @include prefix(transition, all 250ms);
   background-clip: padding-box;
 
   &:hover, &:focus {
     text-decoration: none;
-    @include prefix(box-shadow, rgba(0, 0, 0, 0.1) 0 4px 12px);
   }
 
   &:hover {
-    opacity: .75;
     @include prefix(transform, translateY(-1px));
   }
 
   &:active {
-    opacity: 1;
     @include prefix(box-shadow, rgba(0, 0, 0, .06) 0 2px 4px);
     @include prefix(transform, translateY(0));
   }
@@ -39,10 +36,12 @@
 }
 
 .btn-success {
+  color: $primary-color;
   background-color: $success;
 }
 
 .btn-cancel {
+  color: $primary-color;
   background-color: $grey;
 
   &:hover {
@@ -51,36 +50,22 @@
 }
 
 .btn-alert {
+  color: $primary-color;
   background-color: $alert;
 }
 
 .btn-icon {
+  @extend .btn;
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: auto;
   width: calc(1em + 20px);
   height: calc(1em + 20px);
   border-radius: 50%;
-  @include prefix(box-shadow, rgba(0, 0, 0, 0.02) 0 1px 3px 0);
-  @include prefix(transition, all 250ms);
-  background-clip: padding-box;
-  background-color: #000;
 
   img {
     width: 16px;
     height: 16px;
-    @include prefix(filter, invert(100%));
-  }
-
-  &:hover {
-    @include prefix(transform, translateY(-1px));
-    @include prefix(box-shadow, rgba(0, 0, 0, 0.1) 0 4px 12px);
-    opacity: .75;
-  }
-
-  &:active {
-    @include prefix(transform, translateY(0));
-    @include prefix(box-shadow, rgba(0, 0, 0, .06) 0 2px 4px);
-    opacity: 1;
   }
 }

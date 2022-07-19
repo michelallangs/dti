@@ -41,7 +41,7 @@
         </div>
 
         <div class="actions">
-          <%= f.submit "Salvar", data: { disable_with: "Aguarde..." }, class: "btn" %>
+          <%= f.submit "Salvar", data: { disable_with: "Aguarde..." }, class: "btn-success" %>
 
           <%- if controller_name != 'sessions' %>
             <p class="m-t-25">Já possui cadastro? <%= link_to "Entrar com a minha conta", new_session_path(resource_name), class: "link" %></p>

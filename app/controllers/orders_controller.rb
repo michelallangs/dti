@@ -7,36 +7,31 @@ class OrdersController < ApplicationController
     search = params[:search]
     sp = params[:sp]
 
-    if search
-      if !search.blank?
-        stuff = Stuff.find_by_patrimony(search)
-
-        if stuff
-          @orders = is_admin? ? Order.joins(:stuff).where(stuffs: { patrimony: search}) 
-                              : Order.joins(:stuff).where(stuffs: { patrimony: search}, 
-                                                          orders: { user_id: current_user.id })
-        end
-      else
-        @orders = is_admin? ? Order.all : Order.where(user_id: current_user.id)
-      end
+    if search && !search.blank?
+      @orders = is_admin? ? Order.joins(:stuff).where(stuffs: { patrimony: search}) 
+                          : Order.joins(:stuff).where(stuffs: { patrimony: search}, 
+                                                      orders: { order_school: current_user.id })
     elsif sp
       @orders = is_admin? ? Order.joins(:stuff).where(stuffs: { patrimony: ""}) 
                           : Order.joins(:stuff).where(stuffs: { patrimony: ""}, 
-                                                      orders: { user_id: current_user.id })
+                                                      orders: { order_school: current_user.id })
     else
-      @orders = is_admin? ? Order.all : Order.where(user_id: current_user.id)
+      @orders = is_admin? ? Order.all : Order.where(order_school: current_user.id)
     end
   end
 
   def new
     @order = Order.new
     @order.build_stuff
+    @schools = School.all
   end
 
   def create
     @order = Order.new(order_params)
+    @schools = School.all
     @order.user_id = @order.updated_by = current_user.id
-
+    order_school = is_admin? ? School.find(params[:order][:order_school]).user_id : current_user.id
+    @order.order_school = order_school
     patrimony = params[:order][:stuff_attributes][:patrimony]
 
     if Stuff.where(patrimony: patrimony).exists? && !patrimony.blank?
@@ -46,11 +41,11 @@ class OrdersController < ApplicationController
       stuff_id = Stuff.find_by_patrimony(patrimony).id
       @order = Order.new(requester: requester, spot: spot, defect: defect, 
                          stuff_id: stuff_id, user_id: current_user.id, 
-                         updated_by: current_user.id)
+                         updated_by: current_user.id, order_school: order_school)
     end
 
     if @order.save
-      flash[:notice] = "Chamado aberto com sucesso!"
+      flash[:success] = "Chamado aberto com sucesso!"
       redirect_to orders_path
     else
       render :new
@@ -68,7 +63,7 @@ class OrdersController < ApplicationController
     @order.updated_by = current_user.id
     
     if @order.update(order_params)
-      flash[:notice] = "Dados do chamado atualizado com sucesso!"
+      flash[:success] = "Dados do chamado atualizado com sucesso!"
       redirect_to orders_path
     else
       render :edit

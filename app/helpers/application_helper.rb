@@ -18,7 +18,7 @@ module ApplicationHelper
       end
 
       if flash[type]
-        messages += "<div class=\"flash #{type}\"><p class=\"flash-title\">#{message_type}</p><p class=\"flash-body\"><span>#{flash[type]}</span></p></div>"
+        messages += "<div class=\"flash #{type}\"><p class=\"flash-title\">#{message_type}</p><p class=\"flash-body\">#{flash[type]}</p></div>"
       end
     }
 

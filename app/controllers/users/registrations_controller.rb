@@ -10,7 +10,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:notice] = "Unidade cadastrada com sucesso!"
+      flash[:success] = "Unidade cadastrada com sucesso!"
       redirect_to home_path
     else
       render :new

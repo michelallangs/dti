@@ -118,6 +118,10 @@
 	max-height: none;
 	justify-content: flex-start;
 	padding: 20px 0 50px 0;
+	max-width: 1600px;
+	position: relative;
+	top: 50%;
+	@include prefix(transform, translateY(-50%));
 
 	.logo-dti {
 		display: block;

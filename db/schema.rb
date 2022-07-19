@@ -13,9 +13,10 @@
 ActiveRecord::Schema[7.0].define(version: 2022_06_28_192624) do
   create_table "orders", force: :cascade do |t|
     t.string "requester"
+    t.integer "order_school"
     t.string "spot"
     t.text "defect"
-    t.string "backup"
+    t.string "backup", default: "Não"
     t.text "performed_service"
     t.text "obs"
     t.integer "removal_technician"

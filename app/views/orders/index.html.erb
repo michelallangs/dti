@@ -27,18 +27,20 @@
 					<%= link_to image_tag("icons/list.svg"), "#", class: "as-list btn-icon" %>
 					<%= link_to image_tag("icons/filter.svg"), "#", class: "btn-icon" %>
 				</div>
-				<%= link_to "Abrir chamado", new_order_path, class: "btn" %>
+				<%= link_to "Abrir chamado", new_order_path, class: "btn-success" %>
 			</div>
 		</header>
 
-		<section class="container-body">
-			<% if @orders.nil? || @orders.blank? %>
-				<h3 class="text-center">Nenhum chamado encontrado.</h3>
-			<% else %>
+		<%= content_tag :i, "Resultados da busca: #{@orders.length} chamado(s) encontrados.", class: "flash notice m-b-0" if params[:search] || params[:sp] %>
+
+		<% unless @orders.nil? || @orders.blank? %>
+			<section class="container-body">
 				<% list_status.each do |status| %>
 					<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
 				<% end %>
-			<% end %>
-		</section>
+			</section>
+		<% else %>
+			<h3 class="text-center m-t-25"><i>Nenhum dado encontrado.</i></h3>
+		<% end %>
 	</div>
 </div>

@@ -16,9 +16,9 @@
   flex-direction: column;
   padding: 10px 15px;
   font-size: .9em;
-  background-color: #f4f4f4;
-  max-width: 400px;
+  background-color: $primary-color;
   margin-bottom: 25px;
+  @include prefix(box-shadow, rgba(149, 157, 165, 0.2) 0px 8px 24px);
 
   p {
     &.flash-title {
@@ -33,6 +33,8 @@
   }
 
   &.success {
+    border-left: solid 5px $success;
+
     .flash-title {
       color: $success;
     }
@@ -45,6 +47,8 @@
   }
 
   &.info, &.notice {
+    border-left: solid 5px $info;
+
     .flash-title {
       color: $info;
     }

@@ -12,6 +12,10 @@
 	      	<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
 
 	      	<div class="flex-row h-centered text-center">
+	      		<%= content_tag :div, "", class: "flex-col flex-col-4 h-centered" do %>
+      				<%= f.input :order_school, label: "Nome da unidade", collection: @schools, prompt: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+    				<% end if is_admin? %>
+
 	      		<div class="flex-col flex-col-4 h-centered">
       				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" }, input_html: { class: "text-center" } %>
 						</div>	      		
@@ -39,7 +43,7 @@
           </div>
 
 	        <div class="actions m-t-50">
-	          <%= f.submit "Finalizar", data: { disable_with: "Aguarde..." }, class: "btn" %>
+	          <%= f.submit "Finalizar", data: { disable_with: "Aguarde..." }, class: "btn-success" %>
 	          <%= link_to "Voltar", :back, class: "btn-cancel" %>
 	        </div>
 	      <% end %>
