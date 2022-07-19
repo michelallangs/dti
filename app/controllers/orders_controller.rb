@@ -118,7 +118,12 @@ class OrdersController < ApplicationController
   end
 
   def order_creator(id)
-    creator ||= creator = School.find_by_user_id(id).name.split(/(?=\-)/).first
+    user = User.find_by_id(id)
+    if user.user_level == 1
+      creator = School.find_by_user_id(id).name.split(/(?=\-)/).first
+    else
+      creator = user.name
+    end
     return creator
   end
 

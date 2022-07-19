@@ -20,6 +20,7 @@ gem 'simple_form'
 gem 'sass-rails'
 gem 'neat'
 gem "font-awesome-sass", "~> 6.1.1"
+gem "hirb"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
