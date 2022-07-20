@@ -25,11 +25,11 @@ ready = function() {
     $(".form-label").removeClass("focused");
   });
 
-  $(".order-card-footer .options .options-btn").on("click", function(e){
+  $(".options .options-btn").on("click", function(e){
     e.preventDefault();
     e.stopPropagation();
 
-    $(".order-card-footer .options .options-btn").not(this).siblings("ul").fadeOut();
+    $(".options .options-btn").not(this).siblings("ul").fadeOut();
     $(this).siblings("ul").fadeToggle();
   });
 

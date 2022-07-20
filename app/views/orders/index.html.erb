@@ -12,20 +12,25 @@
 						<%= submit_tag ("Buscar") %>
 					</div>
 				<% end %>
-
-				<%= form_tag(orders_path, method: :get) do %>
-					<div class="sp">
-						<%= hidden_field_tag(:sp, params[:sp]) %>
-						<%= submit_tag ("Sem patrimônio") %>
-					</div>
-				<% end %>
 			</div>
 
 			<div class="right-content">
 				<div class="action-buttons">
 					<%= link_to image_tag("icons/grid.png"), "#", class: "as-grid btn-icon" %>
 					<%= link_to image_tag("icons/list.svg"), "#", class: "as-list btn-icon" %>
-					<%= link_to image_tag("icons/filter.svg"), "#", class: "btn-icon" %>
+					<div class="options">
+						<%= link_to image_tag("icons/filter.svg"), "#", alt: "Filtrar", title: "Filtrar", class: "btn-icon options-btn" %>
+						<ul>
+							<li>
+								<%= form_tag(orders_path, method: :get) do %>
+									<div class="sp">
+										<%= hidden_field_tag(:sp, params[:sp]) %>
+										<%= submit_tag ("Equipamentos sem patrimônio") %>
+									</div>
+								<% end %>
+							</li>
+						</ul>
+					</div>
 				</div>
 				<%= link_to "Abrir chamado", new_order_path, class: "btn-success" %>
 			</div>

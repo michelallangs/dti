@@ -23,16 +23,16 @@
 			align-items: center;
 
 			.sp input {
-				margin-top: 5px;
 				background-color: transparent;
-				color: $info;
 				cursor: pointer;
-				font-style: italic;
-				font-size: .75em;
+				padding: 10px 15px;
+	      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+	      white-space: nowrap;
+	      font-size: .75em;
 
-				&:hover {
-					text-decoration: underline;
-				}
+	      &:hover {
+	        background-color: #f4f4f4;
+	      }
 			}
 
 			.right-content {
@@ -81,8 +81,8 @@
 			}
 
 			.order-status-title {
-				font-weight: 300;
 				margin-bottom: 10px;
+				font-weight: 600;
 
 				span {
 					font-weight: 600;
@@ -94,10 +94,70 @@
 			.order-cards {
 				display: grid;
 				grid-gap: 25px;
-				grid-template-columns: 1fr 1fr 1fr;
+				grid-template-columns: minmax(300px, 400px) minmax(300px, 400px) minmax(300px, 400px) minmax(300px, 400px) minmax(300px, 400px);
 
 				&.as-list {
 					grid-template-columns: 1fr;
+
+					.order-card {
+						flex-direction: row;
+						border-top: none !important;
+
+						&.em-aberto {
+					  	border-left: solid 5px $info;
+					  }
+
+					  &.em-manutencao {
+					  	border-left: solid 5px $grey;
+					  }
+
+					  &.para-retirada {
+					  	border-left: solid 5px $purple;
+					  }
+
+					  &.saiu-para-entrega {
+					  	border-left: solid 5px $warning;
+					  }
+
+					  &.aguardando-pecas {
+					  	border-left: solid 5px $alert;
+					  }
+
+					  &.concluido {
+					  	border-left: solid 5px $success;
+					  }
+
+					  .order-card-header {
+					  	flex-direction: column;
+
+					  	.right-content {
+					  		padding-top: 15px;
+					  	}
+					  }
+
+					  .order-card-body, .order-card-footer {
+					  	display: flex;
+					  	justify-content: center;
+					  }
+
+					  .order-card-body {
+					  	text-align: left;
+					  	padding: 15px;
+					  	border-left: solid 1px #f4f4f4;
+					  	border-right: solid 1px #f4f4f4;
+					  	width: 100%;
+					  	flex-direction: column;
+					  }
+
+					  .order-card-footer {
+					  	align-items: center;
+					  	padding: 15px;
+
+					  	span {
+					  		padding: 0 25px 0 0;
+					  	}
+					  }
+					}
 				}
 
 				.order-card {
@@ -196,70 +256,26 @@
 					}
 
 					.order-card-footer {
+						position: relative;
+						padding: 15px;
+
 						span {
-							margin-left: 15px;
+							color: $grey;
 							font-size: .75em;
 							font-weight: 600;
 						}
 
 						.options {
-							@extend .pull-right;
-							position: relative;
+							position: absolute;
+							right: 0;
+							bottom: 0;
 
 							.options-btn {
-								content: "";
-								width: 16px;
-								height: 16px;
-								display: inline-block;
 								margin: 0 5px 15px 0;
-								@include background("icons/dots-v.svg", "icon");
-								opacity: .5;
-							}
-
-							ul {
-								z-index: 999;
-								display: none;
-								list-style: none;
-								position: absolute;
-						    top: calc(100% + 10px);
-						    right: 0;
-								background-color: $primary-color;
-								border-radius: 5px;
-								box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
-								&:before, &:after {
-									content: "";
-						      position: absolute;
-						      border-left: solid 6px transparent;
-						      border-right: solid 6px transparent;
-						      bottom: 100%;
-								}
-
-								&:before {
-						      right: 6px;
-						      bottom: 100%;
-						      border-bottom: solid 6px #fff;
-						      z-index: 3;
-								}
-
-								&:after {
-						      right: 5px;
-						      border-bottom: solid 6px #d6d6d6;
-						      z-index: 2;
-								}
-
-								li a {
-									display: block;
-									padding: 10px 15px;
-									transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-									white-space: nowrap;
-									font-size: .75em;
-									border-radius: 5px;
-
-									&:hover {
-										background-color: #f4f4f4;
-									}
-								}
+								width: 16px;
+						    height: 16px;
+						    display: inline-block;
+						    opacity: .5;
 							}
 						}
 					}

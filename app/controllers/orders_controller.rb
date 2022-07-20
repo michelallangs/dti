@@ -109,7 +109,7 @@ class OrdersController < ApplicationController
       creator = user.name
     end
 
-    return "Última alteração em #{@order.updated_at.strftime("%d/%m/%Y")} às #{@order.updated_at.strftime("%H:%M")} por #{creator}"
+    return "Última alteração em <strong>#{@order.updated_at.strftime("%d/%m/%Y")}</strong> às #{@order.updated_at.strftime("%H:%M")} por <strong>#{creator}</strong>".html_safe
   end
 
   def order_creator(id)

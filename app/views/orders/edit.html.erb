@@ -100,25 +100,29 @@
 		      		</section>
 
 		      		<section class="bordered">
-				      	<div class="flex-row gap-25 h-centered text-center">
-				      		<div class="flex-col flex-col-6">
-										<%= f.input :removal_technician, required: false, label: "Técnico responsável pela retirada", collection: @technicians, prompt: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+				      	<div class="flex-row gap-25">
+				      		<div class="flex-col flex-col-2">
+				      			<h4 class="uppercase">Técnico responsável</h4>
 									</div>   		
 
-									<div class="flex-col flex-col-6">
-			          		<%= f.input :maintenance_technician, required: false, label: "Técnico responsável pela manutenção", collection: @technicians, prompt: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+									<div class="flex-col flex-col-10">
+			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, prompt: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+
+										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, prompt: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 			          	</div>   
 				      	</div>
 		      		</section>
 
 		      		<section class="bordered">
-				      	<div class="flex-row gap-25 h-centered text-center">
-			          	<div class="flex-col flex-col-3">
-										<%= f.input :start_date, required: false, html5: true, label: "Data da retirada", label_html: { class: "form-label" } %>
+				      	<div class="flex-row gap-25">
+			          	<div class="flex-col flex-col-2">
+			          		<h4 class="uppercase">Data</h4>
 									</div> 
 
-									<div class="flex-col flex-col-3">
-										<%= f.input :end_date, required: false, html5: true, label: "Data da entrega", label_html: { class: "form-label" } %>
+									<div class="flex-col flex-col-10">
+										<%= f.input :start_date, required: false, html5: true, label: "Retirada", label_html: { class: "form-label" } %>
+
+										<%= f.input :end_date, required: false, html5: true, label: "Entrega", label_html: { class: "form-label" } %>
 									</div>
 				      	</div>
 		      		</section>

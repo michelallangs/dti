@@ -74,19 +74,19 @@
     			<%= content_tag :dt, "Observações" %>
   				<%= content_tag :dd, @order.obs %>
   			<% end %>
-
-    		<% if !@order.start_date.nil? || !@order.removal_technician.nil? %>
-      		<%= content_tag :p, class: "m-t-50 text-center" do %>
-    				<%= "Retirado em #{@order.start_date.strftime("%d/%m/%Y")} por #{get_user(@order.removal_technician)}" %>
-    			<% end %>
-  			<% end %>
-
-  			<% if !@order.end_date.nil? || !@order.maintenance_technician.nil? %>
-      		<%= content_tag :p, class: "m-t-5 text-center" do %>
-    				<%= "Manutenção feita por #{get_user(@order.maintenance_technician)} e entregue em #{@order.end_date.strftime("%d/%m/%Y")}" %>
-  				<% end %>
-  			<% end %>
   		</section>
+
+  		<% if !@order.start_date.nil? && !@order.removal_technician.nil? %>
+    		<%= content_tag :p, class: "m-t-25 text-center" do %>
+  				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technician)}</strong>".html_safe %>
+  			<% end %>
+			<% end %>
+
+			<% if !@order.end_date.nil? && !@order.maintenance_technician.nil? %>
+    		<%= content_tag :p, class: "m-t-25 text-center" do %>
+  				<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technician)}</strong> e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe %>
+				<% end %>
+			<% end %>
 		</section>
 	</div>
 </div>

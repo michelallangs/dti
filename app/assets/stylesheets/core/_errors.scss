@@ -21,6 +21,8 @@
   @include prefix(box-shadow, rgba(149, 157, 165, 0.2) 0px 8px 24px);
 
   p {
+    font-weight: 400;
+    
     &.flash-title {
       font-weight: 600;
     }
@@ -44,6 +46,14 @@
     .flash-title {
       color: $alert;
     }
+  }
+
+  &.warning {
+    border-left: solid 5px $warning;
+  }
+
+  &.alert {
+    border-left: solid 5px $alert;
   }
 
   &.info, &.notice {

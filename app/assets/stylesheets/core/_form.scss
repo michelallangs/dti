@@ -38,7 +38,7 @@
 	}
 
 	.form-label {
-		font-weight: 600;
+		font-weight: 700;
 		opacity: .5;
 
 		&.focused {
@@ -90,7 +90,6 @@
 		label, input, select, textarea {
 			display: block;
 			width: 100%;
-			margin: 0 auto;
 		}
 
 		input[type="date"] {
