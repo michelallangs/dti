@@ -1,22 +1,31 @@
 class OrdersController < ApplicationController
   helper_method [:get_patrimony, :get_user, :order_updated_at, :order_creator]
   before_action :stuff_category
+  autocomplete :stuff, :patrimony, full: true
   include ApplicationHelper
 
   def index
-    search = params[:search]
+    s_patrimony = params[:s_patrimony]
+    s_spot = params[:s_spot]
+    s_category = params[:s_category]
+    s_brand = params[:s_brand]
     sp = params[:sp]
 
-    if search && !search.blank?
-      @orders = is_admin? ? Order.joins(:stuff).where(stuffs: { patrimony: search}) 
-                          : Order.joins(:stuff).where(stuffs: { patrimony: search}, 
-                                                      orders: { order_school: current_user.id })
+    if (s_patrimony && !s_patrimony.blank?) || (s_spot && !s_spot.blank?) || (s_spot && !s_spot.blank?) || (s_brand && !s_brand.blank?)
+      order_w_patrimony = Order.joins(:stuff).where('patrimony LIKE ? AND 
+                                                     lower(spot) LIKE lower(?) AND 
+                                                     lower(category) LIKE lower(?) AND 
+                                                     lower(brand) LIKE lower(?)', "%#{s_patrimony}%", "%#{s_spot}%", "%#{s_category}%", "%#{s_brand}%")
+
+      @orders = is_admin? ? order_w_patrimony 
+                          : order_w_patrimony.where('order_school = ?', current_user.id)
     elsif sp
-      @orders = is_admin? ? Order.joins(:stuff).where(stuffs: { patrimony: ""}) 
-                          : Order.joins(:stuff).where(stuffs: { patrimony: ""}, 
-                                                      orders: { order_school: current_user.id })
+      order_no_patrimony = Order.joins(:stuff).where('patrimony = ""')
+
+      @orders = is_admin? ? order_no_patrimony 
+                          : order_no_patrimony.where('order_school = ?', current_user.id)
     else
-      @orders = is_admin? ? Order.all : Order.where(order_school: current_user.id)
+      @orders = is_admin? ? Order.all : Order.where('order_school = ?', current_user.id)
     end
   end
 

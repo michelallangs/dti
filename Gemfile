@@ -21,6 +21,8 @@ gem 'sass-rails'
 gem 'neat'
 gem "font-awesome-sass", "~> 6.1.1"
 gem "hirb"
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

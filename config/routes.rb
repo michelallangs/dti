@@ -46,6 +46,14 @@ Rails.application.routes.draw do
     patch  '/chamados/editar-chamado/:id',   action: :update,            as: false
     put    '/chamados/editar-chamado/:id',   action: :update,            as: false
     delete '/chamados/excluir-chamado/:id',  action: :destroy,           as: :destroy_order
-    get '/chamados/:id',                     action: :show,              as: :order
+    get    '/chamados/:id',                  action: :show,              as: :order
+  end
+
+  controller :stuffs do
+    get    '/equipamentos',                  action: :index,             as: :stuffs
+  end
+
+  resources :orders do
+    get :autocomplete_stuff_patrimony, :on => :collection
   end
 end

@@ -1,0 +1,25 @@
+.ui-menu {
+	border: solid 1px #d6d6d6;
+	position: absolute !important;
+	top: 100% !important;
+	background-color: white;
+	z-index: 999;
+	border-radius: 5px;
+	padding: 3px;
+
+	.ui-menu-item {
+		list-style: none;
+
+		.ui-menu-item-wrapper {
+			border-radius: 5px;
+			padding: 15px;
+			font-size: .75em;
+			cursor: pointer;
+			border-top: solid 1px #f4f4f4;
+
+			&.ui-state-active, &:hover {
+				background-color: #f0f5ff;
+			}
+		}
+	}
+}

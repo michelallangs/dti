@@ -82,6 +82,7 @@
 	.input:not(.submit):not(.boolean) {
 		width: 400px;
 		max-width: 100%;
+		position: relative;
 
 		&:nth-child(n+2) {
 			margin-top: 25px;
@@ -343,3 +344,19 @@
 }
 
 
+.filters {
+	display: flex;
+	gap: 15px;
+
+	.search {
+		width: 25%;
+
+		input {
+			width: 100%;
+		}
+	}
+
+	input[type="submit"]{
+		display: none;
+	}
+}

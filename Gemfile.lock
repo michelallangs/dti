@@ -122,6 +122,8 @@ GEM
     jquery-turbolinks (2.1.0)
       railties (>= 3.1.0)
       turbolinks
+    jquery-ui-rails (6.0.1)
+      railties (>= 3.2.16)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -180,6 +182,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.3)
       loofah (~> 2.3)
+    rails-jquery-autocomplete (1.0.5)
+      rails (>= 3.2)
     railties (7.0.3)
       actionpack (= 7.0.3)
       activesupport (= 7.0.3)
@@ -280,9 +284,11 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   jquery-turbolinks
+  jquery-ui-rails
   neat
   puma (~> 5.0)
   rails (~> 7.0.3)
+  rails-jquery-autocomplete
   sass-rails
   selenium-webdriver
   simple_form

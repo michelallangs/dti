@@ -6,12 +6,7 @@
 
 		<header class="container-header">
 			<div class="left-content">
-				<%= form_tag(orders_path, method: :get) do %>
-					<div class="search">
-						<%= text_field_tag(:search, params[:search], placeholder: "Insira o número de patrimônio") %>
-						<%= submit_tag ("Buscar") %>
-					</div>
-				<% end %>
+
 			</div>
 
 			<div class="right-content">
@@ -21,14 +16,7 @@
 					<div class="options">
 						<%= link_to image_tag("icons/filter.svg"), "#", alt: "Filtrar", title: "Filtrar", class: "btn-icon options-btn" %>
 						<ul>
-							<li>
-								<%= form_tag(orders_path, method: :get) do %>
-									<div class="sp">
-										<%= hidden_field_tag(:sp, params[:sp]) %>
-										<%= submit_tag ("Equipamentos sem patrimônio") %>
-									</div>
-								<% end %>
-							</li>
+							<li><%= link_to "Chamados sem patrimônio", sp: true %></li>
 						</ul>
 					</div>
 				</div>
@@ -36,7 +24,28 @@
 			</div>
 		</header>
 
-		<%= content_tag :i, "Resultados da busca: #{@orders.length} chamado(s) encontrados.", class: "flash notice m-b-0" if params[:search] || params[:sp] %>
+		<%= form_tag(orders_path, method: :get, class: "filters") do %>
+			<div class="search" id="autocomplete-patrimony">
+				<%= autocomplete_field_tag :s_patrimony, params[:s_patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",
+'data-noMatchesLabel' => "Nenhum equipamento encontrado" %>
+			</div>
+
+			<div class="search">
+				<%= text_field_tag :s_spot, params[:s_spot], placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
+			</div>
+
+			<div class="search">
+				<%= text_field_tag :s_category, params[:s_category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+			</div>
+
+			<div class="search">
+				<%= text_field_tag :s_brand, params[:s_brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+			</div>
+
+			<%= submit_tag ("Buscar") %>
+		<% end %>
+
+		<%= content_tag :i, "Resultados da busca: #{@orders.length} chamado(s) encontrados.", class: "flash notice m-b-0 m-t-25" if params %>
 
 		<% unless @orders.nil? || @orders.blank? %>
 			<section class="container-body">
