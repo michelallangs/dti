@@ -2,6 +2,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 100%;
 
 	fieldset {
 		width: 100%;
@@ -13,6 +14,7 @@
 			padding-left: 0 !important;
 			padding-right: 0 !important;
 			resize: none;
+			background-color: transparent !important;
 		}
 
 		.select-selected:after {
@@ -39,11 +41,6 @@
 
 	.form-label {
 		font-weight: 700;
-		opacity: .5;
-
-		&.focused {
-			opacity: 1;
-		}
 	}
 
 	.radio_buttons {
@@ -56,19 +53,19 @@
 	  }
 
 		span.radio label {
-			border: solid 2px #d6d6d6;
-			border-radius: 30px;
+			border: solid 2px rgba(0, 0, 0, 0.3);
+			border-radius: 5px;
 			padding: 5px 15px;
 			font-size: .75em;
 			font-weight: 600;
 			min-width: 11em;
 			text-align: center;
 			cursor: pointer;
-			color: $grey;
+			color: rgba(0, 0, 0, 0.75);
 
 			&.checked, &:hover {
-				border-color: #000000;
-				color: #000000 !important;
+				border-color: $dark-blue;
+				color: $dark-blue !important;
 			}
 		}
 
@@ -80,8 +77,6 @@
 	}
 
 	.input:not(.submit):not(.boolean) {
-		width: 400px;
-		max-width: 100%;
 		position: relative;
 
 		&:nth-child(n+2) {
@@ -103,20 +98,20 @@
 		}
 
 		label {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 			text-transform: uppercase;
 		}
 
 		input {
-			padding: 10px 0;
-			background-color: transparent;
+			padding: 10px 15px;
+			border-radius: 5px;
+			background-color: white;
 			color: #000000;
-			border: none;
-			border-bottom: solid 1px $grey;
-			opacity: .5;
+			border: solid 2px transparent;
+			@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
 
 			&:focus, &:hover {
-				opacity: 1;
+				border-color: rgba($dark-blue, 0.75);
 			}
 		}
 	}
@@ -125,10 +120,9 @@
 		position: relative;
 
 		> label {
-			color: $grey;
 			display: flex;
 			align-items: center;
-			font-weight: 600;
+			font-weight: 700;
 		}
 
 		> label input {
@@ -185,7 +179,7 @@
 					display: inline-block;
 					width: 16px;
 					height: 16px;
-					border: solid 1px $grey;
+					border: solid 1px #aaa;
 					margin-right: 10px;
 					border-radius: 50%;
 					@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
@@ -208,7 +202,7 @@
 				}
 
 				&.checked:after {
-					background-color: $info;
+					background-color: $dark-blue;
 				}
 			}
 		}
@@ -219,12 +213,10 @@
 		overflow-y: auto;
 		height: 150px;
 		border-radius: 5px;
-		border: solid 2px #d6d6d6;
-		opacity: .5;
-		margin-top: 15px;
+		border: solid 2px transparent;
 
 		&:hover, &:focus {
-			opacity: 1;
+			border-color: rgba($dark-blue, 0.75);
 		}
 	}
 
@@ -245,23 +237,21 @@
 	}
 
 	.select-selected {
-	  background-color: transparent;
+	  background-color: $primary-color;
 	  color: #000000;
-	  padding-right: 20px;
+	  padding: 10px 30px 10px 15px;
 	  font-size: .75em;
 	  overflow: hidden;
 	  white-space: nowrap;
 	  text-overflow: ellipsis;
-	  border: 1px solid transparent;
-	  border-color: transparent transparent $grey transparent;
-	  opacity: .5;
+	  border: 2px solid transparent;
+	  border-radius: 5px;
 	  position: relative;
 	  min-height: 40px;
-	  max-width: 400px;
 	  text-align: left;
 
 	  &:hover {
-	  	opacity: 1;
+	  	border-color: rgba($dark-blue, .75); 
 	  }
 	}
 
@@ -286,16 +276,16 @@
 
 	/* style the items (options), including the selected item: */
 	.select-items div, .select-selected {
-	  color: #000000;
-	  padding-top: 10px;
-	  padding-bottom: 10px;
 	  cursor: pointer;
+	  border-radius: 5px;
 	}
 
 	.select-items div {
-		padding-left: 10px;
-		border: 1px solid transparent;
-		border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+		padding: 10px 13px 10px 13px;
+
+		&:nth-child(n+2) {
+			border-top: 1px solid rgba(0, 0, 0, 0.1);
+		}
 	}
 
 	/* Style items (options): */
@@ -308,11 +298,11 @@
 	  z-index: 99;
 	  max-height: 300px;
 	  overflow-y: auto;
-	  border: solid 1px transparent;
-	  border-color: transparent #d6d6d6 #d6d6d6 #d6d6d6;
+	  border-radius: 5px;
 	  font-size: .75em;
-	  max-width: 400px;
 	  text-align: left;
+	  padding: 5px;
+	  font-weight: 600;
 	}
 
 	/* Hide the items when the select box is closed: */
@@ -321,7 +311,8 @@
 	}
 
 	.select-items div:hover, .same-as-selected {
-	  background-color: rgba(0, 0, 0, 0.1);
+	  background-color: rgba($dark-blue, .9);
+	  color: $primary-color !important;
 	}
 
 	.fields-inline {
@@ -345,17 +336,6 @@
 
 
 .filters {
-	display: flex;
-	gap: 15px;
-
-	.search {
-		width: 25%;
-
-		input {
-			width: 100%;
-		}
-	}
-
 	input[type="submit"]{
 		display: none;
 	}

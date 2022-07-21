@@ -64,10 +64,15 @@
 	.right-container {
 		position: relative;
 		width: 100%;
-		background-color: rgba(0, 0, 0, .8);
+		background-color: rgba($dark-blue, .25);
 
-		.logo-dti {
-			width: 100px;
+		.form {
+			width: 400px;
+			margin: 0 auto;
+
+			.input {
+				width: 100%;
+			}
 		}
 
 		.form .input:not(.submit):not(.boolean) label {
@@ -106,7 +111,7 @@
 		}
 
 		.sign-up {
-			color: $grey;
+			color: $primary-color;
 			font-size: .9em;
 		}
 	}
@@ -114,10 +119,6 @@
 	.form {
 		.form-options {
 			margin-top: 15px;
-		}
-
-		.input input:not(.submit):not(.boolean) {
-			color: #fff;
 		}
 	}
 }
@@ -128,15 +129,12 @@
 	flex-direction: column;
 	max-height: none;
 	justify-content: flex-start;
-	padding: 20px 0 50px 0;
+	padding: 50px 0;
 	max-width: 1600px;
 	position: relative;
 
 	.logo-dti {
-		display: block;
-		img {
-			width: 100px;
-		}
+		color: $dark-blue;
 	}
 
 	h2 {
@@ -187,5 +185,11 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
+}
+
+.login-panel, .sign-up-panel {
+	.logo-dti {
+		font-size: 5em;
 	}
 }

@@ -5,11 +5,12 @@
   </div>
 
   <div class="right-container">
-    <%= image_tag("logo-dti-branco.png", class: 'logo-dti m-b-50') %>
+    <%= content_tag :h1, "DTI", class: 'logo-dti m-b-5' %>
+    <h3 class="logo-subtitle m-b-50 text-center">SISTEMA DE GERENCIAMENTO DE <br>CHAMADOS TÉCNICOS</h3>
 
     <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
       <%= flash_message %>
-
+      
       <%= f.input :username, as: :email, required: false, label: "Login ou e-mail", placeholder: "exemplo@email.com", autofocus: true, label_html: { class: "form-label" } %>
       <%= f.input :password, required: false, label: "Senha", placeholder: "* * * * * * * * * *", label_html: { class: "form-label" }  %>
 
@@ -24,7 +25,7 @@
         </div>
       </div>
 
-      <%= f.submit "Entrar", data: { disable_with: "Entrando..." }, class: "btn btn-cancel" %>
+      <%= f.submit "Entrar", data: { disable_with: "Entrando..." }, class: "btn btn-info" %>
     <% end %>
 
     <span class="divider">Ou</span>

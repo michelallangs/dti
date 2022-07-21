@@ -75,15 +75,13 @@
 	    			<div id="admin-data" class="order-data <%= 'current' if is_admin?%>">
 				    	<section class="bordered">
 				      	<div class="flex-row">
-				      		<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
-					      		<div class="flex-col flex-col-4">
-				      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean" } %>
-										</div>	      		
-									<% end %>
+					      		<div class="flex-col flex-col-12 flex-inline">
+					      			<%= f.input :status, required: false, label: "Status", collection: list_status, prompt: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-50" } %>
 
-									<div class="flex-col flex-col-8">
-										<%= f.input :status, required: false, label: "Status", collection: list_status, prompt: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-									</div>
+					      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
+					      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+											<% end %>
+										</div>	      		
 				      	</div>
 		      		</section>
 
@@ -105,10 +103,9 @@
 				      			<h4 class="uppercase">Técnico responsável</h4>
 									</div>   		
 
-									<div class="flex-col flex-col-10">
-			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, prompt: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-
-										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, prompt: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+									<div class="flex-col flex-col-10 flex-inline">
+			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, prompt: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-15" } %>
+										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, prompt: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-t-0" } %>
 			          	</div>   
 				      	</div>
 		      		</section>
@@ -119,10 +116,9 @@
 			          		<h4 class="uppercase">Data</h4>
 									</div> 
 
-									<div class="flex-col flex-col-10">
-										<%= f.input :start_date, required: false, html5: true, label: "Retirada", label_html: { class: "form-label" } %>
-
-										<%= f.input :end_date, required: false, html5: true, label: "Entrega", label_html: { class: "form-label" } %>
+									<div class="flex-col flex-col-10 flex-inline">
+										<%= f.input :start_date, required: false, html5: true, label: "Retirada", label_html: { class: "form-label" }, wrapper_html: { class: "m-r-15" } %>
+										<%= f.input :end_date, required: false, html5: true, label: "Entrega", label_html: { class: "form-label" }, wrapper_html: { class: "m-t-0" } %>
 									</div>
 				      	</div>
 		      		</section>

@@ -1,5 +1,7 @@
 .btn {
-  padding: 10px 20px;
+  padding: 0 30px;
+  height: 40px;
+  line-height: 40px;
   text-align: center;
   text-transform: uppercase;
   border: none;
@@ -10,8 +12,7 @@
   font-family: $font;
   font-size: 14px;
   font-weight: 600;
-  line-height: 18px;
-  border-radius: 50px;
+  border-radius: 5px;
   min-width: 120px;
   @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
   @include prefix(transition, all 250ms);
@@ -29,24 +30,43 @@
     @include prefix(box-shadow, rgba(0, 0, 0, .06) 0 2px 4px);
     @include prefix(transform, translateY(0));
   }
+
+  .icon {
+    float: left;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, .3);
+    @include prefix(transform, translateX(-30px));
+    border-radius: 5px 0 0 5px;
+
+    &.add {
+      @include background("icons/add.svg", 24px);
+    }
+
+    &.filter {
+      @include background("icons/filter.svg", 16px);
+    }
+  }
 }
 
-.btn-cancel, .btn-alert, .btn-success {
+.btn-cancel, .btn-alert, .btn-success, .btn-info {
   @extend .btn;
 }
 
 .btn-success {
   color: $primary-color;
-  background-color: $success;
+  background-color: $green;
+}
+
+.btn-info {
+  color: $primary-color;
+  background-color: $blue;
 }
 
 .btn-cancel {
   color: $primary-color;
   background-color: $grey;
-
-  &:hover {
-    color: #ffffff;
-  }
 }
 
 .btn-alert {
@@ -62,6 +82,7 @@
   min-width: auto;
   width: 40px;
   height: 40px;
+  padding: 0;
   border-radius: 50%;
 
   img {

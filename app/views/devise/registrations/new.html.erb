@@ -1,8 +1,4 @@
 <div class="box sign-up-panel">
-  <div class="panel-header">
-    <%= link_to image_tag("logo-dti-preto.jpg"), new_user_session_path, class: 'logo-dti' %>
-  </div>
-  
   <div class="panel-body">
     <%= simple_form_for @user, url: new_user_registration_path, html: { class: "form" } do |f| %>
       <%= f.simple_fields_for :school do |s| %>

@@ -9,13 +9,15 @@ class OrdersController < ApplicationController
     s_spot = params[:s_spot]
     s_category = params[:s_category]
     s_brand = params[:s_brand]
+    s_status = params[:s_status]
     sp = params[:sp]
 
-    if (s_patrimony && !s_patrimony.blank?) || (s_spot && !s_spot.blank?) || (s_spot && !s_spot.blank?) || (s_brand && !s_brand.blank?)
+    if (s_patrimony && !s_patrimony.blank?) || (s_spot && !s_spot.blank?) || (s_spot && !s_spot.blank?) || (s_brand && !s_brand.blank?) || (s_status && !s_status.blank?)
       order_w_patrimony = Order.joins(:stuff).where('patrimony LIKE ? AND 
                                                      lower(spot) LIKE lower(?) AND 
                                                      lower(category) LIKE lower(?) AND 
-                                                     lower(brand) LIKE lower(?)', "%#{s_patrimony}%", "%#{s_spot}%", "%#{s_category}%", "%#{s_brand}%")
+                                                     lower(brand) LIKE lower(?) AND
+                                                     lower(status) LIKE lower(?)', "%#{s_patrimony}%", "%#{s_spot}%", "%#{s_category}%", "%#{s_brand}%", "%#{s_status}%")
 
       @orders = is_admin? ? order_w_patrimony 
                           : order_w_patrimony.where('order_school = ?', current_user.id)

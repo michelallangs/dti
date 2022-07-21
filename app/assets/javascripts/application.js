@@ -32,7 +32,7 @@ ready = function() {
     e.stopPropagation();
 
     $(".options .options-btn").not(this).siblings("ul").fadeOut();
-    $(this).siblings("ul").fadeToggle();
+    $(this).siblings("ul").fadeToggle(300);
   });
 
   $(document).on("click", function(){
@@ -51,6 +51,10 @@ ready = function() {
     if ($(this).hasClass("as-list")) {
       $(".order-cards").addClass("as-list") ;
     }
+  })
+
+  $(".filters .select-items div").on("click", function(){
+    $(this).parents(".form").submit();
   })
 };
 

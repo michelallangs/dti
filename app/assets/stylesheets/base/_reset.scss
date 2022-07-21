@@ -52,20 +52,20 @@ strong {
 
 ::-webkit-input-placeholder {
   font-style: italic;
-  color: $grey;
+  color: rgba($secondary-color, .5);
 }
 
 :-moz-placeholder {
   font-style: italic;
-  color: $grey;
+  color: rgba($secondary-color, .5);
 }
 
 ::-moz-placeholder {
   font-style: italic;
-  color: $grey;
+  color: rgba($secondary-color, .5);
 }
 
 :-ms-input-placeholder {
   font-style: italic;
-  color: $grey;
+  color: rgba($secondary-color, .5);
 }

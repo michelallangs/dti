@@ -19,6 +19,11 @@
   background-color: $primary-color;
   margin-bottom: 25px;
   @include prefix(box-shadow, rgba(149, 157, 165, 0.2) 0px 8px 24px);
+  border-radius: 5px;
+
+  &.inline {
+    flex-direction: row;
+  }
 
   p {
     font-weight: 400;

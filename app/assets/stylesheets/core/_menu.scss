@@ -2,23 +2,19 @@
 	width: 300px;
 	display: flex;
 	flex-direction: column;
-	background-color: $secondary-color;
+	background-color: $dark-blue;
 
 	.sidebar-header {
-		display: grid;
-		grid-auto-flow: column;
+		display: flex;
 		align-items: center;
 		justify-content: center;
-		grid-gap: 15px;
+		gap: 25px;
 		padding: 25px;
-
-		.logo-dti img {
-			width: 60px;
-		}
 
 		h3 {
 			font-size: .6em;
 			color: $primary-color;
+			line-height: 15px;
 		}
 	}
 
@@ -62,8 +58,8 @@
 					}
 
 					&:hover {
+						padding-left: 40px;
 						opacity: .75;
-						@include prefix(transform, translateY(-3px));
 					}
 
 					i {
