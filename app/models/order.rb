@@ -1,8 +1,14 @@
 class Order < ApplicationRecord
 	belongs_to :stuff, optional: true
+	belongs_to :school
 	accepts_nested_attributes_for :stuff
 
+	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]
   validates :defect, presence: { message: "Por favor, descreva o problema" }, on: [:create, :update]
+
+  def school_name
+	  self.school.name.split(/(?=\-)/).first
+	end
 end

@@ -120,6 +120,10 @@
 		.form-options {
 			margin-top: 15px;
 		}
+
+		.boolean label {
+			color: white;
+		}
 	}
 }
 
@@ -130,8 +134,8 @@
 	max-height: none;
 	justify-content: flex-start;
 	padding: 50px 0;
-	max-width: 1600px;
 	position: relative;
+	max-width: 1280px;
 
 	.logo-dti {
 		color: $dark-blue;
@@ -153,20 +157,8 @@
 			font-weight: 600;
 		}
 
-		.radio_buttons {
-			grid-template-columns: 1fr 1fr 1fr 1fr;
-		}
-
 		.input.radio_buttons {
 			margin-top: 0 !important;
-		}
-
-		.input.numeric, .input.zip-code {
-			width: 100px !important;
-		}
-
-		.input.district {
-			width: 150px !important;
 		}
 
 		.left-content, .right-content {

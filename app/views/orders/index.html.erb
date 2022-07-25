@@ -5,10 +5,6 @@
 		<%= flash_message %>
 
 		<header class="container-header">
-			<div class="left-content">
-
-			</div>
-
 			<div class="right-content">
 				<div class="action-buttons">
 					<%= link_to image_tag("icons/grid.png"), "#", alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" %>
@@ -25,50 +21,55 @@
 		</header>
 
 		<%= form_tag(orders_path, method: :get, class: "filters form") do %>
-			<div class="flex-row gap-15">
-				<div class="search flex-col flex-col-3" id="autocomplete-patrimony">
+			<div class="row">
+				<div class="search col-3" id="autocomplete-patrimony">
 					<%= autocomplete_field_tag :s_patrimony, params[:s_patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",
 	'data-noMatchesLabel' => "Nenhum equipamento encontrado" %>
 				</div>
 
-				<div class="search flex-col flex-col-3" id="autocomplete-spot">
-					<%= text_field_tag :s_spot, params[:s_spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
+				<div class="search col-3" id="autocomplete-spot">
+					<%= search_field_tag :s_spot, params[:s_spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
 					<% list_spots.each do |spot| %>
 				    <%= content_tag :div, spot, class: "search_list list_spots" %>
 					<% end %>
 				</div>
 
-				<div class="search flex-col flex-col-3" id="autocomplete-category">
-					<%= text_field_tag :s_category, params[:s_category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+				<div class="search col-3" id="autocomplete-category">
+					<%= search_field_tag :s_category, params[:s_category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
 					<% list_categories.each do |category| %>
 				    <%= content_tag :div, category, class: "search_list list_categories" %>
 					<% end %>
 				</div>
 
-				<div class="search flex-col flex-col-3" id="autocomplete-brand">
-					<%= text_field_tag :s_brand, params[:s_brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+				<div class="search col-3" id="autocomplete-brand">
+					<%= search_field_tag :s_brand, params[:s_brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
 					<% list_brands.each do |brand| %>
 				    <%= content_tag :div, brand, class: "search_list list_brands" %>
 					<% end %>
 				</div>
 			</div>
 
-			<div class="flex-row gap-15 m-t-15">
-				<div class="flex-col flex-col-3">
+			<div class="row m-t-15">
+				<div class="col-3">
 					<div class="custom-select">
-						<%= select_tag :s_status, options_for_select(list_status, params[:s_status]), prompt: "Todos"  %>
+						<%= select_tag :s_status, options_for_select(list_status, params[:s_status]), include_blank: "Mostrar todos"  %>
 					</div>
 				</div>
 
-				<div class="flex-col flex-col-3"></div>
-				<div class="flex-col flex-col-3"></div>
-				<div class="flex-col flex-col-3"></div>
+				<div class="col-3">
+					<div class="custom-select">
+						<%= select_tag :s_technician, options_for_select(@technicians.pluck(:name, :id), params[:s_technician]), include_blank: "Mostrar todos" %>
+					</div>
+				</div>
+
+				<div class="col-3">
+				</div>
 			</div>
 
 			<%= submit_tag ("Buscar") %>
 		<% end %>
 
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash inline notice m-b-0 m-t-25" if params[:commit] || params[:sp] %>
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash inline m-b-0 m-t-25" unless search_params.empty? %>
 
 		<% unless @orders.nil? || @orders.blank? %>
 			<section class="container-body">
@@ -77,7 +78,7 @@
 				<% end %>
 			</section>
 		<% else %>
-			<h3 class="text-center m-t-25"><i>Nenhum dado encontrado.</i></h3>
+			<h3 class="text-center m-t-50"><i>Nenhum dado encontrado.</i></h3>
 		<% end %>
 	</div>
 </div>

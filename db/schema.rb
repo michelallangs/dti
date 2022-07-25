@@ -10,18 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_192624) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_25_183958) do
   create_table "orders", force: :cascade do |t|
     t.string "requester"
-    t.integer "order_school"
     t.string "spot"
     t.text "defect"
     t.string "backup", default: "Não"
     t.text "performed_service"
     t.text "obs"
-    t.integer "removal_technician"
-    t.integer "maintenance_technician"
-    t.integer "updated_by"
+    t.string "removal_technician", default: "0"
+    t.string "maintenance_technician", default: "0"
+    t.string "updated_by"
     t.date "start_date"
     t.date "end_date"
     t.string "status", default: "Em aberto"
@@ -29,13 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_192624) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "stuff_id"
+    t.integer "school_id"
   end
 
   create_table "schools", force: :cascade do |t|
     t.string "segment"
     t.string "name", null: false
     t.string "address", null: false
-    t.integer "address_number", null: false
+    t.string "address_number", null: false
     t.string "district", null: false
     t.string "zip_code", null: false
     t.string "phone", null: false

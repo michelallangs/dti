@@ -1,4 +1,4 @@
-<div class="box sign-up-panel">
+<div class="row box sign-up-panel">
   <div class="panel-body">
     <%= simple_form_for @user, url: new_user_registration_path, html: { class: "form" } do |f| %>
       <%= f.simple_fields_for :school do |s| %>
@@ -7,33 +7,59 @@
           <p>Entre com os dados da sua unidade</p>
 
           <p class="segment">Escolha o segmento ao qual sua unidade pertence</p>
-          <%= s.input :segment, label: false, as: :radio_buttons, collection: ['Infantil', 'Fundamental', 'Integral', 'Profissionalizante'] %>
+          <%= s.input :segment, label: false, as: :radio_buttons, collection: list_segments %>
 
-          <div class="fields-inline">
-            <%= s.input :name, label: "Nome da unidade", collection: @schools, prompt: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+          <div class="fields-inline row">
+            <div class="col-7">
+              <%= s.input :name, label: "Nome da unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+            </div>
 
-            <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" } %>
+            <div class="col-5">
+              <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" } %>
+            </div>
           </div>
 
-          <div class="fields-inline">
-            <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" } %>
+          <div class="fields-inline row">
+            <div class="col-6">
+              <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" } %>
+            </div>
 
-            <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
+            <div class="col-3">
+              <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
+            </div>
 
-            <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
+            <div class="col-3">
+              <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
+            </div>
           </div>
 
-          <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" } %>
+          <div class="fields-inline row">
+            <div class="col-6">
+              <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" } %>
+            </div>
+          </div>
         </div>
 
         <div class="right-content">
           <p>Insira suas informações de login</p>
 
-          <%= f.input :username, label: "E-mail da unidade", label_html: { class: "form-label" } %>
+          <div class="fields-inline row">
+            <div class="col-12">
+              <%= f.input :username, label: "E-mail da unidade", label_html: { class: "form-label" } %>
+            </div>
+          </div>
 
-          <%= f.input :password, label: "Senha", label_html: { class: "form-label" }, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length) %>
+          <div class="fields-inline row">
+            <div class="col-12">
+              <%= f.input :password, label: "Senha", label_html: { class: "form-label" }, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length) %>
+            </div>
+          </div>
           
-          <%= f.input :password_confirmation, label: "Confirme sua senha", label_html: { class: "form-label" } %>
+          <div class="fields-inline row">
+            <div class="col-12">
+              <%= f.input :password_confirmation, label: "Confirme sua senha", label_html: { class: "form-label" } %>
+            </div>
+          </div>
         </div>
 
         <div class="actions">

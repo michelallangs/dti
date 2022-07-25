@@ -5,7 +5,8 @@ ready = function() {
   var categories = [];
   var brands = [];
 
-  $("#s_patrimony").on("autocompleteselect", function( event, ui ) {
+  $("#s_patrimony").on("autocompleteselect", function(event, ui) {
+    $(this).val(ui.item.label);
     $(this).closest("form").submit();
   });
 
@@ -21,6 +22,7 @@ ready = function() {
     appendTo: $("#autocomplete-spot"),
     minLength: 2,
     select: function(event, ui) {
+      $(this).val(ui.item.label);
       $(this).closest("form").submit();
       return false;
     }
@@ -38,6 +40,7 @@ ready = function() {
     appendTo: $("#autocomplete-category"),
     minLength: 2,
     select: function(event, ui) {
+      $(this).val(ui.item.label);
       $(this).closest("form").submit();
       return false;
     }
@@ -55,6 +58,7 @@ ready = function() {
     appendTo: $("#autocomplete-brand"),
     minLength: 2,
     select: function(event, ui) {
+      $(this).val(ui.item.label);
       $(this).closest("form").submit();
       return false;
     }

@@ -20,7 +20,7 @@
 	&.index {
 		.main-panel .main-container .container-header {
 			display: flex;
-			justify-content: space-between;
+			justify-content: flex-end;
 			align-items: center;
 
 			.sp input {
@@ -322,6 +322,11 @@
 				display: block;
 			}
 		}
+
+		.input.boolean, .input.boolean > label {
+			align-items: start;
+			flex-flow: column;
+		}
 	}
 
 	&.show {
@@ -355,15 +360,11 @@
 
 			.form {
 				.equipment-category {
-					font-size: .9em;
-					font-weight: 600;
+					font-weight: 700;
 				}
 
 				.custom-radio {
-					justify-content: center;
 					align-items: start;
-					grid-gap: 0;
-					grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 
 					span.radio {
 						label {
@@ -372,7 +373,7 @@
 							flex-direction: column;
 							border: none;
 							position: relative;
-							line-height: 1em;
+							font-size: .75em;
 
 							&:before, &:after {
 								content: "";
@@ -381,8 +382,8 @@
 							}
 
 							&:before {
-								width: 6em;
-								height: 6em;
+								width: 60px;
+								height: 60px;
 								background-color: #d6d6d6;
 								position: relative;
 								z-index: 2;
@@ -393,8 +394,8 @@
 								top: 0;
 								left: 50%;
 								@include prefix(transform, translateX(-50%));
-								width: 7em;
-								height: 7em;
+								width: 70px;
+								height: 70px;
 								background-color: #f4f4f4;
 							}
 

@@ -12,7 +12,7 @@ ready = function() {
       x[i].style.display = "none";
     }
     
-    $("#" + orderData).addClass("current").fadeIn();
+    $("#" + orderData).addClass("current").fadeIn(100);
     $(this).addClass("current");
   })
 };

@@ -8,7 +8,7 @@ module ApplicationHelper
     [:success, :notice, :info, :warning, :error, :alert].each {|type|
       case type
         when :warning, :alert
-          message_type = "Atenção:"
+          message_type = ""
         when :notice, :info
           message_type = ""
         when :success
@@ -43,6 +43,11 @@ module ApplicationHelper
     end
   end
 
+  def list_segments
+    segments = ['Infantil', 'Fundamental', 'Integral', 'Profissionalizante', 'Especial', 'Rural', 'Administrativo']
+    return segments
+  end
+
   def list_categories
     categories = ['PC/Notebook', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro']
     return categories
@@ -57,7 +62,7 @@ module ApplicationHelper
   end
 
   def list_spots
-    spots = ['Secretaria', 'Laboratório', 'Direção', 'Recurso', 'Coordenação', 'Biblioteca']
+    spots = ['Biblioteca', 'Coordenação', 'Direção', 'Laboratório', 'Recurso', 'Secretaria']
     return spots
   end
 
@@ -69,5 +74,15 @@ module ApplicationHelper
 
   def get_status(status)
     return I18n.transliterate(status).gsub(/\s+/, '-').delete('()').downcase
+  end
+
+  def search_params
+    search_array = []
+
+    [params[:s_patrimony], params[:s_spot], params[:s_category], params[:s_brand], params[:s_status], params[:sp]].each do |s|
+      search_array << s unless s.nil?
+    end
+
+    return search_array
   end
 end

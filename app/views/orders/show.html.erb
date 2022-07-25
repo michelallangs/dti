@@ -11,7 +11,7 @@
     		<div class="flex-col flex-col-12 order-id text-center">
     			<%= content_tag :h6 do %>
     				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
-    				<%= content_tag :span, " - #{order_creator(@order.order_school)}" if is_admin? %>
+    				<%= content_tag :span, " - #{@order.school.name}" if is_admin? %>
     			<% end %>
     		</div>
     	</div>
@@ -76,16 +76,15 @@
   			<% end %>
   		</section>
 
-  		<% if !@order.start_date.nil? && !@order.removal_technician.nil? %>
+  		<% if !@order.start_date.nil? && !@order.removal_technician == 0 %>
     		<%= content_tag :p, class: "m-t-25 text-center" do %>
   				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technician)}</strong>".html_safe %>
   			<% end %>
 			<% end %>
 
-			<% if !@order.end_date.nil? && !@order.maintenance_technician.nil? %>
-    		<%= content_tag :p, class: "m-t-25 text-center" do %>
-  				<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technician)}</strong> e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe %>
-				<% end %>
+  		<%= content_tag :p, class: "m-t-25 text-center" do %>
+				<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technician)}</strong>".html_safe if !@order.maintenance_technician == 0 %>
+				<%= " e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if !@order.end_date.nil? %>
 			<% end %>
 		</section>
 	</div>

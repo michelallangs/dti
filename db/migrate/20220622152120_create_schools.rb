@@ -4,7 +4,7 @@ class CreateSchools < ActiveRecord::Migration[7.0]
       t.string :segment
       t.string :name, null: false
       t.string :address, null: false
-      t.integer :address_number, null: false
+      t.string :address_number, null: false
       t.string :district, null: false
       t.string :zip_code, null: false
       t.string :phone, null: false

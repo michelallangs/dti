@@ -16,10 +16,14 @@
   flex-direction: column;
   padding: 10px 15px;
   font-size: .9em;
-  background-color: $primary-color;
   margin-bottom: 25px;
-  @include prefix(box-shadow, rgba(149, 157, 165, 0.2) 0px 8px 24px);
   border-radius: 5px;
+  color: $secondary-color;
+  background-color: $primary-color;
+
+  .flash-title, .flash-body {
+    color: $primary-color;
+  }
 
   &.inline {
     flex-direction: row;
@@ -40,38 +44,34 @@
   }
 
   &.success {
-    border-left: solid 5px $success;
-
-    .flash-title {
-      color: $success;
-    }
-  }
-
-  &.warning, &.alert {
-    .flash-title {
-      color: $alert;
-    }
+    background-color: $green;
   }
 
   &.warning {
-    border-left: solid 5px $warning;
+    background-color: $warning;
   }
 
   &.alert {
-    border-left: solid 5px $alert;
+    background-color: $alert;
   }
 
   &.info, &.notice {
-    border-left: solid 5px $info;
+    background-color: $blue;
+  }
 
-    .flash-title {
-      color: $info;
-    }
+  &.success, &.warning, &.alert, &.info, &.notice {
+    color: $primary-color;
   }
 
   &.error {
+    background-color: $primary-color;
+
     .flash-title {
       color: $alert;
+    }
+
+    .flash-body {
+      color: $secondary-color;
     }
   }
 }

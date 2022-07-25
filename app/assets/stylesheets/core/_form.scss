@@ -9,33 +9,12 @@
 	}
 
 	fieldset[disabled="disabled"] {
-		input, select, textarea, .select-selected {
-			border: none !important;
-			padding-left: 0 !important;
-			padding-right: 0 !important;
-			resize: none;
-			background-color: transparent !important;
-		}
-
 		.select-selected:after {
 			display: none;
 		}
 
-		label {
-			opacity: 1 !important;
-			color: $secondary-color !important;
-		}
-
 		* {
 			pointer-events: none;
-		}
-
-		.custom-radio {
-			grid-template-columns: auto !important;
-
-			.radio label:not(.checked) {
-				display: none !important;
-			}
 		}
 	}
 
@@ -45,8 +24,9 @@
 
 	.radio_buttons {
 		align-items: center;
-		display: grid;
-	  grid-gap: 8px;
+		display: flex;
+		flex-flow: row wrap;
+		gap: 8px;
 
 	  &.inline-radio {
 	  	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -100,6 +80,16 @@
 		label {
 			margin-bottom: 10px;
 			text-transform: uppercase;
+		}
+
+		&.radio_buttons {
+			label {
+				margin: 0;
+			}
+
+			.radio + .error {
+				width: 100%;
+			}
 		}
 
 		input {
@@ -214,6 +204,8 @@
 		height: 150px;
 		border-radius: 5px;
 		border: solid 2px transparent;
+		background-color: white;
+		resize: none;
 
 		&:hover, &:focus {
 			border-color: rgba($dark-blue, 0.75);
