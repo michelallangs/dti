@@ -52,22 +52,20 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
-
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
 
     patrimony = params[:order][:stuff_attributes][:patrimony]
-
-    @order.user_id = @order.updated_by = current_user.id
-    @order.school_id = current_user.school.id if !is_admin?
+    school_id = params[:order][:school_id]
+    requester = params[:order][:requester]
+    spot = params[:order][:spot]
+    defect = params[:order][:defect]
 
     if Stuff.where(patrimony: patrimony).exists? && !patrimony.blank?
-      requester = params[:order][:requester]
-      spot = params[:order][:spot]
-      defect = params[:order][:defect]
       stuff_id = Stuff.find_by_patrimony(patrimony).id
-      @order = Order.new(requester: requester, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: current_user.school.id, updated_by: current_user.id)
+      @order = Order.new(requester: requester, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
+    else
+      @order = Order.new(order_params)
     end
 
     if @order.save
@@ -97,7 +95,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit!
+    params.require(:order).permit(:requester, :spot, :defect, :updated_by, :user_id, :stuff_id, :school_id, stuff_attributes: [:category, :brand, :patrimony])
   end
 
   def show

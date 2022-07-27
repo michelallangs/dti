@@ -4,13 +4,15 @@
 	<div class="container main-container">
 		<header class="container-header">
 			<h1 class="header-title m-b-50 text-center">Abertura de <span>chamado</span></h1>
-			<%= params[:order] %>
+			<%#= params[:order] %>
 		</header>
 
 		<section class="container-body">
 			<%= simple_form_for @order, url: new_order_path, html: { class: "form" } do |f| %>
 	      <%= f.simple_fields_for :stuff do |s| %>
-	      	<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
+	      	<%= f.input :user_id, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
+	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
+	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
 
 	      	<div class="row">
 	      		<%= content_tag :div, "", class: "col-3 col-md-5 col-sm-12" do %>

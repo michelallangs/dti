@@ -1,7 +1,8 @@
 class Order < ApplicationRecord
 	belongs_to :stuff, optional: true
 	belongs_to :school
-	accepts_nested_attributes_for :stuff
+	accepts_nested_attributes_for :stuff, 
+  :reject_if => proc { |att| Stuff.where(patrimony: att[:patrimony]).exists? }
 
 	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
