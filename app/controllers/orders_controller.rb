@@ -52,23 +52,36 @@ class OrdersController < ApplicationController
   end
 
   def create
+    allow_save = true
+
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
 
-    patrimony = params[:order][:stuff_attributes][:patrimony]
+    @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     requester = params[:order][:requester]
     spot = params[:order][:spot]
     defect = params[:order][:defect]
+      
+    if Stuff.where(patrimony: @patrimony).exists? && !@patrimony.blank?
+      stuff_id = Stuff.find_by_patrimony(@patrimony).id
 
-    if Stuff.where(patrimony: patrimony).exists? && !patrimony.blank?
-      stuff_id = Stuff.find_by_patrimony(patrimony).id
       @order = Order.new(requester: requester, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
-    else
-      @order = Order.new(order_params)
-    end
 
-    if @order.save
+      if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
+        allow_save = false
+        flash.now[:alert] = "Patrimônio já pertence a outra unidade"
+      end
+    else
+      @order = Order.new
+      @order.build_stuff
+      @order.update(order_params)
+      puts @order
+      @order.stuff.school_id = school_id unless school_id.blank?
+    end
+    
+
+    if allow_save && @order.save
       flash[:success] = "Chamado aberto com sucesso!"
       redirect_to orders_path
     else
@@ -95,7 +108,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:requester, :spot, :defect, :updated_by, :user_id, :stuff_id, :school_id, stuff_attributes: [:category, :brand, :patrimony])
+    params.require(:order).permit(:requester, :spot, :defect, :stuff_id, :user_id, :school_id, :updated_by, stuff_attributes: [:patrimony, :brand, :category, :school_id])
   end
 
   def show

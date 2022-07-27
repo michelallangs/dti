@@ -1,6 +1,7 @@
 class School < ApplicationRecord
   belongs_to :user
-  has_many :orders
+  has_many :orders, dependent: :destroy
+  has_many :stuffs, dependent: :destroy
 
   validates :segment, presence: { message: "Escolha um segmento" }, on: [:create, :update]
   validates :name, presence: {   message: "Escolha uma unidade" }, 
