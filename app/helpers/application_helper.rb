@@ -79,7 +79,7 @@ module ApplicationHelper
   def search_params
     search_array = []
 
-    [params[:s_patrimony], params[:s_spot], params[:s_category], params[:s_brand], params[:s_status], params[:sp]].each do |s|
+    [params[:patrimony], params[:spot], params[:category], params[:brand], params[:status], params[:start_date], params[:end_date]].each do |s|
       search_array << s unless s.nil?
     end
 

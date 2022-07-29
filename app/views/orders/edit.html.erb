@@ -3,7 +3,7 @@
 
 	<div class="container main-container">
 		<header class="container-header">
-			<h1 class="header-title text-center">Editar dados do <span>chamado</span></h1>
+			<h1 class="header-title">Editar dados do <span>chamado</span></h1>
 		</header>
 
 		<section class="container-body">
@@ -17,20 +17,25 @@
 				</div>
 			</div>
 
+			<div class="row order-info m-b-25">
+    		<div class="col-6 order-id">
+    			<%= content_tag :h6 do %>
+    				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
+    				<%= content_tag :span, " - #{@order.school.name}" if is_admin? %>
+    			<% end %>
+    		</div>
+
+    		<div class="col-6 text-right updated-at">
+    			<%= content_tag :span, order_updated_at(@order.updated_at, @order.updated_by) %>
+    		</div>
+    	</div>
+
+    	<%= flash_message %>
+
 			<%= simple_form_for @order, url: edit_order_path, html: { class: "form" } do |f| %>
 	      <%= f.simple_fields_for :stuff do |s| %>
-	      	<div class="row order-info m-b-5">
-	      		<div class="col-6 order-id">
-	      			<%= content_tag :h6 do %>
-	      				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
-	      				<%= content_tag :span, " - #{@order.school.name}" if is_admin? %>
-	      			<% end %>
-	      		</div>
-
-	      		<div class="col-6 text-right updated-at">
-	      			<%= content_tag :span, order_updated_at(@order.updated_at, @order.updated_by) %>
-	      		</div>
-	      	</div>
+	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
+	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
 
 	      	<fieldset <%= "disabled=disabled" if is_admin? || @order.status != "Em aberto" %>>
 						<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
@@ -39,7 +44,7 @@
 		      		<section class="bordered">
 				      	<div class="row">
 				      		<div class="col-3 col-md-5 col-sm-12">
-			      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
+			      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
 									</div>	      		
 				      	</div>
 		      		</section>
@@ -56,7 +61,10 @@
 		      		<section class="bordered">
 			          <div class="row">
 			          	<div class="col-3 col-md-4 col-sm-12">
-										<%= s.input :patrimony, required: false, label: "Nº patrimônio", label_html: { class: "form-label" } %>
+										<div class="input string" id="autocomplete-patrimony">
+			          			<label for="order[stuff_attributes][patrimony]" class="form-label">Nº patrimônio</label>
+											<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
+										</div>
 			          	</div>
 
 			          	<div class="col-3 col-md-4 col-sm-12">
@@ -83,16 +91,14 @@
 				      	<div class="row">
 				      		<div class="col-4 col-md-6 col-sm-12">
 				      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-50" } %>
-									</div>	      		
-								</div>	      		
+									</div>	
 
-				      	<div class="row m-t-50">
-		      				<div class="col-4 col-md-6 col-sm-12">
+									<div class="col-4 col-md-6 col-sm-12">
 				      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
 				      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
 										<% end %>
-									</div>	      		
-				      	</div>
+									</div>      		
+								</div>
 		      		</section>
 
 		      		<section class="bordered">
@@ -112,11 +118,11 @@
 
 				      	<div class="row">
 				      		<div class="col-4 col-md-6 col-sm-12">
-			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, include_blank: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-15" } %>
+			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, include_blank: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 									</div>   		
 
 									<div class="col-4 col-md-6 col-sm-12">
-										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, include_blank: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-t-0" } %>
+										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, include_blank: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 			          	</div>   
 				      	</div>
 		      		</section>
@@ -136,9 +142,9 @@
 
 	    		<% if is_admin? || @order.status == "Em aberto" %>
 		        <div class="actions m-t-25">
-		          <%= f.submit "Atualizar dados", data: { disable_with: "Aguarde..." }, class: "btn-success" %>
-		          <%= link_to "Voltar", orders_path, class: "btn-cancel" %>
-		          <%= link_to "Cancelar chamado", destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert" %>
+		        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon save" do %>Salvar<% end %>
+		          <%= link_to orders_path, class: "btn-cancel icon back" do %>Voltar<% end %>
+		          <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon cancel" do %>Cancelar chamado<% end %>
 		        </div>
 		      <% else %>
 		      	<%= content_tag :p, "Este chamado está sendo ou já foi atendido, portanto não é mais possível fazer alterações.", class: "m-t-25 error alert" %>

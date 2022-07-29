@@ -14,12 +14,12 @@
 						</div>
 
 						<div class="right-content">
-							<%= content_tag :span, order.created_at.strftime("%d/%m/%Y"), class: "order-creation-date" %>
+							<%= content_tag :span, order.created_at, class: "order-creation-date" %>
 						</div>
 					</header>
 
 					<div class="order-card-body">
-						<%= content_tag :h4, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
+						<%= content_tag :h3, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
 						<%= content_tag :p, order.defect %>
 					</div>
 

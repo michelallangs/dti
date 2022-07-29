@@ -1,12 +1,12 @@
 @media only screen and (max-width: 1999px){
   html, body {
-    font-size: 16px;
+    font-size: 12px;
   }
 }
 
 @media only screen and (max-width: 991px){
   html, body {
-    font-size: 15px;
+    font-size: 12px;
 
     @for $i from 1 through 12 {
       .col-md-#{$i} {
@@ -65,7 +65,7 @@
 
 @media only screen and (max-width: 767px){
   html, body {
-    font-size: 14px;
+    font-size: 11px;
 
     .flex-row:not(.order-tabs) {
       flex-direction: column;
@@ -130,7 +130,7 @@
 
 @media only screen and (max-width: 479px){
   html, body {
-    font-size: 14px;
+    font-size: 10px;
   }
 }
 

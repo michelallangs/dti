@@ -1,7 +1,7 @@
 .btn {
-  padding: 0 30px;
-  height: 40px;
-  line-height: 40px;
+  padding: 0 36px;
+  height: 36px;
+  line-height: 36px;
   text-align: center;
   text-transform: uppercase;
   border: none;
@@ -9,13 +9,13 @@
   display: inline-block;
   color: $secondary-color;
   background-color: $primary-color;
+  font-size: 1em;
   font-family: $font;
-  font-size: 14px;
   font-weight: 600;
   border-radius: 5px;
   min-width: 120px;
   @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
-  @include prefix(transition, all 250ms);
+  @include prefix(transition, all 125ms);
   background-clip: padding-box;
   
   &:hover, &:focus {
@@ -27,17 +27,18 @@
   }
 
   &:active {
-    @include prefix(box-shadow, rgba(0, 0, 0, .06) 0 2px 4px);
+    @include prefix(box-shadow, none);
     @include prefix(transform, translateY(0));
   }
 
-  .icon {
+  &.icon:before {
+    content: "";
     float: left;
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     background-color: rgba(0, 0, 0, .3);
-    @include prefix(transform, translateX(-30px));
+    @include prefix(transform, translateX(-36px));
     border-radius: 5px 0 0 5px;
 
     &.add {
@@ -46,6 +47,18 @@
 
     &.filter {
       @include background("icons/filter.svg", 16px);
+    }
+
+    &.cancel {
+      @include background("icons/cancel.svg", 16px);
+    }
+
+    &.back {
+      @include background("icons/back.svg", 16px);
+    }
+
+    &.save {
+      @include background("icons/save.svg", 24px);
     }
   }
 }
@@ -99,62 +112,5 @@
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0.2);
-  }
-}
-
-.options {
-  position: relative;
-
-  .options-btn {
-    img {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  ul {
-    z-index: 999;
-    display: none;
-    list-style: none;
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    background-color: $primary-color;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-
-    &:before, &:after {
-      content: "";
-      position: absolute;
-      border-left: solid 6px transparent;
-      border-right: solid 6px transparent;
-      bottom: 100%;
-    }
-
-    &:before {
-      right: 6px;
-      bottom: 100%;
-      border-bottom: solid 6px #fff;
-      z-index: 3;
-    }
-
-    &:after {
-      right: 5px;
-      border-bottom: solid 6px #d6d6d6;
-      z-index: 2;
-    }
-
-    li a {
-      display: block;
-      padding: 10px 15px;
-      transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-      white-space: nowrap;
-      font-size: .75em;
-      border-radius: 5px;
-
-      &:hover {
-        background-color: #f4f4f4;
-      }
-    }
   }
 }

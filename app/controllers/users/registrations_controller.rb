@@ -25,12 +25,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     require 'csv'
 
     path = "#{Rails.root}/public/schools.csv"
-    file = File.open(path, "r:UTF-8")
-    csv = CSV.parse(file, :headers => true, col_sep: ",")
+    file = File.open(path, "r:ISO-8859-1:UTF-8")
+    csv = CSV.parse(file, :headers => true, col_sep: ";")
     @schools = []
     csv.each do |r|
-      common_name = r[1]
-      full_name = r[0].nil? ? r[0] : " - #{r[0]}"
+      common_name = r[3]
+      full_name = r[2]
+      common_name << " -" if !common_name.nil? && !full_name.nil?
       @schools << "#{common_name} #{full_name}".to_s
     end
   end

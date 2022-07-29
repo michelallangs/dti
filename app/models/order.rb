@@ -1,8 +1,7 @@
 class Order < ApplicationRecord
 	belongs_to :stuff, optional: true
 	belongs_to :school
-	accepts_nested_attributes_for :stuff, 
-  :reject_if => proc { |att| Stuff.where(patrimony: att[:patrimony]).exists? }
+	accepts_nested_attributes_for :stuff
 
 	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
@@ -12,4 +11,8 @@ class Order < ApplicationRecord
   def school_name
 	  self.school.name.split(/(?=\-)/).first
 	end
+
+	def created_at
+    attributes['created_at'].strftime("%d/%m/%Y")
+  end
 end

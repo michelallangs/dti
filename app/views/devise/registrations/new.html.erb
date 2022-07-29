@@ -1,10 +1,11 @@
 <div class="row box sign-up-panel">
   <div class="panel-body">
+    <h2 class="m-t-25 m-r-50 m-b-0 m-l-50">Comece aqui a sua conta</h2>
+
     <%= simple_form_for @user, url: new_user_registration_path, html: { class: "form" } do |f| %>
       <%= f.simple_fields_for :school do |s| %>
         <div class="left-content">
-          <h2>Comece aqui a sua conta</h2>
-          <p>Entre com os dados da sua unidade</p>
+          <p class="m-b-50">Entre com os dados da sua unidade</p>
 
           <p class="segment">Escolha o segmento ao qual sua unidade pertence</p>
           <%= s.input :segment, label: false, as: :radio_buttons, collection: list_segments %>
@@ -41,7 +42,7 @@
         </div>
 
         <div class="right-content">
-          <p>Insira suas informações de login</p>
+          <p class="m-b-50">Insira suas informações de login</p>
 
           <div class="fields-inline row">
             <div class="col-12">

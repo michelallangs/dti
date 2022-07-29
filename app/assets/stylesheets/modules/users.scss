@@ -112,7 +112,6 @@
 
 		.sign-up {
 			color: $primary-color;
-			font-size: .9em;
 		}
 	}
 
@@ -153,7 +152,7 @@
 		.segment {
 			margin-bottom: 5px;
 			margin-top: 25px;
-			font-size: .75em;
+			font-size: 1em;
 			font-weight: 600;
 		}
 
@@ -164,10 +163,6 @@
 		.left-content, .right-content {
 			flex: 1 1 0;
 			padding: 50px;
-		}
-
-		.right-content {
-			padding-top: 82px;
 		}
 
 		.actions {

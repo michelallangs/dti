@@ -12,7 +12,7 @@
 		padding: 25px;
 
 		h3 {
-			font-size: .6em;
+			font-size: .75em;
 			color: $primary-color;
 			line-height: 15px;
 		}
@@ -38,11 +38,10 @@
 					display: block;
 					color: $primary-color;
 					text-decoration: none;
-					font-size: .75em;
 					position: relative;
 
 					&, &:before {
-						@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
+						@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 					}
 
 					&:before {
@@ -107,17 +106,17 @@
 		.welcome, .welcome-user {
 			color: $primary-color;
 			padding: 0 25px;
+			line-height: 16px;
 		}
 
 		.welcome {
-			font-size: .75em;
 	    color: #9ea7ad;
-	    margin-bottom: -5px;
 		}
 
 		.welcome-user {
 			font-weight: 600;
     	font-style: italic;
+    	font-size: 1.25em;
 		}
 
 		a {
@@ -125,11 +124,10 @@
 			display: block;
 			color: $primary-color;
 			text-decoration: none;
-			font-size: .75em;
 
 			&:hover {
 				opacity: .75;
-				@include prefix(transition, .5s cubic-bezier(.075,.82,.165,1));
+				@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 				@include prefix(transform, translateY(-3px));
 			}
 

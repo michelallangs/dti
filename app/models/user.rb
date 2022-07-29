@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_one :school
   accepts_nested_attributes_for :school 
 
-  validates :username, uniqueness: true, presence: { message: "Por favor, digite o e-mail" }, on: [:create, :update]
+  validates :username, uniqueness: { message: "Este nome de usuário já está em uso" }, presence: { message: "Por favor, digite o e-mail" }, on: [:create, :update]
   validates :password, presence: { message: "Por favor, digite uma senha" }, on: [:create, :update]
   validates_confirmation_of :password, message: "Digite a mesma senha nos dois campos"
 

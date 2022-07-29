@@ -3,7 +3,7 @@
 
 	<div class="container main-container">
 		<header class="container-header">
-			<h1 class="header-title m-b-50 text-center">Abertura de <span>chamado</span></h1>
+			<h1 class="header-title m-b-50">Abertura de <span>chamado</span></h1>
 		</header>
 
   	<%= flash_message %>
@@ -17,11 +17,11 @@
 
 	      	<div class="row">
 	      		<%= content_tag :div, "", class: "col-3 col-md-5 col-sm-12" do %>
-      				<%= f.input :school_id, label: "Nome da unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
     				<% end if is_admin? %>
 
 	      		<div class="col-3 col-md-5 col-sm-12">
-      				<%= f.input :requester, required: false, label: "Nome do(a) solicitante", label_html: { class: "form-label" } %>
+      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
 						</div>	      		
 	      	</div>
 	      		
@@ -35,8 +35,8 @@
           <div class="row m-t-50">
           	<div class="col-3 col-md-4 col-sm-12">
           		<div class="input string" id="autocomplete-patrimony">
-          			<label for="order[stuff_attributes][patrimony]" class="form-label">Nº patrimônio</label>
-								<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony", 'data-noMatchesLabel' => "Patrimônio não encontrado", maxlength: 6 %>
+          			<label for="order[stuff_attributes][patrimony]" class="form-label">Patrimônio</label>
+								<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
 							</div>
           	</div>
 
@@ -56,8 +56,8 @@
           </div>
 
 	        <div class="actions m-t-50">
-	          <%= f.submit "Finalizar", data: { disable_with: "Aguarde..." }, class: "btn-success" %>
-	          <%= link_to "Voltar", orders_path, class: "btn-cancel" %>
+	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon save" do %>Finalizar<% end %>
+	          <%= link_to orders_path, class: "btn-cancel icon back" do %>Voltar<% end %>
 	        </div>
 	      <% end %>
 	    <% end %>

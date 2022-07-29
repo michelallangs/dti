@@ -8,41 +8,40 @@
 			<div class="right-content">
 				<div class="action-buttons">
 					<%= link_to image_tag("icons/grid.png"), "#", alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" %>
-					<%= link_to image_tag("icons/list.svg"), "#", alt: "Modo de exibição: lista", title: "Modo de exibição: lista",class: "as-list btn-icon" %>
+					<%= link_to image_tag("icons/list.svg"), "#", alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" %>
 					<div class="options">
-						<%= link_to "#", alt: "Filtrar", title: "Filtrar", class: "btn options-btn" do %><i class="icon filter"></i>Filtrar<% end %>
+						<%= link_to "#", alt: "Filtro avançado", title: "Filtro avançado", class: "btn options-btn icon filter" do %>Filtro avançado<% end %>
 						<ul>
 							<li><%= link_to "Chamados sem patrimônio", sp: true %></li>
 						</ul>
 					</div>
 				</div>
-				<%= link_to new_order_path, class: "btn-success" do %><i class="icon add"></i>Abrir chamado<% end %>
+				<%= link_to new_order_path, class: "btn-success icon add" do %>Abrir chamado<% end %>
 			</div>
 		</header>
 
 		<%= form_tag(orders_path, method: :get, class: "filters form") do %>
 			<div class="row">
 				<div class="search col-3" id="autocomplete-patrimony">
-					<%= autocomplete_field_tag :s_patrimony, params[:s_patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",
-	'data-noMatchesLabel' => "Nenhum equipamento encontrado" %>
+					<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
 				</div>
 
 				<div class="search col-3" id="autocomplete-spot">
-					<%= search_field_tag :s_spot, params[:s_spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
+					<%= search_field_tag :spot, params[:spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
 					<% list_spots.each do |spot| %>
 				    <%= content_tag :div, spot, class: "search_list list_spots" %>
 					<% end %>
 				</div>
 
 				<div class="search col-3" id="autocomplete-category">
-					<%= search_field_tag :s_category, params[:s_category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+					<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
 					<% list_categories.each do |category| %>
 				    <%= content_tag :div, category, class: "search_list list_categories" %>
 					<% end %>
 				</div>
 
 				<div class="search col-3" id="autocomplete-brand">
-					<%= search_field_tag :s_brand, params[:s_brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+					<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
 					<% list_brands.each do |brand| %>
 				    <%= content_tag :div, brand, class: "search_list list_brands" %>
 					<% end %>
@@ -52,17 +51,22 @@
 			<div class="row m-t-15">
 				<div class="col-3">
 					<div class="custom-select">
-						<%= select_tag :s_status, options_for_select(list_status, params[:s_status]), include_blank: "Mostrar todos"  %>
+						<%= select_tag :status, options_for_select(list_status, params[:status]), include_blank: "Selecione o status..."  %>
 					</div>
 				</div>
 
 				<div class="col-3">
 					<div class="custom-select">
-						<%= select_tag :s_technician, options_for_select(@technicians.pluck(:name, :id), params[:s_technician]), include_blank: "Mostrar todos" %>
+						<%= select_tag :technician, options_for_select(@technicians.pluck(:name, :id), params[:technician]), include_blank: "Responsável pela manutenção..." %>
 					</div>
 				</div>
 
-				<div class="col-3">
+				<div class="search date col-3" id="start-date">
+					<%= text_field_tag :start_date, params[:start_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
+				</div>
+
+				<div class="search date col-3" id="end-date">
+					<%= text_field_tag :end_date, params[:end_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
 				</div>
 			</div>
 

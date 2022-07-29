@@ -7,38 +7,43 @@ class OrdersController < ApplicationController
   def index
     @technicians = User.where("user_level == 0 AND username != 'admin'")
 
-    s_patrimony = params[:s_patrimony]
-    s_spot = params[:s_spot]
-    s_category = params[:s_category]
-    s_brand = params[:s_brand]
-    s_status = params[:s_status]
-    s_technician = params[:s_technician]
-    search_params = [s_patrimony, s_spot, s_category, s_brand, s_status, s_technician]
-    sp = params[:sp]
+    patrimony = params[:patrimony]
+    spot = params[:spot]
+    category = params[:category]
+    brand = params[:brand]
+    status = params[:status]
+    technician = params[:technician]
+    start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
+    end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
+    search_params = [patrimony, spot, category, brand, status, technician, start_date, end_date]
 
     if search_params.all?
-      order_w_patrimony = Order.joins(:stuff).where("patrimony LIKE ? AND 
-                                                     lower(spot) LIKE lower(?) AND 
-                                                     lower(category) LIKE lower(?) AND 
-                                                     lower(brand) LIKE lower(?) AND 
-                                                     maintenance_technician LIKE ? AND 
-                                                     lower(status) LIKE lower(?)", 
-                                                     "%#{s_patrimony}%", 
-                                                     "%#{s_spot}%", 
-                                                     "%#{s_category}%", 
-                                                     "%#{s_brand}%", 
-                                                     "%#{s_technician}%", 
-                                                     "%#{s_status}%")
+      patrimony = patrimony.downcase == "s/p" ? "" : "%#{patrimony}%"
 
-      @orders = is_admin? ? order_w_patrimony 
-                          : order_w_patrimony.where('school_id = ?', current_user.school.id)
-    elsif sp
-      order_no_patrimony = Order.joins(:stuff).where('patrimony = ""')
+      @orders = Order.joins(:stuff).where("stuffs.patrimony LIKE ? AND 
+                                           lower(orders.spot) LIKE lower(?) AND 
+                                           lower(stuffs.category) LIKE lower(?) AND 
+                                           lower(stuffs.brand) LIKE lower(?) AND 
+                                           orders.maintenance_technician LIKE ? AND 
+                                           lower(orders.status) LIKE lower(?) AND 
+                                           date(orders.created_at) BETWEEN ? AND ?", 
+                                           patrimony, 
+                                           "%#{spot}%", 
+                                           "%#{category}%", 
+                                           "%#{brand}%", 
+                                           "%#{technician}%", 
+                                           "%#{status}%",
+                                           start_date.to_date,
+                                           end_date.to_date)
 
-      @orders = is_admin? ? order_no_patrimony 
-                          : order_no_patrimony.where('school_id = ?', current_user.school.id)
+      @orders = is_admin? ? @orders 
+                          : @orders.where('orders.school_id = ?', current_user.school.id)
+
+      if (start_date && end_date) && (start_date > end_date)
+        flash.now[:warning] = "A data inicial deve ser menor do que a final"
+      end
     else
-      @orders = is_admin? ? Order.all : Order.where('school_id = ?', current_user.school.id)
+      @orders = is_admin? ? Order.all : Order.where('orders.school_id = ?', current_user.school.id)
     end
   end
 
@@ -76,7 +81,6 @@ class OrdersController < ApplicationController
       @order = Order.new
       @order.build_stuff
       @order.update(order_params)
-      puts @order
       @order.stuff.school_id = school_id unless school_id.blank?
     end
     
@@ -91,15 +95,26 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @patrimony = @order.stuff.patrimony
     @technicians = User.where(user_level: 0).where.not(name: "Administrador")
   end
 
   def update
+    allow_update = true
+
     @order = Order.find(params[:id])
     @technicians = User.where(user_level: 0).where.not(name: "Administrador")
-    @order.updated_by = current_user.id
+    @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
+    school_id = params[:order][:school_id]
+
+    unless @patrimony.blank?
+      if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
+        allow_update = false
+        flash.now[:alert] = "Patrimônio já pertence a outra unidade"
+      end
+    end
     
-    if @order.update(order_params)
+    if allow_update && @order.update(order_update_params)
       flash[:success] = "Dados do chamado atualizados com sucesso!"
       redirect_to orders_path
     else
@@ -109,6 +124,10 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:requester, :spot, :defect, :stuff_id, :user_id, :school_id, :updated_by, stuff_attributes: [:patrimony, :brand, :category, :school_id])
+  end
+
+  def order_update_params
+    params.require(:order).permit!
   end
 
   def show

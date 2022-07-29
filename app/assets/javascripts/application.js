@@ -3,6 +3,7 @@
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
+//= require bootstrap-datepicker
 
 //= require_tree .
 
@@ -31,12 +32,12 @@ ready = function() {
     e.preventDefault();
     e.stopPropagation();
 
-    $(".options .options-btn").not(this).siblings("ul").fadeOut();
-    $(this).siblings("ul").fadeToggle(300);
+    $(".options .options-btn").not(this).siblings("ul").hide();
+    $(this).siblings("ul").toggle();
   });
 
   $(document).on("click", function(){
-    $(".options-btn").siblings("ul").fadeOut();
+    $(".options-btn").siblings("ul").hide();
     var radio = $("input.radio_buttons:checked");
     $("input.radio_buttons").parent().removeClass("checked");
 
@@ -56,6 +57,22 @@ ready = function() {
   $(".filters .select-items div").on("click", function(){
     $(this).parents(".form").submit();
   })
+
+  $("#start_date").datepicker({
+    container: '#start-date',                
+    language: 'pt-BR',
+    autoclose: true
+  }).on("changeDate", function(){
+    $(this).parents(".form").submit();
+  });
+
+  $("#end_date").datepicker({
+    container: '#end-date',                
+    language: 'pt-BR',
+    autoclose: true
+  }).on("changeDate", function(){
+    $(this).parents(".form").submit();
+  });
 };
 
 $(document).ready(ready);

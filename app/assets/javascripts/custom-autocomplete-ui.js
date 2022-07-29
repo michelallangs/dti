@@ -5,7 +5,7 @@ ready = function() {
   var categories = [];
   var brands = [];
 
-  $("#s_patrimony").on("autocompleteselect", function(event, ui) {
+  $("#patrimony").on("autocompleteselect", function(event, ui) {
     $(this).val(ui.item.label);
     $(this).closest("form").submit();
   });
@@ -17,7 +17,7 @@ ready = function() {
     spots.push(item);
   })
 
-  $("#s_spot").autocomplete({
+  $("#spot").autocomplete({
     source: spots,
     appendTo: $("#autocomplete-spot"),
     minLength: 2,
@@ -35,7 +35,7 @@ ready = function() {
     categories.push(item);
   })
 
-  $("#s_category").autocomplete({
+  $("#category").autocomplete({
     source: categories,
     appendTo: $("#autocomplete-category"),
     minLength: 2,
@@ -53,7 +53,7 @@ ready = function() {
     brands.push(item);
   })
 
-  $("#s_brand").autocomplete({
+  $("#brand").autocomplete({
     source: brands,
     appendTo: $("#autocomplete-brand"),
     minLength: 2,
