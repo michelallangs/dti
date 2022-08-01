@@ -15,34 +15,34 @@ class OrdersController < ApplicationController
     technician = params[:technician]
     start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
-    search_params = [patrimony, spot, category, brand, status, technician, start_date, end_date]
+    search = [patrimony, spot, category, brand, status, technician, start_date, end_date]
 
-    if search_params.all?
+    if !search.all?(&:blank?)
+      puts "FILTRANDO RESULTADOS"
+      puts " "
       patrimony = patrimony.downcase == "s/p" ? "" : "%#{patrimony}%"
 
-      @orders = Order.joins(:stuff).where("stuffs.patrimony LIKE ? AND 
-                                           lower(orders.spot) LIKE lower(?) AND 
-                                           lower(stuffs.category) LIKE lower(?) AND 
-                                           lower(stuffs.brand) LIKE lower(?) AND 
-                                           orders.maintenance_technician LIKE ? AND 
-                                           lower(orders.status) LIKE lower(?) AND 
-                                           date(orders.created_at) BETWEEN ? AND ?", 
-                                           patrimony, 
-                                           "%#{spot}%", 
-                                           "%#{category}%", 
-                                           "%#{brand}%", 
-                                           "%#{technician}%", 
-                                           "%#{status}%",
-                                           start_date.to_date,
-                                           end_date.to_date)
+      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technician LIKE ? AND lower(orders.status) LIKE lower(?)"
+
+      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{status}%"]
+
+      if !start_date.blank? || !end_date.blank?
+        query += " AND date(orders.created_at) BETWEEN ? AND ?"
+        values += [start_date.to_date, end_date.to_date]
+      end
+
+      @orders = Order.joins(:stuff).where(query, *values)
 
       @orders = is_admin? ? @orders 
                           : @orders.where('orders.school_id = ?', current_user.school.id)
+      
 
       if (start_date && end_date) && (start_date > end_date)
         flash.now[:warning] = "A data inicial deve ser menor do que a final"
       end
     else
+      puts "MOSTRANDO TODOS"
+      puts " "
       @orders = is_admin? ? Order.all : Order.where('orders.school_id = ?', current_user.school.id)
     end
   end

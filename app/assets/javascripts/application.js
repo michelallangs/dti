@@ -57,22 +57,6 @@ ready = function() {
   $(".filters .select-items div").on("click", function(){
     $(this).parents(".form").submit();
   })
-
-  $("#start_date").datepicker({
-    container: '#start-date',                
-    language: 'pt-BR',
-    autoclose: true
-  }).on("changeDate", function(){
-    $(this).parents(".form").submit();
-  });
-
-  $("#end_date").datepicker({
-    container: '#end-date',                
-    language: 'pt-BR',
-    autoclose: true
-  }).on("changeDate", function(){
-    $(this).parents(".form").submit();
-  });
 };
 
 $(document).ready(ready);
