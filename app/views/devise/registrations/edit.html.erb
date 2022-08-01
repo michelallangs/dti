@@ -1,43 +1,58 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="box main-panel">
+  <%= render "layouts/main_menu" %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+  <div class="container main-container">
+    <header class="container-header">
+      <h1 class="header-title">Editar dados da <span>conta</span></h1>
+    </header>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+    <section class="container-body">
+      <%= simple_form_for @user, url: edit_user_registration_path, html: { class: "form" } do |f| %>
+        <div class="row">
+          <div class="col-4 col-md-6 col-sm-12">
+            <%= f.input :username, label: "E-mail/Nome de usuário", label_html: { class: "form-label" }, input_html: { placeholder: "unidade@email.com"} %>
+          </div>
+        </div>
+
+        <%= f.simple_fields_for :school do |s| %>
+          <div class="row">
+            <div class="col-12">
+              <%= s.input :segment, label: "Segmento", as: :radio_buttons, collection: list_segments, label_html: { class: "form-label" } %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-3 col-md-6 col-sm-12">
+              <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" }, input_html: { placeholder: "Ex.: 12345-678", maxlength: 8 } %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6 col-md-6 col-sm-12">
+              <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: Rua Um Dois de Oliveira Quatro"} %>
+            </div>
+
+            <div class="col-3 col-md-3 col-sm-12">
+              <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
+            </div>
+
+            <div class="col-3 col-md-3 col-sm-12">
+              <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4 col-md-6 col-sm-12">
+              <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678"} %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="actions m-t-50">
+          <%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon save" do %>Salvar<% end %>
+          <%= link_to profile_path, class: "btn-cancel icon back" do %>Voltar<% end %>
+        </div>
+      <% end %>
+    </section>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+</div>

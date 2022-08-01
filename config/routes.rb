@@ -13,15 +13,11 @@ Rails.application.routes.draw do
     #sessions
     get    '/entrar',         to: 'devise/sessions#new',            as: :new_user_session
     post   '/entrar',         to: 'devise/sessions#create',         as: :user_session
-    # get    '/sair',           to: 'devise/sessions#destroy',        as: :destroy_user_session
     delete '/sair',           to: 'devise/sessions#destroy',        as: :destroy_user_session
 
     #passwords
-    get    '/nova-senha',       to: 'devise/passwords#new',           as: :new_user_password
-    post   '/nova-senha',       to: 'devise/passwords#create',        as: :user_password
-    get    '/trocar-senha',     to: 'devise/passwords#edit',          as: :edit_user_password
-    patch  '/trocar-senha',     to: 'devise/passwords#update',        as: false
-    put    '/trocar-senha',     to: 'devise/passwords#update',        as: false
+    get    '/nova-senha',     to: 'devise/passwords#new',           as: :new_user_password
+    post   '/nova-senha',     to: 'devise/passwords#create',        as: :user_password
 
     #registrations
     get    '/cancelar-conta',   to: 'users/registrations#cancel',   as: :cancel_user_registration
@@ -31,6 +27,13 @@ Rails.application.routes.draw do
     patch  '/editar-cadastro',  to: 'users/registrations#update',   as: false
     put    '/editar-cadastro',  to: 'users/registrations#update',   as: false
     delete '/deletar-conta',    to: 'users/registrations#destroy',  as: :destroy_user_registration
+  end
+
+  controller :users do
+    get    '/usuarios',                      action: :index,             as: :users
+    get    '/trocar-senha',                  action: :edit_password,     as: :edit_user_password
+    patch  '/trocar-senha',                  action: :update_password,   as: false
+    put    '/trocar-senha',                  action: :update_password,   as: false
   end
 
   controller :home do

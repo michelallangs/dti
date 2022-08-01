@@ -17,6 +17,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def edit
+    @user = current_user
+  end
+
+  def update
+    @user = current_user
+
+    if @user.update(user_params)
+      flash[:success] = "Dados atualizados com sucesso!"
+      redirect_to profile_path
+    else
+      render :edit
+    end
+  end
+
   def user_params
     params.require(:user).permit!
   end

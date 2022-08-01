@@ -80,7 +80,7 @@
     color: $alert !important;
   }
 
-  input, select, textarea {
+  input, select, textarea, label, .select-selected {
     border-color: $alert !important;
   }
 
@@ -90,7 +90,7 @@
     color: $alert;
     position: relative;
     margin-top: 10px;
-    font-size: .6em;
+    font-size: .9em;
     font-weight: 700;
 
     &:first-letter {

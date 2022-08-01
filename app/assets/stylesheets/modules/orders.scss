@@ -1,22 +1,4 @@
 #orders {
-	&.new, &.create, &.edit, &.update, &.show {
-		.main-panel .main-container {
-			.container-header {
-				.header-title {
-					font-weight: 300;
-					text-transform: uppercase;
-					span {
-						font-style: initial;
-					}
-				}
-			}
-
-			.container-body {
-				padding-top: 0;
-			}
-		}
-	}
-
 	&.index {
 		.main-panel .main-container .container-header {
 			display: flex;
@@ -432,11 +414,6 @@
 
 				.input .numeric {
 					width: 150px !important;
-				}
-
-				.actions {
-					display: flex;
-					gap: 25px;
 				}
 			}
 		}

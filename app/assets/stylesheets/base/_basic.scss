@@ -10,6 +10,10 @@
 	width: 100%;
 	@include outer-container;
 	max-width: none;
+
+	&:nth-of-type(n+2) {
+		margin-top: 25px;
+	}
 }
 
 .flex-row {
@@ -163,34 +167,6 @@
 	color: $primary-color;
 }
 
-.main-panel {
-	&, .main-sidebar, .main-container {
-		height: 100%;
-	}
-
-	.main-container {
-		width: 100%;
-		overflow-y: auto;
-		padding: 25px 50px;
-
-		.container-header, .container-body {
-			padding: 25px 0;
-		}
-
-		.container-header {
-			.header-title {
-				font-size: 2em;
-				line-height: 20px;
-
-				span {
-					font-weight: 600;
-					font-style: italic;
-				}
-			}
-		}
-	}
-}
-
 section {
   padding: 25px 0;
 }
@@ -278,4 +254,10 @@ dl {
       }
     }
   }
+}
+
+.actions {
+	display: flex;
+	gap: 25px;
+	justify-content: center;
 }

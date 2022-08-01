@@ -124,11 +124,11 @@
 			display: block;
 			color: $primary-color;
 			text-decoration: none;
+			@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 			&:hover {
+				padding-left: 40px;
 				opacity: .75;
-				@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
-				@include prefix(transform, translateY(-3px));
 			}
 
 			.sign-out {

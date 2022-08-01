@@ -43,7 +43,7 @@
 			color: rgba(0, 0, 0, 0.75);
 
 			&.checked, &:hover {
-				border-color: $dark-blue;
+				border-color: $dark-blue !important;
 				color: $dark-blue !important;
 			}
 		}

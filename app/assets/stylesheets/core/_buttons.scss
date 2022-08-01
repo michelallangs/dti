@@ -45,20 +45,28 @@
       @include background("icons/add.svg", 24px);
     }
 
-    &.filter {
-      @include background("icons/filter.svg", 16px);
+    &.back {
+      @include background("icons/back.svg", 16px);
     }
 
     &.cancel {
       @include background("icons/cancel.svg", 16px);
     }
 
-    &.back {
-      @include background("icons/back.svg", 16px);
+    &.edit {
+      @include background("icons/edit.svg", 16px);
+    }
+
+    &.filter {
+      @include background("icons/filter.svg", 16px);
+    }
+
+    &.password {
+      @include background("icons/password.svg", 20px);
     }
 
     &.save {
-      @include background("icons/save.svg", 24px);
+      @include background("icons/save.svg", 20px);
     }
   }
 }

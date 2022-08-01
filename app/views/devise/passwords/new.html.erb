@@ -1,16 +1,13 @@
-<h2>Forgot your password?</h2>
+<div class="row box password-panel">
+  <div class="panel-body">
+    <h2>Esqueceu sua senha?</h2>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <p>Entre em contato com a gente.</p>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <h2 class="m-t-25"><strong>(12) 3625-5113 / 3632-1992</strong></h2>
+
+    <div class="actions m-t-25">
+      <%= link_to "Entrar com a minha conta", new_session_path(resource_name), class: "link m-t-25" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit "Send me reset password instructions" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

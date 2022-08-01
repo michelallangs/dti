@@ -1,0 +1,66 @@
+<div class="box main-panel">
+	<%= render "layouts/main_menu" %>
+
+	<div class="container main-container">
+		<%= flash_message %>
+		
+		<header class="container-header">
+			<h1 class="header-title">Meu <span>perfil</span></h1>
+		</header>
+
+		<section class="container-body">
+  		<section>
+  			<h3 class="m-b-25">Dados do usuário</h3>
+
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Nome" %>
+  				<%= content_tag :dd, username %>
+  			<% end %>
+
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Login/E-mail" %>
+  				<%= content_tag :dd, current_user.username %>
+  			<% end %>
+
+  			<% if is_school? %>
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Segmento" %>
+	  				<%= content_tag :dd, @school.segment %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Telefone" %>
+	  				<%= content_tag :dd, @school.phone %>
+	  			<% end %>
+  			<% end %>
+  		</section>
+      
+      <% if is_school? %>
+	  		<section>
+	  			<h3 class="m-b-25">Endereço</h3>
+
+	      	<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Logradouro" %>
+	  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Bairro" %>
+	  				<%= content_tag :dd, @school.district %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "CEP" %>
+	  				<%= content_tag :dd, @school.zip_code %>
+	  			<% end %>
+	  		</section>
+      <% end %>
+
+			<div class="actions m-t-25 text-center">
+				<%= link_to edit_user_registration_path, class: "btn-info icon edit" do %>Editar dados<% end %>
+				<%= link_to edit_user_password_path, class: "btn-cancel icon password" do %>Trocar senha<% end %>
+				<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon cancel" do %>Apagar conta<% end %>
+      </div>
+		</section>
+	</div>
+</div>

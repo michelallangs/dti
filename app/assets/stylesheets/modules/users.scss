@@ -1,5 +1,5 @@
-#registrations, #users, #sessions {
-	&.new, &.create, &.edit, &.update {
+#registrations, #users, #sessions, #passwords {
+	&.new, &.create {
 		.main {
 			height: auto;
 			min-height: 100%;
@@ -160,9 +160,9 @@
 			margin-top: 0 !important;
 		}
 
-		.left-content, .right-content {
+		.content {
 			flex: 1 1 0;
-			padding: 50px;
+			padding: 15px 50px;
 		}
 
 		.actions {
@@ -172,6 +172,23 @@
 			align-items: center;
 			justify-content: center;
 		}
+	}
+}
+
+.password-panel {
+	@extend .sign-up-panel;
+	background-image: none;
+	align-items: flex-start;
+	width: 400px;
+	max-width: none;
+	padding: 25px;
+
+	.panel-body {
+		width: 100%;
+	}
+
+	.form .content {
+		padding: 0;
 	}
 }
 
