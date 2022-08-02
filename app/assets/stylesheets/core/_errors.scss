@@ -20,6 +20,10 @@
   color: $secondary-color;
   background-color: $primary-color;
 
+  &.flash-search {
+    border: solid 1px $dark-blue;
+  }
+
   .flash-title, .flash-body {
     color: $primary-color;
   }

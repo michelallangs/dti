@@ -73,7 +73,7 @@
 			<%= submit_tag ("Buscar") %>
 		<% end %>
 
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash inline m-b-0 m-t-25" unless search_params.empty? %>
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<% unless @orders.nil? || @orders.blank? %>
 			<section class="container-body">

@@ -2,8 +2,15 @@
 	&.index {
 		.main-panel .main-container {
 			.container-header {
-				.header-title span {
-					font-style: italic;
+				.header-title  {
+					font-size: 1em;
+					text-transform: none;
+
+					span {
+						display: block;
+						font-size: 1.5em;
+						font-style: italic;
+					}
 				}
 			}
 		}

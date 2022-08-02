@@ -21,6 +21,9 @@
 		}
 
 		.container-header {
+			display: flex;
+			justify-content: space-between;
+
 			.header-title {
 				font-size: 2em;
 				line-height: 20px;
@@ -30,6 +33,12 @@
 				span {
 					font-weight: 600;
 				}
+			}
+
+			.right-content {
+				display: flex;
+				align-items: center;
+				gap: 10px;
 			}
 		}
 	}

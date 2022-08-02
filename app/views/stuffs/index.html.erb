@@ -6,6 +6,10 @@
 
 		<header class="container-header">
 			<h1 class="header-title">Lista de <span>equipamentos</span></h1>
+
+			<div class="right-content">
+				<%= link_to new_stuff_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Cadastrar equipamento<% end %>
+			</div>
 		</header>
 
 		<%= form_tag(stuffs_path, method: :get, class: "filters form") do %>
@@ -35,6 +39,8 @@
 
 			<%= submit_tag ("Buscar") %>
 		<% end %>
+
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<section class="container-body">
 			<% unless @stuffs.nil? || @stuffs.blank? %>

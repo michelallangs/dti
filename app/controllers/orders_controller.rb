@@ -15,9 +15,9 @@ class OrdersController < ApplicationController
     technician = params[:technician]
     start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
-    search = [patrimony, spot, category, brand, status, technician, start_date, end_date]
+    @search = [patrimony, spot, category, brand, status, technician, start_date, end_date]
 
-    if !search.all?(&:blank?)
+    if !@search.all?(&:blank?)
       patrimony = patrimony.downcase == "s/p" ? "" 
                                               : "%#{patrimony}%"
 

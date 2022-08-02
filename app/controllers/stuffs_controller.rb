@@ -7,11 +7,11 @@ class StuffsController < ApplicationController
 		patrimony = params[:patrimony]
     category = params[:category]
     brand = params[:brand]
-    search = [id, patrimony, category, brand]
+    @search = [id, patrimony, category, brand]
 
     @stuffs = Stuff.joins(:school)
 
-    if !search.all?(&:blank?)
+    if !@search.all?(&:blank?)
     	patrimony = patrimony.downcase == "s/p" ? "" 
     																					: "%#{patrimony}%"
 
@@ -32,6 +32,26 @@ class StuffsController < ApplicationController
 
 	 	@stuffs = @stuffs.order("#{params[:sort_by]} ASC") if params[:sort_by]
 	end
+
+  def new
+    @stuff = Stuff.new
+    @schools = School.all.collect {|s| [ s.name, s.id ] }
+    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
+  end
+
+  def create
+    @stuff = Stuff.new(stuff_params)
+
+    @schools = School.all.collect {|s| [ s.name, s.id ] }
+    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
+
+    if @stuff.save
+      flash[:success] = "Equipamento cadastrado com sucesso!"
+      redirect_to stuffs_path
+    else
+      render :new
+    end
+  end
 
 	def edit
 		@stuff = Stuff.find(params[:id])

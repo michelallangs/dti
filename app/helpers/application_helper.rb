@@ -75,14 +75,4 @@ module ApplicationHelper
   def get_status(status)
     return I18n.transliterate(status).gsub(/\s+/, '-').delete('()').downcase
   end
-
-  def search_params
-    search_array = []
-
-    [params[:patrimony], params[:spot], params[:category], params[:brand], params[:status], params[:technician], params[:start_date], params[:end_date]].each do |s|
-      search_array << s unless s.nil?
-    end
-
-    return search_array
-  end
 end
