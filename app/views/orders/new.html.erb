@@ -56,8 +56,8 @@
           </div>
 
 	        <div class="actions m-t-50">
-	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon save" do %>Finalizar<% end %>
-	          <%= link_to orders_path, class: "btn-cancel icon back" do %>Voltar<% end %>
+	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Finalizar<% end %>
+	          <%= link_to orders_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
 	        </div>
 	      <% end %>
 	    <% end %>

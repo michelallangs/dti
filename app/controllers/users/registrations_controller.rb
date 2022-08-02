@@ -32,6 +32,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      flash[:alert] = "Chamado excluído com sucesso!"
+      redirect_to root_path
+    end
+  end
+
   def user_params
     params.require(:user).permit!
   end

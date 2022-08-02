@@ -19,7 +19,7 @@
 
 			<div class="row order-info m-b-25">
     		<div class="col-6 order-id">
-    			<%= content_tag :h6 do %>
+    			<%= content_tag :h4 do %>
     				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
     				<%= content_tag :span, " - #{@order.school.name}" if is_admin? %>
     			<% end %>
@@ -41,7 +41,7 @@
 						<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
 		      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
 
-		      		<section class="bordered">
+		      		<section>
 				      	<div class="row">
 				      		<div class="col-3 col-md-5 col-sm-12">
 			      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
@@ -49,7 +49,7 @@
 				      	</div>
 		      		</section>
 				      		
-		      		<section class="bordered">
+		      		<section>
 				      	<div class="row">
 									<div class="col-12">
 						      	<p class="equipment-category"><%= @stuff_category %></p>
@@ -58,7 +58,7 @@
 				      	</div>
 		      		</section>
 
-		      		<section class="bordered">
+		      		<section>
 			          <div class="row">
 			          	<div class="col-3 col-md-4 col-sm-12">
 										<div class="input string" id="autocomplete-patrimony">
@@ -87,7 +87,7 @@
 
     			<fieldset <%= "disabled=disabled" if !is_admin? %>>
 	    			<div id="admin-data" class="order-data <%= 'current' if is_admin?%>">
-				    	<section class="bordered">
+				    	<section>
 				      	<div class="row">
 				      		<div class="col-4 col-md-6 col-sm-12">
 				      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-50" } %>
@@ -101,7 +101,7 @@
 								</div>
 		      		</section>
 
-		      		<section class="bordered">
+		      		<section>
 				      	<div class="row">
 				      		<div class="col-8 col-md-6 col-sm-12">
 			          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" } %>
@@ -113,7 +113,7 @@
 				      	</div>
 		      		</section>
 
-		      		<section class="bordered">
+		      		<section>
 		      			<h3 class="uppercase m-b-25 highlight">Técnico responsável</h3>
 
 				      	<div class="row">
@@ -127,7 +127,7 @@
 				      	</div>
 		      		</section>
 
-		      		<section class="bordered">
+		      		<section>
 	          		<h4 class="uppercase m-b-25 highlight">Data</h4>
 
 				      	<div class="flex-row">
@@ -142,9 +142,9 @@
 
 	    		<% if is_admin? || @order.status == "Em aberto" %>
 		        <div class="actions m-t-25">
-		        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon save" do %>Salvar<% end %>
-		          <%= link_to orders_path, class: "btn-cancel icon back" do %>Voltar<% end %>
-		          <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon cancel" do %>Cancelar chamado<% end %>
+		        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Salvar<% end %>
+		          <%= link_to orders_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+		          <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Cancelar chamado<% end %>
 		        </div>
 		      <% else %>
 		      	<%= content_tag :p, "Este chamado está sendo ou já foi atendido, portanto não é mais possível fazer alterações.", class: "m-t-25 error alert" %>

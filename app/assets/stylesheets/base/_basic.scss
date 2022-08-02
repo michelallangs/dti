@@ -261,3 +261,7 @@ dl {
 	gap: 25px;
 	justify-content: center;
 }
+
+.invert-svg {
+	@include prefix(filter, invert(100%));
+}

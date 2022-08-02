@@ -101,8 +101,8 @@ GEM
     digest (3.1.0)
     erubi (1.10.0)
     ffi (1.15.5-x64-mingw-ucrt)
-    font-awesome-sass (6.1.1)
-      sassc (~> 2.0)
+    font-awesome-rails (4.7.0.8)
+      railties (>= 3.2, < 8.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
     hirb (0.7.3)
@@ -282,7 +282,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.8)
-  font-awesome-sass (~> 6.1.1)
+  font-awesome-rails
   hirb
   iconv
   importmap-rails

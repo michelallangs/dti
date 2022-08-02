@@ -57,9 +57,9 @@
       <% end %>
 
 			<div class="actions m-t-25 text-center">
-				<%= link_to edit_user_registration_path, class: "btn-info icon edit" do %>Editar dados<% end %>
-				<%= link_to edit_user_password_path, class: "btn-cancel icon password" do %>Trocar senha<% end %>
-				<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon cancel" do %>Apagar conta<% end %>
+				<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
+				<%= link_to edit_user_password_path, class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+				<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Apagar conta<% end %>
       </div>
 		</section>
 	</div>

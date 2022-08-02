@@ -19,7 +19,7 @@ gem "bootsnap", require: false
 gem 'simple_form'
 gem 'sass-rails'
 gem 'neat'
-gem "font-awesome-sass", "~> 6.1.1"
+gem "font-awesome-rails"
 gem "hirb"
 gem 'jquery-ui-rails'
 gem 'rails-jquery-autocomplete'

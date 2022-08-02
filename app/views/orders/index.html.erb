@@ -7,16 +7,16 @@
 		<header class="container-header">
 			<div class="right-content">
 				<div class="action-buttons">
-					<%= link_to image_tag("icons/grid.png"), "#", alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" %>
-					<%= link_to image_tag("icons/list.svg"), "#", alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" %>
+					<%= link_to "#", alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
+					<%= link_to "#", alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
 					<div class="options">
-						<%= link_to "#", alt: "Filtro avançado", title: "Filtro avançado", class: "btn options-btn icon filter" do %>Filtro avançado<% end %>
+						<%= link_to "#", alt: "Filtro avançado", title: "Filtro avançado", class: "btn options-btn icon" do %><i class="fa fa-filter_list"></i>Filtro avançado<% end %>
 						<ul>
 							<li><%= link_to "Chamados sem patrimônio", sp: true %></li>
 						</ul>
 					</div>
 				</div>
-				<%= link_to new_order_path, class: "btn-success icon add" do %>Abrir chamado<% end %>
+				<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir chamado<% end %>
 			</div>
 		</header>
 

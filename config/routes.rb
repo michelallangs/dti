@@ -53,7 +53,14 @@ Rails.application.routes.draw do
   end
 
   controller :stuffs do
-    get    '/equipamentos',                  action: :index,             as: :stuffs
+    get    '/equipamentos',                               action: :index,             as: :stuffs
+    get    '/equipamentos/cadastrar-equipamento',         action: :new,               as: :new_stuff
+    post   '/equipamentos/cadastrar-equipamento',         action: :create,            as: false
+    get    '/equipamentos/editar-equipamento/:id',        action: :edit,              as: :edit_stuff
+    patch  '/equipamentos/editar-equipamento/:id',        action: :update,            as: false
+    put    '/equipamentos/editar-equipamento/:id',        action: :update,            as: false
+    delete '/equipamentos/excluir-equipamento/:id',       action: :destroy,           as: :destroy_stuff
+    get    '/equipamentos/:id',                           action: :show,              as: :stuff
   end
 
   resources :orders do

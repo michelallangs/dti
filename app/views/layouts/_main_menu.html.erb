@@ -8,18 +8,18 @@
 	<nav class="sidebar-nav">
 		<h6 class="nav-title">Navegação principal</h6>
 		<ul>
-			<li><%= link_to home_path, class: current?(home_path) do %><i class="home"></i>Página inicial<% end %></li>
-			<li><%= link_to orders_path, class: current?(orders_path) do %><i class="orders"></i>Chamados<% end %></li>
-			<li><%= link_to stuffs_path, class: current?(stuffs_path) do %><i class="equipments"></i>Equipamentos<% end %></li>
-			<% if is_admin? %><li><%= link_to "#" do %><i class="schools"></i>Unidades<% end %></li><% end %>
-			<% if is_admin? %><li><%= link_to "#" do %><i class="users"></i>Usuários<% end %></li><% end %>
-			<li><%= link_to profile_path, class: current?(profile_path) do %><i class="settings"></i>Configurações<% end %></li>
+			<li><%= link_to home_path, class: current?(home_path) do %><span class="material-icons md-20 md-light">home</span>Página inicial<% end %></li>
+			<li><%= link_to orders_path, class: current?(orders_path) do %><span class="material-icons md-20 md-light">receipt_long</span>Chamados<% end %></li>
+			<li><%= link_to stuffs_path, class: current?(stuffs_path) do %><span class="material-icons md-20 md-light">devices</span>Equipamentos<% end %></li>
+			<% if is_admin? %><li><%= link_to "#" do %><span class="material-icons md-20 md-light">apartment</span>Unidades<% end %></li><% end %>
+			<% if is_admin? %><li><%= link_to "#" do %><span class="material-icons md-20 md-light">group</span>Usuários<% end %></li><% end %>
+			<li><%= link_to profile_path, class: current?(profile_path) do %><span class="material-icons md-20 md-light">manage_accounts</span>Configurações<% end %></li>
 		</ul>
 	</nav>
 
 	<footer class="sidebar-footer">
 		<p class="welcome">Bem vindo,</p>
     <p class="welcome-user"><%= username %>!</p>
-		<%= link_to destroy_user_session_path, method: :delete do %><i class="sign-out"></i>Sair<% end %>
+		<%= link_to destroy_user_session_path, method: :delete do %><span class="material-icons md-20 md-light">logout</span>Sair<% end %>
 	</footer>
 </aside>

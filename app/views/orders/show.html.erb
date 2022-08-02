@@ -90,7 +90,7 @@
 			<% end if !@order.maintenance_technician == 0 && !@order.end_date.nil? %>
 
 			<div class="actions m-t-25 text-center">
-        <%= link_to "Voltar", orders_path, class: "btn-cancel" %>
+        <%= link_to orders_path, class: "btn-cancel" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
       </div>
 		</section>
 	</div>

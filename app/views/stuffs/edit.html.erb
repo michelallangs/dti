@@ -1,0 +1,44 @@
+<div class="box main-panel">
+	<%= render "layouts/main_menu" %>
+
+	<div class="container main-container">
+		<header class="container-header">
+			<h1 class="header-title">Editar dados do <span>equipamento</span></h1>
+		</header>
+
+		<section class="container-body">
+    	<%= flash_message %>
+
+			<%= simple_form_for @stuff, url: edit_stuff_path, html: { class: "form" } do |f| %>
+      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
+
+      	<div class="row">
+					<div class="col-3 col-md-4 col-sm-12">
+        		<div class="input string" id="autocomplete-patrimony">
+        			<label for="stuff[patrimony]" class="form-label">Patrimônio</label>
+							<%= autocomplete_field_tag "stuff[patrimony]", @stuff.patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
+						</div>
+        	</div>      		
+      	</div>
+
+      	<div class="row">
+					<div class="col-3 col-md-6 col-sm-12">
+		      	<%= f.input :category, required: false, label: "Categoria", collection: list_categories, include_blank: "Selecione a categoria...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+					</div>	      		
+      	</div>
+
+      	<div class="row">
+					<div class="col-3 col-md-6 col-sm-12">
+		      	<%= f.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+					</div>	      		
+      	</div>
+
+        <div class="actions m-t-50">
+        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Salvar<% end %>
+          <%= link_to stuffs_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+          <%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir equipamento<% end %>
+        </div>
+	    <% end %>
+		</section>
+	</div>
+</div>

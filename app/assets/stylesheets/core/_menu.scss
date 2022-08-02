@@ -35,7 +35,8 @@
 			li {
 				a {
 					padding: 25px;
-					display: block;
+					display: flex;
+					align-items: center;
 					color: $primary-color;
 					text-decoration: none;
 					position: relative;
@@ -61,13 +62,8 @@
 						opacity: .75;
 					}
 
-					i {
-						width: 20px;
-						height: 20px;
-						display: inline-block;
-						margin-right: 20px;
-						vertical-align: middle;
-						@include prefix(filter, invert(100%));
+					span {
+						margin-right: 15px;
 
 						&.home {
 					    @include background("icons/home.svg", "icon");
@@ -121,7 +117,8 @@
 
 		a {
 			padding: 25px;
-			display: block;
+			display: flex;
+			align-items: center;
 			color: $primary-color;
 			text-decoration: none;
 			@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
@@ -131,14 +128,8 @@
 				opacity: .75;
 			}
 
-			.sign-out {
-				width: 20px;
-				height: 20px;
-				display: inline-block;
-				margin-right: 20px;
-				vertical-align: middle;
-				@include prefix(filter, invert(100%));
-				@include background("icons/sign-out.svg", "icon");
+			span {
+				margin-right: 15px;
 			}
 		}
 	}

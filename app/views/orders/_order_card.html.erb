@@ -26,7 +26,7 @@
 					<%= content_tag :footer, class: "order-card-footer" do %>
 						<%= content_tag :span, order.school_name if is_admin? %>
 						<div class="options">
-							<%= link_to image_tag("icons/dots-v.svg"), "#", class: "options-btn" %>
+							<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
 							<ul>
 								<li><%= link_to "Editar", edit_order_path(order) %></li>
 								<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
