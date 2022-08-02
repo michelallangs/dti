@@ -1,4 +1,6 @@
 class Stuff < ApplicationRecord
+	paginates_per 5
+
 	has_many :orders, dependent: :destroy
 	belongs_to :school
 

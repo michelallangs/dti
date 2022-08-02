@@ -34,109 +34,99 @@
 
 			<%= simple_form_for @order, url: edit_order_path, html: { class: "form" } do |f| %>
 	      <%= f.simple_fields_for :stuff do |s| %>
-	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
-	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
+	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
+	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
 
 	      	<fieldset <%= "disabled=disabled" if is_admin? || @order.status != "Em aberto" %>>
 						<div id="school-data" class="order-data <%= 'current' if !is_admin?%>">
 		      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
 
-		      		<section>
-				      	<div class="row">
-				      		<div class="col-3 col-md-5 col-sm-12">
-			      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
-									</div>	      		
-				      	</div>
-		      		</section>
+			      	<div class="row">
+			      		<div class="col-3 col-md-5 col-sm-12">
+		      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
+								</div>	      		
+			      	</div>
 				      		
-		      		<section>
-				      	<div class="row">
-									<div class="col-12">
-						      	<p class="equipment-category"><%= @stuff_category %></p>
-					          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
-									</div>	      		
-				      	</div>
-		      		</section>
+			      	<div class="row">
+								<div class="col-12">
+					      	<p class="equipment-category"><%= @stuff_category %></p>
+				          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
+								</div>	      		
+			      	</div>
 
-		      		<section>
-			          <div class="row">
-			          	<div class="col-3 col-md-4 col-sm-12">
-										<div class="input string" id="autocomplete-patrimony">
-			          			<label for="order[stuff_attributes][patrimony]" class="form-label">Nº patrimônio</label>
-											<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
-										</div>
-			          	</div>
-
-			          	<div class="col-3 col-md-4 col-sm-12">
-			        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-			          	</div>
-
-			          	<div class="col-3 col-md-4 col-sm-12">
-			        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-			          	</div>
+		          <div class="row">
+		          	<div class="col-3 col-md-4 col-sm-12">
+									<div class="input string" id="autocomplete-patrimony">
+		          			<label for="order[stuff_attributes][patrimony]" class="form-label">Nº patrimônio</label>
+										<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
+									</div>
 		          	</div>
 
-			          <div class="row m-t-50">
-			          	<div class="col-6 col-md-12">
-			          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
-			          	</div>
-			          </div>
-		      		</section>
+		          	<div class="col-3 col-md-4 col-sm-12">
+		        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>
+
+		          	<div class="col-3 col-md-4 col-sm-12">
+		        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>
+	          	</div>
+
+		          <div class="row m-t-50">
+		          	<div class="col-6 col-md-12">
+		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+		          	</div>
+		          </div>
 	    			</div>
 	    		</fieldset>
 
     			<fieldset <%= "disabled=disabled" if !is_admin? %>>
 	    			<div id="admin-data" class="order-data <%= 'current' if is_admin?%>">
-				    	<section>
-				      	<div class="row">
-				      		<div class="col-4 col-md-6 col-sm-12">
-				      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-50" } %>
-									</div>	
+			      	<div class="row">
+			      		<div class="col-4 col-md-6 col-sm-12">
+			      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select m-r-50" } %>
+								</div>	
 
-									<div class="col-4 col-md-6 col-sm-12">
-				      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
-				      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
-										<% end %>
-									</div>      		
-								</div>
-		      		</section>
+								<div class="col-4 col-md-6 col-sm-12">
+			      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
+			      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+									<% end %>
+								</div>      		
+							</div>
 
-		      		<section>
-				      	<div class="row">
-				      		<div class="col-8 col-md-6 col-sm-12">
-			          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" } %>
-			          	</div>     		
+			      	<div class="row">
+			      		<div class="col-8 col-md-6 col-sm-12">
+		          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" } %>
+		          	</div>     		
 
-									<div class="col-4 col-md-6 col-sm-12">
-			          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" } %>
-			          	</div>    
-				      	</div>
-		      		</section>
+								<div class="col-4 col-md-6 col-sm-12">
+		          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" } %>
+		          	</div>    
+			      	</div>
 
-		      		<section>
-		      			<h3 class="uppercase m-b-25 highlight">Técnico responsável</h3>
 
-				      	<div class="row">
-				      		<div class="col-4 col-md-6 col-sm-12">
-			          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, include_blank: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-									</div>   		
+			      	<div class="row">
+	      				<h3 class="uppercase m-b-25 highlight">Técnico responsável</h3>
 
-									<div class="col-4 col-md-6 col-sm-12">
-										<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, include_blank: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-			          	</div>   
-				      	</div>
-		      		</section>
+			      		<div class="col-4 col-md-6 col-sm-12">
+		          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, include_blank: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+								</div>   		
 
-		      		<section>
-	          		<h4 class="uppercase m-b-25 highlight">Data</h4>
+								<div class="col-4 col-md-6 col-sm-12">
+									<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, include_blank: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>   
+			      	</div>
 
+
+          		<div class="row">
+          			<h3 class="uppercase m-b-25 highlight">Data</h3>
+          			
 				      	<div class="flex-row">
 			          	<div class="flex-col flex-col-12 flex-inline">
 										<%= f.input :start_date, required: false, html5: true, label: "Retirada", label_html: { class: "form-label" }, wrapper_html: { class: "m-r-15" } %>
 										<%= f.input :end_date, required: false, html5: true, label: "Entrega", label_html: { class: "form-label" }, wrapper_html: { class: "m-t-0" } %>
 									</div>
 				      	</div>
-		      		</section>
+          		</div>
 				    </div>
 	    		</fieldset>
 

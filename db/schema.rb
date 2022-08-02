@@ -13,6 +13,7 @@
 ActiveRecord::Schema[7.0].define(version: 2022_07_27_171148) do
   create_table "orders", force: :cascade do |t|
     t.string "requester"
+    t.string "requester_ascii"
     t.string "spot"
     t.text "defect"
     t.string "backup", default: "Não"
@@ -34,6 +35,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_171148) do
   create_table "schools", force: :cascade do |t|
     t.string "segment"
     t.string "name", null: false
+    t.string "name_ascii"
     t.string "address", null: false
     t.string "address_number", null: false
     t.string "district", null: false

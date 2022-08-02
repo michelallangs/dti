@@ -44,16 +44,6 @@ ready = function() {
     radio.parent().addClass("checked");
   });
 
-  $(".btn-icon").on("click", function(){
-    if ($(this).hasClass("as-grid")) {
-      $(".order-cards").removeClass("as-list") ;
-    }
-
-    if ($(this).hasClass("as-list")) {
-      $(".order-cards").addClass("as-list") ;
-    }
-  })
-
   $(".filters .select-items div").on("click", function(){
     $(this).parents(".form").submit();
   })

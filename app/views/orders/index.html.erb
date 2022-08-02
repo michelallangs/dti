@@ -7,8 +7,8 @@
 		<header class="container-header">
 			<div class="right-content">
 				<div class="action-buttons">
-					<%= link_to "#", alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
-					<%= link_to "#", alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
+					<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
+					<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
 					<div class="options">
 						<%= link_to "#", alt: "Filtro avançado", title: "Filtro avançado", class: "btn options-btn icon" do %><i class="fa fa-filter_list"></i>Filtro avançado<% end %>
 						<ul>
@@ -61,6 +61,16 @@
 					</div>
 				</div>
 
+				<div class="search col-3">
+					<%= search_field_tag :requester, params[:requester], placeholder: "Solicitante" %>
+				</div>
+
+				<div class="search col-3">
+					<%= search_field_tag :school, params[:school], placeholder: "Unidade" %>
+				</div>
+			</div>
+
+			<div class="row m-t-15">
 				<div class="search date col-3" id="start-date">
 					<%= text_field_tag :start_date, params[:start_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
 				</div>
@@ -80,6 +90,8 @@
 				<% list_status.each do |status| %>
 					<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
 				<% end %>
+
+				<%= paginate @orders %>
 			</section>
 		<% else %>
 			<h3 class="text-center m-t-50"><i>Nenhum dado encontrado.</i></h3>

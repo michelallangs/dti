@@ -43,18 +43,18 @@
 		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<section class="container-body">
-			<% unless @stuffs.nil? || @stuffs.blank? %>
+			<% unless @stuffs_paginate.nil? || @stuffs_paginate.blank? %>
 				<ul class="responsive-table">
 					<li class="table-header">
 						<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
 						<div class="table-col table-col-15"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
 						<div class="table-col table-col-15"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
 						<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
-						<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name"), class: ("active" if params[:sort_by] == "schools.name")) %></div>
+						<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
 						<div class="table-col table-col-10">Opções</div>
 					</li>
 
-					<% @stuffs.each do |s| %>
+					<% @stuffs_paginate.each do |s| %>
 						<li class="table-row">
 							<div class="table-col table-col-5"><strong><%= s.id %></strong></div>
 							<div class="table-col table-col-15"><%= s.patrimony.presence || "S/P" %></div>
@@ -70,6 +70,8 @@
 						</li>
 					<% end %>
 				</ul>
+
+				<%= paginate @stuffs_paginate %>	
 			<% else %>
 				<h3 class="text-center m-t-50"><i>Nenhum equipamento encontrado.</i></h3>
 			<% end %>

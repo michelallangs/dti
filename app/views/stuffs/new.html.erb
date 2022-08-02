@@ -10,13 +10,13 @@
     	<%= flash_message %>
 
 			<%= simple_form_for @stuff, url: new_stuff_path, html: { class: "form" } do |f| %>
-      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
+      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
 
-      	<div class="row">
-      		<%= content_tag :div, "", class: "col-3 col-md-5 col-sm-12" do %>
-    				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-  				<% end if is_admin? %>
-      	</div>
+    		<%= content_tag :div, "", class: "row" do %>
+    			<div class="col-3 col-md-5 col-sm-12">
+  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+    			</div>
+				<% end if is_admin? %>
 
       	<div class="row">
 					<div class="col-3 col-md-4 col-sm-12">

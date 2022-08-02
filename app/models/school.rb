@@ -1,4 +1,6 @@
 class School < ApplicationRecord
+  before_save :create_normalized_strings
+
   belongs_to :user
   has_many :orders, dependent: :destroy
   has_many :stuffs, dependent: :destroy
@@ -11,4 +13,8 @@ class School < ApplicationRecord
   validates :address_number, presence: { message: "Informe o número do endereço" }, on: [:create, :update]
   validates :district, presence: { message: "Informe o bairro" }, on: [:create, :update]
   validates :phone, presence: { message: "Informe o número de telefone" }, on: [:create, :update]
+
+  def create_normalized_strings
+    self.name_ascii = I18n.transliterate name
+  end
 end

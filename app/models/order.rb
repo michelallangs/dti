@@ -1,4 +1,8 @@
 class Order < ApplicationRecord
+  before_save :create_normalized_strings
+
+	paginates_per 5
+
 	belongs_to :stuff, optional: true
 	belongs_to :school
 	accepts_nested_attributes_for :stuff
@@ -15,4 +19,8 @@ class Order < ApplicationRecord
 	def created_at
     attributes['created_at'].strftime("%d/%m/%Y")
   end
+
+	def create_normalized_strings
+	  self.requester_ascii = I18n.transliterate requester
+	end
 end

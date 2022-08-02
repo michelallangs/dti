@@ -2,7 +2,7 @@
 	<%= content_tag :div, class: "order-container #{get_status(status)}" do %>
 		<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
 
-		<div class="order-cards">
+		<div class="order-cards <%= params[:view].presence %>">
 			<% orders.each do |order| %>
 				<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
 					<%= link_to "", order_path(order), title: "Clique para ver detalhes", class: "order-card-link" %>

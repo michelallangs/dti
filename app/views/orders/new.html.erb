@@ -11,9 +11,9 @@
 		<section class="container-body">
 			<%= simple_form_for @order, url: new_order_path, html: { class: "form" } do |f| %>
 	      <%= f.simple_fields_for :stuff do |s| %>
-	      	<%= f.input :user_id, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
-	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper_html: { class: "m-t-0" } %>
-	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper_html: { class: "m-t-0" } if !is_admin? %>
+	      	<%= f.input :user_id, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
+	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
+	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
 
 	      	<div class="row">
 	      		<%= content_tag :div, "", class: "col-3 col-md-5 col-sm-12" do %>
