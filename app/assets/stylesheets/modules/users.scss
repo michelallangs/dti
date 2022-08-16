@@ -27,7 +27,7 @@
 		@include background("bg.jpg", cover);
 	}
 
-	.left-container, .right-container {
+	.left-container, .right-container, .right-container .content {
 		position: relative;
 		display: flex;
 		align-items: center;
@@ -66,8 +66,14 @@
 		width: 100%;
 		background-color: rgba($dark-blue, .25);
 
+		.content {
+			width: 100%;
+			padding: 25px;
+		}
+
 		.form {
 			width: 400px;
+			max-width: 100%;
 			margin: 0 auto;
 
 			.input {
@@ -136,6 +142,14 @@
 	position: relative;
 	max-width: 1280px;
 
+	.panel-header, .panel-body {
+		width: 100%;
+	}
+
+	.panel-header {
+		padding: 15px 50px;
+	}
+
 	.logo-dti {
 		color: $dark-blue;
 	}
@@ -150,8 +164,7 @@
 		flex-wrap: wrap;
 
 		.segment {
-			margin-bottom: 5px;
-			margin-top: 25px;
+			margin-bottom: 10px;
 			font-size: 1em;
 			font-weight: 600;
 		}
@@ -161,7 +174,6 @@
 		}
 
 		.content {
-			flex: 1 1 0;
 			padding: 15px 50px;
 		}
 

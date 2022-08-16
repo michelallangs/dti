@@ -1,7 +1,4 @@
 .form {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	width: 100%;
 
 	fieldset {
@@ -322,7 +319,6 @@
 }
 
 .search {
-	display: inline-block;
 	position: relative;
 
 	&:after {
@@ -332,7 +328,8 @@
 		@include background("icons/search.svg", "icon");
 		position: absolute;
 		right: 15px;
-		top: 10px;
+		top: 50%;
+		@include prefix(transform, translateY(-50%));
 	}
 
 	input {
@@ -375,8 +372,8 @@
 }
 
 .filters {
-	background-color: $primary-color;
 	padding: 15px;
+	background-color: $primary-color;
 	border-radius: 5px;
 
 	.search input, .select-selected {

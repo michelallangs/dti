@@ -1,6 +1,6 @@
 .responsive-table {
   li {
-    border-radius: 3px;
+    border-radius: 5px;
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
@@ -59,14 +59,12 @@
     .table-header {
       display: none;
     }
-    .table-row{
-      
-    }
+
     li {
       display: block;
     }
+
     .table-col {
-      
       flex-basis: 100%;
       
     }

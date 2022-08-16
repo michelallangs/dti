@@ -8,17 +8,30 @@
   html, body {
     font-size: 12px;
 
-    @for $i from 1 through 12 {
-      .col-md-#{$i} {
-        @include span-columns($i);
-      }
+    .main .menu-icon {
+      display: block;
+      position: absolute;
+      left: 15px;
+      top: 15px;
+      cursor: pointer;
     }
 
     .main-sidebar {
+      position: fixed;
+      z-index: 999;
+      left: -70px;
       width: 70px;
 
+      &.visible {
+        left: 0;
+      }
+
       .sidebar-header {
-        .header-title {
+        .logo-dti {
+          font-size: 2em;
+        }
+
+        .logo-subtitle {
           display: none;
         }
       }
@@ -60,6 +73,10 @@
     .order-cards {
       grid-template-columns: 1fr 1fr !important;
     }
+
+    .sign-up-panel .form .content {
+      flex: auto;
+    }
   }
 }
 
@@ -67,21 +84,27 @@
   html, body {
     font-size: 11px;
 
-    .flex-row:not(.order-tabs) {
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .form .actions {
-      flex-direction: column;
+    .login-panel {
+      .left-container {
+        display: none;
+      }
     }
 
     .order-cards {
       grid-template-columns: 1fr !important;
     }
 
-    #orders .main-panel .main-container .form .custom-radio {
-      grid-template-columns: auto;
+    #orders .main-panel .main-container {
+      .form .custom-radio {
+        grid-template-columns: auto;
+      }
+
+      .order-info {
+        .order-id, .updated-at {
+          text-align: center;
+          font-size: 1em;
+        }
+      }
     }
 
     dl {
@@ -94,13 +117,12 @@
   }
 }
 
-@media only screen and (max-width: 639px){
+@media only screen and (max-width: 575px){
   html, body {
-    @for $i from 1 through 12 {
-      .col-sm-#{$i} {
-        margin-top: 15px;
-        @include span-columns($i);
-      }
+    font-size: 10px;
+
+    .actions {
+      flex-direction: column;
     }
 
     .main-panel .main-container {
@@ -115,22 +137,12 @@
 
       .search {
         display: block;
-
-        input[type="text"] {
-          padding: 10px 15px 10px 46px;
-        }
-
+        
         input[type="submit"] {
           display: none;
         }
       }
     }
-  }
-}
-
-@media only screen and (max-width: 479px){
-  html, body {
-    font-size: 10px;
   }
 }
 

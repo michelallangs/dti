@@ -5,6 +5,8 @@ ruby "3.1.2"
 
 gem "rails", "~> 7.0.3"
 gem "sprockets-rails"
+gem 'popper_js', '~> 2.11.5'
+gem 'bootstrap', '~> 5.2.0'
 gem "sqlite3", "~> 1.4"
 gem "puma", "~> 5.0"
 gem "importmap-rails"

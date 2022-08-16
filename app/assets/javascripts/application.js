@@ -1,4 +1,6 @@
-//= require jquery
+//= require jquery3
+//= require popper
+//= require bootstrap
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/widgets/autocomplete
@@ -37,6 +39,7 @@ ready = function() {
   });
 
   $(document).on("click", function(){
+    $(".main-sidebar").removeClass("visible");
     $(".options-btn").siblings("ul").hide();
     var radio = $("input.radio_buttons:checked");
     $("input.radio_buttons").parent().removeClass("checked");
@@ -46,6 +49,12 @@ ready = function() {
 
   $(".filters .select-items div").on("click", function(){
     $(this).parents(".form").submit();
+  })
+
+  $(".menu-icon").on("click", function(e){
+    e.stopPropagation();
+
+    $(".main-sidebar").addClass("visible");
   })
 };
 

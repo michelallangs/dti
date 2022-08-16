@@ -1,97 +1,105 @@
 <div class="box main-panel">
-	<%= render "layouts/main_menu" %>
+	<%= render "shared/main_menu" %>
 
-	<div class="container main-container">
-		<header class="container-header">
-			<h1 class="header-title">Ordem de <span>serviço</span></h1>
-		</header>
+	<div class="main-container">
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Ordem de <span>serviço</span></h1>
 
-		<section class="container-body">
-  		<section>
-  			<h3 class="m-b-25">
-  				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
-  			</h3>
+					<div class="actions text-center">
+		        <%= link_to orders_path, class: "btn-cancel" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+		      </div>
+				</header>
+			</div>
+		</div>
 
-  			<% if is_admin? %>
-	  			<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "Unidade" %>
-	  				<%= content_tag :dd, @order.school.name %>
-	  			<% end %>
-  			<% end %>
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+		  		<section>
+		  			<h3 class="m-b-25">
+		  				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
+		  			</h3>
 
-  			<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Solicitante" %>
-  				<%= content_tag :dd, @order.requester %>
-  			<% end %>
-  		</section>
-      		
-  		<section>
-  			<h3 class="m-b-25">Informações do equipamento</h3>
+		  			<% if is_admin? %>
+			  			<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "Unidade" %>
+			  				<%= content_tag :dd, @order.school.name %>
+			  			<% end %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Categoria" %>
-  				<%= content_tag :dd, @order.stuff.category %>
-  			<% end %>
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Solicitante" %>
+		  				<%= content_tag :dd, @order.requester %>
+		  			<% end %>
+		  		</section>
+		      		
+		  		<section>
+		  			<h3 class="m-b-25">Informações do equipamento</h3>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Número de patrimônio" %>
-  				<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
-  			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Categoria" %>
+		  				<%= content_tag :dd, @order.stuff.category %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Marca/modelo" %>
-  				<%= content_tag :dd, @order.stuff.brand %>
-  			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Número de patrimônio" %>
+		  				<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Local de instalação" %>
-  				<%= content_tag :dd, @order.spot %>
-  			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Marca/modelo" %>
+		  				<%= content_tag :dd, @order.stuff.brand %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Defeito apresentado" %>
-  				<%= content_tag :dd, @order.defect %>
-  			<% end %>
-  		</section>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Local de instalação" %>
+		  				<%= content_tag :dd, @order.spot %>
+		  			<% end %>
 
-  		<section>
-  			<h3 class="m-b-25">Relatório</h3>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Defeito apresentado" %>
+		  				<%= content_tag :dd, @order.defect %>
+		  			<% end %>
+		  		</section>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Necessário backup?" %>
-  				<%= content_tag :dd, @order.backup %>
-  			<% end %>
+		  		<section>
+		  			<h3 class="m-b-25">Relatório</h3>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Status" %>
-  				<%= content_tag :dd, @order.status %>
-  			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Necessário backup?" %>
+		  				<%= content_tag :dd, @order.backup %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Serviço realizado" %>
-  				<%= content_tag :dd, @order.performed_service %>
-  			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Status" %>
+		  				<%= content_tag :dd, @order.status %>
+		  			<% end %>
 
-      	<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Observações" %>
-  				<%= content_tag :dd, @order.obs %>
-  			<% end %>
-  		</section>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Serviço realizado" %>
+		  				<%= content_tag :dd, @order.performed_service %>
+		  			<% end %>
 
-  		<% if !@order.start_date.nil? && !@order.removal_technician == 0 %>
-    		<%= content_tag :p, class: "m-t-25 text-center" do %>
-  				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technician)}</strong>".html_safe %>
-  			<% end %>
-			<% end %>
+		      	<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Observações" %>
+		  				<%= content_tag :dd, @order.obs %>
+		  			<% end %>
+		  		</section>
 
-  		<%= content_tag :p, class: "m-t-25 text-center" do %>
-				<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technician)}</strong>".html_safe if !@order.maintenance_technician == 0 %>
-				<%= " e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if !@order.end_date.nil? %>
-			<% end if !@order.maintenance_technician == 0 && !@order.end_date.nil? %>
+		  		<% if !@order.start_date.nil? && !@order.removal_technician == 0 %>
+		    		<%= content_tag :p, class: "m-t-25 text-center" do %>
+		  				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technician)}</strong>".html_safe %>
+		  			<% end %>
+					<% end %>
 
-			<div class="actions m-t-25 text-center">
-        <%= link_to orders_path, class: "btn-cancel" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
-      </div>
-		</section>
+		  		<%= content_tag :p, class: "m-t-25 text-center" do %>
+						<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technician)}</strong>".html_safe if !@order.maintenance_technician == 0 %>
+						<%= " e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if !@order.end_date.nil? %>
+					<% end if !@order.maintenance_technician == 0 && !@order.end_date.nil? %>
+				</section>
+			</div>
+		</div>
 	</div>
 </div>

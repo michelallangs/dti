@@ -1,69 +1,85 @@
-<div class="row box sign-up-panel">
-  <div class="panel-body">
-    <h2 class="m-t-25 m-r-50 m-b-0 m-l-50">Comece aqui a sua conta</h2>
+<div class="box sign-up-panel">
+  <div class="panel-header">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="m-t-25 m-b-0">Comece aqui a sua conta</h2>
+      </div>
+    </div>
+  </div>
 
+  <div class="panel-body">
     <%= simple_form_for @user, url: new_user_registration_path, html: { class: "form" } do |f| %>
       <%= f.simple_fields_for :school do |s| %>
-        <div class="content">
-          <p class="m-b-50">Entre com os dados da sua unidade</p>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="content">
+              <p class="m-b-25">Entre com os dados da sua unidade</p>
 
-          <p class="segment">Escolha o segmento ao qual sua unidade pertence</p>
-          <%= s.input :segment, label: false, as: :radio_buttons, collection: list_segments %>
+              <div class="row">
+                <div class="col-12">
+                  <p class="segment">Escolha o segmento ao qual sua unidade pertence</p>
+                  <%= s.input :segment, label: false, as: :radio_buttons, collection: list_segments %>
+                </div>
+              </div>
 
-          <div class="fields-inline row">
-            <div class="col-7">
-              <%= s.input :name, label: "Nome da unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-            </div>
+              <div class="row">
+                <div class="col-12 col-lg-7">
+                  <%= s.input :name, label: "Nome da unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+                </div>
 
-            <div class="col-5">
-              <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" }, input_html: { placeholder: "Ex.: 12345-678", maxlength: 8 } %>
-            </div>
+                <div class="col-12 col-lg-5">
+                  <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" }, input_html: { placeholder: "Ex.: 12345-678", maxlength: 8 } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: Rua Um Dois de Oliveira Quatro"} %>
+                </div>
+
+                <div class="col-12 col-lg-3">
+                  <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
+                </div>
+
+                <div class="col-12 col-lg-3">
+                  <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-lg-6">
+                  <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678"} %>
+                </div>
+              </div> 
+            </div> 
           </div>
 
-          <div class="fields-inline row">
-            <div class="col-6">
-              <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: Rua Um Dois de Oliveira Quatro"} %>
-            </div>
+          <div class="col-12 col-lg-6">
+            <div class="content">
+              <p class="m-b-25">Insira suas informações de login</p>
 
-            <div class="col-3">
-              <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
-            </div>
+              <div class="row">
+                <div class="col-12">
+                  <%= f.input :username, label: "E-mail da unidade", label_html: { class: "form-label" }, input_html: { placeholder: "unidade@email.com"} %>
+                </div>
+              </div>
 
-            <div class="col-3">
-              <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
-            </div>
-          </div>
-
-          <div class="fields-inline row">
-            <div class="col-6">
-              <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678"} %>
+              <div class="row">
+                <div class="col-12">
+                  <%= f.input :password, label: "Senha", label_html: { class: "form-label" }, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "**********"} %>
+                </div>
+              </div>
+              
+              <div class="row">
+                <div class="col-12">
+                  <%= f.input :password_confirmation, label: "Confirme sua senha", label_html: { class: "form-label" }, input_html: { placeholder: "**********"} %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="content">
-          <p class="m-b-50">Insira suas informações de login</p>
-
-          <div class="row">
-            <div class="col-12">
-              <%= f.input :username, label: "E-mail da unidade", label_html: { class: "form-label" }, input_html: { placeholder: "unidade@email.com"} %>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-12">
-              <%= f.input :password, label: "Senha", label_html: { class: "form-label" }, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "**********"} %>
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="col-12">
-              <%= f.input :password_confirmation, label: "Confirme sua senha", label_html: { class: "form-label" }, input_html: { placeholder: "**********"} %>
-            </div>
-          </div>
-        </div>
-
-        <div class="actions">
+        <div class="actions m-t-25">
           <%= f.submit "Salvar", data: { disable_with: "Aguarde..." }, class: "btn-success" %>
 
           <%- if controller_name != 'sessions' %>

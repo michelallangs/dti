@@ -1,39 +1,51 @@
 <div class="box main-panel">
-	<%= render "layouts/main_menu" %>
+	<%= render "shared/main_menu" %>
 
-	<div class="container main-container">
+	<div class="main-container">
 		<%= flash_message %>
 
-		<header class="container-header">
-			<h1 class="header-title">Lista de <span>equipamentos</span></h1>
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Lista de <span>equipamentos</span></h1>
 
-			<div class="right-content">
-				<%= link_to new_stuff_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Cadastrar equipamento<% end %>
+					<div class="right-content">
+						<%= link_to new_stuff_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Cadastrar equipamento<% end %>
+					</div>
+				</header>
 			</div>
-		</header>
+		</div>
 
 		<%= form_tag(stuffs_path, method: :get, class: "filters form") do %>
 			<div class="row">
-				<div class="search col-3" id="autocomplete-category">
-					<%= search_field_tag :id, params[:id], placeholder: "Número da OS" %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-category">
+						<%= search_field_tag :id, params[:id], placeholder: "Número da OS" %>
+					</div>
 				</div>
 
-				<div class="search col-3" id="autocomplete-patrimony">
-					<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-patrimony">
+						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
+					</div>
 				</div>
 
-				<div class="search col-3" id="autocomplete-category">
-					<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
-					<% list_categories.each do |category| %>
-				    <%= content_tag :div, category, class: "search_list list_categories" %>
-					<% end %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-category">
+						<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+						<% list_categories.each do |category| %>
+					    <%= content_tag :div, category, class: "search_list list_categories" %>
+						<% end %>
+					</div>
 				</div>
 
-				<div class="search col-3" id="autocomplete-brand">
-					<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
-					<% list_brands.each do |brand| %>
-				    <%= content_tag :div, brand, class: "search_list list_brands" %>
-					<% end %>
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-brand">
+						<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+						<% list_brands.each do |brand| %>
+					    <%= content_tag :div, brand, class: "search_list list_brands" %>
+						<% end %>
+					</div>
 				</div>
 			</div>
 
@@ -42,39 +54,43 @@
 
 		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
-		<section class="container-body">
-			<% unless @stuffs_paginate.nil? || @stuffs_paginate.blank? %>
-				<ul class="responsive-table">
-					<li class="table-header">
-						<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
-						<div class="table-col table-col-15"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
-						<div class="table-col table-col-15"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
-						<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
-						<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
-						<div class="table-col table-col-10">Opções</div>
-					</li>
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+					<% unless @stuffs_paginate.nil? || @stuffs_paginate.blank? %>
+						<ul class="responsive-table">
+							<li class="table-header">
+								<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
+								<div class="table-col table-col-15"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
+								<div class="table-col table-col-15"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
+								<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
+								<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
+								<div class="table-col table-col-10">Opções</div>
+							</li>
 
-					<% @stuffs_paginate.each do |s| %>
-						<li class="table-row">
-							<div class="table-col table-col-5"><strong><%= s.id %></strong></div>
-							<div class="table-col table-col-15"><%= s.patrimony.presence || "S/P" %></div>
-							<div class="table-col table-col-15"><%= s.category %></div>
-							<div class="table-col table-col-15"><%= s.brand %></div>
-							<div class="table-col table-col-40"><%= s.school.name %></div>
-							<div class="table-col table-col-10">
-								<div class="options">
-				          <%= link_to edit_stuff_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-icons md-20">edit</span><% end %>
-				          <%= link_to destroy_stuff_path(s), alt: "Apagar", title: "Apagar", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-icons md-20">delete</span><% end %>
-								</div>
-							</div>
-						</li>
+							<% @stuffs_paginate.each do |s| %>
+								<li class="table-row">
+									<div class="table-col table-col-5" data-label="#"><strong><%= s.id %></strong></div>
+									<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
+									<div class="table-col table-col-15" data-label="Categoria"><%= s.category %></div>
+									<div class="table-col table-col-15" data-label="Marca/Modelo"><%= s.brand %></div>
+									<div class="table-col table-col-40" data-label="Unidade"><%= s.school.name %></div>
+									<div class="table-col table-col-10">
+										<div class="options">
+						          <%= link_to edit_stuff_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-icons md-20">edit</span><% end %>
+						          <%= link_to destroy_stuff_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-icons md-20">delete</span><% end %>
+										</div>
+									</div>
+								</li>
+							<% end %>
+						</ul>
+
+						<%= paginate @stuffs_paginate %>	
+					<% else %>
+						<h3 class="text-center m-t-50"><i>Nenhum equipamento encontrado.</i></h3>
 					<% end %>
-				</ul>
-
-				<%= paginate @stuffs_paginate %>	
-			<% else %>
-				<h3 class="text-center m-t-50"><i>Nenhum equipamento encontrado.</i></h3>
-			<% end %>
-		</section>
+				</section>
+			</div>
+		</div>
 	</div>
 </div>

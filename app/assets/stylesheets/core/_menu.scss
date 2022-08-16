@@ -3,6 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	background-color: $dark-blue;
+	@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 	.sidebar-header {
 		display: flex;

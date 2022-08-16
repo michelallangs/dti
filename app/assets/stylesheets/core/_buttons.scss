@@ -17,6 +17,7 @@
   @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
   @include prefix(transition, all 125ms);
   background-clip: padding-box;
+  white-space: nowrap;
   
   &:hover, &:focus {
     text-decoration: none;

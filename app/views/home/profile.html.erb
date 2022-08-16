@@ -1,66 +1,74 @@
 <div class="box main-panel">
-	<%= render "layouts/main_menu" %>
+	<%= render "shared/main_menu" %>
 
-	<div class="container main-container">
+	<div class="main-container">
 		<%= flash_message %>
-		
-		<header class="container-header">
-			<h1 class="header-title">Meu <span>perfil</span></h1>
-		</header>
 
-		<section class="container-body">
-  		<section>
-  			<h3 class="m-b-25">Dados do usuário</h3>
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Meu <span>perfil</span></h1>
 
-  			<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Nome" %>
-  				<%= content_tag :dd, username %>
-  			<% end %>
+					<div class="actions">
+						<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
+						<%= link_to edit_user_password_path, class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+						<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir conta<% end %>
+		      </div>
+				</header>
+			</div>
+		</div>
 
-  			<%= content_tag :dl do %>
-    			<%= content_tag :dt, "Login/E-mail" %>
-  				<%= content_tag :dd, current_user.username %>
-  			<% end %>
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+		  		<section>
+		  			<h3 class="m-b-25">Dados do usuário</h3>
 
-  			<% if is_school? %>
-	  			<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "Segmento" %>
-	  				<%= content_tag :dd, @school.segment %>
-	  			<% end %>
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Nome" %>
+		  				<%= content_tag :dd, username %>
+		  			<% end %>
 
-	  			<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "Telefone" %>
-	  				<%= content_tag :dd, @school.phone %>
-	  			<% end %>
-  			<% end %>
-  		</section>
-      
-      <% if is_school? %>
-	  		<section>
-	  			<h3 class="m-b-25">Endereço</h3>
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Login/E-mail" %>
+		  				<%= content_tag :dd, current_user.username %>
+		  			<% end %>
 
-	      	<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "Logradouro" %>
-	  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
-	  			<% end %>
+		  			<% if is_school? %>
+			  			<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "Segmento" %>
+			  				<%= content_tag :dd, @school.segment %>
+			  			<% end %>
 
-	  			<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "Bairro" %>
-	  				<%= content_tag :dd, @school.district %>
-	  			<% end %>
+			  			<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "Telefone" %>
+			  				<%= content_tag :dd, @school.phone %>
+			  			<% end %>
+		  			<% end %>
+		  		</section>
+		      
+		      <% if is_school? %>
+			  		<section>
+			  			<h3 class="m-b-25">Endereço</h3>
 
-	  			<%= content_tag :dl do %>
-	    			<%= content_tag :dt, "CEP" %>
-	  				<%= content_tag :dd, @school.zip_code %>
-	  			<% end %>
-	  		</section>
-      <% end %>
+			      	<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "Logradouro" %>
+			  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
+			  			<% end %>
 
-			<div class="actions m-t-25 text-center">
-				<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
-				<%= link_to edit_user_password_path, class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
-				<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Apagar conta<% end %>
-      </div>
-		</section>
+			  			<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "Bairro" %>
+			  				<%= content_tag :dd, @school.district %>
+			  			<% end %>
+
+			  			<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "CEP" %>
+			  				<%= content_tag :dd, @school.zip_code %>
+			  			<% end %>
+			  		</section>
+		      <% end %>
+				</section>
+			</div>
+		</div>
 	</div>
 </div>

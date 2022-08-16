@@ -5,33 +5,35 @@
   </div>
 
   <div class="right-container">
-    <%= content_tag :h1, "DTI", class: 'logo-dti m-b-5' %>
-    <h3 class="logo-subtitle m-b-50 text-center">SISTEMA DE GERENCIAMENTO DE <br>CHAMADOS TÉCNICOS</h3>
+    <div class="content">
+      <%= content_tag :h1, "DTI", class: 'logo-dti m-b-5' %>
+      <h3 class="logo-subtitle m-b-50 text-center">SISTEMA DE GERENCIAMENTO DE <br>CHAMADOS TÉCNICOS</h3>
 
-    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
-      <%= flash_message %>
-      
-      <%= f.input :username, as: :email, required: false, label: "Login ou e-mail", placeholder: "exemplo@email.com", autofocus: true, label_html: { class: "form-label" } %>
-      <%= f.input :password, required: false, label: "Senha", placeholder: "* * * * * * * * * *", label_html: { class: "form-label" }  %>
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
+        <%= flash_message %>
+        
+        <%= f.input :username, as: :email, required: false, label: "Login ou e-mail", placeholder: "exemplo@email.com", autofocus: true, label_html: { class: "form-label" } %>
+        <%= f.input :password, required: false, label: "Senha", placeholder: "* * * * * * * * * *", label_html: { class: "form-label" }  %>
 
-      <div class="form-options">
-        <div class="left-content">
-          <%= f.input :remember_me, label: "Lembrar", as: :boolean if devise_mapping.rememberable? %>
+        <div class="form-options">
+          <div class="left-content">
+            <%= f.input :remember_me, label: "Lembrar", as: :boolean if devise_mapping.rememberable? %>
+          </div>
+          <div class="right-content">
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+              <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "link" %><br />
+            <% end -%>
+          </div>
         </div>
-        <div class="right-content">
-          <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-            <%= link_to "Esqueceu sua senha?", new_password_path(resource_name), class: "link" %><br />
-          <% end -%>
-        </div>
-      </div>
 
-      <%= f.submit "Entrar", data: { disable_with: "Entrando..." }, class: "btn btn-info m-t-25" %>
-    <% end %>
+        <%= f.submit "Entrar", data: { disable_with: "Entrando..." }, class: "btn btn-info m-t-25" %>
+      <% end %>
 
-    <span class="divider">Ou</span>
+      <span class="divider">Ou</span>
 
-    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-      <p class="sign-up">Novo por aqui? <%= link_to "Criar conta", new_registration_path(resource_name), class: "link" %></p>
-    <% end -%>
-  </div>
+      <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+        <p class="sign-up">Novo por aqui? <%= link_to "Criar conta", new_registration_path(resource_name), class: "link" %></p>
+      <% end -%>
+    </div>
+    </div>
 </div>

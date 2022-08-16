@@ -1,66 +1,74 @@
 <div class="box main-panel">
-	<%= render "layouts/main_menu" %>
+	<%= render "shared/main_menu" %>
 
-	<div class="container main-container">
-		<header class="container-header">
-			<h1 class="header-title">Abertura de <span>chamado</span></h1>
-		</header>
+	<div class="main-container">
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Abertura de <span>chamado</span></h1>
+
+					<div class="actions">
+		      	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Finalizar<% end %>
+		        <%= link_to orders_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+		      </div>
+				</header>
+			</div>
+		</div>
 
   	<%= flash_message %>
 
-		<section class="container-body">
-			<%= simple_form_for @order, url: new_order_path, html: { class: "form" } do |f| %>
-	      <%= f.simple_fields_for :stuff do |s| %>
-	      	<%= f.input :user_id, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
-	      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
-	      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
+  	<div class="row">
+  		<div class="col">
+  			<section class="container-body">
+					<%= simple_form_for @order, url: new_order_path, html: { class: "form" } do |f| %>
+			      <%= f.simple_fields_for :stuff do |s| %>
+			      	<%= f.input :user_id, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
+			      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
+			      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
 
-	      	<div class="row">
-	      		<%= content_tag :div, "", class: "col-3 col-md-5 col-sm-12" do %>
-      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-    				<% end if is_admin? %>
+			      	<div class="row">
+			      		<%= content_tag :div, "", class: "col-12 col-sm-6 col-md-4 col-lg-3" do %>
+		      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		    				<% end if is_admin? %>
 
-	      		<div class="col-3 col-md-5 col-sm-12">
-      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
-						</div>	      		
-	      	</div>
-	      		
-	      	<div class="row m-t-50">
-						<div class="col-12">
-			      	<p class="equipment-category ">Selecione a categoria do equipamento</p>
-		          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
-						</div>	      		
-	      	</div>
+			      		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+		      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
+								</div>	      		
+			      	</div>
+			      		
+			      	<div class="row m-t-25">
+								<div class="col">
+					      	<p class="equipment-category ">Selecione a categoria do equipamento</p>
+				          <%= s.input :category, label: false, as: :radio_buttons, collection: list_categories, wrapper_html: { class: "custom-radio" } %>
+								</div>	      		
+			      	</div>
 
-          <div class="row m-t-50">
-          	<div class="col-3 col-md-4 col-sm-12">
-          		<div class="input string" id="autocomplete-patrimony">
-          			<label for="order[stuff_attributes][patrimony]" class="form-label">Patrimônio</label>
-								<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
-							</div>
-          	</div>
+		          <div class="row m-t-25">
+		          	<div class="col-12 col-sm-4">
+		          		<div class="input string" id="autocomplete-patrimony">
+		          			<label for="order[stuff_attributes][patrimony]" class="form-label">Patrimônio</label>
+										<%= autocomplete_field_tag "order[stuff_attributes][patrimony]", @patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, maxlength: 6 %>
+									</div>
+		          	</div>
 
-          	<div class="col-3 col-md-4 col-sm-12">
-        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-          	</div>
+		          	<div class="col-12 col-sm-4">
+		        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>
 
-          	<div class="col-3 col-md-4 col-sm-12">
-        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-          	</div>
-        	</div>
+		          	<div class="col-12 col-sm-4">
+		        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		          	</div>
+		        	</div>
 
-          <div class="row m-t-50">
-          	<div class="col-6 col-md-12">
-          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
-          	</div>
-          </div>
-
-	        <div class="actions m-t-50">
-	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Finalizar<% end %>
-	          <%= link_to orders_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
-	        </div>
-	      <% end %>
-	    <% end %>
-		</section>
+		          <div class="row m-t-25">
+		          	<div class="col">
+		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+		          	</div>
+		          </div>
+			      <% end %>
+			    <% end %>
+				</section>
+  		</div>
+  	</div>
 	</div>
 </div>
