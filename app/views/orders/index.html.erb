@@ -102,13 +102,19 @@
 		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<% unless @orders.nil? || @orders.blank? %>
-			<section class="container-body">
-				<% list_status.each do |status| %>
-					<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
-				<% end %>
-
-				<%= paginate @orders %>
-			</section>
+			<div class="row">
+				<div class="col">
+					<div class="hidden-scrollbar <%= params[:view].presence %>">
+						<button class="prev-btn" title="Mover para esquerda"><span class="material-icons">keyboard_double_arrow_left</span></button>
+						<button class="next-btn" title="Mover para direita"><span class="material-icons">keyboard_double_arrow_right</span></button>
+						<section class="container-body <%= params[:view].presence %>">
+							<% list_status.each do |status| %>
+								<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
+							<% end %>
+						</section>
+					</div>
+				</div>
+			</div>
 		<% else %>
 			<h3 class="text-center m-t-50"><i>Nenhum dado encontrado.</i></h3>
 		<% end %>

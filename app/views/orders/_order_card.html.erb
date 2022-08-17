@@ -1,40 +1,42 @@
 <% unless orders.nil? || orders.blank? %>
-	<%= content_tag :div, class: "order-container #{get_status(status)}" do %>
-		<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
+	<%= content_tag :div, class: "hidden-scrollbar" do %>
+		<%= content_tag :div, class: "order-container #{get_status(status)}" do %>
+			<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
 
-		<div class="order-cards <%= params[:view].presence %>">
-			<% orders.each do |order| %>
-				<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
-					<%= link_to "", order_path(order), title: "Clique para ver detalhes", class: "order-card-link" %>
+			<div class="order-cards">
+				<% orders.each do |order| %>
+					<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
+						<%= link_to "", order_path(order), title: "Clique para ver detalhes", class: "order-card-link" %>
 
-					<header class="order-card-header">
-						<div class="left-content">
-							<%= content_tag :span, "##{order.id.to_s.rjust(3, '0')}", class: "order-id" %>
-							<%= content_tag :span, order.spot, class: "order-spot" %>
+						<header class="order-card-header">
+							<div class="left-content">
+								<%= content_tag :span, "##{order.id.to_s.rjust(3, '0')}", class: "order-id" %>
+								<%= content_tag :span, order.spot, class: "order-spot" %>
+							</div>
+
+							<div class="right-content">
+								<%= content_tag :span, order.created_at, class: "order-creation-date" %>
+							</div>
+						</header>
+
+						<div class="order-card-body">
+							<%= content_tag :h3, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
+							<%= content_tag :p, order.defect %>
 						</div>
 
-						<div class="right-content">
-							<%= content_tag :span, order.created_at, class: "order-creation-date" %>
-						</div>
-					</header>
-
-					<div class="order-card-body">
-						<%= content_tag :h3, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
-						<%= content_tag :p, order.defect %>
-					</div>
-
-					<%= content_tag :footer, class: "order-card-footer" do %>
-						<%= content_tag :span, order.school_name if is_admin? %>
-						<div class="options">
-							<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
-							<ul>
-								<li><%= link_to "Editar", edit_order_path(order) %></li>
-								<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
-							</ul>
-						</div>
+						<%= content_tag :footer, class: "order-card-footer" do %>
+							<%= content_tag :span, order.school_name if is_admin? %>
+							<div class="options">
+								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
+								<ul>
+									<li><%= link_to "Editar", edit_order_path(order) %></li>
+									<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
+								</ul>
+							</div>
+						<% end %>
 					<% end %>
 				<% end %>
-			<% end %>
-		</div>
+			</div>
+		<% end %>
 	<% end %>
 <% end %>

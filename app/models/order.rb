@@ -1,8 +1,6 @@
 class Order < ApplicationRecord
   before_save :create_normalized_strings
 
-	paginates_per 5
-
 	belongs_to :stuff, optional: true
 	belongs_to :school
 	accepts_nested_attributes_for :stuff

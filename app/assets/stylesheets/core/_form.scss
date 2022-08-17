@@ -205,7 +205,7 @@
 		resize: none;
 
 		&:hover, &:focus {
-			border-color: rgba($dark-blue, 0.75);
+			border-color: rgba($dark-blue, 0.75) !important;
 		}
 	}
 
@@ -240,7 +240,7 @@
 	  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 	  &:hover {
-	  	border-color: rgba($dark-blue, .75); 
+	  	border-color: rgba($dark-blue, .75) !important; 
 	  }
 	}
 
@@ -341,7 +341,7 @@
 		@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 		&:hover {
-			border-color: rgba($dark-blue, .75);
+			border-color: rgba($dark-blue, .75) !important;
 		}
 	}
 
@@ -372,12 +372,8 @@
 }
 
 .filters {
-	padding: 15px;
-	background-color: $primary-color;
-	border-radius: 5px;
-
 	.search input, .select-selected {
-		border-color: $alt-color;
+		border-color: $primary-color;
 	}
 
 	input[type="submit"]{

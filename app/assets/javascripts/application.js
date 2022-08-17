@@ -36,11 +36,15 @@ ready = function() {
 
     $(".options .options-btn").not(this).siblings("ul").hide();
     $(this).siblings("ul").toggle();
+
+    $(".order-card").removeClass("focused");
+    $(this).parents(".order-card").addClass("focused")
   });
 
   $(document).on("click", function(){
     $(".main-sidebar").removeClass("visible");
     $(".options-btn").siblings("ul").hide();
+    $(".order-card").removeClass("focused");
     var radio = $("input.radio_buttons:checked");
     $("input.radio_buttons").parent().removeClass("checked");
 

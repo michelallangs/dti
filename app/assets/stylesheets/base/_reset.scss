@@ -39,15 +39,20 @@ strong {
 }
 
 *::-webkit-scrollbar {
-  width: 6px !important;
+  width: 15px;
+  height: 15px;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,.2);
+  border-radius: 100px;
+  border: 5px solid transparent;
+  background-clip: content-box;
+  background-color: rgba($dark-blue, .75);
 }
 
 *::-webkit-scrollbar-track {
-  background: rgba(255,255,255,1);
+  background-color: #e4e4e4;
+  border-radius: 100px;
 }
 
 ::-webkit-input-placeholder {

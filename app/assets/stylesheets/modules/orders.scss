@@ -15,11 +15,152 @@
 			}
 		}
 
+		.hidden-scrollbar {
+			overflow: hidden;
+    	height: 60vh;
+    	position: relative;
+
+    	&.list {
+    		overflow: auto;
+    		height: auto;
+    	}
+
+    	.prev-btn, .next-btn {
+    		display: none;
+    		z-index: 999;
+    		position: absolute;
+    		top: 40%;
+    		@include prefix(transform, translateY(-50%));
+    		padding: 10px;
+    		cursor: pointer;
+    		border-radius: 5px;
+    		background-color: $grey;
+
+    		&:hover {
+    			@include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
+    		}
+
+    		span {
+    			font-size: 30px;
+    		}
+    	}
+
+    	.prev-btn {
+    		left: 10px;
+    		@include prefix(transform, translateX(-50%));
+    	}
+
+    	.next-btn {
+    		right: 10px;
+    		@include prefix(transform, translateX(50%));
+    	}
+		}
+
 		.container-body {
-			.order-container {
-				&:nth-child(n+2) {
-					margin-top: 50px;
+			display: grid;
+			grid-gap: 15px;
+			grid-template-columns: repeat(auto-fill,330px);
+			grid-auto-flow: column;
+			grid-auto-columns: 330px;
+	    overflow-y: hidden;
+    	overflow-x: auto;
+			height: calc(100% + 15px);
+			width: 100%;
+
+			&.list, 
+
+			&.list {
+				grid-auto-flow: row;
+				grid-template-columns: 1fr;
+				grid-auto-columns: 1fr;
+
+				&, .order-container {
+					height: auto;
+	    		width: 100%;	
+	    		overflow: hidden;
+	    		background-color: transparent;			
 				}
+
+				.order-container {
+					padding: 0;
+				}
+
+				.hidden-scrollbar {
+					height: auto;
+				}
+
+				.order-cards .order-card {
+					flex-direction: row;
+					border-top: none !important;
+					width: 100%;
+
+					&.em-aberto {
+				  	border-left: solid 5px $info;
+				  }
+
+				  &.em-manutencao {
+				  	border-left: solid 5px #aaa;
+				  }
+
+				  &.para-retirada {
+				  	border-left: solid 5px $purple;
+				  }
+
+				  &.saiu-para-entrega {
+				  	border-left: solid 5px $warning;
+				  }
+
+				  &.aguardando-pecas {
+				  	border-left: solid 5px $alert;
+				  }
+
+				  &.concluido {
+				  	border-left: solid 5px $success;
+				  }
+
+				  .order-card-header {
+				  	flex-direction: column;
+
+				  	.right-content {
+				  		padding-top: 15px;
+				  	}
+				  }
+
+				  .order-card-body, .order-card-footer {
+				  	display: flex;
+				  }
+
+				  .order-card-body {
+				  	text-align: left;
+				  	padding: 15px;
+				  	width: 100%;
+				  	flex-direction: column;
+				  	justify-content: center;
+				  }
+
+				  .order-card-footer {
+				  	white-space: nowrap;
+				  	align-items: center;
+				  	padding: 15px;
+
+				  	.options {
+				  		bottom: 0;
+				  	}
+
+				  	> span {
+				  		padding: 0 25px 0 0;
+				  	}
+				  }
+				}
+			}
+
+			.order-container {
+				background-color: rgba($grey, .75);
+				padding: 15px;
+				border-radius: 5px;
+				max-height: calc(100% - 30px);
+				width: calc(100% + 15px);
+				overflow-y: auto;
 
 				&.em-aberto h4 span {
 			  	color: $info;
@@ -60,84 +201,21 @@
 
 			.order-cards {
 				display: grid;
-				grid-gap: 25px 2.5%;
-				grid-template-columns: 1fr 1fr 1fr 1fr;
-
-				&.list {
-					grid-template-columns: 1fr;
-
-					.order-card {
-						flex-direction: row;
-						border-top: none !important;
-
-						&.em-aberto {
-					  	border-left: solid 5px $info;
-					  }
-
-					  &.em-manutencao {
-					  	border-left: solid 5px #aaa;
-					  }
-
-					  &.para-retirada {
-					  	border-left: solid 5px $purple;
-					  }
-
-					  &.saiu-para-entrega {
-					  	border-left: solid 5px $warning;
-					  }
-
-					  &.aguardando-pecas {
-					  	border-left: solid 5px $alert;
-					  }
-
-					  &.concluido {
-					  	border-left: solid 5px $success;
-					  }
-
-					  .order-card-header {
-					  	flex-direction: column;
-
-					  	.right-content {
-					  		padding-top: 15px;
-					  	}
-					  }
-
-					  .order-card-body, .order-card-footer {
-					  	display: flex;
-					  }
-
-					  .order-card-body {
-					  	text-align: left;
-					  	padding: 15px;
-					  	width: 100%;
-					  	flex-direction: column;
-					  	justify-content: center;
-					  }
-
-					  .order-card-footer {
-					  	width: 200px;
-					  	align-items: center;
-					  	padding: 15px;
-
-					  	.options {
-					  		bottom: 0;
-					  	}
-
-					  	> span {
-					  		padding: 0 25px 0 0;
-					  	}
-					  }
-					}
-				}
+				grid-gap: 15px;
+				grid-template-columns: 1fr;
 
 				.order-card {
 				  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 				  border-radius: 5px;
-				  min-width: 200px;
 				  display: flex;
+				  width: 300px;
 				  flex-direction: column;
 				  position: relative;
 				  background-color: white;
+
+				  &.focused {
+						background-color: rgba(0, 0, 0, .5);
+					}
 
 				  &.em-aberto {
 				  	border-top: solid 10px $info;
@@ -196,6 +274,7 @@
 						top: 0;
 						right: 0;
 						bottom: 0;
+						z-index: 10;
 					}
 
 					.order-card-header {
@@ -240,7 +319,7 @@
 						}
 
 						.options {
-							position: relative;
+							position: static;
 							bottom: -5px;
 
 							.options-btn {
@@ -249,6 +328,37 @@
 						    span {
 						    	color: #aaa;
 						    }
+							}
+
+							ul {
+								width: 100%;
+								top: auto;
+								bottom: 0;
+								right: 0;
+								left: 0;
+								background-color: $alt-color;
+								padding-top: 40px;
+
+								&:before, &:after {
+									content: "";
+									cursor: pointer;
+									display: inline-block;
+									width: 15px;
+									height: 2px;
+									position: absolute;
+									top: 20px;
+									right: 10px;
+									background-color: #aaa;
+									border: none;
+								}
+
+								&:before {
+									@include prefix(transform, rotate(45deg));
+								}
+
+								&:after {
+									@include prefix(transform, rotate(-45deg));
+								}
 							}
 						}
 					}
