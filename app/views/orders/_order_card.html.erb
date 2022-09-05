@@ -6,8 +6,6 @@
 			<div class="order-cards">
 				<% orders.each do |order| %>
 					<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
-						<%= link_to "", order_path(order), title: "Clique para ver detalhes", class: "order-card-link" %>
-
 						<header class="order-card-header">
 							<div class="left-content">
 								<%= content_tag :span, "##{order.id.to_s.rjust(3, '0')}", class: "order-id" %>
@@ -29,6 +27,7 @@
 							<div class="options">
 								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
 								<ul>
+									<li><%= link_to "Ver detalhes", order_path(order) %></li>
 									<li><%= link_to "Editar", edit_order_path(order) %></li>
 									<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
 								</ul>

@@ -37,8 +37,7 @@ ready = function() {
     $(".options .options-btn").not(this).siblings("ul").hide();
     $(this).siblings("ul").toggle();
 
-    $(".order-card").removeClass("focused");
-    $(this).parents(".order-card").addClass("focused")
+    $(this).parents(".order-card").toggleClass("focused")
   });
 
   $(document).on("click", function(){

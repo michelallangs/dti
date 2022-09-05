@@ -21,7 +21,7 @@
     	position: relative;
 
     	&.list {
-    		overflow: auto;
+    		overflow: initial;
     		height: auto;
     	}
 
@@ -67,8 +67,6 @@
 			height: calc(100% + 15px);
 			width: 100%;
 
-			&.list, 
-
 			&.list {
 				grid-auto-flow: row;
 				grid-template-columns: 1fr;
@@ -77,22 +75,29 @@
 				&, .order-container {
 					height: auto;
 	    		width: 100%;	
-	    		overflow: hidden;
+	    		overflow: initial;
 	    		background-color: transparent;			
 				}
 
 				.order-container {
+					margin-top: 15px;
+					max-height: none;
 					padding: 0;
 				}
 
 				.hidden-scrollbar {
 					height: auto;
+					overflow: initial;
 				}
 
 				.order-cards .order-card {
 					flex-direction: row;
 					border-top: none !important;
 					width: 100%;
+
+					&.focused {
+						background-color: $primary-color;
+					}
 
 					&.em-aberto {
 				  	border-left: solid 5px $info;
@@ -143,8 +148,9 @@
 				  	align-items: center;
 				  	padding: 15px;
 
-				  	.options {
-				  		bottom: 0;
+				  	.options ul {
+				  		bottom: auto;
+				  		top: 100%;
 				  	}
 
 				  	> span {
@@ -266,15 +272,6 @@
 							font-weight: 600;
 							color: rgba(0, 0, 0, 0.5);
 						}
-					}
-
-					.order-card-link {
-						position: absolute;
-						left: 0;
-						top: 0;
-						right: 0;
-						bottom: 0;
-						z-index: 10;
 					}
 
 					.order-card-header {
