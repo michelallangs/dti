@@ -123,12 +123,12 @@
 					      	<div class="row m-t-25">
 			      				<h3 class="uppercase highlight">Técnico responsável</h3>
 
-					      		<div class="col-12 col-sm-6 col-lg-4">
-				          		<%= f.input :removal_technician, required: false, label: "Retirada", collection: @technicians, include_blank: "Quem retirou o equipamento?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+			      				<div class="col-12 col-sm-6 col-lg-4">
+				          		<%= f.input :removal_technicians, required: false, label: "Retirada", collection: @technicians, include_blank: "--------------------", input_html: { multiple: true, title: "Pressione CTRL para marcar/desmarcar" }, label_html: { class: "form-label" } %>
 										</div>   		
 
 										<div class="col-12 col-sm-6 col-lg-4">
-											<%= f.input :maintenance_technician, required: false, label: "Manutenção", collection: @technicians, include_blank: "Quem realizou o serviço?", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+											<%= f.input :maintenance_technicians, required: false, label: "Manutenção", collection: @technicians, include_blank: "--------------------", input_html: { multiple: true, title: "Pressione CTRL para marcar/desmarcar" }, label_html: { class: "form-label" } %>
 				          	</div>   
 					      	</div>
 

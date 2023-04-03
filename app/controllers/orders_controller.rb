@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
     category = params[:category]
     brand = params[:brand]
     status = params[:status]
-    technician = params[:technician]
+    technician = params[:technician].blank? ? "" : params[:technician]
     start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
     requester = I18n.transliterate(params[:requester]) if params[:requester]
@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
       patrimony = patrimony.downcase == "s/p" ? "" 
                                               : "%#{patrimony}%"
 
-      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technician LIKE ? AND lower(orders.status) LIKE lower(?) AND lower(orders.requester_ascii) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
+      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND lower(orders.status) LIKE lower(?) AND lower(orders.requester_ascii) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
       values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{status}%", "%#{requester}%", "%#{school}%"]
 
@@ -155,7 +155,7 @@ class OrdersController < ApplicationController
   end
 
   def get_user(id)
-    user = User.find_by_id(id)
+    user = User.find(id.reject { |x| x.empty? }).map { |u| u.name }.to_sentence
     return user
   end
 

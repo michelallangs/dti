@@ -5,6 +5,9 @@ class Order < ApplicationRecord
 	belongs_to :school
 	accepts_nested_attributes_for :stuff
 
+	serialize :removal_technicians, Array, default: [""]
+	serialize :maintenance_technicians, Array, default: [""]
+
 	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]

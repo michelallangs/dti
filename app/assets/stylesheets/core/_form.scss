@@ -225,23 +225,35 @@
 		}
 	}
 
-	.select-selected {
+	.select-selected, select[multiple="multiple"] {
 	  background-color: $primary-color;
 	  color: #000000;
-	  padding: 10px 30px 10px 15px;
-	  overflow: hidden;
 	  white-space: nowrap;
 	  text-overflow: ellipsis;
-	  border: 2px solid transparent;
-	  border-radius: 5px;
 	  position: relative;
-	  min-height: 40px;
 	  text-align: left;
-	  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 	  &:hover {
 	  	border-color: rgba($dark-blue, .75) !important; 
 	  }
+	}
+
+	.select-selected {
+	  padding: 10px 30px 10px 15px;
+	  overflow: hidden;
+	  border: 2px solid transparent;
+	  border-radius: 5px;
+	  min-height: 40px;
+	  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
+	}
+
+	select[multiple="multiple"] option {
+		padding: 10px;
+	}
+
+	select[multiple="multiple"] option[selected] {
+		background-color: $dark-blue;
+		color: #fff;
 	}
 
 	/* Style the arrow inside the select element: */

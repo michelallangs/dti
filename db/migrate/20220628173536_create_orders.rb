@@ -8,8 +8,8 @@ class CreateOrders < ActiveRecord::Migration[7.0]
       t.string :backup, default: "Não"
       t.text :performed_service
       t.text :obs
-      t.string :removal_technician, default: "0"
-      t.string :maintenance_technician, default: "0"
+      t.text :removal_technicians
+      t.text :maintenance_technicians
       t.string :updated_by
       t.date :start_date
       t.date :end_date

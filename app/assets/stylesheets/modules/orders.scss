@@ -364,6 +364,12 @@
 		}
 	}
 
+	&.new {
+		.ui-helper-hidden-accessible {
+			display: none;
+		}
+	}
+
 	&.edit, &.update, &.show {
 		.order-tabs {
 			position: relative;
