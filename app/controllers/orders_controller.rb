@@ -108,12 +108,26 @@ class OrdersController < ApplicationController
     @technicians = User.where(user_level: 0).where.not(name: "Administrador")
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
+    start_date = params[:order][:start_date]
+    end_date = params[:order][:end_date]
 
     unless @patrimony.blank?
       if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
         allow_update = false
         flash.now[:alert] = "Patrimônio já pertence a outra unidade"
       end
+    end
+
+    unless start_date.blank? || end_date.blank?
+      if start_date > end_date
+        allow_update = false
+        flash.now[:alert] = "A data de entrega deve ser maior que a de retirada"
+      end
+    end
+
+    if (!start_date.blank? && start_date.to_datetime > Date.today) || (!end_date.blank? && end_date.to_datetime > Date.today)
+      allow_update = false
+      flash.now[:alert] = "As datas de retirada/entregam devem ser menores que a data de hoje"
     end
     
     if allow_update && @order.update(order_update_params)

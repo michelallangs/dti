@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_171148) do
     t.string "category"
     t.string "brand"
     t.string "patrimony"
+    t.string "defaulted", default: "Não"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "school_id"

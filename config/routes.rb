@@ -65,10 +65,10 @@ Rails.application.routes.draw do
 
   resources :orders do
     get :autocomplete_stuff_patrimony, :on => :collection
-    get '/página/:page', action: :index, on: :collection
+    get '/:slug', action: :index, on: :collection
   end
 
   resources :stuffs do
-    get '/página/:page', action: :index, on: :collection
+    get '/:slug', action: :index, on: :collection
   end
 end

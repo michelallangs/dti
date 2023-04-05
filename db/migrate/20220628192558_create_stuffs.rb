@@ -4,6 +4,7 @@ class CreateStuffs < ActiveRecord::Migration[7.0]
       t.string :category
       t.string :brand
       t.string :patrimony
+      t.string :defaulted, default: "Não"
 
       t.timestamps
     end

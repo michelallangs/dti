@@ -4,6 +4,9 @@
 	<div class="main-container">
 		<%= flash_message %>
 
+		<%= "Retirada: #{params[:start_date]}" %>
+		<%= "Data de hoje: #{Date.today}" %>
+
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
@@ -91,7 +94,7 @@
 				</div>
 			</div>
 
-			<%= submit_tag ("Buscar") %>
+			<%= submit_tag "Buscar" %>
 		<% end %>
 
 		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>

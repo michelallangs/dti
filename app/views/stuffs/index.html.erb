@@ -62,21 +62,27 @@
 						<ul class="responsive-table">
 							<li class="table-header">
 								<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
-								<div class="table-col table-col-15"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
-								<div class="table-col table-col-15"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
+								<div class="table-col table-col-10"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
+								<div class="table-col table-col-25"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
 								<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
 								<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
-								<div class="table-col table-col-10">Opções</div>
+								<div class="table-col table-col-5">Opções</div>
 							</li>
 
 							<% @stuffs_paginate.each do |s| %>
 								<li class="table-row">
 									<div class="table-col table-col-5" data-label="#"><strong><%= s.id %></strong></div>
-									<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
-									<div class="table-col table-col-15" data-label="Categoria"><%= s.category %></div>
+									<div class="table-col table-col-10" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
+									<div class="table-col table-col-25" data-label="Categoria">
+										<% if s.category == 'PC/Notebook' %>
+											<%= content_tag :span, "done", title: "Padrão OK", class: "material-icons md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
+											<%= content_tag :span, "close", title: "Necessária padronização", class: "material-icons md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
+										<% end %>
+										<%= s.category %>
+									</div>
 									<div class="table-col table-col-15" data-label="Marca/Modelo"><%= s.brand %></div>
 									<div class="table-col table-col-40" data-label="Unidade"><%= s.school.name %></div>
-									<div class="table-col table-col-10">
+									<div class="table-col table-col-5">
 										<div class="options">
 						          <%= link_to edit_stuff_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-icons md-20">edit</span><% end %>
 						          <%= link_to destroy_stuff_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-icons md-20">delete</span><% end %>

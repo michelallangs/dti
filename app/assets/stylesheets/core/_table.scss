@@ -1,7 +1,6 @@
 .responsive-table {
   li {
     border-radius: 5px;
-    padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,6 +11,7 @@
     font-size: 1em;
     text-transform: uppercase;
     letter-spacing: 0.03em;
+    padding: 15px 30px;
 
     .active {
       font-weight: 700;
@@ -26,17 +26,19 @@
 
     a, div {
       position: relative;
-      font-weight: 300;
+      font-weight: 600;
       color: $primary-color;
     }
   }
   .table-row {
     background-color: #ffffff;
     @include prefix(box-shadow, 0px 0px 9px 0px rgba(0,0,0,0.1));
+    padding: 25px 30px;
   }
 
   @for $i from 1 through 100 {
     .table-col-#{$i} {
+      display: flex;
       flex-basis: #{$i + "%"};
     }
   }
