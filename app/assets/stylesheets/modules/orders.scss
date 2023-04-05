@@ -100,11 +100,11 @@
 					}
 
 					&.em-aberto {
-				  	border-left: solid 5px $info;
+				  	border-left: solid 5px $success;
 				  }
 
 				  &.em-manutencao {
-				  	border-left: solid 5px #aaa;
+				  	border-left: solid 5px $orange;
 				  }
 
 				  &.para-retirada {
@@ -120,7 +120,11 @@
 				  }
 
 				  &.concluido {
-				  	border-left: solid 5px $success;
+				  	border-left: solid 5px $info;
+				  }
+
+				  &.cancelado {
+				  	border-left: solid 5px #aaa;
 				  }
 
 				  .order-card-header {
@@ -169,11 +173,11 @@
 				overflow-y: auto;
 
 				&.em-aberto h4 span {
-			  	color: $info;
+			  	color: $success;
 			  }
 
 			  &.em-manutencao h4 span {
-			  	color: #aaa;
+			  	color: $orange;
 			  }
 
 			  &.para-retirada h4 span {
@@ -181,7 +185,7 @@
 			  }
 
 			  &.saiu-para-entrega h4 span {
-			  	color: $orange;
+			  	color: $warning;
 			  }
 
 			  &.aguardando-pecas h4 span {
@@ -189,7 +193,11 @@
 			  }
 
 			  &.concluido h4 span {
-			  	color: $success;
+			  	color: $info;
+			  }
+
+			  &.cancelado h4 span {
+			  	color: #aaa;
 			  }
 			}
 
@@ -224,11 +232,11 @@
 					}
 
 				  &.em-aberto {
-				  	border-top: solid 10px $info;
+				  	border-top: solid 10px $success;
 				  }
 
 				  &.em-manutencao {
-				  	border-top: solid 10px #aaa;
+				  	border-top: solid 10px $orange;
 				  }
 
 				  &.para-retirada {
@@ -244,7 +252,11 @@
 				  }
 
 				  &.concluido {
-				  	border-top: solid 10px $success;
+				  	border-top: solid 10px $info;
+				  }
+
+				  &.cancelado {
+				  	border-top: solid 10px #aaa;
 				  }
 
 					&:hover {
@@ -328,11 +340,11 @@
 							}
 
 							ul {
+								min-width: 160px;
 								width: 100%;
 								top: auto;
 								bottom: 0;
 								right: 0;
-								left: 0;
 								background-color: $alt-color;
 								padding-top: 40px;
 

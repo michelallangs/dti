@@ -384,6 +384,8 @@
 }
 
 .filters {
+	display: none;
+	
 	.search input, .select-selected {
 		border-color: $primary-color;
 	}

@@ -11,14 +11,9 @@
 						<div class="action-buttons">
 							<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
 							<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
-							<!-- <div class="options">
-								<%= link_to "#", alt: "Filtro avançado", title: "Filtro avançado", class: "btn options-btn icon" do %><i class="fa fa-filter_list"></i>Filtro avançado<% end %>
-								<ul>
-									<li><%= link_to "Chamados sem patrimônio", sp: true %></li>
-								</ul>
-							</div> -->
+							<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-icons md-16 md-light">search</span>Filtro avançado<% end %>
+							<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir chamado<% end %>
 						</div>
-						<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir chamado<% end %>
 					</div>
 				</header>
 			</div>
@@ -28,7 +23,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="search" id="autocomplete-patrimony">
-						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
+						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
 					</div>
 				</div>
 

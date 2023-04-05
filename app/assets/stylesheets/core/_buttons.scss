@@ -81,7 +81,7 @@
   @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
 
   &:hover {
-    background-color: rgba($dark-blue, .5);
+    background-color: rgba(#fff, .5);
 
     span {
       color: $dark-blue;

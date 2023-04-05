@@ -35,9 +35,9 @@ ready = function() {
     e.stopPropagation();
 
     $(".options .options-btn").not(this).siblings("ul").hide();
-    $(this).siblings("ul").toggle();
+    $(this).siblings("ul").stop().toggle();
 
-    $(this).parents(".order-card").toggleClass("focused")
+    $(this).parents(".order-card").stop().toggleClass("focused")
   });
 
   $(document).on("click", function(){
@@ -58,6 +58,10 @@ ready = function() {
     e.stopPropagation();
 
     $(".main-sidebar").addClass("visible");
+  })
+
+  $(".enable-filters").on("click", function(){
+    $(".filters").stop().fadeToggle(300);
   })
 };
 

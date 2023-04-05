@@ -138,9 +138,10 @@ class OrdersController < ApplicationController
 
   def destroy
     @order = Order.find(params[:id])
+    @order.update(status: "Cancelado")
 
-    if @order.destroy
-      flash[:alert] = "Chamado excluído com sucesso!"
+    if @order
+      flash[:alert] = "Chamado cancelado com sucesso!"
       redirect_to orders_path
     end
   end

@@ -7,12 +7,12 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 User.create!(name: 'Administrador', username: 'admin', user_level: 0, password: '32453245') 
-User.create!(name: 'Bene', username: 'bene', user_level: 0, password: '32453245')
-User.create!(name: 'Edison', username: 'edison', user_level: 0, password: '32453245')
-User.create!(name: 'Fabricio', username: 'fabricio', user_level: 0, password: '32453245')
-User.create!(name: 'Mateus', username: 'mateus', user_level: 0, password: '32453245')
+User.create!(name: 'Daniel', username: 'daniel', user_level: 0, password: '12345678')
+User.create!(name: 'Mauricio', username: 'mauricio', user_level: 0, password: '12345678')
 User.create!(name: 'Michel', username: 'michel', user_level: 0, password: '32453245')
+User.create!(name: 'Nicolas', username: 'nicolas', user_level: 0, password: '12345678')
 User.create!(name: 'Thiago', username: 'thiago', user_level: 0, password: '32453245')
+User.create!(name: 'Willian', username: 'willian', user_level: 0, password: '12345678')
 User.create!(name: 'Willy', username: 'willy', user_level: 0, password: '32453245')
 
 User.create!(username: 'emief.anita@educacaotaubate.sp.gov.br', password: '32453245')
