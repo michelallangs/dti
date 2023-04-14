@@ -28,6 +28,7 @@ gem 'rails-jquery-autocomplete'
 gem 'iconv'
 gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
+gem 'tinymce-rails'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

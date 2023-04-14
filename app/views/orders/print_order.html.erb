@@ -52,7 +52,7 @@
 
           <div class="col-6 block-col">
             <h3>Patrimônio/Nº série</h3>
-            <p><%= @stuff.patrimony %></p>
+            <p><%= get_patrimony(@stuff.patrimony) %></p>
           </div>
         </div>
 
@@ -77,7 +77,7 @@
         <div class="row">
           <div class="col-12 block-col">
             <h3>Defeito/problema apresentado</h3>
-            <p><%= @order.defect %></p>
+            <div class="html-safe"><%= @order.defect.html_safe if @order.defect %></div>
           </div>
         </div>
 
@@ -90,19 +90,19 @@
         <div class="row">
           <div class="col-6 block-col">
             <h3>Serviço realizado</h3>
-            <p><%= @order.performed_service %></p>
+            <div class="html-safe"><%= @order.performed_service.html_safe if @order.performed_service %></div>
           </div>
 
           <div class="col-6 block-col">
             <h3>Observações</h3>
-            <p><%= @order.obs %></p>
+            <div class="html-safe"><%= @order.obs.html_safe if @order.obs %></div>
           </div>
         </div>
 
         <div class="row">
           <div class="col-6 block-col">
             <h3>Data da manutenção</h3>
-            <p><%= @order.end_date.strftime("%d/%m/%Y") %></p>
+            <p><%= @order.end_date.strftime("%d/%m/%Y") if @order.end_date %></p>
           </div>
 
           <div class="col-6 block-col">

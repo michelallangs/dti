@@ -62,7 +62,8 @@
 
 		          <div class="row m-t-25">
 		          	<div class="col">
-		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" } %>
+		          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" }, input_html: { class: "tinymce" } %>
+		          		<%= tinymce %>
 		          	</div>
 		          </div>
 			      <% end %>

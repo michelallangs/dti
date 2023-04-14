@@ -195,7 +195,10 @@ dl {
 
 	dd {
 		width: calc(100% - 200px);
-		font-weight: bold;
+
+		&, * {
+			font-weight: bold;
+		}
 	}
 }
 
@@ -265,4 +268,10 @@ dl {
 
 .invert-svg {
 	@include prefix(filter, invert(100%));
+}
+
+.html-safe {
+	ul {
+		padding-left: 1.5em;
+	}
 }
