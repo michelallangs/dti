@@ -4,9 +4,6 @@
 	<div class="main-container">
 		<%= flash_message %>
 
-		<%= "Retirada: #{params[:start_date]}" %>
-		<%= "Data de hoje: #{Date.today}" %>
-
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
@@ -59,13 +56,19 @@
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="custom-select">
-						<%= select_tag :status, options_for_select(list_status, params[:status]), include_blank: "Selecione o status..."  %>
+						<%= select_tag :status, options_for_select(list_status, params[:status]), include_blank: "Status..."  %>
 					</div>
 				</div>
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="custom-select">
-						<%= select_tag :technician, options_for_select(@technicians.pluck(:name, :id), params[:technician]), include_blank: "Responsável pela manutenção..." %>
+						<%= select_tag :technician, options_for_select(@technicians.pluck(:name, :id), params[:technician]), include_blank: "Técnico responsável..." %>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="custom-select">
+						<%= select_tag :o_type, options_for_select(list_types, params[:o_type]), include_blank: "Tipo de OS..."  %>
 					</div>
 				</div>
 
@@ -89,8 +92,14 @@
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="search date" id="end-date">
-						<%= text_field_tag :end_date, params[:end_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
+						<%= text_field_tag :end_date, params[:end_date], placeholder: "Data final", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
 					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 text-center">
+					<%= link_to orders_path, class: "btn-cancel icon" do %>Limpar filtros<% end %>
 				</div>
 			</div>
 

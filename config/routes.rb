@@ -50,6 +50,7 @@ Rails.application.routes.draw do
     put    '/chamados/editar-chamado/:id',   action: :update,            as: false
     delete '/chamados/excluir-chamado/:id',  action: :destroy,           as: :destroy_order
     get    '/chamados/:id',                  action: :show,              as: :order
+    get    '/chamados/imprimir-os/:id',      action: :print_order,       as: :print_order
   end
 
   controller :stuffs do

@@ -297,12 +297,13 @@
 	  left: 0;
 	  right: 0;
 	  z-index: 99;
-	  max-height: 300px;
+	  max-height: 270px;
 	  overflow-y: auto;
 	  border-radius: 5px;
 	  text-align: left;
 	  padding: 5px;
 	  font-weight: 600;
+	  @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
 	}
 
 	/* Hide the items when the select box is closed: */

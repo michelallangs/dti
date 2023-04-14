@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_171148) do
   create_table "orders", force: :cascade do |t|
     t.string "requester"
     t.string "requester_ascii"
+    t.string "o_type", default: ""
     t.string "spot"
     t.text "defect"
     t.string "backup", default: "Não"

@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   helper_method [:get_patrimony, :get_user, :order_updated_at, :order_creator]
   before_action :stuff_category
   autocomplete :stuff, :patrimony, full: true
+  layout "print", only: :print_order
   include ApplicationHelper
 
   def index
@@ -13,11 +14,12 @@ class OrdersController < ApplicationController
     brand = params[:brand]
     status = params[:status]
     technician = params[:technician].blank? ? "" : params[:technician]
+    o_type = params[:o_type]
     start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
     requester = I18n.transliterate(params[:requester]) if params[:requester]
     school = I18n.transliterate(params[:school]) if params[:school]
-    @search = [patrimony, spot, category, brand, status, technician, start_date, end_date, requester, school]
+    @search = [patrimony, spot, category, brand, status, technician, o_type, start_date, end_date, requester, school]
 
     @orders = Order.joins(:stuff, :school)
 
@@ -25,9 +27,12 @@ class OrdersController < ApplicationController
       patrimony = patrimony.downcase == "s/p" ? "" 
                                               : "%#{patrimony}%"
 
-      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND lower(orders.status) LIKE lower(?) AND lower(orders.requester_ascii) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
+      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
+               lower(stuffs.brand) LIKE lower(?) AND lower(orders.status) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND 
+               lower(orders.o_type) LIKE lower(?) AND lower(orders.requester_ascii) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{status}%", "%#{requester}%", "%#{school}%"]
+      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{status}%", "%#{technician}%", 
+                "%#{o_type}%", "%#{requester}%", "%#{school}%"]
 
       if !start_date.blank? || !end_date.blank?
         query += " AND date(orders.created_at) BETWEEN ? AND ?"
@@ -67,13 +72,14 @@ class OrdersController < ApplicationController
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     requester = params[:order][:requester]
+    o_type = params[:order][:o_type]
     spot = params[:order][:spot]
     defect = params[:order][:defect]
       
     if Stuff.where(patrimony: @patrimony).exists? && !@patrimony.blank?
       stuff_id = Stuff.find_by_patrimony(@patrimony).id
 
-      @order = Order.new(requester: requester, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
+      @order = Order.new(requester: requester, o_type: o_type, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
 
       if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
         allow_save = false
@@ -139,7 +145,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:requester, :spot, :defect, :stuff_id, :user_id, :school_id, :updated_by, stuff_attributes: [:patrimony, :brand, :category, :school_id])
+    params.require(:order).permit(:requester, :o_type, :spot, :defect, :stuff_id, :user_id, :school_id, :updated_by, stuff_attributes: [:patrimony, :brand, :category, :school_id])
   end
 
   def order_update_params
@@ -158,6 +164,14 @@ class OrdersController < ApplicationController
       flash[:alert] = "Chamado cancelado com sucesso!"
       redirect_to orders_path
     end
+  end
+
+  def print_order
+    @order = Order.find(params[:id])
+    @stuff = Stuff.find(@order.stuff_id)
+
+    @full_address = "#{@order.school.address}, #{@order.school.address_number} - #{@order.school.district} - CEP: #{@order.school.zip_code}" 
+    @stuff_type = "#{@stuff.category} - #{@stuff.brand} (#{@order.spot})" 
   end
 
   def stuff_category

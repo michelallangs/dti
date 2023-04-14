@@ -3,6 +3,7 @@ class CreateOrders < ActiveRecord::Migration[7.0]
     create_table :orders do |t|
       t.string :requester
       t.string :requester_ascii
+      t.string :o_type, default: ""
       t.string :spot
       t.text :defect
       t.string :backup, default: "Não"

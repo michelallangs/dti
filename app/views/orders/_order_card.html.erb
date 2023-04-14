@@ -19,6 +19,7 @@
 
 						<div class="order-card-body">
 							<%= content_tag :h3, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
+							<%= content_tag :span, order.o_type if order.o_type %>
 							<%= content_tag :p, order.defect %>
 						</div>
 
@@ -27,6 +28,7 @@
 							<div class="options">
 								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
 								<ul>
+									<li><%= link_to "Imprimir OS", print_order_path(order), target: "_blank"  %></li>
 									<li><%= link_to "Ver detalhes", order_path(order) %></li>
 									<li><%= link_to "Editar", edit_order_path(order) %></li>
 									<li><%= link_to "Cancelar chamado", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>

@@ -1,0 +1,122 @@
+<div class="print-area">
+  <div class="content">
+    <header>
+      <span class="logo-dti">DTI</span>
+      <h1 class="main-title">Ordem de serviço <%= @order.id %><span><%= @order.o_type if @order.o_type %></span></h1>
+      <span class="logo-dti">DTI</span>
+    </header>
+
+    <div class="container">
+      <div class="block">
+        <div class="row">
+          <div class="col-12 block-col block-title">
+            <h2>Dados da unidade</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Nome</h3>
+            <p><%= @order.school.name %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>Endereço</h3>
+            <p><%= @full_address %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Telefone</h3>
+            <p><%= @order.school.phone %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>E-mail</h3>
+            <p><%= @order.school.user.username %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 block-col block-title">
+            <h2>Informações do equipamento</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Tipo</h3>
+            <p><%= @stuff_type %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>Patrimônio/Nº série</h3>
+            <p><%= @stuff.patrimony %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 block-col block-title">
+            <h2>Chamado</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Solicitante</h3>
+            <p><%= @order.requester %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>Data da solicitação</h3>
+            <p><%= @order.created_at %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 block-col">
+            <h3>Defeito/problema apresentado</h3>
+            <p><%= @order.defect %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 block-col block-title">
+            <h2>Relatório</h2>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Serviço realizado</h3>
+            <p><%= @order.performed_service %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>Observações</h3>
+            <p><%= @order.obs %></p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 block-col">
+            <h3>Data da manutenção</h3>
+            <p><%= @order.end_date.strftime("%d/%m/%Y") %></p>
+          </div>
+
+          <div class="col-6 block-col">
+            <h3>Técnico responsável</h3>
+            <p><%= get_user(@order.maintenance_technicians) %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="signature">Assinatura do responsável da unidade</span>
+    <%= link_to image_tag("logo.png"), "https://taubate.sp.gov.br/", target: "_blank", class: 'logo-pref-taubate' %>
+    <p>SEED - Secretaria Municipal de Educação | CNPJ 45.176.005/0001-08 | Praça Oito de Maio, 37 - Centro - Taubaté - SP</p>
+  </footer>
+</div>

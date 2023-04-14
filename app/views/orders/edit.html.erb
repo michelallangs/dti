@@ -60,7 +60,7 @@
 					      	<div class="row">
 					      		<div class="col-12 col-sm-5 col-lg-3">
 				      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
-										</div>	      		
+										</div>
 					      	</div>
 						      		
 					      	<div class="row m-t-25">
@@ -98,15 +98,19 @@
 		    			<fieldset <%= "disabled=disabled" if !is_admin? %>>
 			    			<div id="admin-data" class="order-data <%= 'current' if is_admin?%>">
 					      	<div class="row">
-					      		<div class="col-12 col-sm-6 col-lg-4">
+					      		<div class="col-12 col-sm-4 col-lg-4">
 					      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 										</div>	
 
-										<div class="col-12 col-sm-6 col-lg-4">
+										<div class="col-12 col-sm-4 col-lg-4">
+					      			<%= f.input :o_type, required: false, label: "Tipo de OS", collection: list_types, include_blank: "Selecione o tipo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+										</div> 
+
+										<div class="col-12 col-sm-4 col-lg-4">
 					      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
 					      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
 											<% end %>
-										</div>      		
+										</div>
 									</div>
 
 					      	<div class="row m-t-25">

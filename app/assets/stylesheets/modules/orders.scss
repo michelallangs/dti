@@ -303,6 +303,14 @@
 				    	margin-bottom: 5px;
 				    }
 
+				    span {
+				    	font-size: .9em;
+							font-weight: 600;
+							color: rgba(0, 0, 0, 0.5);
+							margin-bottom: 15px;
+							display: block;
+				    }
+
 				    p {
 				    	overflow: hidden;
 				    	display: -webkit-box;
@@ -548,6 +556,87 @@
 
 				.input .numeric {
 					width: 150px !important;
+				}
+			}
+		}
+	}
+
+	&.print_order {
+		font-size: 10px;
+
+		.print-area {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			max-width: 680px;
+			height: 100%;
+			margin: 0 auto;
+		}
+
+		.main {
+			background-color: white;
+
+			header, footer {
+				padding: 50px 0;
+			}
+
+			header {
+				display: flex;
+				justify-content: space-between;
+				align-items: end;
+				gap: 25px;
+
+				span {
+					color: #000000;
+				}
+
+				.main-title {
+					text-transform: uppercase;
+					text-align: center;
+					font-size: 2em;
+			   	letter-spacing: -1px;
+
+					span {
+						display: block;
+						text-transform: none;
+						font-size: .75em;
+					}
+				}
+
+				.logo-pref-taubate img {
+					width: 100px;
+				}
+
+				.logo-sec-educacao img {
+					width: 200px;
+				}
+			}
+
+			.container .block {
+				.block-title {
+					background-color: rgba(0, 0, 0, 0.5);
+
+					h2 {
+						color: white;
+						font-size: 1.2em;
+					}
+				}
+			}
+
+			footer {
+				text-align: center;
+
+				.signature {
+					border-top: solid 1px #000000;
+					display: inline-block;
+					font-style: italic;
+					font-weight: 600;
+					padding: 5px 50px 25px 50px;
+				}
+
+				a img {
+					max-width: 75%;
+					margin: 0 auto;
 				}
 			}
 		}

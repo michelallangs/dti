@@ -48,6 +48,12 @@ module ApplicationHelper
     return segments
   end
 
+  def list_types
+    types = ['Manutenção corretiva', 'Manutenção preventiva', 'Infraestrutura de redes', 
+                  'Sistemas', 'Administrativo', 'Acesso remoto', 'Entrega/doação de equipamento']
+    return types
+  end
+
   def list_categories
     categories = ['PC/Notebook', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro']
     return categories
