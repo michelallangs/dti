@@ -22,4 +22,7 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  url: <%= ENV["DATABASE_URL"] %>
+  database: dti_production
+  username: dti
+  password: <%= ENV["DTI_DATABASE_PASSWORD"] %>
