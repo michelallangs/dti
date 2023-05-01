@@ -7,7 +7,6 @@ gem "rails", "~> 7.0.3"
 gem "sprockets-rails"
 gem 'popper_js', '~> 2.11.5'
 gem 'bootstrap', '~> 5.2.0'
-gem "pg"
 gem "puma", "~> 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -29,6 +28,10 @@ gem 'iconv'
 gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
 gem 'tinymce-rails'
+
+group :development, :test, :production do
+  gem "pg"
+end
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
