@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   include ApplicationHelper
 
   def index
-    @technicians = User.where("user_level == 0 AND username != 'admin'")
+    @technicians = User.where("user_level = 0 AND username != 'admin'")
 
     patrimony = params[:patrimony]
     spot = params[:spot]

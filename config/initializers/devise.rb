@@ -41,6 +41,8 @@ Devise.setup do |config|
   
   config.navigational_formats = ['*/*', :html, :turbo_stream]
 
+  config.scoped_views = true
+
   config.warden do |manager|
     manager.failure_app = TurboFailureApp
   end
