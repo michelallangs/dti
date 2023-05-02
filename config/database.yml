@@ -12,6 +12,8 @@ development:
 test:
   <<: *default
   database: dti_test
+  username: postgres
+  password: postgres
 
 production:
   <<: *default
