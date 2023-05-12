@@ -1,0 +1,46 @@
+<div class="box main-panel">
+	<%= render "shared/main_menu" %>
+
+	<div class="main-container">
+		<%= flash_message %>
+
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Perfil de <span>usuário</span></h1>
+
+					<div class="actions">
+						<%= link_to edit_user_path(@user), class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
+						<%= link_to edit_user_password_path(@user), class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+						<%= link_to destroy_user_path(@user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir conta<% end %>
+		      </div>
+				</header>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+		  		<section>
+		  			<h3 class="m-b-25">Dados do usuário</h3>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Nome" %>
+		  				<%= content_tag :dd, @user.name %>
+		  			<% end %>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Login" %>
+		  				<%= content_tag :dd, @user.username %>
+		  			<% end %>
+
+	  				<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "E-mail" %>
+		  				<%= content_tag :dd, @user.email %>
+		  			<% end %>
+		  		</section>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

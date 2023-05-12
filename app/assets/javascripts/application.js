@@ -7,6 +7,8 @@
 //= require jquery-ui/widgets/autocomplete
 //= require autocomplete-rails
 //= require bootstrap-datepicker
+//= require chartkick
+//= require Chart.bundle
 
 //= require_tree .
 
@@ -63,6 +65,18 @@ ready = function() {
 
   $(".enable-filters").on("click", function(){
     $(".filters").stop().fadeToggle(300);
+  })
+
+  $(".search input").each((i, e) => {
+    if ($(e).val() != "") {
+      $(".filters").stop().show();
+    }
+  })
+
+  $(".custom-select select option:selected").each((i, e) => { 
+    if ($(e).index() != 0) {
+      $(".filters").stop().show();
+    }
   })
 };
 

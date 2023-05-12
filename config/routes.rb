@@ -31,9 +31,15 @@ Rails.application.routes.draw do
 
   controller :users do
     get    '/usuarios',                      action: :index,             as: :users
-    get    '/trocar-senha',                  action: :edit_password,     as: :edit_user_password
-    patch  '/trocar-senha',                  action: :update_password,   as: false
-    put    '/trocar-senha',                  action: :update_password,   as: false
+    get    '/usuarios/novo-usuario',         action: :new,               as: :new_user
+    post   '/usuarios/novo-usuario',         action: :create,            as: false
+    get    '/usuarios/editar-usuario/:id',   action: :edit,              as: :edit_user
+    patch  '/usuarios/editar-usuario/:id',   action: :update,            as: false
+    get    '/trocar-senha/:id',              action: :edit_password,     as: :edit_user_password
+    patch  '/trocar-senha/:id',              action: :update_password,   as: false
+    put    '/trocar-senha/:id',              action: :update_password,   as: false
+    delete '/usuarios/excluir-usuario/:id',  action: :destroy,           as: :destroy_user
+    get    '/usuarios/:id',                  action: :show,              as: :user
   end
 
   controller :home do
@@ -42,15 +48,15 @@ Rails.application.routes.draw do
   end
 
   controller :orders do
-    get    '/chamados',                      action: :index,             as: :orders
-    get    '/chamados/abrir-chamado',        action: :new,               as: :new_order
-    post   '/chamados/abrir-chamado',        action: :create,            as: false
-    get    '/chamados/editar-chamado/:id',   action: :edit,              as: :edit_order
-    patch  '/chamados/editar-chamado/:id',   action: :update,            as: false
-    put    '/chamados/editar-chamado/:id',   action: :update,            as: false
-    delete '/chamados/excluir-chamado/:id',  action: :destroy,           as: :destroy_order
-    get    '/chamados/:id',                  action: :show,              as: :order
-    get    '/chamados/imprimir-os/:id',      action: :print_order,       as: :print_order
+    get    '/os',                       action: :index,             as: :orders
+    get    '/os/abrir-os',              action: :new,               as: :new_order
+    post   '/os/abrir-os',              action: :create,            as: false
+    get    '/os/editar-os/:id',         action: :edit,              as: :edit_order
+    patch  '/os/editar-os/:id',         action: :update,            as: false
+    put    '/os/editar-os/:id',         action: :update,            as: false
+    delete '/os/excluir-os/:id',        action: :destroy,           as: :destroy_order
+    get    '/os/:id',                   action: :show,              as: :order
+    get    '/os/imprimir-os/:id',       action: :print_order,       as: :print_order
   end
 
   controller :stuffs do
@@ -64,8 +70,29 @@ Rails.application.routes.draw do
     get    '/equipamentos/:id',                           action: :show,              as: :stuff
   end
 
+  controller :schools do
+    get    '/unidades',                           action: :index,             as: :schools
+    get    '/unidades/cadastrar-unidade',         action: :new,               as: :new_school
+    post   '/unidades/cadastrar-unidade',         action: :create,            as: false
+    get    '/unidades/editar-unidade/:id',        action: :edit,              as: :edit_school
+    patch  '/unidades/editar-unidade/:id',        action: :update,            as: false
+    put    '/unidades/editar-unidade/:id',        action: :update,            as: false
+    delete '/unidades/excluir-unidade/:id',       action: :destroy,           as: :destroy_school
+    get    '/unidades/:id',                       action: :show,              as: :school
+  end
+
   resources :orders do
     get :autocomplete_stuff_patrimony, :on => :collection
+    get '/:slug', action: :index, on: :collection
+  end
+
+  resources :schools do
+    get :autocomplete_school_name, :on => :collection
+    get '/:slug', action: :index, on: :collection
+  end
+
+  resources :users do
+    get :autocomplete_user_name, :on => :collection
     get '/:slug', action: :index, on: :collection
   end
 

@@ -1,0 +1,640 @@
+#orders {
+	&.index {
+		.main-panel .main-container .container-header {
+			display: flex;
+			align-items: center;
+
+			.right-content {
+				.action-buttons {
+					gap: 10px;
+					display: flex;
+					align-items: center;
+			    border-radius: 50px;
+				}
+			}
+		}
+
+		.hidden-scrollbar {
+			overflow: hidden;
+    	height: 60vh;
+    	position: relative;
+
+    	&.list {
+    		overflow: initial;
+    		height: auto;
+    	}
+
+    	.prev-btn, .next-btn {
+    		display: none;
+    		z-index: 999;
+    		position: absolute;
+    		top: 40%;
+    		@include prefix(transform, translateY(-50%));
+    		padding: 10px;
+    		cursor: pointer;
+    		border-radius: 5px;
+    		background-color: $grey;
+
+    		&:hover {
+    			@include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
+    		}
+
+    		span {
+    			font-size: 30px;
+    		}
+    	}
+
+    	.prev-btn {
+    		left: 10px;
+    		@include prefix(transform, translateX(-50%));
+    	}
+
+    	.next-btn {
+    		right: 10px;
+    		@include prefix(transform, translateX(50%));
+    	}
+		}
+
+		.container-body {
+			display: grid;
+			grid-gap: 15px;
+			grid-template-columns: repeat(auto-fill,330px);
+			grid-auto-flow: column;
+			grid-auto-columns: 330px;
+	    overflow-y: hidden;
+    	overflow-x: auto;
+			height: calc(100% + 15px);
+			width: 100%;
+
+			&.list {
+				grid-auto-flow: row;
+				grid-template-columns: 1fr;
+				grid-auto-columns: 1fr;
+
+				&, .order-container {
+					height: auto;
+	    		width: 100%;	
+	    		overflow: initial;
+	    		background-color: transparent;			
+				}
+
+				.order-container {
+					margin-top: 15px;
+					max-height: none;
+					padding: 0;
+				}
+
+				.hidden-scrollbar {
+					height: auto;
+					overflow: initial;
+				}
+
+				.order-cards .order-card {
+					flex-direction: row;
+					border-top: none !important;
+					width: 100%;
+
+					&.focused {
+						background-color: $primary-color;
+					}
+
+					&.em-aberto {
+				  	border-left: solid 5px $success;
+				  }
+
+				  &.em-manutencao {
+				  	border-left: solid 5px $orange;
+				  }
+
+				  &.para-retirada {
+				  	border-left: solid 5px $purple;
+				  }
+
+				  &.saiu-para-entrega {
+				  	border-left: solid 5px $warning;
+				  }
+
+				  &.aguardando-pecas {
+				  	border-left: solid 5px $alert;
+				  }
+
+				  &.concluido {
+				  	border-left: solid 5px $info;
+				  }
+
+				  &.cancelado {
+				  	border-left: solid 5px #aaa;
+				  }
+
+				  .order-card-header {
+				  	flex-direction: column;
+
+				  	.right-content {
+				  		padding-top: 15px;
+				  	}
+				  }
+
+				  .order-card-body, .order-card-footer {
+				  	display: flex;
+				  }
+
+				  .order-card-body {
+				  	text-align: left;
+				  	padding: 15px;
+				  	width: 100%;
+				  	flex-direction: column;
+				  	justify-content: center;
+				  }
+
+				  .order-card-footer {
+				  	white-space: nowrap;
+				  	align-items: center;
+				  	padding: 15px;
+
+				  	.options ul {
+				  		bottom: auto;
+				  		top: 100%;
+				  	}
+
+				  	> span {
+				  		padding: 0 25px 0 0;
+				  	}
+				  }
+				}
+			}
+
+			.order-container {
+				background-color: rgba($grey, .75);
+				padding: 15px;
+				border-radius: 5px;
+				max-height: calc(100% - 30px);
+				width: calc(100% + 15px);
+				overflow-y: auto;
+
+				&.em-aberto h4 span {
+			  	color: $success;
+			  }
+
+			  &.em-manutencao h4 span {
+			  	color: $orange;
+			  }
+
+			  &.para-retirada h4 span {
+			  	color: $purple;
+			  }
+
+			  &.saiu-para-entrega h4 span {
+			  	color: $warning;
+			  }
+
+			  &.aguardando-pecas h4 span {
+			  	color: $alert;
+			  }
+
+			  &.concluido h4 span {
+			  	color: $info;
+			  }
+
+			  &.cancelado h4 span {
+			  	color: #aaa;
+			  }
+			}
+
+			.order-status-title {
+				margin-bottom: 10px;
+				font-size: 1em;
+				font-weight: 600;
+
+				span {
+					font-weight: 600;
+					text-transform: uppercase;
+					color: $info;
+				}
+			}
+
+			.order-cards {
+				display: grid;
+				grid-gap: 15px;
+				grid-template-columns: 1fr;
+
+				.order-card {
+				  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
+				  border-radius: 5px;
+				  display: flex;
+				  width: 300px;
+				  flex-direction: column;
+				  position: relative;
+				  background-color: white;
+
+				  &.focused {
+						background-color: rgba(0, 0, 0, .5);
+					}
+
+				  &.em-aberto {
+				  	border-top: solid 10px $success;
+				  }
+
+				  &.em-manutencao {
+				  	border-top: solid 10px $orange;
+				  }
+
+				  &.para-retirada {
+				  	border-top: solid 10px $purple;
+				  }
+
+				  &.saiu-para-entrega {
+				  	border-top: solid 10px $warning;
+				  }
+
+				  &.aguardando-pecas {
+				  	border-top: solid 10px $alert;
+				  }
+
+				  &.concluido {
+				  	border-top: solid 10px $info;
+				  }
+
+				  &.cancelado {
+				  	border-top: solid 10px #aaa;
+				  }
+
+					&:hover {
+					  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+					}
+
+					.order-card-header {
+						padding: 15px;
+
+						.left-content {
+							display: flex;
+							flex-direction: column;
+
+							.order-id {
+								font-weight: 700;
+							}
+
+							.order-spot {
+								font-style: italic;
+							}
+						}
+
+						.left-content .order-spot, .right-content .order-creation-date {
+							font-size: .9em;
+							font-weight: 600;
+							color: rgba(0, 0, 0, 0.5);
+						}
+					}
+
+					.order-card-header {
+						display: flex;
+						align-items: start;
+						justify-content: space-between;
+					}
+
+					.order-card-body {
+						padding: 50px 25px;
+				    text-align: center;
+				    height: 100%;
+
+				    h3 {
+				    	font-size: 1.25em;
+				    	font-weight: 400;
+				    	margin-bottom: 5px;
+				    }
+
+				    span {
+				    	font-size: .9em;
+							font-weight: 600;
+							color: rgba(0, 0, 0, 0.5);
+							margin-bottom: 15px;
+							display: block;
+				    }
+
+				    .order-defect {
+				    	overflow: hidden;
+				    	display: -webkit-box;
+					    -webkit-line-clamp: 3;
+					    -webkit-box-orient: vertical;
+					    overflow: hidden;
+
+					    &, * {
+					    	font-size: .9rem;
+					    	font-weight: 700;
+					    }
+				    }
+					}
+
+					.order-card-footer {
+						display: flex;
+						align-items: flex-end;
+						justify-content: space-between;
+						position: relative;
+						padding: 15px 5px 15px 15px;
+
+						> span {
+							color: rgba(0, 0, 0, 0.5);
+							font-size: .9em;
+							font-weight: 600;
+						}
+
+						.options {
+							position: static;
+							bottom: -5px;
+
+							.options-btn {
+						    display: inline-block;
+
+						    span {
+						    	color: #aaa;
+						    }
+							}
+
+							ul {
+								min-width: 160px;
+								width: 100%;
+								top: auto;
+								bottom: 0;
+								right: 0;
+								background-color: $alt-color;
+								padding-top: 40px;
+
+								&:before, &:after {
+									content: "";
+									cursor: pointer;
+									display: inline-block;
+									width: 15px;
+									height: 2px;
+									position: absolute;
+									top: 20px;
+									right: 10px;
+									background-color: #aaa;
+									border: none;
+								}
+
+								&:before {
+									@include prefix(transform, rotate(45deg));
+								}
+
+								&:after {
+									@include prefix(transform, rotate(-45deg));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.edit, &.update, &.show {
+		.order-tabs {
+			position: relative;
+			display: flex;
+			justify-content: center;
+
+			&:after {
+				content: "";
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: #d6d6d6;
+				display: inline-block;
+				height: 5px;
+			}
+
+			.order-tab button {
+				border-bottom: solid 5px #d6d6d6;
+				padding: 10px 20px;
+				cursor: pointer;
+				@include prefix(transition, all .5s cubic-bezier(.075,.82,.165,1));
+				position: relative;
+				z-index: 2;
+
+				&:hover, &.current {
+					border-color: $dark-blue;
+				}
+			}
+		}
+
+		.order-data {
+			width: 100%;
+			display: none;
+
+			&.current {
+				display: block;
+			}
+		}
+
+		.input.boolean, .input.boolean > label {
+			align-items: start;
+			flex-flow: column;
+		}
+	}
+
+	&.show {
+		.main-panel .main-container .container-body {
+			section {
+				h3 {
+					text-transform: uppercase;
+			  	padding: 10px 20px;
+			    background-color: $dark-blue;
+			    color: $primary-color;
+			    display: inline-block;
+			    border-radius: 0 5px 5px 0;
+			    margin-left: -50px;
+			  }
+
+				.removal-msg, .maintenance-msg {
+					font-size: .9em;
+				}
+			}
+
+		}
+	}
+
+	.main-panel {
+		.main-container {
+			.order-info {
+				justify-content: space-between;
+				align-items: flex-end;
+				margin-bottom: 5px;
+
+				h6 span {
+					font-weight: 400;
+				}
+
+				.updated-at {
+					font-size: .9em;
+					font-style: italic;
+					color: #d6d6d6;
+					text-align: right;
+				}
+			}
+
+			.form {
+				.equipment-category {
+					font-weight: 700;
+				}
+
+				.custom-radio {
+					align-items: start;
+
+					span.radio {
+						label {
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							border: none;
+							position: relative;
+							font-size: 1em;
+							color: #aaa;
+
+							&:before, &:after {
+								content: "";
+								@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
+								border-radius: 50%;
+								margin-bottom: 20px;
+							}
+
+							&:before {
+								width: 60px;
+								height: 60px;
+								background-color: #d6d6d6;
+								position: relative;
+								z-index: 2;
+							}
+
+							&:after {
+								position: absolute;
+								top: 0;
+								left: 50%;
+								@include prefix(transform, translateX(-50%));
+								width: 70px;
+								height: 70px;
+								background-color: #f4f4f4;
+							}
+
+							&.checked, &:hover {
+								color: $dark-blue !important;
+
+								&:before {
+									background-color: $dark-blue;
+								}
+
+								&:after {
+									background-color: rgba($dark-blue, 0.25);
+								}
+							}
+
+							&[for="order_stuff_attributes_category_pcnotebook"]:before {
+								@include background("icons/laptop.svg", 2em);
+							}
+
+							&[for="order_stuff_attributes_category_monitor"]:before {
+								@include background("icons/monitor.svg", 2em);
+							}
+
+							&[for="order_stuff_attributes_category_impressora"]:before {
+								@include background("icons/printer.svg", 2em);
+							}
+
+							&[for="order_stuff_attributes_category_estabilizadorno-break"]:before {
+								@include background("icons/nobreak.svg", 2em);
+							}
+
+							&[for="order_stuff_attributes_category_outro"]:before {
+								@include background("icons/dots.svg", 2em);
+							}
+						}
+					}
+				}
+
+				.input .numeric {
+					width: 150px !important;
+				}
+			}
+		}
+	}
+
+	&.print_order {
+		font-size: 10px;
+
+		.print-area {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			max-width: 680px;
+			height: 100%;
+			margin: 0 auto;
+		}
+
+		.main {
+			background-color: white;
+
+			header, footer {
+				padding: 50px 0;
+			}
+
+			header {
+				display: flex;
+				justify-content: space-between;
+				align-items: end;
+				gap: 25px;
+
+				span {
+					color: #000000;
+				}
+
+				.main-title {
+					text-transform: uppercase;
+					text-align: center;
+					font-size: 2em;
+			   	letter-spacing: -1px;
+
+					span {
+						display: block;
+						text-transform: none;
+						font-size: .75em;
+					}
+				}
+
+				.logo-pref-taubate img {
+					width: 100px;
+				}
+
+				.logo-sec-educacao img {
+					width: 200px;
+				}
+			}
+
+			.container .block {
+				.block-title {
+					background-color: rgba(0, 0, 0, 0.5);
+
+					h2 {
+						color: white;
+						font-size: 1.2em;
+					}
+				}
+			}
+
+			footer {
+				text-align: center;
+
+				.signature {
+					border-top: solid 1px #000000;
+					display: inline-block;
+					font-style: italic;
+					font-weight: 600;
+					padding: 5px 50px 25px 50px;
+				}
+
+				a img {
+					max-width: 75%;
+					margin: 0 auto;
+				}
+			}
+		}
+	}
+}

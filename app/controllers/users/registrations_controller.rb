@@ -36,7 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     @user = User.find(params[:id])
 
     if @user.destroy
-      flash[:alert] = "Chamado excluído com sucesso!"
+      flash[:alert] = "Conta excluída com sucesso!"
       redirect_to root_path
     end
   end

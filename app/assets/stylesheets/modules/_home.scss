@@ -1,0 +1,80 @@
+#home {
+	.main-panel .main-container {
+		.container-body {
+			section {
+				h3 {
+					text-transform: uppercase;
+			  	padding: 10px 20px;
+			    background-color: $dark-blue;
+			    color: $primary-color;
+			    display: inline-block;
+			    border-radius: 0 5px 5px 0;
+			    margin-left: -50px;
+			  }
+
+				p {
+					font-size: .9em;
+				}
+			}
+
+			.responsive-table {
+				li {
+					margin-bottom: 0;
+				}
+
+				.table-header, .table-row {
+					padding: 15px;
+				}
+
+				.table-row {
+					@include prefix(box-shadow, none);
+					border-top: solid 1px $grey;
+				}
+			}
+
+			.card {
+				font-size: .85em;
+				background-color: $primary-color;
+
+				&:nth-child(n+2) {
+					margin-top: 50px;
+				}
+
+				.card-header {
+					position: relative;
+					top: -15px;
+					left: 25px;
+					display: inline-block;
+					background-color: $green;
+					padding: 15px 25px;
+					border-radius: 5px;
+
+					.card-title {
+						color: $primary-color;
+						font-size: 1.25em;
+					}
+				}
+
+				&[data-bg="orange"] .card-header {
+					background-color: $orange;
+				}
+
+				&[data-bg="blue"] .card-header {
+					background-color: $blue;
+				}
+
+				&[data-bg="purple"] .card-header {
+					background-color: $purple;
+				}
+
+				&[data-bg="dark-blue"] .card-header {
+					background-color: $dark-blue;
+				}
+
+				.card-body {
+					padding: 5px 25px;
+				}
+			}
+		}
+	}
+}

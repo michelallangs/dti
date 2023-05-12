@@ -27,7 +27,7 @@
 
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="search" id="autocomplete-patrimony">
-						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
+						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar OS sem patrimônio" %>
 					</div>
 				</div>
 
@@ -59,7 +59,7 @@
 			<%= submit_tag ("Buscar") %>
 		<% end %>
 
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrado(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<div class="row">
 			<div class="col">
@@ -72,7 +72,7 @@
 								<div class="table-col table-col-25"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
 								<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
 								<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
-								<div class="table-col table-col-5">Opções</div>
+								<div class="table-col table-col-5"><div class="options">Opções</div></div>
 							</li>
 
 							<% @stuffs_paginate.each do |s| %>

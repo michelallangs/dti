@@ -74,11 +74,22 @@ module ApplicationHelper
 
   def list_status
     status = ['Em aberto', 'Em manutenção', 'Para retirada', 
-              'Saiu para entrega', 'Aguardando peça(s)', 'Concluído', 'Cancelado']
+              'Saiu para entrega', 'Aguardando peça(s)', 'Aguardando doação', 
+              'Concluído', 'Cancelado']
     return status
   end
 
   def get_status(status)
     return I18n.transliterate(status).gsub(/\s+/, '-').delete('()').downcase
+  end
+
+  def order_creator(id)
+    user = User.find_by_id(id)
+    if user.user_level == 1
+      creator = user.school.name.split(/(?=\-)/).first
+    else
+      creator = user.name
+    end
+    return creator
   end
 end

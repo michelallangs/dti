@@ -11,7 +11,7 @@
 
 					<div class="actions">
 						<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path, class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+						<%= link_to edit_user_password_path(current_user), class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
 						<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir conta<% end %>
 		      </div>
 				</header>
@@ -30,8 +30,15 @@
 		  			<% end %>
 
 		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Login/E-mail" %>
+		    			<%= content_tag :dt, "Login" %>
 		  				<%= content_tag :dd, current_user.username %>
+		  			<% end %>
+
+		  			<% if is_admin? %>
+		  				<%= content_tag :dl do %>
+			    			<%= content_tag :dt, "E-mail" %>
+			  				<%= content_tag :dd, current_user.email %>
+			  			<% end %>
 		  			<% end %>
 
 		  			<% if is_school? %>

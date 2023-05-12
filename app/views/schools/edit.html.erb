@@ -1,0 +1,67 @@
+<div class="box main-panel">
+  <%= render "shared/main_menu" %>
+
+  <div class="main-container">
+    <div class="row">
+      <div class="col">
+        <header class="container-header">
+          <h1 class="header-title">Editar dados da <span>unidade</span></h1>
+
+          <div class="actions">
+            <%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Salvar<% end %>
+            <%= link_to :back, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+          </div>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <section class="container-body">
+          <%= simple_form_for @user, url: edit_school_path, html: { class: "form" } do |f| %>
+            <div class="row">
+              <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                <%= f.input :username, label: "E-mail/Nome de usuário", label_html: { class: "form-label" }, input_html: { placeholder: "unidade@email.com"} %>
+              </div>
+            </div>
+
+            <%= f.simple_fields_for :school do |s| %>
+              <div class="row">
+                <div class="col">
+                  <%= s.input :segment, label: "Segmento", as: :radio_buttons, collection: list_segments, label_html: { class: "form-label" } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+                  <%= s.input :zip_code, label: "CEP", label_html: { class: "form-label" }, wrapper_html: { class: "zip-code" }, input_html: { placeholder: "Ex.: 12345-678", maxlength: 8 } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-6">
+                  <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: Rua Um Dois de Oliveira Quatro"} %>
+                </div>
+
+                <div class="col-12 col-sm-3">
+                  <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
+                </div>
+
+                <div class="col-12 col-sm-3">
+                  <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-4">
+                  <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678"} %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </section>
+      </div>
+    </div>
+    
+  </div>
+</div>

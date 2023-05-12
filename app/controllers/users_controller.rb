@@ -1,18 +1,98 @@
 class UsersController < ApplicationController
-	def edit_password
-		@user = current_user
+	autocomplete :user, :name, full: true
+
+	def index
+		id = params[:id]
+		name = params[:name]
+		email = params[:email]
+		username = params[:username]
+    @search = [id, name, email, username]
+
+    @users = User.where(user_level: 0)
+
+    if !@search.all?(&:blank?)
+    	query = "lower(name) LIKE lower(?) AND 
+    					 lower(email) LIKE lower(?) AND 
+    					 lower(username) LIKE lower(?)"
+
+      values = ["%#{name}%", "%#{email}%", "%#{username}%"]
+
+      @users = @users.where(query, *values)
+    end
+
+	 	@users = @users.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
+
+    @users_paginate = @users.page params[:page]
 	end
 
-	def update_password
-		@user = current_user
+	def new
+		@user = User.new
+	end
 
+	def create
+		@user = User.new(user_params)
+    is_technician = params[:is_technician]
+    is_technician == "Sim" ? 1 : 0
+    @user.is_technician = is_technician
+
+    if @user.save
+      flash[:success] = "Usuário cadastrado com sucesso!"
+      redirect_to users_path
+    else
+      render :new
+    end
+	end
+
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+		@user = User.find(params[:id])
+    is_technician = params[:is_technician]
+    is_technician == "Sim" ? 1 : 0
+    @user.is_technician = is_technician
+		
 		if @user.update(user_params)
-      flash[:success] = "Senha atualizada com sucesso!"
-      redirect_to profile_path
+      flash[:success] = "Dados atualizados com sucesso!"
+      redirect_to users_path
     else
       render :edit
     end
 	end
+
+	def edit_password
+		@user = User.find(params[:id])
+	end
+
+	def update_password
+		@user = User.find(params[:id])
+
+		if @user.update(user_params)
+      flash[:success] = "Senha atualizada com sucesso!"
+
+      if @user == current_user 
+      	redirect_to profile_path
+    	else 
+    		redirect_to edit_user_path(@user)
+    	end
+    else
+      render :edit
+    end
+	end
+
+	def destroy
+    @user = User.find(params[:id])
+
+    if @user.destroy
+      flash[:alert] = "Usuário excluído com sucesso!"
+      redirect_to users_path
+    end
+  end
+
+  def show
+    @user = User.find(params[:id])
+  end
 
 	def user_params
 		params.require(:user).permit!

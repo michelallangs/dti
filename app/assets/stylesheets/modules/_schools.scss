@@ -1,0 +1,21 @@
+#schools {
+  .main-panel .main-container {
+    .container-body {
+      section {
+        h3 {
+          text-transform: uppercase;
+          padding: 10px 20px;
+          background-color: $dark-blue;
+          color: $primary-color;
+          display: inline-block;
+          border-radius: 0 5px 5px 0;
+          margin-left: -50px;
+        }
+
+        p {
+          font-size: .9em;
+        }
+      }
+    }
+  }
+}

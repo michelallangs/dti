@@ -5,16 +5,16 @@
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
-					<h1 class="header-title">Editar dados do <span>chamado</span></h1>
+					<h1 class="header-title">Editar dados da <span>OS</span></h1>
 
 					<% if is_admin? || @order.status == "Em aberto" %>
 		        <div class="actions">
 		        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Salvar<% end %>
 		          <%= link_to orders_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
-		          <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Cancelar chamado<% end %>
+		          <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Cancelar OS<% end %>
 		        </div>
 		      <% else %>
-		      	<%= content_tag :p, "Este chamado está sendo ou já foi atendido, portanto não é mais possível fazer alterações.", class: "m-t-25 error alert" %>
+		      	<%= content_tag :p, "Esta OS está sendo ou já foi atendida, portanto não é mais possível fazer alterações.", class: "m-t-25 error alert" %>
 		      <% end %>
 				</header>
 			</div>
@@ -25,7 +25,7 @@
 				<section class="container-body">
 					<div class="order-tabs m-b-10">
 						<div class="order-tab text-center">
-							<button class="btn-data <%= 'current' if !is_admin?%>" order-data="school-data">Informações do chamado</button>
+							<button class="btn-data <%= 'current' if !is_admin?%>" order-data="school-data">Informações da OS</button>
 						</div>
 					  
 						<div class="order-tab text-center">
@@ -36,7 +36,7 @@
 					<div class="row order-info m-b-25">
 		    		<div class="col-12 col-lg-6 order-id">
 		    			<%= content_tag :h4 do %>
-		    				<%= "Chamado ##{@order.id.to_s.rjust(3, '0')}" %>
+		    				<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
 		    				<%= content_tag :span, " - #{@order.school.name}" if is_admin? %>
 		    			<% end %>
 		    		</div>

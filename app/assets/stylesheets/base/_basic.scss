@@ -68,6 +68,10 @@
 	float: right;
 }
 
+.uppercase {
+	text-transform: uppercase;
+}
+
 .v-align {
 	display: table-cell;
 	vertical-align: middle;
@@ -301,4 +305,8 @@ dl {
 	ul {
 		padding-left: 1.5em;
 	}
+}
+
+.ui-helper-hidden-accessible {
+	display: none;
 }

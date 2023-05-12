@@ -1,0 +1,234 @@
+#users {
+	.main-panel .main-container {
+		.container-body {
+			section {
+				h3 {
+					text-transform: uppercase;
+			  	padding: 10px 20px;
+			    background-color: $dark-blue;
+			    color: $primary-color;
+			    display: inline-block;
+			    border-radius: 0 5px 5px 0;
+			    margin-left: -50px;
+			  }
+
+				p {
+					font-size: .9em;
+				}
+			}
+		}
+	}
+}
+
+
+#registrations, #sessions, #passwords {
+	&.new, &.create {
+		.main {
+			height: auto;
+			min-height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 25px;
+		}
+	}
+}
+
+.login-panel {
+	max-width: 1280px;
+	height: 720px;
+	width: 100%;
+	position: relative;
+	
+	&:before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		width: 100%;
+		height: 100%;
+		@include background("bg.jpg", cover);
+	}
+
+	.left-container, .right-container, .right-container .content {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		height: 100%;
+	}
+
+	.left-container {
+		width: 100%;
+		max-width: 480px;
+		background-color: #fff;
+
+		a {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-bottom: 50px;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		.logo-pref-taubate {
+			width: 240px;
+		}
+
+		.logo-sec-educacao {
+			width: 300px;
+		}
+	}
+
+	.right-container {
+		position: relative;
+		width: 100%;
+		background-color: rgba($dark-blue, .75);
+
+		.content {
+			width: 100%;
+			padding: 25px;
+		}
+
+		.form {
+			width: 400px;
+			max-width: 100%;
+			margin: 0 auto;
+
+			.input {
+				width: 100%;
+			}
+		}
+
+		.form .input:not(.submit):not(.boolean) label {
+			color: #ffffff;
+		}
+
+		.form-options {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+
+		.divider {
+			color: $grey;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			text-transform: uppercase;
+			margin: 50px auto;
+
+			&:before, &:after {
+				content: "";
+				display: inline-block;
+				width: 100px;
+				height: 1px;
+				background-color: $grey;
+			}
+
+			&:before {
+				margin-right: 15px;
+			}
+
+			&:after {
+				margin-left: 15px;
+			}
+		}
+
+		.sign-up {
+			color: $primary-color;
+		}
+	}
+
+	.form {
+		.form-options {
+			margin-top: 15px;
+		}
+
+		.boolean label {
+			color: white;
+		}
+	}
+}
+
+.sign-up-panel {
+	background-image: url("header.jpg");
+	background-repeat: repeat-x;
+	flex-direction: column;
+	max-height: none;
+	justify-content: flex-start;
+	padding: 50px 0;
+	position: relative;
+	max-width: 1280px;
+
+	.panel-header, .panel-body {
+		width: 100%;
+	}
+
+	.panel-header {
+		padding: 15px 50px;
+	}
+
+	.logo-dti {
+		color: $dark-blue;
+	}
+
+	h2 {
+		font-weight: 400;
+	}
+
+	.form {
+		flex-direction: row;
+		align-items: flex-start;
+		flex-wrap: wrap;
+
+		.segment {
+			margin-bottom: 10px;
+			font-size: 1em;
+			font-weight: 600;
+		}
+
+		.input.radio_buttons {
+			margin-top: 0 !important;
+		}
+
+		.content {
+			padding: 15px 50px;
+		}
+
+		.actions {
+			flex: 1 1 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+}
+
+.password-panel {
+	@extend .sign-up-panel;
+	background-image: none;
+	align-items: flex-start;
+	width: 400px;
+	max-width: none;
+	padding: 25px;
+
+	.panel-body {
+		width: 100%;
+	}
+
+	.form .content {
+		padding: 0;
+	}
+}
+
+.login-panel, .sign-up-panel {
+	.logo-dti {
+		font-size: 5em;
+	}
+}

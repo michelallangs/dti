@@ -7,12 +7,14 @@
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
+					<h1 class="header-title">Ordens de <span>serviço</span></h1>
+
 					<div class="right-content">
 						<div class="action-buttons">
 							<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
 							<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
 							<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-icons md-16 md-light">search</span>Filtro avançado<% end %>
-							<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir chamado<% end %>
+							<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir OS<% end %>
 						</div>
 					</div>
 				</header>
@@ -23,7 +25,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="search" id="autocomplete-patrimony">
-						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar chamados sem patrimônio" %>
+						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, type: "search", title: "Digite S/P para pesquisar OS sem patrimônio" %>
 					</div>
 				</div>
 
@@ -106,7 +108,7 @@
 			<%= submit_tag "Buscar" %>
 		<% end %>
 
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} chamado(s) encontrados.".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} ordem(ns) de serviço encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 		<% unless @orders.nil? || @orders.blank? %>
 			<div class="row">
@@ -123,7 +125,7 @@
 				</div>
 			</div>
 		<% else %>
-			<h3 class="text-center m-t-50"><i>Nenhum dado encontrado.</i></h3>
+			<h3 class="text-center m-t-50"><i>Nenhuma ordem de serviço encontrada.</i></h3>
 		<% end %>
 	</div>
 </div>

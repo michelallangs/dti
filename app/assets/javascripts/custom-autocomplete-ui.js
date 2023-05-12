@@ -5,7 +5,7 @@ ready = function() {
   var categories = [];
   var brands = [];
 
-  $("#patrimony").on("autocompleteselect", function(event, ui) {
+  $("#patrimony, #name").on("autocompleteselect", function(event, ui) {
     $(this).val(ui.item.label);
     $(this).closest("form").submit();
   });

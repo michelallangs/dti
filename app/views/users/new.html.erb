@@ -1,0 +1,66 @@
+<div class="box main-panel">
+	<%= render "shared/main_menu" %>
+
+	<div class="main-container">
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Cadastrar <span>usuário</span></h1>
+
+					<div class="actions">
+		      	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Finalizar<% end %>
+		        <%= link_to users_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+		      </div>
+				</header>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+		    	<%= flash_message %>
+
+					<%= simple_form_for @user, url: new_user_path, html: { class: "form" } do |f| %>
+            <%= f.input :user_level, as: :hidden, input_html: { value: 0 } %>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :name, label: "Nome completo", label_html: { class: "form-label" }, input_html: { autofocus: true, placeholder: "Fulaninho de Tal"} %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :email, label: "E-mail", label_html: { class: "form-label" }, input_html: { placeholder: "usuario@email.com"} %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :is_technician, required: false, label: "Este usuário é técnico?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :username, label: "Nome de usuário", label_html: { class: "form-label" }, input_html: { placeholder: "fulaninhodetal"} %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :password, label: "Senha", label_html: { class: "form-label" }, hint: ("mínimo de #{@minimum_password_length} caracteres" if @minimum_password_length), input_html: { placeholder: "**********"} %>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <%= f.input :password_confirmation, label: "Confirme a senha", label_html: { class: "form-label" }, input_html: { placeholder: "**********"} %>
+              </div>
+		        </div>
+			    <% end %>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>

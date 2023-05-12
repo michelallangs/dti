@@ -12,8 +12,13 @@
   padding-top: 25px;
   display: flex;
   justify-content: center;
-  border-left: 1px solid #ddd;
   width: 100%;
+
+  span:first-child {
+    &, & a {
+      border-left-width: 1px;
+    }
+  }
 
   span:not(.current) {
     &:hover a {

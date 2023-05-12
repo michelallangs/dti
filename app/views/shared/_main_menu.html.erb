@@ -9,10 +9,10 @@
 		<h6 class="nav-title">Navegação principal</h6>
 		<ul>
 			<li><%= link_to home_path, class: current?(home_path) do %><span class="material-icons md-20 md-light">home</span>Página inicial<% end %></li>
-			<li><%= link_to orders_path, class: current?(orders_path) do %><span class="material-icons md-20 md-light">receipt_long</span>Chamados<% end %></li>
+			<li><%= link_to orders_path, class: current?(orders_path) do %><span class="material-icons md-20 md-light">receipt_long</span>Ordens de Serviço<% end %></li>
 			<li><%= link_to stuffs_path, class: current?(stuffs_path) do %><span class="material-icons md-20 md-light">devices</span>Equipamentos<% end %></li>
-			<% if is_admin? %><li><%= link_to "#" do %><span class="material-icons md-20 md-light">apartment</span>Unidades<% end %></li><% end %>
-			<% if is_admin? %><li><%= link_to "#" do %><span class="material-icons md-20 md-light">group</span>Usuários<% end %></li><% end %>
+			<% if is_admin? %><li><%= link_to schools_path, class: current?(schools_path) do %><span class="material-icons md-20 md-light">apartment</span>Unidades<% end %></li><% end %>
+			<% if is_admin? %><li><%= link_to users_path, class: current?(users_path) do %><span class="material-icons md-20 md-light">group</span>Usuários<% end %></li><% end %>
 			<li><%= link_to profile_path, class: current?(profile_path) do %><span class="material-icons md-20 md-light">manage_accounts</span>Configurações<% end %></li>
 		</ul>
 	</nav>

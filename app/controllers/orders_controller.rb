@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   include ApplicationHelper
 
   def index
-    @technicians = User.where("user_level = 0 AND username != 'admin'")
+    @technicians = User.where("user_level = 0 AND username != 'admin'").order("name ASC")
 
     patrimony = params[:patrimony]
     spot = params[:spot]
@@ -51,7 +51,7 @@ class OrdersController < ApplicationController
       @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?
     end
 
-    @orders = @orders.page params[:page]
+    @orders = @orders.order("id DESC").page params[:page]
   end
 
   def new
@@ -94,7 +94,7 @@ class OrdersController < ApplicationController
     
 
     if allow_save && @order.save
-      flash[:success] = "Chamado aberto com sucesso!"
+      flash[:success] = "OS aberta com sucesso!"
       redirect_to orders_path
     else
       render :new
@@ -104,14 +104,14 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @patrimony = @order.stuff.patrimony
-    @technicians = User.where(user_level: 0).where.not(name: "Administrador")
+    @technicians = User.where(user_level: 0).where.not(name: "Administrador").order("name ASC")
   end
 
   def update
     allow_update = true
 
     @order = Order.find(params[:id])
-    @technicians = User.where(user_level: 0).where.not(name: "Administrador")
+    @technicians = User.where(user_level: 0).where.not(name: "Administrador").order("name ASC")
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]
@@ -137,7 +137,7 @@ class OrdersController < ApplicationController
     end
     
     if allow_update && @order.update(order_update_params)
-      flash[:success] = "Dados do chamado atualizados com sucesso!"
+      flash[:success] = "Dados da OS atualizados com sucesso!"
       redirect_to orders_path
     else
       render :edit
@@ -161,7 +161,7 @@ class OrdersController < ApplicationController
     @order.update(status: "Cancelado")
 
     if @order
-      flash[:alert] = "Chamado cancelado com sucesso!"
+      flash[:alert] = "OS cancelada com sucesso!"
       redirect_to orders_path
     end
   end
@@ -197,15 +197,5 @@ class OrdersController < ApplicationController
     end
 
     return "Última alteração em <strong>#{@order.updated_at.strftime("%d/%m/%Y")}</strong> às #{@order.updated_at.strftime("%H:%M")} por <strong>#{creator}</strong>".html_safe
-  end
-
-  def order_creator(id)
-    user = User.find_by_id(id)
-    if user.user_level == 1
-      creator = user.school.name.split(/(?=\-)/).first
-    else
-      creator = user.name
-    end
-    return creator
   end
 end

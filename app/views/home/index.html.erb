@@ -5,11 +5,103 @@
 		<%= flash_message %>
 		
 		<header class="container-header">
-			<h1 class="header-title">Bem vindo, <span><%= username %>!</span></h1>
+			<h1 class="header-title">Página <span>inicial</span></h1>
 		</header>
 
 		<section class="container-body">
+			<div class="row">
+				<div class="col-12">
 			
+					<div class="card">
+						<header class="card-header">
+							<h1 class="card-title">Últimas atualizações</h1>
+						</header>
+
+						<% unless @last_orders.nil? || @last_orders.blank? %>
+							<div class="card-body">
+								<ul class="responsive-table">
+									<li class="table-header">
+										<div class="table-col table-col-5">#</div>
+										<div class="table-col table-col-15">Atualizada em</div>
+										<div class="table-col table-col-20">Unidade</div>
+										<div class="table-col table-col-50">Defeito apresentado</div>
+										<div class="table-col table-col-10"><div class="options">Opções</div></div>
+									</li>
+
+									<% @last_orders.each do |o| %>
+										<li class="table-row">
+											<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
+											<div class="table-col table-col-15" data-label="Atualizada em">
+												<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
+												<%= o.updated_at.strftime("%H:%M") %>
+											</div>
+											<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
+											<div class="table-col table-col-50" data-label="Defeito apresentado"><%= o.defect.to_s.html_safe %></div>
+											<div class="table-col table-col-10">
+												<div class="options">
+								          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+												</div>
+											</div>
+										</li>
+									<% end %>
+								</ul>
+							</div>
+						<% else %>
+							<h3 class="text-center m-t-25 p-b-50"><i>Não há dados cadastrados.</i></h3>
+						<% end %>
+					</div>
+				</div>
+			</div>
+
+			<div class="row m-t-25">
+				<div class="col-12 col-md-6">
+					<div class="card" data-bg="orange">
+						<header class="card-header">
+							<h1 class="card-title">Ordens de serviço abertas nos últimos 30 dias</h1>
+						</header>
+						<div class="card-body">
+							<%= line_chart Order.group_by_day(:created_at, last: 30, format: "%d %b").count %>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6">
+					<div class="card" data-bg="blue">
+						<header class="card-header">
+							<h1 class="card-title">Ordens de serviço atendidas nos últimos 30 dias</h1>
+						</header>
+						<div class="card-body">
+							<%= line_chart Order.where(status: ["Em manutenção", "Para retirada", "Concluído"]).group_by_day(:updated_at, last: 30, format: "%d %b").count %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row m-t-25">
+				<div class="col-12 col-md-6">
+					<div class="card" data-bg="purple">
+						<header class="card-header">
+							<h1 class="card-title">Atendimentos na semana</h1>
+						</header>
+						<div class="card-body">
+							<%= line_chart @users.map { |user|
+							    {name: user.name, data: Order.where("maintenance_technicians LIKE ?", "%#{user.id}%").group_by_day(:updated_at, last: 7, format: "%d %b").count}
+							} %>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-12 col-md-6">
+					<div class="card" data-bg="dark-blue">
+						<header class="card-header">
+							<h1 class="card-title">Atendimentos por técnico nos últimos 30 dias</h1>
+						</header>
+						<div class="card-body">
+							<%= column_chart orders_per_user(@orders, @users) %>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
 	</div>
 </div>

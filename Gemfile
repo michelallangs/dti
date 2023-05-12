@@ -28,6 +28,8 @@ gem 'iconv'
 gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
 gem 'tinymce-rails'
+gem "chartkick"
+gem "groupdate"
 
 group :development, :test, :production do
   gem "pg"

@@ -1,4 +1,6 @@
 class School < ApplicationRecord
+  paginates_per 5
+  
   before_save :create_normalized_strings
 
   belongs_to :user

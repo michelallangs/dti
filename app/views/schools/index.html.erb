@@ -1,0 +1,104 @@
+<div class="box main-panel">
+	<%= render "shared/main_menu" %>
+
+	<div class="main-container">
+		<%= flash_message %>
+
+		<div class="row">
+			<div class="col">
+				<header class="container-header">
+					<h1 class="header-title">Lista de <span>unidades</span></h1>
+
+					<div class="right-content">
+						<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-icons md-16 md-light">search</span>Filtro avançado<% end %>
+						<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Cadastrar unidade<% end %>
+					</div>
+				</header>
+			</div>
+		</div>
+
+		<%= form_tag(schools_path, method: :get, class: "filters form") do %>
+			<div class="row">
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-name">
+						<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="search">
+						<%= search_field_tag :email, params[:email], placeholder: "E-mail" %>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="search">
+						<%= search_field_tag :district, params[:district], placeholder: "Bairro" %>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="search">
+						<%= search_field_tag :zip_code, params[:zip_code], placeholder: "CEP" %>
+					</div>
+				</div>
+
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="search">
+						<div class="custom-select">
+							<%= select_tag :segment, options_for_select(list_segments, params[:segment]), include_blank: "Segmento..."  %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12 text-center">
+					<%= link_to schools_path, class: "btn-cancel icon" do %>Limpar filtros<% end %>
+				</div>
+			</div>
+
+			<%= submit_tag ("Buscar") %>
+		<% end %>
+
+		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@schools.length} unidade(s) encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+
+		<div class="row">
+			<div class="col">
+				<section class="container-body">
+					<% unless @schools_paginate.nil? || @schools_paginate.blank? %>
+						<ul class="responsive-table">
+							<li class="table-header">
+								<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
+								<div class="table-col table-col-35"><%= link_to("Nome", request.params.merge(sort_by: "name"), class: ("active" if params[:sort_by] == "name")) %></div>
+								<div class="table-col table-col-20"><%= link_to("Telefone", request.params.merge(sort_by: "phone"), class: ("active" if params[:sort_by] == "phone")) %></div>
+								<div class="table-col table-col-30"><%= link_to("E-mail", request.params.merge(sort_by: "users.username"), class: ("active" if params[:sort_by] == "users.username")) %></div>
+								<div class="table-col table-col-10"><div class="options">Opções</div></div>
+							</li>
+
+							<% @schools_paginate.each do |s| %>
+								<li class="table-row">
+									<div class="table-col table-col-5" data-label="#"><strong><%= s.id %></strong></div>
+									<div class="table-col table-col-35" data-label="Nome"><%= s.name %></div>
+									<div class="table-col table-col-20" data-label="Telefone"><%= s.phone %></div>
+									<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>
+									<div class="table-col table-col-10">
+										<div class="options">
+											<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+						          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-icons md-20">edit</span><% end %>
+						          <%= link_to destroy_school_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-icons md-20">delete</span><% end %>
+										</div>
+									</div>
+								</li>
+							<% end %>
+						</ul>
+
+						<%= paginate @schools_paginate %>	
+					<% else %>
+						<h3 class="text-center m-t-50"><i>Nenhuma unidade encontrada.</i></h3>
+					<% end %>
+				</section>
+			</div>
+		</div>
+	</div>
+</div>
