@@ -68,16 +68,21 @@ class UsersController < ApplicationController
 	def update_password
 		@user = User.find(params[:id])
 
-		if @user.update(user_params)
-      flash[:success] = "Senha atualizada com sucesso!"
+    if @user.valid_password?(params[:current_password])
+      if @user.update(user_params)
+        flash[:success] = "Senha atualizada com sucesso!"
 
-      if @user == current_user 
-      	redirect_to profile_path
-    	else 
-    		redirect_to edit_user_path(@user)
-    	end
+        if @user == current_user 
+          redirect_to profile_path
+        else 
+          redirect_to edit_user_path(@user)
+        end
+      else
+        render :edit_password
+      end
     else
-      render :edit
+      flash.now[:alert] = "Senha atual incorreta"
+      render :edit_password
     end
 	end
 
@@ -85,6 +90,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.destroy
+      orders = Order.where("maintenance_technicians LIKE ? OR removal_technicians LIKE ?", "%#{@user.id}%", "%#{@user.id}%")
+
+      orders.map { |order| 
+        maintenance_technicians = order.maintenance_technicians.delete(@user.id.to_s)
+        removal_technicians = order.removal_technicians.delete(@user.id.to_s)
+        order.save!
+      }
+
       flash[:alert] = "Usuário excluído com sucesso!"
       redirect_to users_path
     end

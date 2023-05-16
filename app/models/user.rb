@@ -8,7 +8,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :school 
 
   validates :username, uniqueness: { message: "Este nome de usuário já está em uso" }, presence: { message: "Por favor, digite o e-mail/nome de usuário" }, on: [:create, :update]
-  validates :password, presence: { message: "Por favor, digite uma senha" }, on: [:create]
+  validates :password, presence: { message: "Por favor, digite uma senha" }, on: [:create, :update_password]
   validates_confirmation_of :password, message: "Digite a mesma senha nos dois campos"
 
   def self.from_omniauth(auth)
