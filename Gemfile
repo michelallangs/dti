@@ -30,6 +30,7 @@ gem 'kaminari'
 gem 'tinymce-rails'
 gem "chartkick"
 gem "groupdate"
+gem 'chosen-rails'
 
 group :development, :test, :production do
   gem "pg"

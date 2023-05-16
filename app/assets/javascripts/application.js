@@ -9,6 +9,7 @@
 //= require bootstrap-datepicker
 //= require chartkick
 //= require Chart.bundle
+//= require chosen-jquery
 
 //= require_tree .
 

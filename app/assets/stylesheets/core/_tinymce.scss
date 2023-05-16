@@ -1,3 +1,8 @@
 .tox-tinymce {
   height: 300px !important;
+  border: solid 2px transparent;
+
+  &:hover {
+    border-color: $dark-blue;
+  }
 }

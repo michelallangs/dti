@@ -37,7 +37,7 @@
 											</div>
 											<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
 											<div class="table-col table-col-50" data-label="Defeito apresentado"><%= o.defect.to_s.html_safe %></div>
-											<div class="table-col table-col-10">
+											<div class="table-col table-col-10" data-label="Opções">
 												<div class="options">
 								          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
 												</div>

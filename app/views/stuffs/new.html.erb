@@ -25,7 +25,7 @@
 
 		    		<%= content_tag :div, "", class: "row" do %>
 		    			<div class="col-12 col-sm-4">
-		  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+		  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
 		    			</div>
 						<% end if is_admin? %>
 

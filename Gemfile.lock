@@ -93,6 +93,17 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     chartkick (5.0.2)
+    chosen-rails (1.10.0)
+      coffee-rails (>= 3.2)
+      railties (>= 3.0)
+      sassc-rails (>= 2.1.2)
+    coffee-rails (5.0.0)
+      coffee-script (>= 2.2.0)
+      railties (>= 5.2.0)
+    coffee-script (2.4.1)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.12.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
     date (3.3.3)
@@ -307,6 +318,7 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   capybara
   chartkick
+  chosen-rails
   debug
   devise (~> 4.8)
   font-awesome-rails
