@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
   include ApplicationHelper
 
   def index
-    @technicians = User.where("user_level = 0 AND username != 'admin'").order("name ASC")
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
 
     patrimony = params[:patrimony]
     spot = params[:spot]
@@ -104,14 +104,14 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @patrimony = @order.stuff.patrimony
-    @technicians = User.where(user_level: 0).where.not(name: "Administrador").order("name ASC")
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
   end
 
   def update
     allow_update = true
 
     @order = Order.find(params[:id])
-    @technicians = User.where(user_level: 0).where.not(name: "Administrador").order("name ASC")
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]

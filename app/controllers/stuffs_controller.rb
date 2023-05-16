@@ -32,7 +32,7 @@ class StuffsController < ApplicationController
 
 	 	@stuffs = @stuffs.order("#{params[:sort_by]} ASC") if params[:sort_by]
 
-    @stuffs_paginate = @stuffs.page params[:page]
+    @stuffs_paginate = @stuffs.page(params[:page]).per(params[:limit])
 	end
 
   def new

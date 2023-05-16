@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
 
 	 	@schools = @schools.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
-    @schools_paginate = @schools.page params[:page]
+    @schools_paginate = @schools.page(params[:page]).per(params[:limit])
 	end
 
 	def new
