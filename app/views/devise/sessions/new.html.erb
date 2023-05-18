@@ -6,8 +6,7 @@
 
   <div class="right-container">
     <div class="content">
-      <%= content_tag :h1, "DTI", class: 'logo-dti m-b-5' %>
-      <h3 class="logo-subtitle m-b-50 text-center">SISTEMA DE GERENCIAMENTO DE <br>CHAMADOS TÉCNICOS</h3>
+      <%= image_tag "logo-dcpeoti.png", class: 'logo-dcpeoti' %>
 
       <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form" }) do |f| %>
         <%= flash_message %>

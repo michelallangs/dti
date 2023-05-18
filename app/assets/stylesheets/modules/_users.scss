@@ -9,7 +9,7 @@
 			    color: $primary-color;
 			    display: inline-block;
 			    border-radius: 0 5px 5px 0;
-			    margin-left: -50px;
+			    margin-left: -30px;
 			  }
 
 				p {
@@ -184,10 +184,6 @@
 		padding: 15px 50px;
 	}
 
-	.logo-dti {
-		color: $dark-blue;
-	}
-
 	h2 {
 		font-weight: 400;
 	}
@@ -235,11 +231,5 @@
 
 	.form .content {
 		padding: 0;
-	}
-}
-
-.login-panel, .sign-up-panel {
-	.logo-dti {
-		font-size: 5em;
 	}
 }

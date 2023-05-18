@@ -34,6 +34,42 @@
     background-color: #ffffff;
     @include prefix(box-shadow, 0px 0px 9px 0px rgba(0,0,0,0.1));
     padding: 25px 30px;
+
+    div[data-label="Status"] {
+      font-weight: 600;
+    }
+
+    div[data-status="em-aberto"] {
+      color: $success;
+    }
+
+    div[data-status="em-manutencao"] {
+      color: $orange;
+    }
+
+    div[data-status="para-retirada"] {
+      color: $purple;
+    }
+
+    div[data-status="saiu-para-entrega"] {
+      color: $warning;
+    }
+
+    div[data-status="aguardando-pecas"] {
+      color: $alert;
+    }
+
+    div[data-status="aguardando-doacao"] {
+      color: $crimson;
+    }
+
+    div[data-status="concluido"] {
+      color: $info;
+    }
+
+    div[data-status="cancelado"] {
+      color: #aaa;
+    }
   }
 
   @for $i from 1 through 100 {

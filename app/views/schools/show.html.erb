@@ -11,7 +11,8 @@
 
 					<div class="actions">
 						<%= link_to edit_school_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path(@school.user), class: "btn-cancel icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+						<%= link_to edit_user_password_path(@school.user), class: "btn-warning icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
+						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
 						<%= link_to destroy_user_registration_path(@school.user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir unidade<% end %>
 		      </div>
 				</header>
@@ -62,6 +63,101 @@
 		    			<%= content_tag :dt, "CEP" %>
 		  				<%= content_tag :dd, @school.zip_code %>
 		  			<% end %>
+		  		</section>
+
+		  		<section>
+		  			<h3 class="m-b-25">Histórico</h3>
+
+		  			<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<% unless @school.orders.nil? || @school.orders.blank? %>
+										<div class="card-body">
+											<ul class="responsive-table">
+												<li class="table-header">
+													<div class="table-col table-col-5">#</div>
+													<div class="table-col table-col-10">Solicitante</div>
+													<div class="table-col table-col-10">Status</div>
+													<div class="table-col table-col-10">Tipo</div>
+													<div class="table-col table-col-40">Defeito apresentado</div>
+													<div class="table-col table-col-15">Atualizada em</div>
+													<div class="table-col table-col-10"><div class="options">Opções</div></div>
+												</li>
+
+												<% @school.orders.order("created_at DESC").each do |o| %>
+													<li class="table-row">
+														<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
+														<div class="table-col table-col-10" data-label="Solicitante"><%= o.requester %></div>
+														<div class="table-col table-col-10" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
+														<div class="table-col table-col-10" data-label="Tipo"><%= o.o_type || " - " %></div>
+														<div class="table-col table-col-40" data-label="Defeito apresentado">
+															<div class="order-defect">
+																<%= o.defect.to_s.html_safe %>
+															</div>
+														</div>
+														<div class="table-col table-col-15" data-label="Atualizada em">
+															<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
+															<%= o.updated_at.strftime("%H:%M") %>
+														</div>
+														<div class="table-col table-col-10" data-label="Opções">
+															<div class="options">
+											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+															</div>
+														</div>
+													</li>
+												<% end %>
+											</ul>
+										</div>
+									<% else %>
+										<h3 class="text-center m-t-25 p-b-50"><i>Nenhuma OS registrada para esta unidade.</i></h3>
+									<% end %>
+								</div>
+							</div>
+						</div>
+		  		</section>
+
+		  		<section>
+		  			<h3 class="m-b-25">Inventário</h3>
+
+		  			<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<% unless @school.stuffs.nil? || @school.stuffs.blank? %>
+										<div class="card-body">
+											<ul class="responsive-table">
+												<li class="table-header">
+													<div class="table-col table-col-15">Patrimônio</div>
+													<div class="table-col table-col-40">Categoria</div>
+													<div class="table-col table-col-35">Marca/modelo</div>
+													<div class="table-col table-col-10"><div class="options">Opções</div></div>
+												</li>
+
+												<% @school.stuffs.order("category ASC").each do |s| %>
+													<li class="table-row">
+														<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
+														<div class="table-col table-col-40" data-label="Categoria">
+															<% if s.category == 'PC/Notebook' %>
+																<%= content_tag :span, "done", title: "Padrão OK", class: "material-icons md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
+																<%= content_tag :span, "close", title: "Necessária padronização", class: "material-icons md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
+															<% end %>
+															<%= s.category %>
+														</div>
+														<div class="table-col table-col-35" data-label="Marca/modelo"><%= s.brand %></div>
+														<div class="table-col table-col-10" data-label="Opções">
+															<div class="options">
+											          <%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+															</div>
+														</div>
+													</li>
+												<% end %>
+											</ul>
+										</div>
+									<% else %>
+										<h3 class="text-center m-t-25 p-b-50"><i>Nenhum equipamento registrado para esta unidade.</i></h3>
+									<% end %>
+								</div>
+							</div>
+						</div>
 		  		</section>
 				</section>
 			</div>

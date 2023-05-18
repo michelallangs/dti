@@ -163,11 +163,9 @@
   }
 }
 
-.logo-dti {
-	font-size: 3em;
-	font-weight: 300;
-	color: $primary-color;
-	font-family: "Toothless";
+.logo-dcpeoti {
+	width: 20em;
+	filter: drop-shadow(0px 10px 8px #000);
 }
 
 .logo-subtitle {
@@ -189,15 +187,6 @@
 
 	.loading-content {
 		text-align: center;
-	}
-
-	.logo-dti, .logo-subtitle {
-		color: $dark-blue;
-		display: block;
-	}
-
-	.logo-dti {
-		margin-bottom: 15px;
 	}
 }
 
@@ -309,4 +298,16 @@ dl {
 
 .ui-helper-hidden-accessible {
 	display: none;
+}
+
+.order-defect {
+	display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &, * {
+  	font-size: .9rem;
+  	font-weight: 700;
+  }
 }

@@ -42,7 +42,6 @@ class OrdersController < ApplicationController
       @orders = @orders.where(query, *values)
 
       @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?
-      
 
       if (start_date && end_date) && (start_date > end_date)
         flash.now[:warning] = "A data inicial deve ser menor do que a final"

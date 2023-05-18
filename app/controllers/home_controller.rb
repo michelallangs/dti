@@ -1,10 +1,12 @@
 class HomeController < ApplicationController
 	helper_method [:orders_per_user]
+	include ApplicationHelper
 
 	def index
+		@users = User.where("is_technician = 'Sim'").order("name ASC")
 		@orders = Order.all
-		@users = User.where("user_level = 0 AND is_technician = 'Sim'").order("name ASC")
-		@last_orders = Order.order("updated_at DESC").first(5)	
+		@orders = @orders.where('school_id = ?', current_user.school.id) if is_school?
+		@last_orders = @orders.order("updated_at DESC").first(5)	
 	end
 
 	def profile

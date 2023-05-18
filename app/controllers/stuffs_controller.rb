@@ -79,6 +79,10 @@ class StuffsController < ApplicationController
     end
   end
 
+  def show
+    @stuff = Stuff.find(params[:id])
+  end
+
 	def stuff_params
     params.require(:stuff).permit!
   end

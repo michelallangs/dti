@@ -30,12 +30,8 @@
       }
 
       .sidebar-header {
-        .logo-dti {
-          font-size: 2em;
-        }
-
-        .logo-subtitle {
-          display: none;
+        .logo-dcpeoti {
+          width: 4em;
         }
       }
 
@@ -151,7 +147,7 @@
       }
     }
 
-    #home, #orders, #schools, #users {
+    #home, #orders, #schools, #users, #stuffs {
       .main-panel .main-container .container-body section h3 {
         margin-left: -15px !important;
       }

@@ -4,6 +4,7 @@
 	flex-direction: column;
 	background-color: $dark-blue;
 	@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
+	overflow-y: auto;
 
 	.sidebar-header {
 		display: flex;
@@ -17,6 +18,11 @@
 			color: $primary-color;
 			line-height: 15px;
 		}
+
+		.logo-dcpeoti {
+			width: 10em;
+			filter: drop-shadow(0px 5px 8px #000);
+		}
 	}
 
 	.sidebar-nav {
@@ -27,15 +33,15 @@
 			color: $grey;
 			padding: 0 25px;
 			text-transform: uppercase;
+			display: none;
 		}
 
 		ul {
-			margin: 15px 0;
 			list-style: none;
 
 			li {
 				a {
-					padding: 25px;
+					padding: 15px 25px;
 					display: flex;
 					align-items: center;
 					color: $primary-color;

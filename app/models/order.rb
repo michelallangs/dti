@@ -12,6 +12,9 @@ class Order < ApplicationRecord
 	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]
   validates :defect, presence: { message: "Por favor, descreva o problema" }, on: [:create, :update]
+  validates_length_of :defect, maximum: 255, allow_blank: true
+  validates_length_of :performed_service, maximum: 255, allow_blank: true
+  validates_length_of :obs, maximum: 255, allow_blank: true
 
   def school_name
 	  self.school.name.split(/(?=\-)/).first

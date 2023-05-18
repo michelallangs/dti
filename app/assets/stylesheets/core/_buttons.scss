@@ -45,17 +45,20 @@
   }
 }
 
-.btn-cancel, .btn-alert, .btn-success, .btn-info {
+.btn-cancel, .btn-alert, .btn-success, .btn-info, .btn-warning {
   @extend .btn;
 }
 
-.btn-success {
+.btn-alert, .btn-success, .btn-info, .btn-warning,
+.btn-alert span, .btn-success span, .btn-info span, .btn-warning span {
   color: $primary-color;
+}
+
+.btn-success {
   background-color: $green;
 }
 
 .btn-info {
-  color: $primary-color;
   background-color: $blue;
 }
 
@@ -64,8 +67,11 @@
 }
 
 .btn-alert {
-  color: $primary-color;
   background-color: $alert;
+}
+
+.btn-warning {
+  background-color: $warning;
 }
 
 .btn-icon {

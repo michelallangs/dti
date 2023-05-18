@@ -11,7 +11,6 @@
 		<section class="container-body">
 			<div class="row">
 				<div class="col-12">
-			
 					<div class="card">
 						<header class="card-header">
 							<h1 class="card-title">Últimas atualizações</h1>
@@ -22,21 +21,31 @@
 								<ul class="responsive-table">
 									<li class="table-header">
 										<div class="table-col table-col-5">#</div>
+										<div class="table-col table-col-<%= is_school? ? "20" : "15" %>">Status</div>
+										<% unless is_school? %><div class="table-col table-col-20">Unidade</div><% end %>
+										<div class="table-col table-col-<%= is_school? ? "50" : "35" %>">Defeito apresentado</div>
 										<div class="table-col table-col-15">Atualizada em</div>
-										<div class="table-col table-col-20">Unidade</div>
-										<div class="table-col table-col-50">Defeito apresentado</div>
 										<div class="table-col table-col-10"><div class="options">Opções</div></div>
 									</li>
 
 									<% @last_orders.each do |o| %>
 										<li class="table-row">
 											<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
+											<div class="table-col table-col-<%= is_school? ? "20" : "15" %>" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
+
+											<% unless is_school? %>
+												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
+											<% end %>
+
+											<div class="table-col table-col-<%= is_school? ? "50" : "35" %>" data-label="Defeito apresentado">
+												<div class="order-defect">
+													<%= o.defect.to_s.html_safe %>	
+												</div>
+											</div>
 											<div class="table-col table-col-15" data-label="Atualizada em">
 												<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
 												<%= o.updated_at.strftime("%H:%M") %>
 											</div>
-											<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
-											<div class="table-col table-col-50" data-label="Defeito apresentado"><%= o.defect.to_s.html_safe %></div>
 											<div class="table-col table-col-10" data-label="Opções">
 												<div class="options">
 								          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>

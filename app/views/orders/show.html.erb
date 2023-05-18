@@ -10,8 +10,10 @@
 					<h1 class="header-title">Ordem de <span>serviço</span></h1>
 
 					<div class="actions text-center">
+		        <%= link_to print_order_path(@order), target: "_blank", class: "btn-warning icon" do %><span class="material-icons md-16 md-light">print</span>Imprimir OS<% end %>
 		        <%= link_to edit_order_path(@order), class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar OS<% end %>
 		        <%= link_to :back, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
+		        <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Cancelar OS<% end %>
 		      </div>
 				</header>
 			</div>
