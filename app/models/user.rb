@@ -7,7 +7,11 @@ class User < ApplicationRecord
   has_one :school, dependent: :destroy
   accepts_nested_attributes_for :school 
 
-  validates :username, uniqueness: { message: "Este nome de usuário já está em uso" }, presence: { message: "Por favor, digite o e-mail/nome de usuário" }, on: [:create, :update]
+  validates :email, length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }
+  validates :name, length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }
+  validates :username, uniqueness: { message: "Este nome de usuário já está em uso" }, 
+                       presence: { message: "Por favor, digite o e-mail/nome de usuário" },
+                       length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }, on: [:create, :update]
   validates :password, presence: { message: "Por favor, digite uma senha" }, on: [:create, :update_password]
   validates_confirmation_of :password, message: "Digite a mesma senha nos dois campos"
 

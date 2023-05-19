@@ -9,12 +9,13 @@ class Order < ApplicationRecord
 	serialize :maintenance_technicians, Array, default: [""]
 
 	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
-	validates :requester, presence: { message: "Por favor, digite o solicitante" }, on: [:create, :update]
+	validates :requester, presence: { message: "Por favor, digite o solicitante" },
+												length: { maximum: 20 , message: "Limite máximo de caracteres: 20" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]
-  validates :defect, presence: { message: "Por favor, descreva o problema" }, on: [:create, :update]
-  validates_length_of :defect, maximum: 255, allow_blank: true
-  validates_length_of :performed_service, maximum: 255, allow_blank: true
-  validates_length_of :obs, maximum: 255, allow_blank: true
+  validates :defect, presence: { message: "Por favor, descreva o problema" }, 
+  									 length: { maximum: 255 , message: "Limite máximo de caracteres: 255" }, on: [:create, :update]
+  validates :performed_service, length: { maximum: 255 , message: "Limite máximo de caracteres: 255", allow_blank: true }
+  validates :obs, length: { maximum: 255 , message: "Limite máximo de caracteres: 255", allow_blank: true }
 
   def school_name
 	  self.school.name.split(/(?=\-)/).first
