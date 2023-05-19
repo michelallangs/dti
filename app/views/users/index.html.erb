@@ -19,6 +19,12 @@
 
 		<%= form_tag(users_path, method: :get, class: "filters form") do %>
 			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="custom-select">
+						<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
+					</div>
+				</div>
+				
 				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="search" id="autocomplete-name">
 						<%= autocomplete_field_tag :name, params[:name], autocomplete_user_name_users_path, placeholder: "Nome", append_to: "#autocomplete-name",'data-showNoMatches' => false %>

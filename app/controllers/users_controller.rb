@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
 	 	@users = @users.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
-    @users_paginate = @users.page params[:page]
+    @users_paginate = @users.page(params[:page]).per(params[:limit])
 	end
 
 	def new
