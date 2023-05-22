@@ -8,6 +8,7 @@ class OrdersController < ApplicationController
   def index
     @technicians = User.where("is_technician = 'Sim'").order("name ASC")
 
+    # params[:view] = "list" if params[:view].nil?
     patrimony = params[:patrimony]
     spot = params[:spot]
     category = params[:category]

@@ -13,9 +13,9 @@ class Order < ApplicationRecord
 												length: { maximum: 20 , message: "Limite máximo de caracteres: 20" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]
   validates :defect, presence: { message: "Por favor, descreva o problema" }, 
-  									 length: { maximum: 255 , message: "Limite máximo de caracteres: 255" }, on: [:create, :update]
-  validates :performed_service, length: { maximum: 255 , message: "Limite máximo de caracteres: 255", allow_blank: true }
-  validates :obs, length: { maximum: 255 , message: "Limite máximo de caracteres: 255", allow_blank: true }
+  									 length: { maximum: 500 , message: "Limite máximo de caracteres: 500" }, on: [:create, :update]
+  validates :performed_service, length: { maximum: 500 , message: "Limite máximo de caracteres: 500", allow_blank: true }
+  validates :obs, length: { maximum: 500 , message: "Limite máximo de caracteres: 500", allow_blank: true }
 
   def school_name
 	  self.school.name.split(/(?=\-)/).first

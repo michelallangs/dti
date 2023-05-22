@@ -108,13 +108,19 @@
 										<div class="col-12 col-sm-4 col-lg-4">
 					      			<%= f.input :o_type, required: false, label: "Tipo de OS", collection: list_types, include_blank: "Selecione o tipo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 										</div> 
-
-										<div class="col-12 col-sm-4 col-lg-4">
-					      			<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
-					      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
-											<% end %>
-										</div>
 									</div>
+
+				      		<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
+										<div class="row m-t-25">
+											<div class="col-12 col-sm-4 col-lg-4">
+					      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+											</div>
+
+											<div class="col-12 col-sm-4 col-lg-4">
+					      				<%= s.input :defaulted, required: false, label: "O equipamento está padronizado?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+											</div>
+										</div>
+									<% end %>
 
 					      	<div class="row m-t-25">
 					      		<div class="col-12 col-md-6 col-lg-8">
