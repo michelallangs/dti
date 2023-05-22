@@ -81,11 +81,11 @@
 				          	</div>
 
 				          	<div class="col-12 col-sm-4">
-				        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+				        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
 				          	</div>
 
 				          	<div class="col-12 col-sm-4">
-				        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+				        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
 				          	</div>
 			          	</div>
 

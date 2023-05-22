@@ -60,10 +60,11 @@ module ApplicationHelper
   end
 
   def list_brands
-    brands = ['Asus', 'Acer', 'AOC', 'APC', 'BenQ',  'Brother', 
-              'Cisco', 'Dell', 'D-Link', 'Epson', 'HP', 'Intelbras', 
-              'Lenovo', 'Lexmark', 'LG', 'Microsoft', 'Multilaser', 'Neologic', 
-              'Oro', 'Philips', 'Positivo', 'Samsung', 'SMS', 'Toshiba', 'TP-Link']
+    brands = ['Genérico', 'Asus', 'Acer', 'AOC', 'APC', 'Apple', 'BenQ',  'Brother', 
+              'CCE', 'Cisco', 'Dell', 'D-Link', 'EPCOM', 'Epson', 'HP', 'IBM', 'Intelbras', 
+              'Lenovo', 'Lexmark', 'LG', 'Microsoft', 'Multilaser', 'Neologic',
+              'MyMax', 'Oro', 'PC Mix', 'Philips', 'Philco', 'Positivo', 
+              'Qbex', 'Samsung', 'SMS', 'Toshiba', 'TP-Link']
     return brands
   end
 
