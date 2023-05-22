@@ -56,7 +56,7 @@
 		  			<div class="row">
 							<div class="col-12">
 								<div class="card">
-									<% unless @stuff.orders.nil? || @stuff.orders.blank? %>
+									<% unless @orders.nil? || @orders.blank? %>
 										<div class="card-body">
 											<ul class="responsive-table">
 												<li class="table-header">
@@ -69,7 +69,7 @@
 													<div class="table-col table-col-10"><div class="options">Opções</div></div>
 												</li>
 
-												<% @stuff.orders.order("created_at DESC").each do |o| %>
+												<% @orders.order("created_at DESC").each do |o| %>
 													<li class="table-row">
 														<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
 														<div class="table-col table-col-10" data-label="Solicitante"><%= o.requester %></div>
@@ -92,9 +92,11 @@
 													</li>
 												<% end %>
 											</ul>
+
+											<%= paginate @orders %>
 										</div>
 									<% else %>
-										<h3 class="text-center m-t-25 p-b-50"><i>Nenhuma OS registrada para este equipamento.</i></h3>
+										<h4 class="text-center m-t-25 p-b-50"><i>Nenhuma OS registrada para este equipamento.</i></h4>
 									<% end %>
 								</div>
 							</div>

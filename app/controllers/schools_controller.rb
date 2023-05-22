@@ -74,6 +74,8 @@ class SchoolsController < ApplicationController
 
   def show
     @school = School.find(params[:id])
+    @orders = @school.orders.page(params[:orders_page]).per(10)
+    @stuffs = @school.stuffs.page(params[:stuffs_page]).per(10)
   end
 
   def user_params

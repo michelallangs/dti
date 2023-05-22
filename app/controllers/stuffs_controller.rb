@@ -81,6 +81,7 @@ class StuffsController < ApplicationController
 
   def show
     @stuff = Stuff.find(params[:id])
+    @orders = @stuff.orders.page(params[:page]).per(10)
   end
 
 	def stuff_params

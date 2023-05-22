@@ -105,6 +105,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @orders = Order.where("maintenance_technicians LIKE ?", "%#{@user.id}%").page(params[:page]).per(5)
   end
 
 	def user_params

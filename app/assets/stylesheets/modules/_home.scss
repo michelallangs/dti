@@ -35,6 +35,8 @@
 			margin-top: 15px;
 			font-size: .85em;
 			background-color: $primary-color;
+			border-radius: 5px;
+			@include prefix(box-shadow, (rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px));
 
 			&:nth-child(n+2) {
 				margin-top: 50px;
@@ -46,12 +48,14 @@
 				left: 25px;
 				display: inline-block;
 				background-color: $green;
-				padding: 15px 25px;
+				padding: 10px 20px;
+				max-width: 25em;
 				border-radius: 5px;
 
 				.card-title {
 					color: $primary-color;
 					font-size: 1.25em;
+					line-height: 1.5em;
 				}
 			}
 
