@@ -100,7 +100,7 @@
 															<div class="table-col table-col-10" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
 															<div class="table-col table-col-10" data-label="Tipo"><%= o.o_type || " - " %></div>
 															<div class="table-col table-col-40" data-label="Defeito apresentado">
-																<div class="order-defect">
+																<div class="order-defect limited-text">
 																	<%= o.defect.to_s.html_safe %>
 																</div>
 															</div>

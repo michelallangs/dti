@@ -300,14 +300,9 @@ dl {
 	display: none;
 }
 
-.order-defect {
+.limited-text {
 	display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
-
-  &, * {
-  	font-size: .9rem;
-  	font-weight: 700;
-  }
 }
