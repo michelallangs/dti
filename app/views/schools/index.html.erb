@@ -84,7 +84,7 @@
 
 							<% @schools_paginate.each do |s| %>
 								<li class="table-row">
-									<div class="table-col table-col-5" data-label="#"><strong><%= s.id %></strong></div>
+									<div class="table-col table-col-5" data-label="#"><strong><%= s.id.to_s.rjust(3, '0') %></strong></div>
 									<div class="table-col table-col-35" data-label="Nome"><%= s.name %></div>
 									<div class="table-col table-col-20" data-label="Telefone"><%= s.phone %></div>
 									<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>

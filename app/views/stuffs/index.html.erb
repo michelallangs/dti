@@ -83,7 +83,7 @@
 
 							<% @stuffs_paginate.each do |s| %>
 								<li class="table-row">
-									<div class="table-col table-col-5" data-label="#"><strong><%= s.id %></strong></div>
+									<div class="table-col table-col-5" data-label="#"><strong><%= s.id.to_s.rjust(3, '0') %></strong></div>
 									<div class="table-col table-col-10" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
 									<div class="table-col table-col-20" data-label="Categoria">
 										<% if s.category == 'PC/Notebook' %>

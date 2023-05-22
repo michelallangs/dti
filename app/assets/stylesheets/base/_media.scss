@@ -60,12 +60,14 @@
       }
     }
 
-    .main-panel .main-container .container-header {
-      flex-direction: column;
-      gap: 15px;
+    .main-panel .main-container {
+      .container-header {
+        flex-direction: column;
+        gap: 15px;
 
-      .grid, .list {
-        display: none;
+        .grid, .list {
+          display: none;
+        }
       }
     }
 
@@ -98,6 +100,45 @@
         .order-id, .updated-at {
           text-align: center;
           font-size: 1em;
+        }
+      }
+
+      .container-body {
+        &.list {
+          .order-cards {
+            display: block !important;
+
+            .order-card {
+              flex-wrap: wrap;
+
+              &:nth-child(n+2) {
+                margin-top: 15px;
+              }
+
+              .order-card-header {
+                flex: 3;
+                justify-content: flex-start;
+
+                .right-content {
+                  padding-top: 5px;
+                  margin-top: 5px;
+                  border-top: dotted 1px #ccc;
+                } 
+              }
+
+              .order-card-body {
+                flex: 9;
+              }
+
+              .order-card-footer {
+                flex: 1 100%;
+
+                .options ul {
+                  width: auto;
+                }
+              }
+            }
+          }
         }
       }
     }

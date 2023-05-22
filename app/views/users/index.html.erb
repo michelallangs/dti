@@ -70,7 +70,7 @@
 
 							<% @users_paginate.each do |u| %>
 								<li class="table-row">
-									<div class="table-col table-col-5" data-label="#"><strong><%= u.id %></strong></div>
+									<div class="table-col table-col-5" data-label="#"><strong><%= u.id.to_s.rjust(3, '0') %></strong></div>
 									<div class="table-col table-col-20" data-label="Nome"><%= u.name %></div>
 									<div class="table-col table-col-20" data-label="Nome de usuário"><%= u.username %></div>
 									<div class="table-col table-col-45" data-label="E-mail"><%= u.email %></div>
