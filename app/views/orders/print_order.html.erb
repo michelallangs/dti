@@ -102,7 +102,7 @@
         <div class="row">
           <div class="col-6 block-col">
             <h3>Data da manutenção</h3>
-            <p><%= @order.end_date.strftime("%d/%m/%Y") if @order.end_date %></p>
+            <p><%= @order.updated_at.strftime("%d/%m/%Y") if @order.updated_at %></p>
           </div>
 
           <div class="col-6 block-col">
