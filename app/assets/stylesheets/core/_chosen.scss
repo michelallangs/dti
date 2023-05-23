@@ -2,6 +2,7 @@
   font-size: 1em;
   font-family: $font;
   min-width: 240px;
+  width: 100% !important;
 
   .chosen-single, &.chosen-container-active.chosen-with-drop .chosen-single, .chosen-choices {
     padding: 10px 30px 10px 15px;

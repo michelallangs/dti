@@ -55,7 +55,7 @@ module ApplicationHelper
   end
 
   def list_categories
-    categories = ['PC/Notebook', 'Monitor', 'Impressora', 'Estabilizador/No-Break', 'Outro']
+    categories = ['PC/Notebook', 'Monitor', 'Impressora', 'Rede', 'Estabilizador/No-Break', 'Outro']
     return categories
   end
 

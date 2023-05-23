@@ -61,6 +61,7 @@ class OrdersController < ApplicationController
     @order.build_stuff
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
   end
 
   def create
@@ -68,6 +69,7 @@ class OrdersController < ApplicationController
 
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
 
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]

@@ -388,7 +388,7 @@
 		}
 	}
 
-	&.edit, &.update, &.show {
+	&.new, &.create, &.edit, &.update, &.show {
 		.order-tabs {
 			position: relative;
 			display: flex;
@@ -541,6 +541,10 @@
 								@include background("icons/printer.svg", 2em);
 							}
 
+							&[for="order_stuff_attributes_category_rede"]:before {
+								@include background("icons/rede.png", 3em);
+							}
+
 							&[for="order_stuff_attributes_category_estabilizadorno-break"]:before {
 								@include background("icons/nobreak.svg", 2em);
 							}
@@ -583,7 +587,8 @@
 
 		.main {
 			background-color: white;
-			overflow: hidden;
+			overflow: auto;
+			page-break-after: auto;
 
 			header, footer {
 				padding: 50px 0;
