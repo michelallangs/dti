@@ -574,10 +574,16 @@
 				width: 10em;
 				filter: none;
 			}
+			
+			* {
+				-webkit-print-color-adjust: exact;
+				color-adjust: exact;
+			}
 		}
 
 		.main {
 			background-color: white;
+			overflow: hidden;
 
 			header, footer {
 				padding: 50px 0;
