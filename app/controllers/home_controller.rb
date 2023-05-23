@@ -5,7 +5,7 @@ class HomeController < ApplicationController
 	def index
 		@users = User.where("is_technician = 'Sim'").order("name ASC")
 		@orders = Order.all
-		@orders = @orders.where('school_id = ?', current_user.school.id) if is_school?
+		@orders = @orders.where('school_id = ?', current_user.school.id) if is_school?(current_user)
 		@last_orders = @orders.order("updated_at DESC").first(5)	
 	end
 

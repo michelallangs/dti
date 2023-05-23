@@ -26,7 +26,7 @@ class StuffsController < ApplicationController
 
       @stuffs = @stuffs.where(query, *values)
     else
-    	@stuffs = @stuffs.where("schools.user_id = ?", current_user.id) if is_school?
+    	@stuffs = @stuffs.where("schools.user_id = ?", current_user.id) if is_school?(current_user)
     end
 
 

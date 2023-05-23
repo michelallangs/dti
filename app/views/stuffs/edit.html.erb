@@ -22,7 +22,7 @@
 		    	<%= flash_message %>
 
 					<%= simple_form_for @stuff, url: edit_stuff_path, html: { class: "form" } do |f| %>
-		      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
+		      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
 		      	<div class="row">
 							<div class="col-12 col-lg-4 col-md-5 col-sm-6">

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	autocomplete :user, :name, full: true
+  include ApplicationHelper
 
 	def index
 		id = params[:id]
@@ -74,8 +75,10 @@ class UsersController < ApplicationController
 
         if @user == current_user 
           redirect_to profile_path
+        elsif is_school?(@user)
+          redirect_to school_path(@user.school)
         else 
-          redirect_to edit_user_path(@user)
+          redirect_to user_path(@user)
         end
       else
         render :edit_password

@@ -24,7 +24,7 @@ class SchoolsController < ApplicationController
 
       @schools = @schools.where(query, *values)
     else
-    	@schools = @schools.where("schools.user_id = ?", current_user.id) if is_school?
+    	@schools = @schools.where("schools.user_id = ?", current_user.id) if is_school?(current_user)
     end
 
 	 	@schools = @schools.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 

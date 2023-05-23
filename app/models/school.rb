@@ -16,7 +16,7 @@ class School < ApplicationRecord
                       length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }, on: [:create, :update]
   validates :address_number, presence: { message: "Informe o número do endereço" }, on: [:create, :update]
   validates :district, presence: { message: "Informe o bairro" },
-                       length: { maximum: 20 , message: "Limite máximo de caracteres: 20" }, on: [:create, :update]
+                       length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }, on: [:create, :update]
   validates :phone, presence: { message: "Informe o número de telefone" }, on: [:create, :update]
 
   def create_normalized_strings

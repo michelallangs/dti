@@ -3,9 +3,10 @@
   padding: 0 14px;
   line-height: 38px;
   text-decoration: none;
-  background-color: white;
-  border: 1px solid #DDD;
-  border-left-width: 0;
+  border-radius: 5px;
+  margin: 0 2px;
+  font-weight: 600;
+  @include prefix(box-shadow, (rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px));
 }
 
 .pagination {
@@ -14,10 +15,14 @@
   justify-content: center;
   width: 100%;
 
-  span:first-child {
-    &, & a {
-      border-left-width: 1px;
-    }
+  a, span.gap {
+    background-color: $primary-color;
+    color: $dark-blue !important;
+  }
+
+  span.current {
+    background-color: $dark-blue;
+    color: $primary-color;
   }
 
   span:not(.current) {

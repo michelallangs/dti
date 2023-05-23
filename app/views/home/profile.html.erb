@@ -34,14 +34,14 @@
 		  				<%= content_tag :dd, current_user.username %>
 		  			<% end %>
 
-		  			<% if is_admin? %>
+		  			<% if is_admin?(current_user) %>
 		  				<%= content_tag :dl do %>
 			    			<%= content_tag :dt, "E-mail" %>
 			  				<%= content_tag :dd, current_user.email %>
 			  			<% end %>
 		  			<% end %>
 
-		  			<% if is_school? %>
+		  			<% if is_school?(current_user) %>
 			  			<%= content_tag :dl do %>
 			    			<%= content_tag :dt, "Segmento" %>
 			  				<%= content_tag :dd, @school.segment %>
@@ -54,7 +54,7 @@
 		  			<% end %>
 		  		</section>
 		      
-		      <% if is_school? %>
+		      <% if is_school?(current_user) %>
 			  		<section>
 			  			<h3 class="m-b-25">Endereço</h3>
 

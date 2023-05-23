@@ -25,16 +25,16 @@ module ApplicationHelper
     messages.html_safe
   end
 
-  def is_admin?
-    current_user.user_level == 0
+  def is_admin?(user)
+    user.user_level == 0
   end
 
-  def is_school?
-    current_user.user_level == 1
+  def is_school?(user)
+    user.user_level == 1
   end
 
   def username
-    return is_admin? ? current_user.name : current_user.school.name.split(/(?=\-)/).first.strip
+    return is_admin?(current_user) ? current_user.name : current_user.school.name.split(/(?=\-)/).first.strip
   end
 
   def current?(link_path)

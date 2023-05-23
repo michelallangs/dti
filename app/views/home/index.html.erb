@@ -21,9 +21,9 @@
 								<ul class="responsive-table">
 									<li class="table-header">
 										<div class="table-col table-col-5">#</div>
-										<div class="table-col table-col-<%= is_school? ? "20" : "15" %>">Status</div>
-										<% unless is_school? %><div class="table-col table-col-20">Unidade</div><% end %>
-										<div class="table-col table-col-<%= is_school? ? "50" : "35" %>">Defeito apresentado</div>
+										<div class="table-col table-col-<%= is_school?(current_user) ? "20" : "15" %>">Status</div>
+										<% unless is_school?(current_user) %><div class="table-col table-col-20">Unidade</div><% end %>
+										<div class="table-col table-col-<%= is_school?(current_user) ? "50" : "35" %>">Defeito apresentado</div>
 										<div class="table-col table-col-15">Atualizada em</div>
 										<div class="table-col table-col-10"><div class="options">Opções</div></div>
 									</li>
@@ -31,13 +31,13 @@
 									<% @last_orders.each do |o| %>
 										<li class="table-row">
 											<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
-											<div class="table-col table-col-<%= is_school? ? "20" : "15" %>" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
+											<div class="table-col table-col-<%= is_school?(current_user) ? "20" : "15" %>" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
 
-											<% unless is_school? %>
+											<% unless is_school?(current_user) %>
 												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
 											<% end %>
 
-											<div class="table-col table-col-<%= is_school? ? "50" : "35" %>" data-label="Defeito apresentado">
+											<div class="table-col table-col-<%= is_school?(current_user) ? "50" : "35" %>" data-label="Defeito apresentado">
 												<div class="order-defect limited-text">
 													<%= o.defect.to_s.html_safe %>	
 												</div>

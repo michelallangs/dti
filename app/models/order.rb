@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-	paginates_per 5
+	paginates_per 10
 	
   before_save :create_normalized_strings
 
@@ -12,7 +12,7 @@ class Order < ApplicationRecord
 
 	validates :school_id, presence: { message: "Escolha uma unidade" }, on: [:create, :update]
 	validates :requester, presence: { message: "Por favor, digite o solicitante" },
-												length: { maximum: 20 , message: "Limite máximo de caracteres: 20" }, on: [:create, :update]
+												length: { maximum: 50 , message: "Limite máximo de caracteres: 50" }, on: [:create, :update]
   validates :spot, presence: { message: "Escolha o local de instalação" }, on: [:create, :update]
   validates :defect, presence: { message: "Por favor, descreva o problema" }, 
   									 length: { maximum: 500 , message: "Limite máximo de caracteres: 500" }, on: [:create, :update]

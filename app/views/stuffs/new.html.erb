@@ -21,13 +21,13 @@
 		    	<%= flash_message %>
 
 					<%= simple_form_for @stuff, url: new_stuff_path, html: { class: "form" } do |f| %>
-		      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin? %>
+		      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
 		    		<%= content_tag :div, "", class: "row" do %>
 		    			<div class="col-12 col-sm-4">
 		  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
 		    			</div>
-						<% end if is_admin? %>
+						<% end if is_admin?(current_user) %>
 
 		      	<div class="row">
 							<div class="col-12 col-sm-4">

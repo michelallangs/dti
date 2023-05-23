@@ -27,7 +27,7 @@
 		  				<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
 		  			</h3>
 
-		  			<% if is_admin? %>
+		  			<% if is_admin?(current_user) %>
 			  			<%= content_tag :dl do %>
 			    			<%= content_tag :dt, "Unidade" %>
 			  				<%= content_tag :dd, @order.school.name %>

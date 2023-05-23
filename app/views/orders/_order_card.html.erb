@@ -24,7 +24,7 @@
 						</div>
 
 						<%= content_tag :footer, class: "order-card-footer" do %>
-							<%= content_tag :span, is_admin? ? order.school_name : "" %>
+							<%= content_tag :span, is_admin?(current_user) ? order.school_name : "" %>
 							<div class="options">
 								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
 								<ul>

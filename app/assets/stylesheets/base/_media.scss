@@ -8,6 +8,16 @@
   html, body {
     font-size: 12px;
 
+    .login-panel {
+      .left-container {
+        display: none;
+      }
+
+      .right-container .logo-dcpeoti {
+        display: block;
+      }
+    }
+
     .main .menu-icon {
       display: block;
       position: absolute;
@@ -80,12 +90,6 @@
 @media only screen and (max-width: 767px){
   html, body {
     font-size: 11px;
-
-    .login-panel {
-      .left-container {
-        display: none;
-      }
-    }
 
     .order-cards {
       grid-template-columns: 1fr !important;

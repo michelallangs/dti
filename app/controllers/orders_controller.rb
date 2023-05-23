@@ -25,7 +25,7 @@ class OrdersController < ApplicationController
     @orders = Order.joins(:stuff, :school)
 
     if !@search.all?(&:blank?)
-      patrimony = patrimony.downcase == "s/p" ? "" 
+      patrimony = patrimony.to_s.downcase == "s/p" ? "" 
                                               : "%#{patrimony}%"
 
       query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
@@ -42,13 +42,13 @@ class OrdersController < ApplicationController
 
       @orders = @orders.where(query, *values)
 
-      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?
+      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
 
       if (start_date && end_date) && (start_date > end_date)
         flash.now[:warning] = "A data inicial deve ser menor do que a final"
       end
     else
-      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?
+      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
     end
 
     @orders = @orders.order("id DESC").page params[:page]
@@ -175,7 +175,7 @@ class OrdersController < ApplicationController
   end
 
   def stuff_category
-    @stuff_category = is_admin? ? "CATEGORIA DO EQUIPAMENTO" : "Selecione a categoria do equipamento"
+    @stuff_category = is_admin?(current_user) ? "CATEGORIA DO EQUIPAMENTO" : "Selecione a categoria do equipamento"
     return @stuff_category
   end
 
