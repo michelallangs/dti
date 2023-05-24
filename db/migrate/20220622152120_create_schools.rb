@@ -14,7 +14,5 @@ class CreateSchools < ActiveRecord::Migration[7.0]
     end
 
     add_index :schools, :name, unique: true
-    add_index :schools, :phone, unique: true
-    add_index :schools, :zip_code, unique: true
   end
 end

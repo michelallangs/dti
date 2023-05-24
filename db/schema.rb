@@ -49,8 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_01_163056) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["name"], name: "index_schools_on_name", unique: true
-    t.index ["phone"], name: "index_schools_on_phone", unique: true
-    t.index ["zip_code"], name: "index_schools_on_zip_code", unique: true
   end
 
   create_table "stuffs", force: :cascade do |t|
