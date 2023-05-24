@@ -94,7 +94,7 @@
 			border-radius: 5px;
 			background-color: white;
 			color: #000000;
-			border: solid 2px transparent;
+			border: solid 2px $grey;
 			@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
 			&:focus, &:hover {

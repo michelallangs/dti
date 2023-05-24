@@ -69,7 +69,7 @@ module ApplicationHelper
   end
 
   def list_spots
-    spots = ['Biblioteca', 'Coordenação', 'Direção', 'Laboratório', 'Recurso', 'Secretaria']
+    spots = ['Biblioteca', 'Coordenação', 'Direção', 'Laboratório', 'Professores', 'Recurso', 'Secretaria', 'Vice-direção']
     return spots
   end
 
