@@ -50,18 +50,16 @@
                   <%= s.input :address, label: "Logradouro", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: Rua Um Dois de Oliveira Quatro"} %>
                 </div>
 
-                <div class="col-12 col-sm-3">
+                <div class="col-12 col-sm-2">
                   <%= s.input :address_number, as: :numeric, label: "Número", label_html: { class: "form-label" } %>
                 </div>
 
                 <div class="col-12 col-sm-3">
                   <%= s.input :district, label: "Bairro", label_html: { class: "form-label" }, wrapper_html: { class: "district" } %>
                 </div>
-              </div>
 
-              <div class="row">
-                <div class="col-12 col-sm-6 col-md-4">
-                  <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678"} %>
+                <div class="col-12 col-sm-2">
+                  <%= s.input :phone, label: "Telefone", label_html: { class: "form-label" }, input_html: { placeholder: "Ex.: (00) 91234-5678", maxlength: 30 } %>
                 </div>
               </div>
             <% end %>
