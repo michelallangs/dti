@@ -219,6 +219,11 @@
     .flash {
       margin-top: 50px;
     }
+
+    .pagination a, .pagination span.current, .pagination span.gap {
+      padding: 0 7px;
+      line-height: 24px;
+    }
   }
 }
 
