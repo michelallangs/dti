@@ -36,4 +36,15 @@
       }
     }
   }
+
+  .form .radio_buttons span.radio label {
+    border: solid 2px rgba(0, 0, 0, 0.1);
+    background-color: $primary-color;
+
+    &.checked, &:hover {
+      border-color: $dark-blue !important;
+      color: $primary-color !important;
+      background-color: $dark-blue !important;
+    }
+  }
 }
