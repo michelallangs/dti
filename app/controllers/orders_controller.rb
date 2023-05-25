@@ -72,6 +72,8 @@ class OrdersController < ApplicationController
     @technicians = User.where("is_technician = 'Sim'").order("name ASC")
 
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
+    category = params[:order][:stuff_attributes][:category]
+    brand = params[:order][:stuff_attributes][:brand]
     school_id = params[:order][:school_id]
     requester = params[:order][:requester]
     o_type = params[:order][:o_type]
@@ -85,18 +87,24 @@ class OrdersController < ApplicationController
     start_date = params[:order][:start_date]
     end_date = params[:order][:end_date]
     status = params[:order][:status]
+    stuff = Stuff.find_by_patrimony_and_category_and_brand_and_school_id(@patrimony, category, brand, school_id)
+    order_values = {requester: requester, o_type: o_type, spot: spot, defect: defect, backup: backup, performed_service: performed_service,
+                    obs: obs, removal_technicians: removal_technicians, maintenance_technicians: maintenance_technicians, start_date: start_date,
+                    end_date: end_date, status: status, user_id: current_user.id, school_id: school_id, updated_by: current_user.id}
       
     if Stuff.where(patrimony: @patrimony).exists? && !@patrimony.blank?
       stuff_id = Stuff.find_by_patrimony(@patrimony).id
 
-      @order = Order.new(requester: requester, o_type: o_type, spot: spot, defect: defect, backup: backup, performed_service: performed_service,
-                         obs: obs, removal_technicians: removal_technicians, maintenance_technicians: maintenance_technicians, start_date: start_date,
-                         end_date: end_date, status: status, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
+      @order = Order.new(order_values.merge({stuff_id: stuff_id}))
 
       if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
         allow_save = false
         flash.now[:alert] = "Patrimônio já pertence a outra unidade"
       end
+    elsif !stuff.nil?
+      stuff_id = stuff.id
+
+      @order = Order.new(order_values.merge({stuff_id: stuff_id}))
     else
       @order = Order.new
       @order.build_stuff
