@@ -77,11 +77,21 @@ class OrdersController < ApplicationController
     o_type = params[:order][:o_type]
     spot = params[:order][:spot]
     defect = params[:order][:defect]
+    backup = params[:order][:backup]
+    performed_service = params[:order][:performed_service]
+    obs = params[:order][:obs]
+    removal_technicians = params[:order][:removal_technicians]
+    maintenance_technicians = params[:order][:maintenance_technicians]
+    start_date = params[:order][:start_date]
+    end_date = params[:order][:end_date]
+    status = params[:order][:status]
       
     if Stuff.where(patrimony: @patrimony).exists? && !@patrimony.blank?
       stuff_id = Stuff.find_by_patrimony(@patrimony).id
 
-      @order = Order.new(requester: requester, o_type: o_type, spot: spot, defect: defect, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
+      @order = Order.new(requester: requester, o_type: o_type, spot: spot, defect: defect, backup: backup, performed_service: performed_service,
+                         obs: obs, removal_technicians: removal_technicians, maintenance_technicians: maintenance_technicians, start_date: start_date,
+                         end_date: end_date, status: status, stuff_id: stuff_id, user_id: current_user.id, school_id: school_id, updated_by: current_user.id)
 
       if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
         allow_save = false
