@@ -22,7 +22,15 @@
 		</div>
 
 		<%= form_tag(orders_path, method: :get, class: "filters form") do %>
+			<%= hidden_field_tag :view, params[:view] %>
+
 			<div class="row">
+				<div class="col-lg-3 col-md-6 col-sm-12">
+					<div class="custom-select">
+						<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
+					</div>
+				</div>
+
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="search" id="autocomplete-patrimony">
 						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, type: "search", title: "Digite S/P para pesquisar OS sem patrimônio" %>

@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-	paginates_per 10
+	paginates_per 25
 	
   before_save :create_normalized_strings
 
