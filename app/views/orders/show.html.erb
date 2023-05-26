@@ -100,9 +100,9 @@
 					<% end %>
 
 		  		<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
-						<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technicians)}</strong>".html_safe if @order.maintenance_technicians.length > 1 %>
-						<%= " e entregue em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if !@order.end_date.nil? %>
-					<% end if @order.maintenance_technicians.length > 1 && !@order.end_date.nil? %>
+						<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technicians)}</strong> em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if @order.maintenance_technicians.length > 1 && !@order.end_date.nil? %>
+						<%= " e entregue  if !@order.end_date.nil? %>
+					<% end if  %>
 
 					<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
 						<%= order_updated_at(@order.updated_at, @order.updated_by) %>
