@@ -74,9 +74,8 @@ module ApplicationHelper
   end
 
   def list_status
-    status = ['Em aberto', 'Em manutenção', 'Para retirada', 
-              'Saiu para entrega', 'Aguardando peça(s)', 'Aguardando doação', 
-              'Concluído', 'Cancelado']
+    status = ['Em aberto', 'Em manutenção', 'Para retirada', 'Aguardando peça(s)', 
+              'Aguardando doação', 'Concluído', 'Cancelado']
     return status
   end
 

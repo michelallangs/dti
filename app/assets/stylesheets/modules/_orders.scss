@@ -104,15 +104,11 @@
 				  }
 
 				  &.em-manutencao {
-				  	border-left: solid 5px $orange;
+				  	border-left: solid 5px $warning;
 				  }
 
 				  &.para-retirada {
 				  	border-left: solid 5px $purple;
-				  }
-
-				  &.saiu-para-entrega {
-				  	border-left: solid 5px $warning;
 				  }
 
 				  &.aguardando-pecas {
@@ -182,15 +178,11 @@
 			  }
 
 			  &.em-manutencao h4 span {
-			  	color: $orange;
+			  	color: $warning;
 			  }
 
 			  &.para-retirada h4 span {
 			  	color: $purple;
-			  }
-
-			  &.saiu-para-entrega h4 span {
-			  	color: $warning;
 			  }
 
 			  &.aguardando-pecas h4 span {
@@ -246,15 +238,11 @@
 				  }
 
 				  &.em-manutencao {
-				  	border-top: solid 10px $orange;
+				  	border-top: solid 10px $warning;
 				  }
 
 				  &.para-retirada {
 				  	border-top: solid 10px $purple;
-				  }
-
-				  &.saiu-para-entrega {
-				  	border-top: solid 10px $warning;
 				  }
 
 				  &.aguardando-pecas {

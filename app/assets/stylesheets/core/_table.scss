@@ -44,15 +44,11 @@
     }
 
     div[data-status="em-manutencao"] {
-      color: $orange;
+      color: $warning;
     }
 
     div[data-status="para-retirada"] {
       color: $purple;
-    }
-
-    div[data-status="saiu-para-entrega"] {
-      color: $warning;
     }
 
     div[data-status="aguardando-pecas"] {

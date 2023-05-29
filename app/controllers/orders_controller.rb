@@ -151,13 +151,13 @@ class OrdersController < ApplicationController
     unless start_date.blank? || end_date.blank?
       if start_date > end_date
         allow_update = false
-        flash.now[:alert] = "A data de entrega deve ser maior que a de retirada"
+        flash.now[:alert] = "A data final deve ser maior do que a inicial"
       end
     end
 
     if (!start_date.blank? && start_date.to_datetime > Date.today) || (!end_date.blank? && end_date.to_datetime > Date.today)
       allow_update = false
-      flash.now[:alert] = "As datas de retirada/entregam devem ser menores que a data de hoje"
+      flash.now[:alert] = "As datas inicial/final devem ser menores que a data de hoje"
     end
     
     if allow_update && @order.update(order_update_params)
