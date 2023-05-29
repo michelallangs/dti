@@ -171,7 +171,7 @@ class OrdersController < ApplicationController
   def order_params
     params.require(:order).permit(:requester, :o_type, :spot, :defect, :backup, :performed_service, :obs, :removal_technicians, 
                                   :maintenance_technicians, :start_date, :end_date, :status, :stuff_id, :user_id, :school_id, :updated_by, 
-                                  stuff_attributes: [:patrimony, :brand, :category, :school_id])
+                                  stuff_attributes: [:patrimony, :brand, :category, :defaulted, :school_id])
   end
 
   def order_update_params
