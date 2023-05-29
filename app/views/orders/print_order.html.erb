@@ -1,7 +1,6 @@
 <div class="print-area">
   <div class="content">
     <header>
-      <%= image_tag "logo-dcpeoti.png", class: 'logo-dcpeoti' %>
       <h1 class="main-title">Ordem de serviço #<%= @order.id.to_s.rjust(3, '0') %><span><%= @order.o_type if @order.o_type %></span></h1>
       <%= image_tag "logo-dcpeoti.png", class: 'logo-dcpeoti' %>
     </header>
