@@ -55,6 +55,10 @@
       color: $alert;
     }
 
+    div[data-status="garantia"] {
+      color: $orange;
+    }
+
     div[data-status="aguardando-doacao"] {
       color: $crimson;
     }

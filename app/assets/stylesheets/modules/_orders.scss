@@ -115,6 +115,10 @@
 				  	border-left: solid 5px $alert;
 				  }
 
+				  &.garantia {
+				  	border-left: solid 5px $orange;
+				  }
+
 				  &.aguardando-doacao {
 				  	border-left: solid 5px $crimson;
 				  }
@@ -189,6 +193,10 @@
 			  	color: $alert;
 			  }
 
+			  &.garantia h4 span {
+			  	color: $orange;
+			  }
+
 			  &.aguardando-doacao h4 span {
 			  	color: $crimson;
 			  }
@@ -248,6 +256,11 @@
 				  &.aguardando-pecas {
 				  	border-top: solid 10px $alert;
 				  }
+
+				  &.garantia {
+				  	border-top: solid 10px $orange;
+				  }
+
 
 				  &.aguardando-doacao {
 				  	border-top: solid 10px $crimson;
