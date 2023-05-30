@@ -134,8 +134,6 @@ class OrdersController < ApplicationController
 
     @order = Order.find(params[:id])
     @technicians = User.where("is_technician = 'Sim'").order("name ASC")
-    @r_technicians = params[:order][:removal_technicians]
-    @m_technicians = params[:order][:maintenance_technicians]
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]
