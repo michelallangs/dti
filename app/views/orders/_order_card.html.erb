@@ -26,6 +26,13 @@
 						<%= content_tag :footer, class: "order-card-footer" do %>
 							<%= content_tag :span, is_admin?(current_user) ? order.school_name : "" %>
 							<div class="options">
+
+								<% if order.maintenance_technicians != [""] %>
+									<span class="material-icons md-20 order-card-users" title="<%= get_user(order.maintenance_technicians) %>">
+										<%= order.maintenance_technicians.length > 2 ? "group" : "person" %>
+									</span>
+								<% end %>
+
 								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
 								<ul>
 									<li><%= link_to "Imprimir OS", print_order_path(order), target: "_blank"  %></li>

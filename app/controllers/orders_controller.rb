@@ -212,14 +212,17 @@ class OrdersController < ApplicationController
     return user
   end
 
-  def order_updated_at(date, id)
+  def order_updated_at(datetime, id)
+    time = datetime.strftime("%H:%M")
+    date = datetime.strftime("%d/%m/%Y")
     user = User.find_by_id(id)
-    if user.user_level == 1
+    
+    if is_school?(user)
       creator = School.find_by_user_id(id).name.split(/(?=\-)/).first.strip
     else
       creator = user.name
     end
 
-    return "Última alteração em <strong>#{@order.updated_at.strftime("%d/%m/%Y")}</strong> às #{@order.updated_at.strftime("%H:%M")} por <strong>#{creator}</strong>".html_safe
+    return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator}</strong>".html_safe
   end
 end
