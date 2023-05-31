@@ -50,7 +50,7 @@ module ApplicationHelper
 
   def list_types
     types = ['Manutenção corretiva', 'Manutenção preventiva', 'Infraestrutura de redes', 
-                  'Sistemas', 'Administrativo', 'Acesso remoto', 'Entrega/doação de equipamento']
+              'Sistemas', 'Administrativo', 'Acesso remoto', 'Entrega/doação de equipamento']
     return types
   end
 
@@ -69,7 +69,7 @@ module ApplicationHelper
   end
 
   def list_spots
-    spots = ['Biblioteca', 'Coordenação', 'Direção', 'Laboratório', 'Professores', 'Recurso', 'Secretaria', 'Vice-direção']
+    spots = ['Administrativo', 'Biblioteca', 'Coordenação', 'Direção', 'Laboratório', 'Professores', 'Recurso', 'Secretaria', 'Vice-direção', 'Outro']
     return spots
   end
 
