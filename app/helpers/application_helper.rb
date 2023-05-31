@@ -64,7 +64,7 @@ module ApplicationHelper
               'CCE', 'Cisco', 'Daruma', 'Dell', 'D-Link', 'EPCOM', 'Epson', 'HP', 'IBM', 'Intelbras', 
               'Lenovo', 'Lexmark', 'LG', 'Microsoft', 'Multilaser', 'Neologic',
               'MyMax', 'Oro', 'PC Mix', 'Philips', 'Philco', 'Positivo', 
-              'Qbex', 'Samsung', 'SMS', 'Toshiba', 'TP-Link']
+              'Qbex', 'Samsung', 'SMS', 'Sony', 'Toshiba', 'TP-Link']
     return brands
   end
 
