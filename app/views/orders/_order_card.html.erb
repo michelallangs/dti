@@ -28,7 +28,7 @@
 							<div class="options">
 
 								<% if order.maintenance_technicians != [""] %>
-									<span class="material-icons md-20 order-card-users" title="<%= get_user(order.maintenance_technicians) %>">
+									<span class="material-icons md-20 order-card-users tooltip-toggle" data-tooltip="<%= get_user(order.maintenance_technicians) %>" title="<%= get_user(order.maintenance_technicians) %>">
 										<%= order.maintenance_technicians.length > 2 ? "group" : "person" %>
 									</span>
 								<% end %>
