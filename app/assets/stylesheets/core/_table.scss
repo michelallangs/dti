@@ -51,20 +51,28 @@
       color: $purple;
     }
 
-    div[data-status="aguardando-pecas"] {
-      color: $alert;
+    div[data-status="concluido"] {
+      color: $info;
     }
 
     div[data-status="garantia"] {
       color: $orange;
     }
 
-    div[data-status="aguardando-doacao"] {
+    div[data-status="para-doacao"] {
       color: $crimson;
     }
 
-    div[data-status="concluido"] {
-      color: $info;
+    div[data-status="aguardando-pecas"] {
+      color: $alert;
+    }
+
+    div[data-status="aguardando-descarte"] {
+      color: $light-copper;
+    }
+
+    div[data-status="descarte"] {
+      color: $copper;
     }
 
     div[data-status="cancelado"] {

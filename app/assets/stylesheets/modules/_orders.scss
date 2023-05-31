@@ -111,20 +111,28 @@
 				  	border-left: solid 5px $purple;
 				  }
 
-				  &.aguardando-pecas {
-				  	border-left: solid 5px $alert;
+				  &.concluido {
+				  	border-left: solid 5px $info;
 				  }
 
 				  &.garantia {
 				  	border-left: solid 5px $orange;
 				  }
 
-				  &.aguardando-doacao {
+				  &.para-doacao {
 				  	border-left: solid 5px $crimson;
 				  }
 
-				  &.concluido {
-				  	border-left: solid 5px $info;
+				  &.aguardando-pecas {
+				  	border-left: solid 5px $alert;
+				  }
+
+				  &.aguardando-descarte {
+				  	border-left: solid 5px $light-copper;
+				  }
+
+				  &.descarte {
+				  	border-left: solid 5px $copper;
 				  }
 
 				  &.cancelado {
@@ -189,20 +197,28 @@
 			  	color: $purple;
 			  }
 
-			  &.aguardando-pecas h4 span {
-			  	color: $alert;
+			  &.concluido h4 span {
+			  	color: $info;
 			  }
 
 			  &.garantia h4 span {
 			  	color: $orange;
 			  }
 
-			  &.aguardando-doacao h4 span {
+			  &.para-doacao h4 span {
 			  	color: $crimson;
 			  }
 
-			  &.concluido h4 span {
-			  	color: $info;
+			  &.aguardando-pecas h4 span {
+			  	color: $alert;
+			  }
+
+			  &.aguardando-descarte h4 span {
+			  	color: $light-copper;
+			  }
+
+			  &.descarte h4 span {
+			  	color: $copper;
 			  }
 
 			  &.cancelado h4 span {
@@ -249,25 +265,32 @@
 				  	border-top: solid 10px $warning;
 				  }
 
-				  &.para-retirada {
-				  	border-top: solid 10px $purple;
+				  &.concluido {
+				  	border-top: solid 10px $info;
 				  }
 
-				  &.aguardando-pecas {
-				  	border-top: solid 10px $alert;
+				  &.para-retirada {
+				  	border-top: solid 10px $purple;
 				  }
 
 				  &.garantia {
 				  	border-top: solid 10px $orange;
 				  }
 
-
-				  &.aguardando-doacao {
+				  &.para-doacao {
 				  	border-top: solid 10px $crimson;
 				  }
 
-				  &.concluido {
-				  	border-top: solid 10px $info;
+				  &.aguardando-pecas {
+				  	border-top: solid 10px $alert;
+				  }
+
+				  &.aguardando-descarte {
+				  	border-top: solid 10px $light-copper;
+				  }
+
+				  &.descarte {
+				  	border-top: solid 10px $copper;
 				  }
 
 				  &.cancelado {
@@ -313,16 +336,16 @@
 				    height: 100%;
 
 				    h3 {
-				    	font-size: 1.25em;
+				    	font-size: 1em;
 				    	font-weight: 400;
-				    	margin-bottom: 5px;
+				    	margin-bottom: 15px;
 				    }
 
 				    span {
-				    	font-size: .9em;
+				    	font-size: 1.25em;
 							font-weight: 600;
 							color: rgba(0, 0, 0, 0.5);
-							margin-bottom: 15px;
+							margin-bottom: 5px;
 							display: block;
 				    }
 					}
