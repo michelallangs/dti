@@ -4,7 +4,7 @@
 			<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
 
 			<div class="order-cards">
-				<% orders.each do |order| %>
+				<% orders.sort_by(&:id).reverse.each do |order| %>
 					<%= content_tag :div, class: "order-card #{get_status(order.status)}" do %>
 						<header class="order-card-header">
 							<div class="left-content">

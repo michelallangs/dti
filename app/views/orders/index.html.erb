@@ -125,8 +125,8 @@
 						<button class="prev-btn" title="Mover para esquerda"><span class="material-icons">keyboard_double_arrow_left</span></button>
 						<button class="next-btn" title="Mover para direita"><span class="material-icons">keyboard_double_arrow_right</span></button>
 						<section class="container-body <%= params[:view].presence %>">
-							<% list_status.each do |status| %>
-								<%= render "order_card", orders: @orders.where(status: status), status: status.downcase %>
+							<% @orders.group_by(&:status).each do |status, orders| %>
+								<%= render "order_card", orders: orders, status: status.downcase %>
 							<% end %>
 						</section>
 					</div>
