@@ -1,6 +1,5 @@
 class StuffsController < ApplicationController
 	autocomplete :stuff, :patrimony, full: true
-	include ApplicationHelper
 
 	def index
 		id = params[:id]

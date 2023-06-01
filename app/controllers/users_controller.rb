@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
 	autocomplete :user, :name, full: true
-  include ApplicationHelper
 
 	def index
 		id = params[:id]

@@ -1,6 +1,5 @@
 class SchoolsController < ApplicationController
 	autocomplete :school, :name, full: true
-	include ApplicationHelper
 
 	def index
 		id = params[:id]

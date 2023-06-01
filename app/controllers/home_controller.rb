@@ -1,6 +1,5 @@
 class HomeController < ApplicationController
 	helper_method [:orders_per_user]
-	include ApplicationHelper
 
 	def index
 		@users = User.where("is_technician = 'Sim'").order("name ASC")
@@ -15,7 +14,7 @@ class HomeController < ApplicationController
 
 	def orders_per_user(orders, users)
 		users.map { |user|
-			{ user.name => orders.where("maintenance_technicians LIKE ? AND updated_at > ?", "%#{user.id}%", 30.days.ago).count }
+			{ user.name.split.first.strip => orders.where("maintenance_technicians LIKE ? AND updated_at > ?", "%#{user.id}%", 30.days.ago).count }
 		}.reduce(:merge)
 	end
 end

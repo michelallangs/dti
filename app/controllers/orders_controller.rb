@@ -1,13 +1,11 @@
 class OrdersController < ApplicationController
   helper_method [:get_patrimony, :get_user, :order_updated_at, :order_creator]
   before_action :stuff_category
+  before_action :technicians, only: [:index, :new, :create, :edit, :update]
   autocomplete :stuff, :patrimony, full: true
   layout "print", only: :print_order
-  include ApplicationHelper
 
   def index
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
-
     # params[:view] = "list" if params[:view].nil?
     patrimony = params[:patrimony]
     spot = params[:spot]
@@ -20,6 +18,7 @@ class OrdersController < ApplicationController
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
     requester = I18n.transliterate(params[:requester]) if params[:requester]
     school = I18n.transliterate(params[:school]) if params[:school]
+
     @search = [patrimony, spot, category, brand, status, technician, o_type, start_date, end_date, requester, school]
 
     @orders = Order.joins(:stuff, :school)
@@ -61,18 +60,14 @@ class OrdersController < ApplicationController
     @order.build_stuff
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
   end
 
   def create
     allow_save = true
-
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
     @r_technicians = params[:order][:removal_technicians]
     @m_technicians = params[:order][:maintenance_technicians]
-
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     category = params[:order][:stuff_attributes][:category]
     brand = params[:order][:stuff_attributes][:brand]
@@ -126,14 +121,11 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @patrimony = @order.stuff.patrimony
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
   end
 
   def update
     allow_update = true
-
     @order = Order.find(params[:id])
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]
@@ -212,11 +204,15 @@ class OrdersController < ApplicationController
     user = User.find_by_id(id)
     
     if is_school?(user)
-      creator = School.find_by_user_id(id).name.split(/(?=\-)/).first.strip
+      creator = School.find_by_user_id(id).name.split(/(?=\-)/)
     else
-      creator = user.name
+      creator = user.name.split
     end
 
-    return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator}</strong>".html_safe
+    return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator.first.strip}</strong>".html_safe
+  end
+
+  def technicians
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC").map { |t| t.name.split.first.strip }
   end
 end

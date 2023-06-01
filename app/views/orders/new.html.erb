@@ -122,7 +122,6 @@
 			          		<%= f.input :removal_technicians, required: false, label: "Retirada", collection: @technicians, selected: @r_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem retirou o equipamento?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
 									</div>   		
 
-									<%#= @technicians.map { |t| t.id } %>
 									<div class="col-12 col-sm-6 col-lg-4">
 										<%= f.input :maintenance_technicians, required: false, label: "Manutenção", collection: @technicians, selected: @m_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem fez a manutenção?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
 			          	</div>   

@@ -90,7 +90,7 @@
 						</header>
 						<div class="card-body">
 							<%= line_chart @users.map { |user|
-							    {name: user.name, data: Order.where("maintenance_technicians LIKE ?", "%#{user.id}%").group_by_day(:updated_at, last: 7, format: "%d %b").count}
+							    {name: user.name.split.first.strip, data: Order.where("maintenance_technicians LIKE ?", "%#{user.id}%").group_by_day(:updated_at, last: 7, format: "%d %b").count}
 							} %>
 						</div>
 					</div>
