@@ -202,7 +202,7 @@ class OrdersController < ApplicationController
   end
 
   def get_user(id)
-    user = User.find(id.reject { |x| x.empty? }).map { |u| u.name }.to_sentence
+    user = User.find(id.reject { |x| x.empty? }).map { |u| u.name.split.first.strip }.to_sentence
     return user
   end
 
