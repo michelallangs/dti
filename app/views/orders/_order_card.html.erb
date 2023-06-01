@@ -24,7 +24,7 @@
 						</div>
 
 						<%= content_tag :footer, class: "order-card-footer" do %>
-							<%= content_tag :span, is_admin?(current_user) ? order.school_name : "" %>
+							<%= content_tag :span, is_admin?(current_user) ? order.school.usual_name : "" %>
 							<div class="options">
 
 								<% if order.maintenance_technicians != [""] %>

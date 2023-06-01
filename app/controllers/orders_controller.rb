@@ -194,7 +194,7 @@ class OrdersController < ApplicationController
   end
 
   def get_user(id)
-    user = User.find(id.reject { |x| x.empty? }).map { |u| u.name.split.first.strip }.to_sentence
+    user = User.find(id.reject { |x| x.empty? }).map { |u| u.first_name }.to_sentence
     return user
   end
 
@@ -204,15 +204,15 @@ class OrdersController < ApplicationController
     user = User.find_by_id(id)
     
     if is_school?(user)
-      creator = School.find_by_user_id(id).name.split(/(?=\-)/)
+      creator = School.find_by_user_id(id).usual_name
     else
-      creator = user.name.split
+      creator = user.first_name
     end
 
-    return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator.first.strip}</strong>".html_safe
+    return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator}</strong>".html_safe
   end
 
   def technicians
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC").select(:name, :id).map { |t| [t.name.split.first.strip, t.id] }
   end
 end

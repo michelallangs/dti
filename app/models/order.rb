@@ -19,10 +19,6 @@ class Order < ApplicationRecord
   validates :performed_service, length: { maximum: 500 , message: "Limite máximo de caracteres: 500", allow_blank: true }
   validates :obs, length: { maximum: 500 , message: "Limite máximo de caracteres: 500", allow_blank: true }
 
-  def school_name
-	  self.school.name.split(/(?=\-)/).first
-	end
-
 	def created_at
     attributes['created_at'].strftime("%d/%m/%Y")
   end
@@ -30,4 +26,8 @@ class Order < ApplicationRecord
 	def create_normalized_strings
 	  self.requester_ascii = I18n.transliterate requester
 	end
+
+	def user_first_name
+    self.user.name.split.first
+  end
 end

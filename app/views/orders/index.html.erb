@@ -72,7 +72,7 @@
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="custom-select">
-						<%= select_tag :technician, options_for_select(@technicians.pluck(:name, :id), params[:technician]), include_blank: "Técnico responsável..." %>
+						<%= select_tag :technician, options_for_select(@technicians, params[:technician]), include_blank: "Técnico responsável..." %>
 					</div>
 				</div>
 

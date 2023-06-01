@@ -14,7 +14,7 @@ class HomeController < ApplicationController
 
 	def orders_per_user(orders, users)
 		users.map { |user|
-			{ user.name.split.first.strip => orders.where("maintenance_technicians LIKE ? AND updated_at > ?", "%#{user.id}%", 30.days.ago).count }
+			{ user.first_name => orders.where("maintenance_technicians LIKE ? AND updated_at > ?", "%#{user.id}%", 30.days.ago).count }
 		}.reduce(:merge)
 	end
 end

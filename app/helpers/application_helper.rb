@@ -34,7 +34,7 @@ module ApplicationHelper
   end
 
   def username
-    return is_admin?(current_user) ? current_user.name.split.first.strip : current_user.school.name.split(/(?=\-)/).first.strip
+    return is_admin?(current_user) ? current_user.first_name : current_user.school.usual_name
   end
 
   def current?(link_path)
@@ -86,10 +86,10 @@ module ApplicationHelper
   def order_creator(id)
     user = User.find_by_id(id)
     if is_school?(user)
-      creator = user.school.name.split(/(?=\-)/)
+      creator = user.school.usual_name
     else
-      creator = user.name.split
+      creator = user.first_name
     end
-    return creator.first.strip
+    return creator
   end
 end

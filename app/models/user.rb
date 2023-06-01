@@ -21,4 +21,14 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0,20]
     end
   end
+
+  def first_name
+    name.split.first
+  end
+
+  def last_name
+    if name.split.count > 1
+      name.split[1..-1].join(' ')
+    end
+  end
 end

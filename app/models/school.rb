@@ -22,4 +22,8 @@ class School < ApplicationRecord
   def create_normalized_strings
     self.name_ascii = I18n.transliterate name
   end
+
+  def usual_name
+    name.split(/(?=\-)/).first.strip
+  end
 end

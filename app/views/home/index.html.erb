@@ -30,7 +30,7 @@
 											<div class="table-col table-col-<%= is_school?(current_user) ? "20" : "15" %>" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
 
 											<% unless is_school?(current_user) %>
-												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school_name %></div>
+												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school.usual_name %></div>
 											<% end %>
 
 											<div class="table-col table-col-<%= is_school?(current_user) ? "50" : "35" %>" data-label="Defeito apresentado">
@@ -90,7 +90,7 @@
 						</header>
 						<div class="card-body">
 							<%= line_chart @users.map { |user|
-							    {name: user.name.split.first.strip, data: Order.where("maintenance_technicians LIKE ?", "%#{user.id}%").group_by_day(:updated_at, last: 7, format: "%d %b").count}
+							    {name: user.first_name, data: Order.where("maintenance_technicians LIKE ?", "%#{user.id}%").group_by_day(:updated_at, last: 7, format: "%d %b").count}
 							} %>
 						</div>
 					</div>
