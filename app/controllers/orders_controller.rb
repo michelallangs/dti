@@ -158,7 +158,7 @@ class OrdersController < ApplicationController
       flash.now[:alert] = "As datas inicial/final devem ser menores que a data de hoje"
     end
     
-    if allow_update && @order.update(order_update_params)
+    if allow_update && @order.update(order_params)
       flash[:success] = "Dados da OS atualizados com sucesso!"
       redirect_to orders_path
     else
@@ -167,12 +167,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:requester, :o_type, :spot, :defect, :backup, :performed_service, :obs, :removal_technicians, 
-                                  :maintenance_technicians, :start_date, :end_date, :status, :stuff_id, :user_id, :school_id, :updated_by, 
-                                  stuff_attributes: [:patrimony, :brand, :category, :defaulted, :school_id])
-  end
-
-  def order_update_params
     params.require(:order).permit!
   end
 
