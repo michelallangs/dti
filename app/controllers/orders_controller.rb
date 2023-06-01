@@ -213,6 +213,6 @@ class OrdersController < ApplicationController
   end
 
   def technicians
-    @technicians = User.where("is_technician = 'Sim'").order("name ASC").map { |t| t.name.split.first.strip }
+    @technicians = User.where("is_technician = 'Sim'").order("name ASC")
   end
 end
