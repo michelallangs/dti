@@ -372,8 +372,16 @@
 							position: static;
 							bottom: -5px;
 
-							.order-card-users {
-					    	color: #333;
+							.order-card-users, .order-card-phone {
+					    	color: rgba(0, 0, 0, 0.5);
+
+					    	&:nth-child(n+2) {
+					    		margin-left: 5px;
+					    	}
+
+					    	&:hover {
+					    		color: #333;
+					    	}
 					    }
 
 							.options-btn {

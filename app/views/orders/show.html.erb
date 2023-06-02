@@ -38,6 +38,11 @@
 		    			<%= content_tag :dt, "Solicitante" %>
 		  				<%= content_tag :dd, @order.requester %>
 		  			<% end %>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Contato" %>
+		  				<%= content_tag :dd, @order.school.phone %>
+		  			<% end %>
 		  		</section>
 		      		
 		  		<section>
