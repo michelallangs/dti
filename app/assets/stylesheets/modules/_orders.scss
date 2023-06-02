@@ -10,6 +10,15 @@
 					display: flex;
 					align-items: center;
 			    border-radius: 50px;
+
+			    .btn-icon.active {
+			    	background-color: rgba(#fff, .5);
+			    	pointer-events: none;
+
+				    span {
+				      color: $dark-blue;
+				    }
+			    }
 				}
 			}
 		}

@@ -11,8 +11,11 @@
 
 					<div class="right-content">
 						<div class="action-buttons">
-							<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon" do %><span class="material-icons md-20">grid_view</span><% end %>
-							<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon" do %><span class="material-icons md-20">table_rows</span><% end %>
+							<% grid_view = params[:view] != "list" ? "active" : "" %>
+							<% list_view = params[:view] == "list" ? "active" : "" %>
+
+							<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon #{grid_view}" do %><span class="material-icons md-20">grid_view</span><% end %>
+							<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon #{list_view}" do %><span class="material-icons md-20">table_rows</span><% end %>
 							<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-icons md-16 md-light">search</span>Filtro avançado<% end %>
 							<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Abrir OS<% end %>
 						</div>
