@@ -10,7 +10,7 @@
     background: none;
     background-color: $primary-color;
     min-height: 40px;
-    border: 2px solid transparent;
+    border: 2px solid $grey;
     border-radius: 5px;
     @include prefix(box-shadow, none);
 

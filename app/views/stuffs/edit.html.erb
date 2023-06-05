@@ -28,7 +28,7 @@
 							<div class="col-12 col-lg-4 col-md-5 col-sm-6">
 		        		<div class="input string" id="autocomplete-patrimony">
 		        			<label for="stuff[patrimony]" class="form-label">Patrimônio</label>
-									<%= autocomplete_field_tag "stuff[patrimony]", @stuff.patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false %>
+									<%= autocomplete_field_tag "stuff[patrimony]", @stuff.patrimony, autocomplete_stuff_patrimony_orders_path, append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, placeholder: "Deixe em branco caso não tenha" %>
 								</div>
 		        	</div>
 	        	</div>

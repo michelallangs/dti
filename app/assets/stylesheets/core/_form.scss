@@ -200,7 +200,7 @@
 		overflow-y: auto;
 		height: 150px;
 		border-radius: 5px;
-		border: solid 2px transparent;
+		border: solid 2px $grey;
 		background-color: white;
 		resize: none;
 
@@ -241,7 +241,7 @@
 	.select-selected {
 	  padding: 10px 30px 10px 15px;
 	  overflow: hidden;
-	  border: 2px solid transparent;
+	  border: 2px solid $grey;
 	  border-radius: 5px;
 	  min-height: 40px;
 	  @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
@@ -347,7 +347,7 @@
 
 	input {
 		padding: 10px 15px 10px 15px;
-		border: solid 2px transparent;
+		border: solid 2px $grey;
 		border-radius: 5px;
 		font-size: 1em;
 		width: 100%;
@@ -388,7 +388,7 @@
 	display: none;
 	
 	.search input, .select-selected {
-		border-color: $primary-color;
+		border-color: $grey;
 	}
 
 	input[type="submit"]{
