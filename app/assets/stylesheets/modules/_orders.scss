@@ -35,7 +35,7 @@
 
     	.prev-btn, .next-btn {
     		display: none;
-    		z-index: 999;
+    		z-index: 998;
     		position: absolute;
     		top: 40%;
     		@include prefix(transform, translateY(-50%));
