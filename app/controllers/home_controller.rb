@@ -9,8 +9,13 @@ class HomeController < ApplicationController
 	end
 
 	def profile
-		@school = current_user.school unless current_user.school.nil?
+		if is_school?(current_user)
+			@school = current_user.school 
+			@stuffs = @school.stuffs.page(params[:stuffs_page]).per(10)
+		end
+
 		@orders = is_school?(current_user) ? @school.orders : Order.where("maintenance_technicians LIKE ?", "%#{current_user.id}%")
+		@orders = @orders.page(params[:orders_page]).per(10)
 	end  
 
 	def orders_per_user(orders, users)

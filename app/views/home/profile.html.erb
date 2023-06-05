@@ -117,9 +117,11 @@
 													</li>
 												<% end %>
 											</ul>
+
+											<%= paginate @orders, param_name: :orders_page %>
 										</div>
 									<% else %>
-										<h3 class="text-center m-t-25 p-b-50"><i>Nenhuma OS registrada para esta unidade.</i></h3>
+										<h4 class="text-center m-t-25 p-b-50"><i>Nenhuma OS <%= is_school?(current_user) ? "registrada para sua unidade." : "atendida por você." %></i></h4>
 									<% end %>
 								</div>
 							</div>
@@ -133,7 +135,7 @@
 			  			<div class="row">
 								<div class="col-12">
 									<div class="card">
-										<% unless @school.stuffs.nil? || @school.stuffs.blank? %>
+										<% unless @stuffs.nil? || @stuffs.blank? %>
 											<div class="card-body">
 												<ul class="responsive-table">
 													<li class="table-header">
@@ -143,7 +145,7 @@
 														<div class="table-col table-col-10"><div class="options">Opções</div></div>
 													</li>
 
-													<% @school.stuffs.order("category ASC").each do |s| %>
+													<% @stuffs.order("category ASC").each do |s| %>
 														<li class="table-row">
 															<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
 															<div class="table-col table-col-40" data-label="Categoria">
@@ -162,9 +164,11 @@
 														</li>
 													<% end %>
 												</ul>
+
+												<%= paginate @stuffs, param_name: :stuffs_page %>
 											</div>
 										<% else %>
-											<h3 class="text-center m-t-25 p-b-50"><i>Nenhum equipamento registrado para esta unidade.</i></h3>
+											<h4 class="text-center m-t-25 p-b-50"><i>Nenhum equipamento registrado para sua unidade.</i></h4>
 										<% end %>
 									</div>
 								</div>
