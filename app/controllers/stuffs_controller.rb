@@ -1,12 +1,14 @@
 class StuffsController < ApplicationController
 	autocomplete :stuff, :patrimony, full: true
+  autocomplete :school, :name, full: true
 
 	def index
 		id = params[:id]
 		patrimony = params[:patrimony]
     category = params[:category]
     brand = params[:brand]
-    @search = [id, patrimony, category, brand]
+    school_name = I18n.transliterate(params[:name]) if params[:name]
+    @search = [id, patrimony, category, brand, school_name]
 
     @stuffs = Stuff.joins(:school)
 
@@ -14,9 +16,12 @@ class StuffsController < ApplicationController
     	patrimony = patrimony.downcase == "s/p" ? "" 
     																					: "%#{patrimony}%"
 
-    	query = "patrimony LIKE ? AND lower(category) LIKE lower(?) AND lower(brand) LIKE lower(?)"
+    	query = "stuffs.patrimony LIKE ? AND 
+               lower(stuffs.category) LIKE lower(?) AND 
+               lower(stuffs.brand) LIKE lower(?) AND 
+               lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{category}%", "%#{brand}%"]
+      values = [patrimony, "%#{category}%", "%#{brand}%", "%#{school_name}%"]
 
       if !id.blank?
         query += " AND stuffs.id LIKE ?"

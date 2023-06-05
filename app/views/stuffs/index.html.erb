@@ -54,6 +54,12 @@
 						<% end %>
 					</div>
 				</div>
+
+				<div class="col-12 col-sm-6 col-lg-3">
+					<div class="search" id="autocomplete-name">
+						<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
+					</div>
+				</div>
 			</div>
 
 			<div class="row">
