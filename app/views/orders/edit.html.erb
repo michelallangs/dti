@@ -48,19 +48,21 @@
 		    		</div>
 		    	</div>
 
-		    	<%= flash_message %>
-
 					<%= simple_form_for @order, url: edit_order_path, html: { class: "form" } do |f| %>
 			      <%= f.simple_fields_for :stuff do |s| %>
+		      		<%= f.input :user_id, as: :hidden, label: false, wrapper: false %>
 			      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
 			      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
-			      	<fieldset <%= "disabled=disabled" if is_admin?(current_user) || @order.status != "Em aberto" %>>
+			      	<fieldset>
 								<div id="school-data" class="order-data <%= 'current' if !is_admin?(current_user) %>">
-				      		<%= f.input :user_id, as: :hidden, label: false, wrapper_html: { class: "m-t-0" } %>
 
 					      	<div class="row">
-					      		<div class="col-12 col-sm-5 col-lg-3">
+					      		<%= content_tag :div, "", class: "col-12 col-sm-6 col-md-4 col-lg-3" do %>
+				      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
+				    				<% end if is_admin?(current_user) %>
+
+					      		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
 				      				<%= f.input :requester, required: false, label: "Solicitante", label_html: { class: "form-label" } %>
 										</div>
 					      	</div>

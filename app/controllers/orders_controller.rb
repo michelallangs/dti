@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   helper_method [:get_patrimony, :get_user, :order_updated_at, :order_creator]
   before_action :stuff_category
   before_action :technicians, only: [:index, :new, :create, :edit, :update]
+  before_action :schools, only: [:new, :create, :edit, :update]
   autocomplete :stuff, :patrimony, full: true
   layout "print", only: :print_order
 
@@ -58,14 +59,10 @@ class OrdersController < ApplicationController
 
     @order = Order.new
     @order.build_stuff
-    @schools = School.all.collect {|s| [ s.name, s.id ] }
-    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
   end
 
   def create
     allow_save = true
-    @schools = School.all.collect {|s| [ s.name, s.id ] }
-    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
     @r_technicians = params[:order][:removal_technicians]
     @m_technicians = params[:order][:maintenance_technicians]
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
@@ -108,7 +105,6 @@ class OrdersController < ApplicationController
       @order.update(order_params)
       @order.stuff.school_id = school_id unless school_id.blank?
     end
-    
 
     if allow_save && @order.save
       flash[:success] = "OS aberta com sucesso!"
@@ -127,12 +123,16 @@ class OrdersController < ApplicationController
     allow_update = true
     @order = Order.find(params[:id])
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
+    category = params[:order][:stuff_attributes][:category] || ""
+    brand = params[:order][:stuff_attributes][:brand] || ""
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]
     end_date = params[:order][:end_date]
+    stuff = Stuff.find_by_patrimony(@patrimony)
+    stuff_school = stuff.school_id.to_s unless stuff.nil?
 
     unless @patrimony.blank?
-      if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
+      if school_id != stuff_school && !school_id.blank? && !stuff_school.blank?
         allow_update = false
         flash.now[:alert] = "Patrimônio já pertence a outra unidade"
       end
@@ -149,8 +149,24 @@ class OrdersController < ApplicationController
       allow_update = false
       flash.now[:alert] = "As datas inicial/final devem ser menores que a data de hoje"
     end
-    
-    if allow_update && @order.update(order_params)
+
+    if allow_update
+      school_has_stuff = School.find(school_id).stuffs.exists?(patrimony: @patrimony)
+
+      if school_has_stuff
+        @order.stuff_id = stuff.id
+
+        @order.update(order_params.except(:stuff_attributes))
+      elsif stuff.nil? 
+        new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id)
+        new_stuff.save
+        @order.stuff_id = new_stuff.id
+
+        @order.update(order_params.except(:stuff_attributes))
+      else
+        @order.update(order_params)
+      end
+
       flash[:success] = "Dados da OS atualizados com sucesso!"
       redirect_to orders_path
     else
@@ -214,5 +230,10 @@ class OrdersController < ApplicationController
 
   def technicians
     @technicians = User.where("is_technician = 'Sim'").order("name ASC").select(:name, :id).map { |t| [t.name.split.first.strip, t.id] }
+  end
+
+  def schools
+    @schools = School.all.collect {|s| [ s.name, s.id ] }
+    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
   end
 end

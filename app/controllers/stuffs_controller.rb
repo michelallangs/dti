@@ -29,7 +29,7 @@ class StuffsController < ApplicationController
     end
 
 
-	 	@stuffs = @stuffs.order("#{params[:sort_by]} ASC") if params[:sort_by]
+	 	@stuffs = @stuffs.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
     @stuffs_paginate = @stuffs.page(params[:page]).per(params[:limit])
 	end
