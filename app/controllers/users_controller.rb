@@ -92,11 +92,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if @user.destroy
-      orders = Order.where("maintenance_technicians LIKE ? OR removal_technicians LIKE ?", "%#{@user.id}%", "%#{@user.id}%")
+      orders = Order.where("maintenance_technicians LIKE ? OR 
+                            removal_technicians LIKE ? OR 
+                            updated_by LIKE ?", "%#{@user.id}%", "%#{@user.id}%", "%#{@user.id}%")
 
       orders.map { |order| 
         maintenance_technicians = order.maintenance_technicians.delete(@user.id.to_s)
         removal_technicians = order.removal_technicians.delete(@user.id.to_s)
+        updated_by = order.update(updated_by: User.first.id)
         order.save!
       }
 
