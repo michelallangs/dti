@@ -10,6 +10,7 @@ class HomeController < ApplicationController
 
 	def profile
 		@school = current_user.school unless current_user.school.nil?
+		@orders = is_school?(current_user) ? @school.orders : Order.where("maintenance_technicians LIKE ?", "%#{current_user.id}%")
 	end  
 
 	def orders_per_user(orders, users)
