@@ -123,8 +123,9 @@ class OrdersController < ApplicationController
     allow_update = true
     @order = Order.find(params[:id])
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
-    category = params[:order][:stuff_attributes][:category] || ""
-    brand = params[:order][:stuff_attributes][:brand] || ""
+    category = params[:order][:stuff_attributes][:category]
+    brand = params[:order][:stuff_attributes][:brand]
+    defaulted = params[:order][:stuff_attributes][:defaulted]
     school_id = params[:order][:school_id]
     start_date = params[:order][:start_date]
     end_date = params[:order][:end_date]
@@ -157,8 +158,9 @@ class OrdersController < ApplicationController
         @order.stuff_id = stuff.id
 
         @order.update(order_params.except(:stuff_attributes))
+        stuff.update(category: category, brand: brand, defaulted: defaulted)
       elsif stuff.nil? 
-        new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id)
+        new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id, defaulted: defaulted)
         new_stuff.save
         @order.stuff_id = new_stuff.id
 
@@ -174,10 +176,6 @@ class OrdersController < ApplicationController
     end
   end
 
-  def order_params
-    params.require(:order).permit!
-  end
-
   def show
     @order = Order.find(params[:id])
   end
@@ -190,6 +188,10 @@ class OrdersController < ApplicationController
       flash[:alert] = "OS cancelada com sucesso!"
       redirect_to orders_path
     end
+  end
+
+  def order_params
+    params.require(:order).permit!
   end
 
   def print_order

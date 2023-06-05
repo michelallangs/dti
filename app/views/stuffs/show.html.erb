@@ -47,7 +47,7 @@
 		  			<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Unidade" %>
 		  				<%= content_tag :dd, @stuff.school.name %>
-		  			<% end %>
+		  			<% end unless is_school?(current_user) %>
 		  		</section>
 
 		  		<section>

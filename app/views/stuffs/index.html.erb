@@ -77,7 +77,7 @@
 								<div class="table-col table-col-10"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
 								<div class="table-col table-col-20"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
 								<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
-								<div class="table-col table-col-40"><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %></div>
+								<%= content_tag :div, class: "table-col table-col-40" do %><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %><% end unless is_school?(current_user) %>
 								<div class="table-col table-col-10"><div class="options">Opções</div></div>
 							</li>
 
@@ -93,7 +93,7 @@
 										<%= s.category %>
 									</div>
 									<div class="table-col table-col-15" data-label="Marca/Modelo"><%= s.brand %></div>
-									<div class="table-col table-col-40" data-label="Unidade"><%= s.school.name %></div>
+									<%= content_tag :div, s.school.name, class: "table-col table-col-40", "data-label": "Unidade" unless is_school?(current_user) %>
 									<div class="table-col table-col-10">
 										<div class="options">
 											<%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
