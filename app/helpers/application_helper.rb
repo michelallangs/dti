@@ -49,7 +49,7 @@ module ApplicationHelper
   end
 
   def list_types
-    types = ['Manutenção corretiva', 'Manutenção preventiva', 'Infraestrutura de redes', 
+    types = ['Manutenção corretiva', 'Manutenção preventiva', 'Atendimento externo', 'Infraestrutura de redes', 
               'Sistemas', 'Administrativo', 'Acesso remoto', 'Entrega/doação de equipamento']
     return types
   end
