@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
-  helper_method [:get_patrimony, :get_user, :order_updated_at, :order_creator]
+  helper_method [:get_patrimony, :get_user, :order_updated_at]
   before_action :stuff_category
   before_action :technicians, only: [:index, :new, :create, :edit, :update]
   before_action :schools, only: [:new, :create, :edit, :update]
   autocomplete :stuff, :patrimony, full: true
+  autocomplete :school, :name, full: true
   layout "print", only: :print_order
 
   def index
     # params[:view] = "list" if params[:view].nil?
+    id = params[:id]
     patrimony = params[:patrimony]
     spot = params[:spot]
     category = params[:category]
@@ -17,10 +19,9 @@ class OrdersController < ApplicationController
     o_type = params[:o_type]
     start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
     end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
-    requester = I18n.transliterate(params[:requester]) if params[:requester]
-    school = I18n.transliterate(params[:school]) if params[:school]
+    school = I18n.transliterate(params[:name]) if params[:name]
 
-    @search = [patrimony, spot, category, brand, status, technician, o_type, start_date, end_date, requester, school]
+    @search = [id, patrimony, spot, category, brand, status, technician, o_type, start_date, end_date, school]
 
     @orders = Order.joins(:stuff, :school)
 
@@ -30,14 +31,19 @@ class OrdersController < ApplicationController
 
       query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
                lower(stuffs.brand) LIKE lower(?) AND lower(orders.status) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND 
-               lower(orders.o_type) LIKE lower(?) AND lower(orders.requester_ascii) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
+               lower(orders.o_type) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{status}%", "%#{technician}%", 
-                "%#{o_type}%", "%#{requester}%", "%#{school}%"]
+      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{status}%", 
+                "%#{technician}%", "%#{o_type}%", "%#{school}%"]
 
       if !start_date.blank? || !end_date.blank?
         query += " AND date(orders.created_at) BETWEEN ? AND ?"
         values += [start_date.to_date, end_date.to_date]
+      end
+
+      if !id.blank?
+        query += " AND orders.id = ?"
+        values += [id]
       end
 
       @orders = @orders.where(query, *values)

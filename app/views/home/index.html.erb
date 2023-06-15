@@ -19,8 +19,8 @@
 										<div class="table-col table-col-5">#</div>
 										<div class="table-col table-col-<%= is_school?(current_user) ? "20" : "15" %>">Status</div>
 										<% unless is_school?(current_user) %><div class="table-col table-col-20">Unidade</div><% end %>
-										<div class="table-col table-col-<%= is_school?(current_user) ? "50" : "35" %>">Defeito apresentado</div>
-										<div class="table-col table-col-15">Atualizada em</div>
+										<div class="table-col table-col-<%= is_school?(current_user) ? "45" : "30" %>">Defeito apresentado</div>
+										<div class="table-col table-col-20">Atualizada em</div>
 										<div class="table-col table-col-10"><div class="options">Opções</div></div>
 									</li>
 
@@ -30,21 +30,26 @@
 											<div class="table-col table-col-<%= is_school?(current_user) ? "20" : "15" %>" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
 
 											<% unless is_school?(current_user) %>
-												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.name %>"><%= o.school.usual_name %></div>
+												<div class="table-col table-col-20" data-label="Unidade" title="<%= o.school.full_name %>">
+													<%= link_to o.school.usual_name, school_path(o.school_id) %>
+												</div>
 											<% end %>
 
-											<div class="table-col table-col-<%= is_school?(current_user) ? "50" : "35" %>" data-label="Defeito apresentado">
+											<div class="table-col table-col-<%= is_school?(current_user) ? "45" : "30" %>" data-label="Defeito apresentado">
 												<div class="order-defect limited-text">
 													<%= o.defect.to_s.html_safe %>	
 												</div>
 											</div>
-											<div class="table-col table-col-15" data-label="Atualizada em">
-												<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
-												<%= o.updated_at.strftime("%H:%M") %>
+											<div class="table-col table-col-20" data-label="Atualizada em">
+												<%= content_tag :span do %>
+													<%= "#{o.updated_at.strftime("%d/%m/%Y")} por " %>
+													<%= link_to order_creator(o.updated_by), is_school?(User.find(o.updated_by)) ? school_path(o.school_id) : user_path(o.updated_by), class: "link"  %><br />
+													<%= o.updated_at.strftime("%H:%M") %>
+												<% end %>
 											</div>
 											<div class="table-col table-col-10" data-label="Opções">
 												<div class="options">
-								          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+								          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 												</div>
 											</div>
 										</li>

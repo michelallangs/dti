@@ -26,4 +26,8 @@ class School < ApplicationRecord
   def usual_name
     name.split(/(?=\-)/).first.strip
   end
+
+  def full_name
+    name.split(/(?=\-)/).last.delete("-").strip
+  end
 end

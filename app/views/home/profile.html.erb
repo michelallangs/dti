@@ -10,9 +10,9 @@
 					<h1 class="header-title">Meu <span>perfil</span></h1>
 
 					<div class="actions">
-						<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path(current_user), class: "btn-warning icon" do %><span class="material-icons md-16">key</span>Trocar senha<% end %>
-						<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir conta<% end %>
+						<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+						<%= link_to edit_user_password_path(current_user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
+						<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir conta<% end %>
 		      </div>
 				</header>
 			</div>
@@ -87,10 +87,10 @@
 												<li class="table-header">
 													<div class="table-col table-col-5">#</div>
 													<div class="table-col table-col-10">Solicitante</div>
-													<div class="table-col table-col-10">Status</div>
+													<div class="table-col table-col-15">Status</div>
 													<div class="table-col table-col-10">Tipo</div>
-													<div class="table-col table-col-40">Defeito apresentado</div>
-													<div class="table-col table-col-15">Atualizada em</div>
+													<div class="table-col table-col-30">Defeito apresentado</div>
+													<div class="table-col table-col-20">Atualizada em</div>
 													<div class="table-col table-col-10"><div class="options">Opções</div></div>
 												</li>
 
@@ -98,20 +98,23 @@
 													<li class="table-row">
 														<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
 														<div class="table-col table-col-10" data-label="Solicitante"><%= o.requester %></div>
-														<div class="table-col table-col-10" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
+														<div class="table-col table-col-15" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
 														<div class="table-col table-col-10" data-label="Tipo"><%= o.o_type || " - " %></div>
-														<div class="table-col table-col-40" data-label="Defeito apresentado">
+														<div class="table-col table-col-30" data-label="Defeito apresentado">
 															<div class="order-defect limited-text">
 																<%= o.defect.to_s.html_safe %>
 															</div>
 														</div>
-														<div class="table-col table-col-15" data-label="Atualizada em">
-															<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
-															<%= o.updated_at.strftime("%H:%M") %>
+														<div class="table-col table-col-20" data-label="Atualizada em">
+															<%= content_tag :span do %>
+																<%= "#{o.updated_at.strftime("%d/%m/%Y")} por " %>
+																<%= link_to order_creator(o.updated_by), is_school?(User.find(o.updated_by)) ? school_path(o.school_id) : user_path(o.updated_by), class: "link"  %><br />
+																<%= o.updated_at.strftime("%H:%M") %>
+															<% end %>
 														</div>
 														<div class="table-col table-col-10" data-label="Opções">
 															<div class="options">
-											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 															</div>
 														</div>
 													</li>
@@ -150,15 +153,15 @@
 															<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
 															<div class="table-col table-col-40" data-label="Categoria">
 																<% if s.category == 'PC/Notebook' %>
-																	<%= content_tag :span, "done", title: "Padrão OK", class: "material-icons md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
-																	<%= content_tag :span, "close", title: "Necessária padronização", class: "material-icons md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
+																	<%= content_tag :span, "done", title: "Padrão OK", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
+																	<%= content_tag :span, "close", title: "Necessária padronização", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
 																<% end %>
 																<%= s.category %>
 															</div>
 															<div class="table-col table-col-35" data-label="Marca/modelo"><%= s.brand %></div>
 															<div class="table-col table-col-10" data-label="Opções">
 																<div class="options">
-												          <%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+												          <%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 																</div>
 															</div>
 														</li>

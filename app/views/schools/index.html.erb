@@ -10,8 +10,8 @@
 					<h1 class="header-title">Lista de <span>unidades</span></h1>
 
 					<div class="right-content">
-						<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-icons md-16 md-light">search</span>Filtro avançado<% end %>
-						<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-icons md-16 md-light">add</span>Cadastrar unidade<% end %>
+						<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
+						<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar unidade<% end %>
 					</div>
 				</header>
 			</div>
@@ -90,9 +90,9 @@
 									<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>
 									<div class="table-col table-col-10">
 										<div class="options">
-											<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
-						          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-icons md-20">edit</span><% end %>
-						          <%= link_to destroy_school_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-icons md-20">delete</span><% end %>
+											<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
+						          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>
+						          <%= link_to destroy_school_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-symbols-outlined md-20">delete</span><% end %>
 										</div>
 									</div>
 								</li>

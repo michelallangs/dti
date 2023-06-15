@@ -179,7 +179,7 @@
 				  		top: 100%;
 				  	}
 
-				  	> span {
+				  	> .school-name {
 				  		padding: 0 25px 0 0;
 				  	}
 				  }
@@ -312,6 +312,9 @@
 
 					.order-card-header {
 						padding: 15px;
+						display: flex;
+						align-items: start;
+						justify-content: space-between;
 
 						.left-content {
 							display: flex;
@@ -331,12 +334,6 @@
 							font-weight: 600;
 							color: rgba(0, 0, 0, 0.5);
 						}
-					}
-
-					.order-card-header {
-						display: flex;
-						align-items: start;
-						justify-content: space-between;
 					}
 
 					.order-card-body {
@@ -371,7 +368,7 @@
 						position: relative;
 						padding: 15px 5px 15px 15px;
 
-						> span {
+						> .school-name {
 							color: rgba(0, 0, 0, 0.5);
 							font-size: .9em;
 							font-weight: 600;

@@ -24,25 +24,25 @@
 						</div>
 
 						<%= content_tag :footer, class: "order-card-footer" do %>
-							<%= content_tag :span, is_admin?(current_user) ? order.school.usual_name : "" %>
+							<%= link_to is_admin?(current_user) ? order.school.usual_name : "", school_path(order.school_id), "data-tooltip": order.school.full_name, title: order.school.full_name, class: "school-name tooltip-toggle" %>
 							
 							<div class="options">
 								<% if is_admin?(current_user) %>
-									<span class="material-icons md-20 order-card-phone tooltip-toggle" data-tooltip="<%= order.school.phone %>" title="<%= order.school.phone %>">call</span>
+									<span class="material-symbols-outlined md-20 order-card-phone tooltip-toggle" data-tooltip="<%= order.school.phone %>" title="<%= order.school.phone %>">call</span>
 								<% end %>
 
 								<% if order.maintenance_technicians != [""] %>
-									<span class="material-icons md-20 order-card-users tooltip-toggle" data-tooltip="<%= get_user(order.maintenance_technicians) %>" title="<%= get_user(order.maintenance_technicians) %>">
+									<span class="material-symbols-outlined md-20 order-card-users tooltip-toggle" data-tooltip="<%= get_user(order.maintenance_technicians) %>" title="<%= get_user(order.maintenance_technicians) %>">
 										<%= order.maintenance_technicians.length > 2 ? "group" : "person" %>
 									</span>
 								<% end %>
 
-								<%= link_to "#", class: "options-btn" do %><span class="material-icons md-20">more_vert</span><% end %>
+								<%= link_to "#", class: "options-btn" do %><span class="material-symbols-outlined md-20">more_vert</span><% end %>
 								<ul>
-									<li><%= link_to "Imprimir OS", print_order_path(order), target: "_blank"  %></li>
-									<li><%= link_to "Ver detalhes", order_path(order) %></li>
-									<li><%= link_to "Editar", edit_order_path(order) %></li>
-									<li><%= link_to "Cancelar OS", destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
+									<li><%= link_to "<span class='material-symbols-outlined md-16'>print</span> Imprimir OS".html_safe, print_order_path(order), target: "_blank"  %></li>
+									<li><%= link_to "<span class='material-symbols-outlined md-16'>visibility</span> Ver detalhes".html_safe, order_path(order) %></li>
+									<li><%= link_to "<span class='material-symbols-outlined md-16'>edit</span> Editar".html_safe, edit_order_path(order) %></li>
+									<li><%= link_to "<span class='material-symbols-outlined md-16'>close</span> Cancelar OS".html_safe, destroy_order_path(order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." } %></li>
 								</ul>
 							</div>
 						<% end %>

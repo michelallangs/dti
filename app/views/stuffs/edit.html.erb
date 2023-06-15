@@ -8,9 +8,9 @@
 					<h1 class="header-title">Editar dados do <span>equipamento</span></h1>
 
 					<div class="actions">
-	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-icons md-16 md-light">done</span>Salvar<% end %>
-	          <%= link_to stuffs_path, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
-	          <%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir equipamento<% end %>
+	        	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">done</span>Salvar<% end %>
+	          <%= link_to stuffs_path, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+	          <%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir equipamento<% end %>
 	        </div>
 				</header>
 			</div>

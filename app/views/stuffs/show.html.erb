@@ -10,9 +10,9 @@
 					<h1 class="header-title">Detalhes do<span> equipamento</span></h1>
 
 					<div class="actions">
-						<%= link_to edit_stuff_path(@stuff), class: "btn-info icon" do %><span class="material-icons md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-icons md-16">undo</span>Voltar<% end %>
-						<%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-icons md-16 md-light">close</span>Excluir equipamento<% end %>
+						<%= link_to edit_stuff_path(@stuff), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+						<%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir equipamento<% end %>
 		      </div>
 				</header>
 			</div>
@@ -81,12 +81,15 @@
 															</div>
 														</div>
 														<div class="table-col table-col-15" data-label="Atualizada em">
-															<%= "#{o.updated_at.strftime("%d/%m/%Y")} por #{order_creator(o.updated_by)}" %><br />
-															<%= o.updated_at.strftime("%H:%M") %>
+															<%= content_tag :span do %>
+																<%= "#{o.updated_at.strftime("%d/%m/%Y")} por " %>
+																<%= link_to order_creator(o.updated_by), is_school?(User.find(o.updated_by)) ? school_path(o.school_id) : user_path(o.updated_by), class: "link"  %><br />
+																<%= o.updated_at.strftime("%H:%M") %>
+															<% end %>
 														</div>
 														<div class="table-col table-col-10" data-label="Opções">
 															<div class="options">
-											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-icons md-20">visibility</span><% end %>
+											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 															</div>
 														</div>
 													</li>

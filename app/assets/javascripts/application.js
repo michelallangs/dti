@@ -65,11 +65,13 @@ ready = function() {
   })
 
   $(".enable-filters").on("click", function(){
+    $(this).stop().toggleClass("filter-on");
     $(".filters").stop().fadeToggle(300);
   })
 
   $(".search input").each((i, e) => {
     if ($(e).val() != "") {
+      $(".enable-filters").stop().addClass("filter-on");
       $(".filters").stop().show();
     }
   })

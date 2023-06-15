@@ -99,11 +99,6 @@
 	background-color: transparent;
 	font-size: 1em;
 	font-weight: bold;
-
-	&:hover {
-		cursor: pointer;
-		text-decoration: underline;
-	}
 }
 
 .img {
@@ -182,7 +177,7 @@
 	right: 0;
 	top: 0;
 	bottom: 0;
-	z-index: 999;
+	z-index: 1000;
 	background-color: $alt-color;
 
 	.loading-content {
@@ -197,7 +192,6 @@ section {
 dl {
 	width: 100%;
 	display: flex;
-	gap: 15px;
 	padding-top: 15px;
   padding-bottom: 15px;
 
@@ -271,10 +265,21 @@ dl {
       border-radius: 5px;
       color: #aaa;
       font-weight: 600;
+      display: flex;
+    	align-items: center;
+    	text-decoration: none;
 
       &:hover {
         background-color: $dark-blue;
-        color: $primary-color;
+
+        &, span {
+        	color: $primary-color;
+        }
+      }
+
+      span {
+      	margin-right: 10px;
+      	color: #aaa;
       }
     }
   }
@@ -305,6 +310,14 @@ dl {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.enable-filters.filter-on {
+	background-color: rgba(#fff, .5); 
+
+	span {
+		color: $dark-blue;
+	}
 }
 
 .tooltip-toggle {
