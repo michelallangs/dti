@@ -313,7 +313,7 @@
 					.order-card-header {
 						padding: 15px;
 						display: flex;
-						align-items: start;
+						align-items: flex-start;
 						justify-content: space-between;
 
 						.left-content {
@@ -476,7 +476,7 @@
 		}
 
 		.input.boolean, .input.boolean > label {
-			align-items: start;
+			align-items: flex-start;
 			flex-flow: column;
 		}
 	}
@@ -527,7 +527,7 @@
 				}
 
 				.custom-radio {
-					align-items: start;
+					align-items: flex-start;
 
 					span.radio {
 						label {
@@ -632,7 +632,7 @@
 			
 			* {
 				-webkit-print-color-adjust: exact;
-				color-adjust: exact;
+				print-color-adjust: exact;
 			}
 		}
 
