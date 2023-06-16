@@ -90,8 +90,8 @@ module ApplicationHelper
   end
 
   def registered_data(data)
-    limit = params[:limit].to_i > data.count ? data.count : params[:limit]
-    content = params[:limit].blank? ? "(Total: #{data.count})" : "(exibindo #{limit} de #{data.count})"
+    limit = params[:limit].to_i > data ? data : params[:limit]
+    content = params[:limit].blank? ? "(Total: #{data})" : "(exibindo #{limit} de #{data})"
 
     return content
   end

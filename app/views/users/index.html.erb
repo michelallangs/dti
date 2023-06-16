@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
-					<h1 class="header-title">Lista de <span>usuários</span> <%= content_tag :i, registered_data(@users) %></h1>
+					<h1 class="header-title">Lista de <span>usuários</span> <%= content_tag :i, registered_data(@users.count) %></h1>
 
 					<div class="right-content">
 						<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
