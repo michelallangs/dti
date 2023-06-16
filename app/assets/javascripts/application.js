@@ -78,6 +78,7 @@ ready = function() {
 
   $(".custom-select select option:selected").each((i, e) => { 
     if ($(e).index() != 0) {
+      $(".enable-filters").stop().addClass("filter-on");
       $(".filters").stop().show();
     }
   })

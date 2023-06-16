@@ -1,5 +1,5 @@
 class School < ApplicationRecord
-  paginates_per 5
+  paginates_per 15
   
   before_save :create_normalized_strings
 

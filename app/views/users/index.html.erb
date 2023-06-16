@@ -7,10 +7,10 @@
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
-					<h1 class="header-title">Lista de <span>usuários</span></h1>
+					<h1 class="header-title">Lista de <span>usuários</span> <%= content_tag :i, registered_data(@users) %></h1>
 
 					<div class="right-content">
-						<%= link_to "#", alt: "Filtrar dados", title: "Filtrar dados", class: "btn icon enable-filters" do %><span class="material-symbols-outlined md-16 md-light">search</span>Filtro avançado<% end %>
+						<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
 						<%= link_to new_user_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar usuário<% end %>
 					</div>
 				</header>
@@ -33,13 +33,14 @@
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
 					<div class="search">
-						<%= search_field_tag :email, params[:email], placeholder: "E-mail" %>
+						<%= search_field_tag :username, params[:username], placeholder: "Nome de usuário" %>
 					</div>
 				</div>
 
 				<div class="col-lg-3 col-md-6 col-sm-12">
+					
 					<div class="search">
-						<%= search_field_tag :username, params[:username], placeholder: "Nome de usuário" %>
+						<%= search_field_tag :email, params[:email], placeholder: "E-mail" %>
 					</div>
 				</div>
 			</div>
@@ -74,7 +75,7 @@
 									<div class="table-col table-col-20" data-label="Nome"><%= u.name %></div>
 									<div class="table-col table-col-20" data-label="Nome de usuário"><%= u.username %></div>
 									<div class="table-col table-col-45" data-label="E-mail"><%= u.email %></div>
-									<div class="table-col table-col-10">
+									<div class="table-col table-col-10" data-label="Opções">
 										<div class="options">
 											<%= link_to user_path(u), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 						          <%= link_to edit_user_path(u), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>

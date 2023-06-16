@@ -7,7 +7,7 @@
 		<div class="row">
 			<div class="col">
 				<header class="container-header">
-					<h1 class="header-title">Lista de <span>unidades</span></h1>
+					<h1 class="header-title">Lista de <span>unidades</span> <%= content_tag :i, registered_data(@schools) %></h1>
 
 					<div class="right-content">
 						<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
@@ -88,7 +88,7 @@
 									<div class="table-col table-col-35" data-label="Nome"><%= s.name %></div>
 									<div class="table-col table-col-20" data-label="Telefone"><%= s.phone %></div>
 									<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>
-									<div class="table-col table-col-10">
+									<div class="table-col table-col-10" data-label="Opções">
 										<div class="options">
 											<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
 						          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>

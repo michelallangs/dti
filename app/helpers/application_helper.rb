@@ -85,11 +85,14 @@ module ApplicationHelper
 
   def order_creator(id)
     user = User.find_by_id(id)
-    if is_school?(user)
-      creator = user.school.usual_name
-    else
-      creator = user.first_name
-    end
-    return creator
+
+    return is_school?(user) ? user.school.usual_name : user.first_name
+  end
+
+  def registered_data(data)
+    limit = params[:limit].to_i > data.count ? data.count : params[:limit]
+    content = params[:limit].blank? ? "(Total: #{data.count})" : "(exibindo #{limit} de #{data.count})"
+
+    return content
   end
 end

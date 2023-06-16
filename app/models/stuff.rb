@@ -1,5 +1,5 @@
 class Stuff < ApplicationRecord
-	paginates_per 5
+	paginates_per 15
 
 	has_many :orders, dependent: :destroy
 	belongs_to :school
