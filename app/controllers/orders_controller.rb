@@ -30,10 +30,10 @@ class OrdersController < ApplicationController
                                               : "%#{patrimony}%"
 
       query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
-               lower(stuffs.brand) LIKE lower(?) AND lower(orders.status) = lower(?) AND orders.maintenance_technicians LIKE ? AND 
+               lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND 
                lower(orders.o_type) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "#{status}", 
+      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", 
                 "%#{technician}%", "%#{o_type}%", "%#{school}%"]
 
       if !start_date.blank? || !end_date.blank?
@@ -44,6 +44,11 @@ class OrdersController < ApplicationController
       if !id.blank?
         query += " AND orders.id = ?"
         values += [id]
+      end
+
+      if !status.blank?
+        query += " AND lower(orders.status) = lower(?)"
+        values += [status]
       end
 
       @orders = @orders.where(query, *values)
