@@ -20,7 +20,9 @@
 						<div class="order-card-body">
 							<%= content_tag :span, order.o_type if order.o_type != "" %>
 							<%= content_tag :h3, "#{order.stuff.category} #{get_patrimony(order.stuff.patrimony)}" %>
-							<%= content_tag :div, order.defect.to_s.html_safe, class: "order-defect limited-text" %>
+							<div class="order-defect">
+								<%= content_tag :div, order.defect.to_s.html_safe, class: "limited-text" %>
+							</div>
 						</div>
 
 						<%= content_tag :footer, class: "order-card-footer" do %>
