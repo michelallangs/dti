@@ -39,7 +39,7 @@
 		    		<div class="col-12 col-lg-6 order-id">
 		    			<%= content_tag :h4 do %>
 		    				<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
-		    				<%= content_tag :span, " - #{@order.school.name}" if is_admin?(current_user) %>
+		    				<%= content_tag :span, " - #{Order.find(params[:id]).school.name}" if is_admin?(current_user) %>
 		    			<% end %>
 		    		</div>
 

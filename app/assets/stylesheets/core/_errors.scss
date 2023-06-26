@@ -14,11 +14,12 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 10px 15px;
-  margin-bottom: 25px;
+  padding: 20px;
+  margin: 15px 0;
   border-radius: 5px;
   color: $secondary-color;
   background-color: $primary-color;
+  border-top: solid 5px rgba(255, 255, 255, 0.25);
 
   &.flash-search {
     border: solid 1px $dark-blue;
@@ -47,19 +48,19 @@
   }
 
   &.success {
-    background-color: $green;
+    background-color: rgba($success, .75);
   }
 
   &.warning {
-    background-color: $warning;
+    background-color: rgba($warning, .75);
   }
 
   &.alert {
-    background-color: $alert;
+    background-color: rgba($alert, .75);
   }
 
   &.info, &.notice {
-    background-color: $blue;
+    background-color: rgba($blue, .75);
   }
 
   &.success, &.warning, &.alert, &.info, &.notice {

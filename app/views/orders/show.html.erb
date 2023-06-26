@@ -77,14 +77,24 @@
 		  		<section>
 		  			<h3 class="m-b-25">Relatório</h3>
 
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Status" %>
+		  				<%= content_tag :dd, @order.status %>
+		  			<% end %>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Tipo de OS" %>
+		  				<%= content_tag :dd, @order.o_type %>
+		  			<% end %>
+
 		      	<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Necessário backup?" %>
 		  				<%= content_tag :dd, @order.backup %>
 		  			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Status" %>
-		  				<%= content_tag :dd, @order.status %>
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "O equipamento está padronizado?" %>
+		  				<%= content_tag :dd, @order.stuff.defaulted %>
 		  			<% end %>
 
 		      	<%= content_tag :dl do %>
