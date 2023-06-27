@@ -123,9 +123,7 @@ class OrdersController < ApplicationController
 
       @order = Order.new(order_values.merge({stuff_id: stuff_id}))
     else
-      puts ""
-      puts "CAIU AQUIIIII"
-      puts ""
+      
       if order_stuff_id.present?
         @new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id, defaulted: defaulted)
         @order = Order.new(order_values)
