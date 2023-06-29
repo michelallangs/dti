@@ -26,12 +26,6 @@
 				</div>
 
 				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-category">
-						<%= search_field_tag :id, params[:id], placeholder: "Número da OS" %>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3">
 					<div class="search" id="autocomplete-patrimony">
 						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar OS sem patrimônio" %>
 					</div>
