@@ -30,7 +30,11 @@
 		  			<% if is_admin?(current_user) %>
 			  			<%= content_tag :dl do %>
 			    			<%= content_tag :dt, "Unidade" %>
-			  				<%= content_tag :dd, @order.school.name %>
+			  				<%= content_tag :dd do %>
+			  					<%= link_to school_path(@order.school), class: "link flex" do %>
+			  						<%= @order.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
+			  					<% end %>
+			  				<% end %>
 			  			<% end %>
 		  			<% end %>
 
@@ -55,7 +59,15 @@
 
 		      	<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Patrimônio/Nº série" %>
-		  				<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
+		    			<% if @order.stuff.patrimony == "" %>
+		  					<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
+		    			<% else %>
+			    			<%= content_tag :dd do %>
+			  					<%= link_to stuff_path(@order.stuff), class: "link flex" do %>
+			  						<%= get_patrimony(@order.stuff.patrimony) %> <span class="material-symbols-outlined md-16">open_in_new</span>
+			  					<% end %>
+			  				<% end %>
+		  				<% end %>
 		  			<% end %>
 
 		      	<%= content_tag :dl do %>
@@ -88,7 +100,7 @@
 		  			<% end %>
 
 		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Necessário backup?" %>
+		    			<%= content_tag :dt, "Foi feito backup?" %>
 		  				<%= content_tag :dd, @order.backup %>
 		  			<% end %>
 

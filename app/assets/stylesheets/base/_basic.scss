@@ -93,12 +93,15 @@
 }
 
 .link {
-	color: $blue;
 	display: inline-block;
 	text-decoration: none;
 	background-color: transparent;
 	font-size: 1em;
-	font-weight: bold;
+
+	&, span {
+		color: $blue;
+		font-weight: bold;
+	}
 }
 
 .img {
@@ -368,4 +371,9 @@ dl {
   opacity: 0;
   pointer-events: none;
   text-align: center;
+}
+
+.flex {
+	display: flex;
+	gap: 5px;
 }

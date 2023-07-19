@@ -141,7 +141,7 @@ class OrdersController < ApplicationController
       end
 
       flash[:success] = "OS aberta com sucesso!"
-      redirect_to orders_path
+      redirect_to order_path(@order)
     else
       render :new
     end
@@ -208,7 +208,7 @@ class OrdersController < ApplicationController
       end
 
       flash[:success] = "Dados da OS atualizados com sucesso!"
-      redirect_to orders_path
+      redirect_to order_path(@order)
     else
       render :edit
     end

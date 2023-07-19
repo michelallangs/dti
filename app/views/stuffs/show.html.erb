@@ -46,7 +46,11 @@
 
 		  			<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Unidade" %>
-		  				<%= content_tag :dd, @stuff.school.name %>
+		    			<%= content_tag :dd do %>
+		  					<%= link_to school_path(@stuff.school), class: "link flex" do %>
+		  						<%= @stuff.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
+		  					<% end %>
+		  				<% end %>
 		  			<% end unless is_school?(current_user) %>
 		  		</section>
 
