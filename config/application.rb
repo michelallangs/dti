@@ -16,6 +16,7 @@ module Dti
     config.serve_static_assets = true
     config.encoding = "utf-8"
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
+    config.assets.css_compressor = nil
 
     # Configuration for the application, engines, and railties goes here.
     #
