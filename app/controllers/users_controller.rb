@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 	def update_password
 		@user = User.find(params[:id])
 
-    if @user.valid_password?(params[:current_password])
+    if @user.valid_password?(params[:current_password]) || is_admin?(current_user)
       if @user.update(user_params)
         flash[:success] = "Senha atualizada com sucesso!"
 
