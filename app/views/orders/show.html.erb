@@ -62,10 +62,12 @@
 		    			<% if @order.stuff.patrimony == "" %>
 		  					<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
 		    			<% else %>
-			    			<%= content_tag :dd do %>
+			    			<%= content_tag :dd, class: "flex" do %>
 			  					<%= link_to stuff_path(@order.stuff), class: "link flex" do %>
 			  						<%= get_patrimony(@order.stuff.patrimony) %> <span class="material-symbols-outlined md-16">open_in_new</span>
 			  					<% end %>
+
+			  					<% unless @order.stuff.school == @order.school %><span class="hint">*Este equipamento foi transferido para outra unidade*</span><% end %>
 			  				<% end %>
 		  				<% end %>
 		  			<% end %>

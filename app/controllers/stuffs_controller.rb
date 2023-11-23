@@ -1,6 +1,7 @@
 class StuffsController < ApplicationController
 	autocomplete :stuff, :patrimony, full: true
   autocomplete :school, :name, full: true
+  before_action :schools, only: [:new, :create, :edit, :update]
 
 	def index
 		id = params[:id]
@@ -41,15 +42,10 @@ class StuffsController < ApplicationController
 
   def new
     @stuff = Stuff.new
-    @schools = School.all.collect {|s| [ s.name, s.id ] }
-    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
   end
 
   def create
     @stuff = Stuff.new(stuff_params)
-
-    @schools = School.all.collect {|s| [ s.name, s.id ] }
-    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
 
     if @stuff.save
       flash[:success] = "Equipamento cadastrado com sucesso!"
@@ -90,5 +86,10 @@ class StuffsController < ApplicationController
 
 	def stuff_params
     params.require(:stuff).permit!
+  end
+
+  def schools
+    @schools = School.all.collect {|s| [ s.name, s.id ] }
+    @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
   end
 end
