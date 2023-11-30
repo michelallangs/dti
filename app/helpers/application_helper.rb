@@ -8,17 +8,17 @@ module ApplicationHelper
     [:success, :notice, :info, :warning, :error, :alert].each {|type|
       case type
         when :warning, :alert
-          message_type = ""
+          message_type = "Atenção!"
         when :notice, :info
-          message_type = ""
+          message_type = "Info!"
         when :success
-          message_type = ""
+          message_type = "Muito bem!"
         else
           message_type = ""
       end
 
       if flash[type]
-        messages += "<div class=\"flash #{type}\"><p class=\"flash-title\">#{message_type}</p><p class=\"flash-body\">#{flash[type]}</p></div>"
+        messages += "<div class=\"flash #{type}\"><button class=\"flash-close\"></button><p class=\"flash-title\">#{message_type}</p><p class=\"flash-body\">#{flash[type]}</p></div>"
       end
     }
 

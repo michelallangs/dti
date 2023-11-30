@@ -82,6 +82,12 @@ ready = function() {
       $(".filters").stop().show();
     }
   })
+
+  $(".flash .flash-close").on("click", function(e){
+    e.stopPropagation();
+
+    $(this).parent(".flash").fadeOut(300);
+  })
 };
 
 $(document).ready(ready);

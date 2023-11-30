@@ -11,18 +11,62 @@
 }
 
 .flash {
-  width: 100%;
+  font-size: 14px;
+  width: 400px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  margin: 15px 0;
+  padding: 15px 20px;
   border-radius: 5px;
   color: $secondary-color;
   background-color: $primary-color;
   border-top: solid 5px rgba(255, 255, 255, 0.25);
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 999;
+  animation: bounceInRight;
+  animation-duration: 1.5s;
+  animation-delay: .15s;
+  animation-timing-function: ease-in-out;
+
+  .flash-close {
+    position: absolute;
+    right: -10px;
+    top: -15px;
+    background-color: $secondary-color;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+
+    &:before, &:after {
+      content: "";
+      width: 12px;
+      height: 2px;
+      background-color: $primary-color;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -1px -6px;
+    }
+
+    &:before {
+      transform: rotate(-45deg);      
+    }
+
+    &:after {
+      transform: rotate(45deg);      
+    }
+  }
 
   &.flash-search {
     border: solid 1px $dark-blue;
+    position: relative;
+    top: 0;
+    right: 0;
+    width: 100%;
+    animation: none;
   }
 
   .flash-title, .flash-body {
@@ -37,7 +81,8 @@
     font-weight: 400;
     
     &.flash-title {
-      font-weight: 600;
+      font-size: 1.15em;
+      font-weight: 700;
     }
   }
 
@@ -48,23 +93,19 @@
   }
 
   &.success {
-    background-color: rgba($success, .75);
+    background-color: rgba($success, .95);
   }
 
   &.warning {
-    background-color: rgba($warning, .75);
+    background-color: rgba($warning, .95);
   }
 
   &.alert {
-    background-color: rgba($alert, .75);
+    background-color: rgba($alert, .95);
   }
 
   &.info, &.notice {
-    background-color: rgba($blue, .75);
-  }
-
-  &.success, &.warning, &.alert, &.info, &.notice {
-    color: $primary-color;
+    background-color: rgba($blue, .95);
   }
 
   &.error {

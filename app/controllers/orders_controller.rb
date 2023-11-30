@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
       @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
 
       if (start_date && end_date) && (start_date > end_date)
-        flash.now[:warning] = "A data inicial deve ser menor do que a final"
+        flash.now[:warning] = "A data inicial deve ser menor do que a final."
       end
     else
       @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
@@ -101,12 +101,12 @@ class OrdersController < ApplicationController
 
     if !start_date.blank? && !end_date.blank? && start_date > end_date
       allow_save = false
-      flash.now[:warning] = "A data final deve ser maior do que a inicial"
+      flash.now[:warning] = "A data final deve ser maior do que a inicial."
     end
 
     if (!start_date.blank? && start_date.to_datetime > Date.today) || (!end_date.blank? && end_date.to_datetime > Date.today)
       allow_save = false
-      flash.now[:warning] = "As datas inicial/final devem ser menores que a data de hoje"
+      flash.now[:warning] = "As datas inicial/final devem ser menores que a data de hoje."
     end
       
     if Stuff.where(patrimony: @patrimony).exists? && !@patrimony.blank?
@@ -116,7 +116,7 @@ class OrdersController < ApplicationController
 
       if school_id != Stuff.find_by_patrimony(@patrimony).school_id.to_s && !school_id.blank?
         allow_save = false
-        flash.now[:warning] = "Patrimônio já pertence a outra unidade"
+        flash.now[:warning] = "Patrimônio já pertence a outra unidade."
       end
     elsif !stuff.nil?
       stuff_id = stuff.id
@@ -169,18 +169,18 @@ class OrdersController < ApplicationController
     unless @patrimony.blank?
       if school_id != stuff_school && !school_id.blank? && !stuff_school.blank?
         allow_update = false
-        flash.now[:warning] = "Patrimônio já pertence a outra unidade"
+        flash.now[:warning] = "Patrimônio já pertence a outra unidade."
       end
     end
 
     if !start_date.blank? && !end_date.blank? && start_date > end_date
       allow_update = false
-      flash.now[:warning] = "A data final deve ser maior do que a inicial"
+      flash.now[:warning] = "A data final deve ser maior do que a inicial."
     end
 
     if (!start_date.blank? && start_date.to_datetime > Date.today) || (!end_date.blank? && end_date.to_datetime > Date.today)
       allow_update = false
-      flash.now[:warning] = "As datas inicial/final devem ser menores que a data de hoje"
+      flash.now[:warning] = "As datas inicial/final devem ser menores que a data de hoje."
     end
 
     school_has_stuff = School.find(school_id).stuffs.exists?(patrimony: @patrimony) unless @patrimony.blank? || school_id.blank?

@@ -247,8 +247,9 @@
 
 .password-panel {
 	@extend .sign-up-panel;
+	text-align: center;
 	background-image: none;
-	align-items: flex-start;
+	align-items: center;
 	width: 400px;
 	max-width: none;
 	padding: 25px;

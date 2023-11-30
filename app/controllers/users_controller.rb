@@ -83,7 +83,7 @@ class UsersController < ApplicationController
         render :edit_password
       end
     else
-      flash.now[:alert] = "Senha atual incorreta"
+      flash.now[:alert] = "Senha atual incorreta."
       render :edit_password
     end
 	end
