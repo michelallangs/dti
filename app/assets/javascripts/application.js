@@ -85,6 +85,7 @@ ready = function() {
 
   $(".flash .flash-close").on("click", function(e){
     e.stopPropagation();
+    e.preventDefault();
 
     $(this).parent(".flash").fadeOut(300);
   })
