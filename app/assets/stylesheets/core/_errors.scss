@@ -61,12 +61,15 @@
   }
 
   &.flash-search {
+    font-size: 12px;
     border: solid 1px $dark-blue;
     position: relative;
     top: 0;
     right: 0;
     width: 100%;
+    max-width: 100%;
     animation: none;
+    z-index: 1;
   }
 
   .flash-title, .flash-body {
