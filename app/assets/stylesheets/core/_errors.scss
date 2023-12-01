@@ -13,7 +13,7 @@
 .flash {
   font-size: 14px;
   width: 400px;
-  max-width: 100%;
+  max-width: calc(100% - 50px);
   display: flex;
   flex-direction: column;
   padding: 15px 20px;
