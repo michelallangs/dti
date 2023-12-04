@@ -92,6 +92,33 @@
 					margin-top: 15px;
 					max-height: none;
 					padding: 0;
+					margin-top: 5px;
+
+					&.collapsed {
+						.order-status-title {
+							border-radius: 5px 5px 0px 0px;
+							background-color: $primary-color;
+							border-bottom: solid 1px #eaeaea;
+
+							&:before {
+								display: none;
+							}
+
+							&:after {
+								display: block;
+							}
+						}
+
+						.order-cards {
+							.order-card {
+								margin-bottom: 10px;
+
+								&:first-child {
+									border-radius: 0px 0px 5px 5px;
+								}
+							}
+						}
+					}
 				}
 
 				.hidden-scrollbar {
@@ -99,97 +126,128 @@
 					overflow: initial;
 				}
 
-				.order-cards .order-card {
-					flex-direction: row;
-					border-top: none !important;
-					width: 100%;
-					min-height: auto;
+				.order-status-title {
+					padding: 15px;
+					background-color: rgba(0,0,0,.05);
+					border-radius: 5px;
+					margin: 0;
+					cursor: pointer;
+					@include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
 
-					&.focused {
-						background-color: $primary-color;
+					&:before, &:after {
+						position: absolute;
+						right: 15px;
+						top: 17.5px;
+						font-size: 20px;
+						text-align: center;
+						color: rgba(0, 0, 0, 0.5);
 					}
 
-					&.em-aberto {
-				  	border-left: solid 5px $success;
-				  }
+					&:after {
+						content: "-";
+						display: none;
+					}
 
-				  &.em-manutencao {
-				  	border-left: solid 5px $warning;
-				  }
+					&:before {
+						content: "+";
+					}
+				}
 
-				  &.para-retirada {
-				  	border-left: solid 5px $purple;
-				  }
+				.order-cards {
+					display: none;
 
-				  &.concluido {
-				  	border-left: solid 5px $info;
-				  }
+					.order-card {
+						flex-direction: row;
+						border-top: none !important;
+						width: 100%;
+						min-height: auto;
 
-				  &.garantia {
-				  	border-left: solid 5px $orange;
-				  }
+						&.focused {
+							background-color: $primary-color;
+						}
 
-				  &.para-doacao {
-				  	border-left: solid 5px $crimson;
-				  }
+						&.em-aberto {
+					  	border-left: solid 5px $success;
+					  }
 
-				  &.aguardando-pecas {
-				  	border-left: solid 5px $alert;
-				  }
+					  &.em-manutencao {
+					  	border-left: solid 5px $warning;
+					  }
 
-				  &.aguardando-descarte {
-				  	border-left: solid 5px $light-copper;
-				  }
+					  &.para-retirada {
+					  	border-left: solid 5px $purple;
+					  }
 
-				  &.descarte {
-				  	border-left: solid 5px $copper;
-				  }
+					  &.concluido {
+					  	border-left: solid 5px $info;
+					  }
 
-				  &.cancelado {
-				  	border-left: solid 5px #aaa;
-				  }
+					  &.garantia {
+					  	border-left: solid 5px $orange;
+					  }
 
-				  .order-card-header {
-				  	flex-direction: column;
-				  	min-width: 10em;
+					  &.para-doacao {
+					  	border-left: solid 5px $crimson;
+					  }
 
-				  	.right-content {
-				  		padding-top: 15px;
-				  	}
-				  }
+					  &.aguardando-pecas {
+					  	border-left: solid 5px $alert;
+					  }
 
-				  .order-card-body, .order-card-footer {
-				  	display: flex;
-				  }
+					  &.aguardando-descarte {
+					  	border-left: solid 5px $light-copper;
+					  }
 
-				  .order-card-body {
-				  	text-align: left;
-				  	padding: 15px;
-				  	width: 100%;
-				  	flex-direction: column;
-				  	justify-content: center;
-				  }
+					  &.descarte {
+					  	border-left: solid 5px $copper;
+					  }
 
-				  .order-card-footer {
-				  	white-space: nowrap;
-				  	align-items: center;
-				  	padding: 15px;
+					  &.cancelado {
+					  	border-left: solid 5px #aaa;
+					  }
 
-				  	.options {
-				  		text-align: right;
-				  		width: 100px;
+					  .order-card-header {
+					  	flex-direction: column;
+					  	min-width: 10em;
 
-				  		ul {
-					  		bottom: auto;
-					  		top: 100%;
+					  	.right-content {
+					  		padding-top: 15px;
 					  	}
-				  	}
+					  }
 
-				  	> .school-name {
-				  		padding: 0 5px 0 0;
-				  		white-space: nowrap;
-				  	}
-				  }
+					  .order-card-body, .order-card-footer {
+					  	display: flex;
+					  }
+
+					  .order-card-body {
+					  	text-align: left;
+					  	padding: 15px;
+					  	width: 100%;
+					  	flex-direction: column;
+					  	justify-content: center;
+					  }
+
+					  .order-card-footer {
+					  	white-space: nowrap;
+					  	align-items: center;
+					  	padding: 15px;
+
+					  	.options {
+					  		text-align: right;
+					  		width: 100px;
+
+					  		ul {
+						  		bottom: auto;
+						  		top: 100%;
+						  	}
+					  	}
+
+					  	> .school-name {
+					  		padding: 0 5px 0 0;
+					  		white-space: nowrap;
+					  	}
+					  }
+					}
 				}
 			}
 
