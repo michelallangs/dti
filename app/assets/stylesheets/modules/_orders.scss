@@ -175,13 +175,19 @@
 				  	align-items: center;
 				  	padding: 15px;
 
-				  	.options ul {
-				  		bottom: auto;
-				  		top: 100%;
+				  	.options {
+				  		text-align: right;
+				  		width: 100px;
+
+				  		ul {
+					  		bottom: auto;
+					  		top: 100%;
+					  	}
 				  	}
 
 				  	> .school-name {
-				  		padding: 0 25px 0 0;
+				  		padding: 0 5px 0 0;
+				  		white-space: nowrap;
 				  	}
 				  }
 				}
@@ -234,6 +240,46 @@
 			  &.cancelado h4 span {
 			  	color: #aaa;
 			  }
+
+			  &.em-aberto h4 i {
+			  	background-color: $success;
+			  }
+
+			  &.em-manutencao h4 i {
+			  	background-color: $warning;
+			  }
+
+			  &.para-retirada h4 i {
+			  	background-color: $purple;
+			  }
+
+			  &.concluido h4 i {
+			  	background-color: $info;
+			  }
+
+			  &.garantia h4 i {
+			  	background-color: $orange;
+			  }
+
+			  &.para-doacao h4 i {
+			  	background-color: $crimson;
+			  }
+
+			  &.aguardando-pecas h4 i {
+			  	background-color: $alert;
+			  }
+
+			  &.aguardando-descarte h4 i {
+			  	background-color: $light-copper;
+			  }
+
+			  &.descarte h4 i {
+			  	background-color: $copper;
+			  }
+
+			  &.cancelado h4 i {
+			  	background-color: #aaa;
+			  }
 			}
 
 			.order-status-title {
@@ -245,6 +291,13 @@
 					font-weight: 600;
 					text-transform: uppercase;
 					color: $info;
+				}
+
+				i {
+					padding: 4px 12px 4px 10px;
+					border-radius: 5px;
+					color: $primary-color;
+					margin-left: 5px;
 				}
 			}
 

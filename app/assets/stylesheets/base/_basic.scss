@@ -325,7 +325,6 @@ dl {
 
 .tooltip-toggle {
 	position: relative;
-	white-space: normal !important;
 	line-height: 14px !important;
 }
 
@@ -341,6 +340,7 @@ dl {
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   width: 100px;
+  white-space: normal !important;
 }
 
 .tooltip-toggle::after {
@@ -353,6 +353,7 @@ dl {
   font-size: 0;
   line-height: 0;
   width: 0;
+  white-space: normal !important;
 }
 
 .tooltip-toggle:hover::before,

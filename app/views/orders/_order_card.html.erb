@@ -1,7 +1,7 @@
 <% unless orders.nil? || orders.blank? %>
 	<%= content_tag :div, class: "hidden-scrollbar" do %>
 		<%= content_tag :div, class: "order-container #{get_status(status)}" do %>
-			<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span><% end %>
+			<%= content_tag :h4, class: "order-status-title" do %><%= status[/(.*)\s/,1] %> <span><%= status.split().last %></span> <i><%= orders.count %></i><% end %>
 
 			<div class="order-cards">
 				<% orders.each do |order| %>
