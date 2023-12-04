@@ -14,7 +14,9 @@ class HomeController < ApplicationController
 			@stuffs = @school.stuffs.page(params[:stuffs_page]).per(10)
 		end
 
-		@orders = is_school?(current_user) ? @school.orders : Order.where("maintenance_technicians LIKE ?", "%#{current_user.id}%")
+		list = []
+    Order.all.map { |o| list << o if o.maintenance_technicians.include? current_user.id.to_s }
+		@orders = is_school?(current_user) ? @school.orders : Order.where(id: list.pluck(:id))
 		@orders = @orders.page(params[:orders_page]).per(10)
 	end  
 

@@ -31,9 +31,6 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(user_params)
-    is_technician = params[:is_technician]
-    is_technician == "Sim" ? 1 : 0
-    @user.is_technician = is_technician
 
     if @user.save
       flash[:success] = "Usuário cadastrado com sucesso!"
@@ -110,7 +107,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @orders = Order.where("maintenance_technicians LIKE ?", "%#{@user.id}%").page(params[:page]).per(5)
+    list = []
+    Order.all.map { |o| list << o if o.maintenance_technicians.include? @user.id.to_s }
+    @orders = Order.where(id: list.pluck(:id)).page(params[:page]).per(5)
   end
 
 	def user_params
