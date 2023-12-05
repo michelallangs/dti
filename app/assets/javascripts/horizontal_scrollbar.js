@@ -39,14 +39,14 @@ ready = function() {
       var scroll = ordersGrid.scrollLeft();
 
       ordersGrid.stop().animate({
-        scrollLeft: scroll - 300
+        scrollLeft: scroll - 345
       }, 400)
     })
 
     nextBtn.on("click", function(){
       var scroll = ordersGrid.scrollLeft();
       ordersGrid.stop().animate({
-        scrollLeft: scroll + 300
+        scrollLeft: scroll + 345
       }, 400)
     })
   }
