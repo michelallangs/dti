@@ -269,8 +269,15 @@ class OrdersController < ApplicationController
     return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator}</strong>".html_safe
   end
 
-  def created_by(user)
-    User.find(user).name
+  def created_by(id)
+    user = User.find(id)
+    if is_school?(user)
+      creator = School.find_by_user_id(id).usual_name
+    else
+      creator = user.first_name
+    end
+
+    return creator
   end
 
   def technicians
