@@ -47,6 +47,16 @@
 		    			<%= content_tag :dt, "Contato" %>
 		  				<%= content_tag :dd, @order.school.phone %>
 		  			<% end %>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Data" %>
+		  				<%= content_tag :dd, @order.created_at %>
+		  			<% end %>
+
+		  			<%= content_tag :dl do %>
+		    			<%= content_tag :dt, "Aberta por" %>
+		  				<%= content_tag :dd, created_by(@order.user_id) %>
+		  			<% end %>
 		  		</section>
 		      		
 		  		<section>

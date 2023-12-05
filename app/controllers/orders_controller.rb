@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  helper_method [:get_patrimony, :get_user, :order_updated_at]
+  helper_method [:get_patrimony, :get_user, :order_updated_at, :created_by]
   before_action :stuff_category
   before_action :technicians, only: [:index, :new, :create, :edit, :update]
   before_action :schools, only: [:new, :create, :edit, :update]
@@ -235,8 +235,9 @@ class OrdersController < ApplicationController
   def print_order
     @order = Order.find(params[:id])
     @stuff = Stuff.find(@order.stuff_id)
+    school = @order.school
 
-    @full_address = "#{@order.school.address}, #{@order.school.address_number} - #{@order.school.district} - CEP: #{@order.school.zip_code}" 
+    @full_address = "#{school.address}, #{school.address_number} - #{school.district} - CEP: #{school.zip_code}" 
     @stuff_type = "#{@stuff.category} - #{@stuff.brand} (#{@order.spot})" 
   end
 
@@ -266,6 +267,10 @@ class OrdersController < ApplicationController
     end
 
     return "Última alteração em <strong>#{date}</strong> às #{time} por <strong>#{creator}</strong>".html_safe
+  end
+
+  def created_by(user)
+    User.find(user).name
   end
 
   def technicians
