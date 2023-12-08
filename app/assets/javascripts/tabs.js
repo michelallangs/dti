@@ -1,18 +1,18 @@
 var ready;
 
 ready = function() {
-  $(".btn-data").on("click", function(){
-    var orderData = $(this).attr("order-data");
+  $(".tab-btn").on("click", function(){
+    var data = $(this).attr("tab-data");
     var i;
-    var x = document.getElementsByClassName("order-data");
+    var x = document.getElementsByClassName("tab-data");
 
     for (i = 0; i < x.length; i++) {
-      $(".btn-data").removeClass("current");
-      $(".order-data").removeClass("current");
+      $(".tab-btn").removeClass("current");
+      $(".tab-data").removeClass("current");
       x[i].style.display = "none";
     }
     
-    $("#" + orderData).addClass("current").fadeIn(100);
+    $("#" + data).addClass("current").fadeIn(100);
     $(this).addClass("current");
   })
 };

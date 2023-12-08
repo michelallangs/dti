@@ -29,6 +29,11 @@ class SchoolsController < ApplicationController
 	 	@schools = @schools.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
     @schools_paginate = @schools.page(params[:page]).per(params[:limit])
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
 	end
 
 	def new
@@ -73,8 +78,13 @@ class SchoolsController < ApplicationController
 
   def show
     @school = School.find(params[:id])
-    @orders = @school.orders.page(params[:orders_page]).per(10)
-    @stuffs = @school.stuffs.page(params[:stuffs_page]).per(10)
+    @orders = @school.orders.page(params[:orders_page]).per(5)
+    @stuffs = @school.stuffs.page(params[:stuffs_page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
   def user_params

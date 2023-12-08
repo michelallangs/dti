@@ -63,6 +63,11 @@ class OrdersController < ApplicationController
     end
 
     @orders = @orders.in_order_of(:status, list_status).order("id DESC").page(params[:page]).per(params[:limit])
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
   def new

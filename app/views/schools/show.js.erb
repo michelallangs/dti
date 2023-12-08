@@ -1,0 +1,5 @@
+$('#history-data').empty();
+$('#history-data').html('<%= escape_javascript(render 'orders') %>');
+
+$('#inventory-data').empty();
+$('#inventory-data').html('<%= escape_javascript(render 'stuffs') %>');

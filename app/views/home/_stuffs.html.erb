@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<% unless @stuffs.nil? || @stuffs.blank? %>
+				<div class="card-body">
+					<ul class="responsive-table">
+						<li class="table-header">
+							<div class="table-col table-col-15">Patrimônio</div>
+							<div class="table-col table-col-40">Categoria</div>
+							<div class="table-col table-col-35">Marca/modelo</div>
+							<div class="table-col table-col-10"><div class="options">Opções</div></div>
+						</li>
+
+						<% @stuffs.order("category ASC").each do |s| %>
+							<li class="table-row">
+								<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
+								<div class="table-col table-col-40" data-label="Categoria">
+									<% if s.category == 'PC/Notebook' %>
+										<%= content_tag :span, "done", title: "Padrão OK", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
+										<%= content_tag :span, "close", title: "Necessária padronização", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
+									<% end %>
+									<%= s.category %>
+								</div>
+								<div class="table-col table-col-35" data-label="Marca/modelo"><%= s.brand %></div>
+								<div class="table-col table-col-10" data-label="Opções">
+									<div class="options">
+					          <%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
+									</div>
+								</div>
+							</li>
+						<% end %>
+					</ul>
+
+					<%= paginate @stuffs, param_name: :stuffs_page, remote: true %>
+				</div>
+			<% else %>
+				<h4 class="text-center m-t-25 p-b-50"><i>Nenhum equipamento registrado para sua unidade.</i></h4>
+			<% end %>
+		</div>
+	</div>
+</div>

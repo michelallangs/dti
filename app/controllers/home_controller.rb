@@ -11,13 +11,18 @@ class HomeController < ApplicationController
 	def profile
 		if is_school?(current_user)
 			@school = current_user.school 
-			@stuffs = @school.stuffs.page(params[:stuffs_page]).per(10)
+			@stuffs = @school.stuffs.page(params[:stuffs_page]).per(5)
 		end
 
 		list = []
     Order.all.map { |o| list << o if o.maintenance_technicians.include? current_user.id.to_s }
 		@orders = is_school?(current_user) ? @school.orders : Order.where(id: list.pluck(:id))
-		@orders = @orders.page(params[:orders_page]).per(10)
+		@orders = @orders.page(params[:orders_page]).per(5)
+
+		respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
 	end  
 
 	def orders_per_user(orders, users)

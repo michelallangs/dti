@@ -12,9 +12,8 @@
   font-size: 1em;
   font-family: $font;
   font-weight: 600;
-  border-radius: 5px;
+  border-radius: 18px;
   min-width: 120px;
-  @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
   @include prefix(transition, all 125ms);
   background-clip: padding-box;
   white-space: nowrap;
@@ -25,10 +24,10 @@
 
   &:hover {
     @include prefix(transform, translateY(-1px));
+    opacity: .75;
   }
 
   &:active {
-    @include prefix(box-shadow, none);
     @include prefix(transform, translateY(0));
   }
 
@@ -41,7 +40,7 @@
     height: 36px;
     background-color: rgba(0, 0, 0, .3);
     @include prefix(transform, translateX(-18px));
-    border-radius: 5px 0 0 5px;
+    border-radius: 18px 0 0 18px;
   }
 }
 
@@ -63,7 +62,7 @@
 }
 
 .btn-cancel {
-  background-color: $grey;
+  background-color: #d6d6d6;
 }
 
 .btn-alert {
@@ -79,19 +78,18 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: rgba(#aaa, .5);
+  background-color: #d6d6d6;
   @include prefix(transition, .25s cubic-bezier(.075,.82,.165,1));
-  @include prefix(box-shadow, 0 10px 10px rgba(0, 0, 0, 0.1));
 
   &:hover {
-    background-color: rgba(#fff, .5);
+    background-color: $dark-blue;
     text-decoration: none;
 
     span {
-      color: $dark-blue;
+      color: $primary-color;
     }
   }
 

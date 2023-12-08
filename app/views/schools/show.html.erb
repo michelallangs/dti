@@ -22,9 +22,37 @@
 		<div class="row">
 			<div class="col">
 				<section class="container-body">
-		  		<section>
-		  			<h3 class="m-b-25">Dados da unidade</h3>
+					<div class="tabs m-b-10">	  
+						<div class="tab text-center">
+					  	<button class="tab-btn <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>" tab-data="school-info-data">
+						  	<span class="material-symbols-outlined md-20">apartment</span>
+						  	Dados da unidade
+						  </button>
+						</div>
 
+						<div class="tab text-center">
+					  	<button class="tab-btn" tab-data="address-data">
+						  	<span class="material-symbols-outlined md-20">location_on</span>
+						  	Endereço
+						  </button>
+						</div>
+
+						<div class="tab text-center">
+					  	<button class="tab-btn <%= 'current' if params[:orders_page] %>" tab-data="history-data">
+					  		<span class="material-symbols-outlined md-20">history</span>
+					  		Histórico
+					  	</button>
+						</div>
+
+						<div class="tab text-center">
+					  	<button class="tab-btn <%= 'current' if params[:stuffs_page] %>" tab-data="inventory-data">
+					  		<span class="material-symbols-outlined md-20">inventory</span>
+					  		Inventário
+					  	</button>
+						</div>
+					</div>
+
+		  		<section id="school-info-data" class="tab-data <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>">
 		  			<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Nome" %>
 		  				<%= content_tag :dd, @school.name %>
@@ -46,9 +74,7 @@
 		  			<% end %>
 		  		</section>
 		      
-		  		<section>
-		  			<h3 class="m-b-25">Endereço</h3>
-
+		  		<section id="address-data" class="tab-data">
 		      	<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Logradouro" %>
 		  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
@@ -65,107 +91,13 @@
 		  			<% end %>
 		  		</section>
 
-		  		<section>
-		  			<h3 class="m-b-25">Histórico</h3>
-
-		  			<div class="row">
-							<div class="col-12">
-								<div class="card">
-									<% unless @orders.nil? || @orders.blank? %>
-										<div class="card-body">
-											<ul class="responsive-table">
-												<li class="table-header">
-													<div class="table-col table-col-5">#</div>
-													<div class="table-col table-col-10">Solicitante</div>
-													<div class="table-col table-col-15">Status</div>
-													<div class="table-col table-col-10">Tipo</div>
-													<div class="table-col table-col-30">Defeito apresentado</div>
-													<div class="table-col table-col-20">Atualizada em</div>
-													<div class="table-col table-col-10"><div class="options">Opções</div></div>
-												</li>
-
-												<% @orders.order("created_at DESC").each do |o| %>
-													<li class="table-row">
-														<div class="table-col table-col-5" data-label="#"><strong><%= o.id.to_s.rjust(3, '0') %></strong></div>
-														<div class="table-col table-col-10" data-label="Solicitante"><%= o.requester %></div>
-														<div class="table-col table-col-15" data-label="Status" data-status="<%= get_status(o.status) %>"><%= o.status %></div>
-														<div class="table-col table-col-10" data-label="Tipo"><%= o.o_type || " - " %></div>
-														<div class="table-col table-col-30" data-label="Defeito apresentado">
-															<div class="order-defect limited-text">
-																<%= o.defect.to_s.html_safe %>
-															</div>
-														</div>
-														<div class="table-col table-col-20" data-label="Atualizada em">
-															<%= content_tag :span do %>
-																<%= "#{o.updated_at.strftime("%d/%m/%Y")} por " %>
-																<%= link_to order_creator(o.updated_by), is_school?(User.find(o.updated_by)) ? school_path(o.school_id) : user_path(o.updated_by), class: "link"  %><br />
-																<%= o.updated_at.strftime("%H:%M") %>
-															<% end %>
-														</div>
-														<div class="table-col table-col-10" data-label="Opções">
-															<div class="options">
-											          <%= link_to order_path(o), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
-															</div>
-														</div>
-													</li>
-												<% end %>
-											</ul>
-
-											<%= paginate @orders, param_name: :orders_page %>
-										</div>
-									<% else %>
-										<h4 class="text-center m-t-25 p-b-50"><i>Nenhuma OS registrada para esta unidade.</i></h4>
-									<% end %>
-								</div>
-							</div>
-						</div>
+		  		<section id="history-data" class="tab-data <%= 'current' if params[:orders_page] %>">
+		  			<%= render 'orders' %>
 		  		</section>
 
-		  		<section>
-		  			<h3 class="m-b-25">Inventário</h3>
-
-		  			<div class="row">
-							<div class="col-12">
-								<div class="card">
-									<% unless @stuffs.nil? || @stuffs.blank? %>
-										<div class="card-body">
-											<ul class="responsive-table">
-												<li class="table-header">
-													<div class="table-col table-col-15">Patrimônio</div>
-													<div class="table-col table-col-40">Categoria</div>
-													<div class="table-col table-col-35">Marca/modelo</div>
-													<div class="table-col table-col-10"><div class="options">Opções</div></div>
-												</li>
-
-												<% @stuffs.order("category ASC").each do |s| %>
-													<li class="table-row">
-														<div class="table-col table-col-15" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
-														<div class="table-col table-col-40" data-label="Categoria">
-															<% if s.category == 'PC/Notebook' %>
-																<%= content_tag :span, "done", title: "Padrão OK", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
-																<%= content_tag :span, "close", title: "Necessária padronização", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
-															<% end %>
-															<%= s.category %>
-														</div>
-														<div class="table-col table-col-35" data-label="Marca/modelo"><%= s.brand %></div>
-														<div class="table-col table-col-10" data-label="Opções">
-															<div class="options">
-											          <%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
-															</div>
-														</div>
-													</li>
-												<% end %>
-											</ul>
-
-											<%= paginate @stuffs, param_name: :stuffs_page %>
-										</div>
-									<% else %>
-										<h4 class="text-center m-t-25 p-b-50"><i>Nenhum equipamento registrado para esta unidade.</i></h4>
-									<% end %>
-								</div>
-							</div>
-						</div>
-		  		</section>
+		  		<section id="inventory-data" class="tab-data <%= 'current' if params[:stuffs_page] %>">
+		  			<%= render 'stuffs' %>
+					</section>
 				</section>
 			</div>
 		</div>

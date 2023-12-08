@@ -167,7 +167,7 @@
 
       span {
         @include prefix(transform, translateX(0));
-        border-radius: 5px;
+        border-radius: 18px;
         text-indent: initial;
       }
     }
@@ -224,6 +224,16 @@
     .pagination a, .pagination span.current, .pagination span.gap {
       padding: 0 7px;
       line-height: 24px;
+    }
+
+    .tabs .tab button {
+      text-indent: -9999px;
+
+      span {
+        display: block;
+        text-indent: initial;
+        float: left;
+      }
     }
   }
 }

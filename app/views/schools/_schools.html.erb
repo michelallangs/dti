@@ -1,0 +1,31 @@
+<% unless @schools_paginate.nil? || @schools_paginate.blank? %>
+	<ul class="responsive-table">
+		<li class="table-header">
+			<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
+			<div class="table-col table-col-35"><%= link_to("Nome", request.params.merge(sort_by: "name"), class: ("active" if params[:sort_by] == "name")) %></div>
+			<div class="table-col table-col-20"><%= link_to("Telefone", request.params.merge(sort_by: "phone"), class: ("active" if params[:sort_by] == "phone")) %></div>
+			<div class="table-col table-col-30"><%= link_to("E-mail", request.params.merge(sort_by: "users.username"), class: ("active" if params[:sort_by] == "users.username")) %></div>
+			<div class="table-col table-col-10"><div class="options">Opções</div></div>
+		</li>
+
+		<% @schools_paginate.each do |s| %>
+			<li class="table-row">
+				<div class="table-col table-col-5" data-label="#"><strong><%= s.id.to_s.rjust(3, '0') %></strong></div>
+				<div class="table-col table-col-35" data-label="Nome"><%= s.name %></div>
+				<div class="table-col table-col-20" data-label="Telefone"><%= s.phone %></div>
+				<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>
+				<div class="table-col table-col-10" data-label="Opções">
+					<div class="options">
+						<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
+	          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>
+	          <%= link_to destroy_school_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-symbols-outlined md-20">delete</span><% end %>
+					</div>
+				</div>
+			</li>
+		<% end %>
+	</ul>
+
+	<%= paginate @schools_paginate, remote: true %>	
+<% else %>
+	<h3 class="text-center m-t-50"><i>Nenhuma unidade encontrada.</i></h3>
+<% end %>

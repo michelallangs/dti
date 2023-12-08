@@ -1,0 +1,39 @@
+<% unless @stuffs_paginate.nil? || @stuffs_paginate.blank? %>
+	<ul class="responsive-table">
+		<li class="table-header">
+			<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
+			<div class="table-col table-col-10"><%= link_to("Patrimônio", request.params.merge(sort_by: "patrimony"), class: ("active" if params[:sort_by] == "patrimony")) %></div>
+			<div class="table-col table-col-20"><%= link_to("Categoria", request.params.merge(sort_by: "category"), class: ("active" if params[:sort_by] == "category")) %></div>
+			<div class="table-col table-col-15"><%= link_to("Marca/Modelo", request.params.merge(sort_by: "brand"), class: ("active" if params[:sort_by] == "brand")) %></div>
+			<%= content_tag :div, class: "table-col table-col-40" do %><%= link_to("Unidade", request.params.merge(sort_by: "schools.name_ascii"), class: ("active" if params[:sort_by] == "schools.name_ascii")) %><% end unless is_school?(current_user) %>
+			<div class="table-col table-col-10"><div class="options">Opções</div></div>
+		</li>
+
+		<% @stuffs_paginate.each do |s| %>
+			<li class="table-row">
+				<div class="table-col table-col-5" data-label="#"><strong><%= s.id.to_s.rjust(3, '0') %></strong></div>
+				<div class="table-col table-col-10" data-label="Patrimônio"><%= s.patrimony.presence || "S/P" %></div>
+				<div class="table-col table-col-20" data-label="Categoria">
+					<% if s.category == 'PC/Notebook' %>
+						<%= content_tag :span, "done", title: "Padrão OK", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: green" if s.defaulted == "Sim" %>
+						<%= content_tag :span, "close", title: "Necessária padronização", class: "material-symbols-outlined md-16 md-light m-r-5", style: "color: red" if s.defaulted == "Não" %>
+					<% end %>
+					<%= s.category %>
+				</div>
+				<div class="table-col table-col-15" data-label="Marca/Modelo"><%= s.brand %></div>
+				<%= content_tag :div, s.school.name, class: "table-col table-col-40", "data-label": "Unidade" unless is_school?(current_user) %>
+				<div class="table-col table-col-10" data-label="Opções">
+					<div class="options">
+						<%= link_to stuff_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
+	          <%= link_to edit_stuff_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>
+	          <%= link_to destroy_stuff_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-symbols-outlined md-20">delete</span><% end %>
+					</div>
+				</div>
+			</li>
+		<% end %>
+	</ul>
+
+	<%= paginate @stuffs_paginate, remote: true %>	
+<% else %>
+	<h3 class="text-center m-t-50"><i>Nenhum equipamento encontrado.</i></h3>
+<% end %>

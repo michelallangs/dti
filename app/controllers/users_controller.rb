@@ -23,6 +23,11 @@ class UsersController < ApplicationController
 	 	@users = @users.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
     @users_paginate = @users.page(params[:page]).per(params[:limit])
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
 	end
 
 	def new
@@ -110,6 +115,11 @@ class UsersController < ApplicationController
     list = []
     Order.all.map { |o| list << o if o.maintenance_technicians.include? @user.id.to_s }
     @orders = Order.where(id: list.pluck(:id)).page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
 	def user_params

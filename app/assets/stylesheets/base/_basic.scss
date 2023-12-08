@@ -292,6 +292,9 @@ dl {
 	display: flex;
 	gap: 15px;
 	justify-content: center;
+	background-color: rgba($grey, .75);
+	border-radius: 36px;
+	padding: 18px 27px;
 }
 
 .invert-svg {

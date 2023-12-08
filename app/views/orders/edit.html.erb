@@ -26,13 +26,19 @@
 		<div class="row">
 			<div class="col">
 				<section class="container-body">
-					<div class="order-tabs m-b-10">
-						<div class="order-tab text-center">
-							<button class="btn-data <%= 'current' if !is_admin?(current_user)%>" order-data="school-data">Informações da OS</button>
+					<div class="tabs m-b-10">
+						<div class="tab text-center">
+							<button class="tab-btn <%= 'current' if !is_admin?(current_user)%>" tab-data="school-data">
+								<span class="material-symbols-outlined md-20">receipt_long</span>
+								Informações da OS
+							</button>
 						</div>
 					  
-						<div class="order-tab text-center">
-					  	<button class="btn-data <%= 'current' if is_admin?(current_user)%>" order-data="admin-data">Relatório técnico</button>
+						<div class="tab text-center">
+					  	<button class="tab-btn <%= 'current' if is_admin?(current_user)%>" tab-data="admin-data">
+					  		<span class="material-symbols-outlined md-20">notes</span>
+					  		Relatório técnico
+					  	</button>
 						</div>
 					</div>
 
@@ -56,7 +62,7 @@
 			      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
 			      	<fieldset>
-								<div id="school-data" class="order-data <%= 'current' if !is_admin?(current_user) %>">
+								<div id="school-data" class="tab-data <%= 'current' if !is_admin?(current_user) %>">
 
 					      	<div class="row">
 					      		<%= content_tag :div, "", class: "col-12 col-sm-6 col-md-4 col-lg-3" do %>
@@ -102,7 +108,7 @@
 			    		</fieldset>
 
 		    			<fieldset <%= "disabled=disabled" if !is_admin?(current_user) %>>
-			    			<div id="admin-data" class="order-data <%= 'current' if is_admin?(current_user) %>">
+			    			<div id="admin-data" class="tab-data <%= 'current' if is_admin?(current_user) %>">
 					      	<div class="row">
 					      		<div class="col-12 col-sm-4 col-lg-4">
 					      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>

@@ -1,5 +1,30 @@
 #stuffs {
   .main-panel .main-container {
+    .container-header {
+      display: flex;
+      align-items: center;
+
+      .right-content {
+        .action-buttons {
+          gap: 10px;
+          display: flex;
+          align-items: center;
+          border-radius: 36px;
+          background-color: rgba($grey, .75);
+          padding: 18px 27px;
+
+          .btn-icon.active {
+            background-color: $dark-blue;
+            pointer-events: none;
+
+            span {
+              color: $primary-color;
+            }
+          }
+        }
+      }
+    }
+    
     .container-body {
       section {
         h3 {

@@ -21,13 +21,19 @@
   		<div class="col">
   			<section class="container-body">
   				<% if is_admin?(current_user) %>
-	  				<div class="order-tabs m-b-50">
-							<div class="order-tab text-center">
-								<button class="btn-data current" order-data="school-data">Informações da OS</button>
+	  				<div class="tabs m-b-50">
+							<div class="tab text-center">
+								<button class="tab-btn current" tab-data="school-data">
+									<span class="material-symbols-outlined md-20">receipt_long</span>
+									Informações da OS
+								</button>
 							</div>
 						  
-							<div class="order-tab text-center">
-						  	<button class="btn-data" order-data="admin-data">Relatório técnico</button>
+							<div class="tab text-center">
+						  	<button class="tab-btn" tab-data="admin-data">
+						  		<span class="material-symbols-outlined md-20">notes</span>
+						  		Relatório técnico
+						  	</button>
 							</div>
 						</div>
 					<% end %>
@@ -38,7 +44,7 @@
 			      	<%= f.input :updated_by, as: :hidden, label: false, input_html: { value: current_user.id }, wrapper: false %>
 			      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
-							<div id="school-data" class="order-data current">
+							<div id="school-data" class="tab-data current">
 				      	<div class="row">
 				      		<%= content_tag :div, "", class: "col-12 col-sm-6 col-md-4 col-lg-3" do %>
 			      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
@@ -81,7 +87,7 @@
 			          </div>
 		          </div>
 
-		    			<div id="admin-data" class="order-data">
+		    			<div id="admin-data" class="tab-data">
 				      	<div class="row">
 				      		<div class="col-12 col-sm-4 col-lg-4">
 				      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>

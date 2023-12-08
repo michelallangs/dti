@@ -10,8 +10,10 @@
 					<h1 class="header-title">Lista de <span>unidades</span> <%= content_tag :i, registered_data(@schools.count) %></h1>
 
 					<div class="right-content">
-						<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
-						<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar unidade<% end %>
+						<div class="action-buttons">
+							<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
+							<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar unidade<% end %>
+						</div>
 					</div>
 				</header>
 			</div>
@@ -71,38 +73,8 @@
 
 		<div class="row">
 			<div class="col">
-				<section class="container-body">
-					<% unless @schools_paginate.nil? || @schools_paginate.blank? %>
-						<ul class="responsive-table">
-							<li class="table-header">
-								<div class="table-col table-col-5"><%= link_to("#", request.params.merge(sort_by: "id"), class: ("active" if params[:sort_by] == "id")) %></div>
-								<div class="table-col table-col-35"><%= link_to("Nome", request.params.merge(sort_by: "name"), class: ("active" if params[:sort_by] == "name")) %></div>
-								<div class="table-col table-col-20"><%= link_to("Telefone", request.params.merge(sort_by: "phone"), class: ("active" if params[:sort_by] == "phone")) %></div>
-								<div class="table-col table-col-30"><%= link_to("E-mail", request.params.merge(sort_by: "users.username"), class: ("active" if params[:sort_by] == "users.username")) %></div>
-								<div class="table-col table-col-10"><div class="options">Opções</div></div>
-							</li>
-
-							<% @schools_paginate.each do |s| %>
-								<li class="table-row">
-									<div class="table-col table-col-5" data-label="#"><strong><%= s.id.to_s.rjust(3, '0') %></strong></div>
-									<div class="table-col table-col-35" data-label="Nome"><%= s.name %></div>
-									<div class="table-col table-col-20" data-label="Telefone"><%= s.phone %></div>
-									<div class="table-col table-col-30" data-label="E-mail"><%= s.user.username %></div>
-									<div class="table-col table-col-10" data-label="Opções">
-										<div class="options">
-											<%= link_to school_path(s), alt: "Ver detalhes", title: "Ver detalhes", class: "btn-icon" do %><span class="material-symbols-outlined md-20">visibility</span><% end %>
-						          <%= link_to edit_school_path(s), alt: "Editar", title: "Editar", class: "btn-icon" do %><span class="material-symbols-outlined md-20">edit</span><% end %>
-						          <%= link_to destroy_school_path(s), alt: "Excluir", title: "Excluir", method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-icon" do %><span class="material-symbols-outlined md-20">delete</span><% end %>
-										</div>
-									</div>
-								</li>
-							<% end %>
-						</ul>
-
-						<%= paginate @schools_paginate %>	
-					<% else %>
-						<h3 class="text-center m-t-50"><i>Nenhuma unidade encontrada.</i></h3>
-					<% end %>
+				<section class="container-body" id="schools-data">
+					<%= render 'schools' %>
 				</section>
 			</div>
 		</div>

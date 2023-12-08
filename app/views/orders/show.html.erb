@@ -22,11 +22,30 @@
 		<div class="row">
 			<div class="col">
 				<section class="container-body">
-		  		<section>
-		  			<h3 class="m-b-25">
-		  				<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
-		  			</h3>
+					<div class="tabs m-b-10">
+						<div class="tab text-center">
+							<button class="tab-btn" tab-data="os-data">
+								<span class="material-symbols-outlined md-20">apartment</span>
+								<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
+							</button>
+						</div>
+					  
+						<div class="tab text-center">
+					  	<button class="tab-btn" tab-data="stuff-info-data">
+						  	<span class="material-symbols-outlined md-20">devices</span>
+						  	Informações do equipamento
+						  </button>
+						</div>
 
+						<div class="tab text-center">
+					  	<button class="tab-btn current" tab-data="report-data">
+					  		<span class="material-symbols-outlined md-20">receipt_long</span>
+					  		Relatório
+					  	</button>
+						</div>
+					</div>
+
+		  		<section id="os-data" class="tab-data">
 		  			<% if is_admin?(current_user) %>
 			  			<%= content_tag :dl do %>
 			    			<%= content_tag :dt, "Unidade" %>
@@ -59,9 +78,7 @@
 		  			<% end %>
 		  		</section>
 		      		
-		  		<section>
-		  			<h3 class="m-b-25">Informações do equipamento</h3>
-
+		  		<section id="stuff-info-data" class="tab-data">
 		      	<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Categoria" %>
 		  				<%= content_tag :dd, @order.stuff.category %>
@@ -98,9 +115,7 @@
 		  			<% end %>
 		  		</section>
 
-		  		<section>
-		  			<h3 class="m-b-25">Relatório</h3>
-
+		  		<section id="report-data" class="tab-data current">
 		  			<%= content_tag :dl do %>
 		    			<%= content_tag :dt, "Status" %>
 		  				<%= content_tag :dd, @order.status %>

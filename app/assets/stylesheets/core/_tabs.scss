@@ -1,0 +1,51 @@
+.tabs {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	border-top: solid 1px $grey;
+	border-bottom: solid 1px $grey;
+	padding: 18px 0;
+
+	.tab {
+		button {
+			padding: 18px 27px;
+			cursor: pointer;
+			@include prefix(transition, all .5s cubic-bezier(.075,.82,.165,1));
+			position: relative;
+			z-index: 2;
+			background-color: #d6d6d6;
+			border-left: solid 1px #ccc;
+
+			&:hover, &.current {
+				background-color: $dark-blue;
+				color: $primary-color;
+			}
+
+			span {
+				display: none;
+				color: $primary-color;
+			}
+		}
+
+		&:first-child button {
+			border-radius: 36px 0 0 36px;
+			border: none;
+		}
+
+		&:last-child button {
+			border-radius: 0 36px 36px 0;
+		}
+	}
+}
+
+.tab-data {
+	width: 100%;
+	display: none;
+	animation: fadeInBottom;
+  animation-duration: .5s;
+  animation-timing-function: ease-in-out;
+
+	&.current {
+		display: block;
+	}
+}

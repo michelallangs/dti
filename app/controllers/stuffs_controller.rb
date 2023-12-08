@@ -38,6 +38,11 @@ class StuffsController < ApplicationController
 	 	@stuffs = @stuffs.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
 
     @stuffs_paginate = @stuffs.page(params[:page]).per(params[:limit])
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
 	end
 
   def new
@@ -81,7 +86,12 @@ class StuffsController < ApplicationController
 
   def show
     @stuff = Stuff.find(params[:id])
-    @orders = @stuff.orders.page(params[:page]).per(10)
+    @orders = @stuff.orders.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js { render :layout => false }
+    end
   end
 
 	def stuff_params
