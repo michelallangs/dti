@@ -89,6 +89,12 @@ ready = function() {
 
     $(this).parent(".flash").fadeOut(300);
   })
+
+  $(document).ajaxStart(function() {
+    $(".spinner").fadeIn('slow');
+  }).ajaxStop(function() {
+    $(".spinner").hide();
+  });
 };
 
 $(document).ready(ready);
