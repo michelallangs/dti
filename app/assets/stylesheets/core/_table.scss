@@ -107,6 +107,10 @@
       height: auto;
       background-color: transparent;
       @include prefix(box-shadow, none);
+
+      &:hover span {
+        color: $dark-blue;
+      }
     }
   }
   
