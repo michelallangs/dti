@@ -226,6 +226,13 @@
       line-height: 24px;
     }
 
+    .pagination {
+      .first, .prev, .next, .last {
+        text-indent: -9999px;
+        position: relative;
+      }
+    }
+
     .tabs .tab button {
       text-indent: -9999px;
 
