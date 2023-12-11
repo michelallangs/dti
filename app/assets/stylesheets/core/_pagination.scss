@@ -40,31 +40,4 @@
     float: none;
     border: none;
   }
-
-  .first, .prev, .next, .last {
-    &:before {
-      position: absolute;
-      left: 0;
-      top: 0;
-      text-align: center;
-      width: 100%;
-      line-height: 25px;
-    }
-  }
-
-  .prev:before {
-    content: "\2039";
-  }
-
-  .next:before {
-    content: "\203A";
-  }
-
-  .first:before {
-    content: "\00AB";
-  }
-
-  .last:before {
-    content: "\00BB";
-  }
 }
