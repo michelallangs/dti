@@ -1,66 +1,57 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Perfil de <span>usuário</span></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="actions">
+				<%= link_to edit_user_path(@user), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+				<%= link_to edit_user_password_path(@user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
+				<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+				<%= link_to destroy_user_path(@user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir conta<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Perfil de <span>usuário</span></h1>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+			<div class="tabs m-b-10">	
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:page].nil? %>" tab-data="user-info-data">
+				  	<span class="material-symbols-outlined md-20">person</span>
+				  	Dados do usuário
+				  </button>
+				</div>
 
-					<div class="actions">
-						<%= link_to edit_user_path(@user), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path(@user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
-						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
-						<%= link_to destroy_user_path(@user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir conta<% end %>
-		      </div>
-				</header>
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:page] %>" tab-data="history-data">
+				  	<span class="material-symbols-outlined md-20">history</span>
+				  	Histórico
+				  </button>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-					<div class="tabs m-b-10">	
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:page].nil? %>" tab-data="user-info-data">
-						  	<span class="material-symbols-outlined md-20">person</span>
-						  	Dados do usuário
-						  </button>
-						</div>
+  		<section id="user-info-data" class="tab-data <%= 'current' if params[:page].nil? %>">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Nome" %>
+  				<%= content_tag :dd, @user.name %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:page] %>" tab-data="history-data">
-						  	<span class="material-symbols-outlined md-20">history</span>
-						  	Histórico
-						  </button>
-						</div>
-					</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Login" %>
+  				<%= content_tag :dd, @user.username %>
+  			<% end %>
 
-		  		<section id="user-info-data" class="tab-data <%= 'current' if params[:page].nil? %>">
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Nome" %>
-		  				<%= content_tag :dd, @user.name %>
-		  			<% end %>
+				<%= content_tag :dl do %>
+    			<%= content_tag :dt, "E-mail" %>
+  				<%= content_tag :dd, @user.email %>
+  			<% end %>
+  		</section>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Login" %>
-		  				<%= content_tag :dd, @user.username %>
-		  			<% end %>
-
-	  				<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "E-mail" %>
-		  				<%= content_tag :dd, @user.email %>
-		  			<% end %>
-		  		</section>
-
-		  		<section id="history-data" class="tab-data <%= 'current' if params[:page] %>">
-		  			<%= render 'orders' %>
-		  		</section>
-				</section>
-			</div>
-		</div>
+  		<section id="history-data" class="tab-data <%= 'current' if params[:page] %>">
+  			<%= render 'orders' %>
+  		</section>
+		</section>
 	</div>
 </div>

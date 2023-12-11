@@ -1,168 +1,159 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Ordem de <span>serviço</span></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
-		
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Ordem de <span>serviço</span></h1>
+			<div class="actions text-center">
+        <%= link_to print_order_path(@order), target: "_blank", class: "btn-warning icon" do %><span class="material-symbols-outlined md-16 md-light">print</span>Imprimir OS<% end %>
+        <%= link_to edit_order_path(@order), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar OS<% end %>
+        <%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+        <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Cancelar OS<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-					<div class="actions text-center">
-		        <%= link_to print_order_path(@order), target: "_blank", class: "btn-warning icon" do %><span class="material-symbols-outlined md-16 md-light">print</span>Imprimir OS<% end %>
-		        <%= link_to edit_order_path(@order), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar OS<% end %>
-		        <%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
-		        <%= link_to destroy_order_path(@order), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Cancelar OS<% end %>
-		      </div>
-				</header>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+			<div class="tabs m-b-10">
+				<div class="tab text-center">
+					<button class="tab-btn" tab-data="os-data">
+						<span class="material-symbols-outlined md-20">apartment</span>
+						<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
+					</button>
+				</div>
+			  
+				<div class="tab text-center">
+			  	<button class="tab-btn" tab-data="stuff-info-data">
+				  	<span class="material-symbols-outlined md-20">devices</span>
+				  	Informações do equipamento
+				  </button>
+				</div>
+
+				<div class="tab text-center">
+			  	<button class="tab-btn current" tab-data="report-data">
+			  		<span class="material-symbols-outlined md-20">receipt_long</span>
+			  		Relatório
+			  	</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-					<div class="tabs m-b-10">
-						<div class="tab text-center">
-							<button class="tab-btn" tab-data="os-data">
-								<span class="material-symbols-outlined md-20">apartment</span>
-								<%= "OS ##{@order.id.to_s.rjust(3, '0')}" %>
-							</button>
-						</div>
-					  
-						<div class="tab text-center">
-					  	<button class="tab-btn" tab-data="stuff-info-data">
-						  	<span class="material-symbols-outlined md-20">devices</span>
-						  	Informações do equipamento
-						  </button>
-						</div>
+  		<section id="os-data" class="tab-data">
+  			<% if is_admin?(current_user) %>
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Unidade" %>
+	  				<%= content_tag :dd do %>
+	  					<%= link_to school_path(@order.school), class: "link flex" do %>
+	  						<%= @order.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
+	  					<% end %>
+	  				<% end %>
+	  			<% end %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn current" tab-data="report-data">
-					  		<span class="material-symbols-outlined md-20">receipt_long</span>
-					  		Relatório
-					  	</button>
-						</div>
-					</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Solicitante" %>
+  				<%= content_tag :dd, @order.requester %>
+  			<% end %>
 
-		  		<section id="os-data" class="tab-data">
-		  			<% if is_admin?(current_user) %>
-			  			<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "Unidade" %>
-			  				<%= content_tag :dd do %>
-			  					<%= link_to school_path(@order.school), class: "link flex" do %>
-			  						<%= @order.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
-			  					<% end %>
-			  				<% end %>
-			  			<% end %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Contato" %>
+  				<%= content_tag :dd, @order.school.phone %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Solicitante" %>
-		  				<%= content_tag :dd, @order.requester %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Data" %>
+  				<%= content_tag :dd, @order.created_at %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Contato" %>
-		  				<%= content_tag :dd, @order.school.phone %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Aberta por" %>
+  				<%= content_tag :dd, created_by(@order.user_id) %>
+  			<% end %>
+  		</section>
+      		
+  		<section id="stuff-info-data" class="tab-data">
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Categoria" %>
+  				<%= content_tag :dd, @order.stuff.category %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Data" %>
-		  				<%= content_tag :dd, @order.created_at %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Patrimônio/Nº série" %>
+    			<% if @order.stuff.patrimony == "" %>
+  					<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
+    			<% else %>
+	    			<%= content_tag :dd, class: "flex" do %>
+	  					<%= link_to stuff_path(@order.stuff), class: "link flex" do %>
+	  						<%= get_patrimony(@order.stuff.patrimony) %> <span class="material-symbols-outlined md-16">open_in_new</span>
+	  					<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Aberta por" %>
-		  				<%= content_tag :dd, created_by(@order.user_id) %>
-		  			<% end %>
-		  		</section>
-		      		
-		  		<section id="stuff-info-data" class="tab-data">
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Categoria" %>
-		  				<%= content_tag :dd, @order.stuff.category %>
-		  			<% end %>
+	  					<% unless @order.stuff.school == @order.school %><span class="hint">*Este equipamento foi transferido para outra unidade*</span><% end %>
+	  				<% end %>
+  				<% end %>
+  			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Patrimônio/Nº série" %>
-		    			<% if @order.stuff.patrimony == "" %>
-		  					<%= content_tag :dd, get_patrimony(@order.stuff.patrimony) %>
-		    			<% else %>
-			    			<%= content_tag :dd, class: "flex" do %>
-			  					<%= link_to stuff_path(@order.stuff), class: "link flex" do %>
-			  						<%= get_patrimony(@order.stuff.patrimony) %> <span class="material-symbols-outlined md-16">open_in_new</span>
-			  					<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Marca/modelo" %>
+  				<%= content_tag :dd, @order.stuff.brand %>
+  			<% end %>
 
-			  					<% unless @order.stuff.school == @order.school %><span class="hint">*Este equipamento foi transferido para outra unidade*</span><% end %>
-			  				<% end %>
-		  				<% end %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Local de instalação" %>
+  				<%= content_tag :dd, @order.spot %>
+  			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Marca/modelo" %>
-		  				<%= content_tag :dd, @order.stuff.brand %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Defeito apresentado" %>
+  				<%= content_tag :dd, @order.defect.to_s.html_safe, class: "html-safe" %>
+  			<% end %>
+  		</section>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Local de instalação" %>
-		  				<%= content_tag :dd, @order.spot %>
-		  			<% end %>
+  		<section id="report-data" class="tab-data current">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Status" %>
+  				<%= content_tag :dd, @order.status %>
+  			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Defeito apresentado" %>
-		  				<%= content_tag :dd, @order.defect.to_s.html_safe, class: "html-safe" %>
-		  			<% end %>
-		  		</section>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Tipo de OS" %>
+  				<%= content_tag :dd, @order.o_type %>
+  			<% end %>
 
-		  		<section id="report-data" class="tab-data current">
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Status" %>
-		  				<%= content_tag :dd, @order.status %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Foi feito backup?" %>
+  				<%= content_tag :dd, @order.backup %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Tipo de OS" %>
-		  				<%= content_tag :dd, @order.o_type %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "O equipamento está padronizado?" %>
+  				<%= content_tag :dd, @order.stuff.defaulted %>
+  			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Foi feito backup?" %>
-		  				<%= content_tag :dd, @order.backup %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Serviço realizado" %>
+  				<%= content_tag :dd, @order.performed_service.to_s.html_safe, class: "html-safe" %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "O equipamento está padronizado?" %>
-		  				<%= content_tag :dd, @order.stuff.defaulted %>
-		  			<% end %>
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Observações" %>
+  				<%= content_tag :dd, @order.obs.to_s.html_safe, class: "html-safe" %>
+  			<% end %>
+  		</section>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Serviço realizado" %>
-		  				<%= content_tag :dd, @order.performed_service.to_s.html_safe, class: "html-safe" %>
-		  			<% end %>
+  		<% if !@order.start_date.nil? && @order.removal_technicians.length > 1 %>
+    		<%= content_tag :p, class: "m-t-15 text-center removal-msg" do %>
+  				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technicians)}</strong>".html_safe %>
+  			<% end %>
+			<% end %>
 
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Observações" %>
-		  				<%= content_tag :dd, @order.obs.to_s.html_safe, class: "html-safe" %>
-		  			<% end %>
-		  		</section>
+  		<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
+				<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technicians)}</strong> em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if @order.maintenance_technicians.length > 1 && !@order.end_date.nil? %>
+			<% end if  %>
 
-		  		<% if !@order.start_date.nil? && @order.removal_technicians.length > 1 %>
-		    		<%= content_tag :p, class: "m-t-15 text-center removal-msg" do %>
-		  				<%= "Retirado em <strong>#{@order.start_date.strftime("%d/%m/%Y")}</strong> por <strong>#{get_user(@order.removal_technicians)}</strong>".html_safe %>
-		  			<% end %>
-					<% end %>
-
-		  		<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
-						<%= "Manutenção feita por <strong>#{get_user(@order.maintenance_technicians)}</strong> em <strong>#{@order.end_date.strftime("%d/%m/%Y")}</strong>".html_safe if @order.maintenance_technicians.length > 1 && !@order.end_date.nil? %>
-					<% end if  %>
-
-					<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
-						<%= order_updated_at(@order.updated_at, @order.updated_by) %>
-					<% end %>
-				</section>
-			</div>
-		</div>
+			<%= content_tag :p, class: "m-t-15 text-center maintenance-msg" do %>
+				<%= order_updated_at(@order.updated_at, @order.updated_by) %>
+			<% end %>
+		</section>
 	</div>
 </div>

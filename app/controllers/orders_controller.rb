@@ -6,9 +6,11 @@ class OrdersController < ApplicationController
   autocomplete :stuff, :patrimony, full: true
   autocomplete :school, :name, full: true
   layout "print", only: :print_order
+  add_breadcrumb "ordens de serviço".html_safe, :orders_path
+  add_breadcrumb "abertura de os".html_safe, :new_order_path, only: [:new, :create]
+  add_breadcrumb "editar dados da os".html_safe, :edit_order_path, only: [:edit, :update]
 
   def index
-    # params[:view] = "list" if params[:view].nil?
     id = params[:id]
     patrimony = params[:patrimony]
     spot = params[:spot]
@@ -221,6 +223,8 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+
+    add_breadcrumb "os ##{@order.id.to_s.rjust(3, '0')}".html_safe, :order_path
   end
 
   def destroy

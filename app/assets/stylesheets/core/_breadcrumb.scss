@@ -1,0 +1,38 @@
+.breadcrumbs {
+	display: flex;
+  align-items: center;
+  margin: 0 -15px;
+
+	a, i, span {
+		color: $secondary-color !important;
+	}
+
+	a {
+		text-decoration: none;
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 10px 15px;
+		border-radius: 30px;
+
+		&:hover {
+			background-color: rgba(229, 232, 232, 0.75);
+		}
+	}
+
+	i {
+		display: inline-block;
+		font-style: normal;
+
+		&:last-child {
+			padding: 10px 15px;
+			font-weight: bold;
+
+			a {
+				padding: 0;
+				cursor: auto;
+				background-color: transparent;
+			}
+		}
+	}
+}

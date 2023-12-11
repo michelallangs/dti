@@ -82,6 +82,8 @@ GEM
       railties (>= 3.0)
     bourbon (7.3.0)
       thor (~> 1.0)
+    breadcrumbs_on_rails (4.1.0)
+      railties (>= 5.0)
     builder (3.2.4)
     capybara (3.39.2)
       addressable
@@ -325,6 +327,7 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2.0)
   bootstrap-datepicker-rails
+  breadcrumbs_on_rails
   capybara
   chartkick
   chosen-rails

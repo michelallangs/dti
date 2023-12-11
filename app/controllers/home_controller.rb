@@ -9,6 +9,8 @@ class HomeController < ApplicationController
 	end
 
 	def profile
+		add_breadcrumb "meu perfil".html_safe, :profile_path
+
 		if is_school?(current_user)
 			@school = current_user.school 
 			@stuffs = @school.stuffs.page(params[:stuffs_page]).per(5)

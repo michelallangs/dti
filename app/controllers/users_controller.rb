@@ -1,5 +1,9 @@
 class UsersController < ApplicationController
 	autocomplete :user, :name, full: true
+  add_breadcrumb "usuários".html_safe, :users_path
+  add_breadcrumb "cadastrar usuário".html_safe, :new_user_path, only: [:new, :create]
+  add_breadcrumb "editar dados do usuário".html_safe, :edit_user_path, only: [:edit, :update]
+  add_breadcrumb "trocar senha".html_safe, :edit_user_password_path, only: [:edit_password, :update_password]
 
 	def index
 		id = params[:id]
@@ -112,6 +116,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+
+    add_breadcrumb "#{@user.first_name}".html_safe, :user_path
+
     list = []
     Order.all.map { |o| list << o if o.maintenance_technicians.include? @user.id.to_s }
     @orders = Order.where(id: list.pluck(:id)).page(params[:page]).per(5)

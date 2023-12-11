@@ -1,106 +1,97 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Detalhes da<span> unidade</span></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="actions">
+				<%= link_to edit_school_path, class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+				<%= link_to edit_user_password_path(@school.user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
+				<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+				<%= link_to destroy_user_registration_path(@school.user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir unidade<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Detalhes da<span> unidade</span></h1>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+			<div class="tabs m-b-10">	  
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>" tab-data="school-info-data">
+				  	<span class="material-symbols-outlined md-20">apartment</span>
+				  	Dados da unidade
+				  </button>
+				</div>
 
-					<div class="actions">
-						<%= link_to edit_school_path, class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path(@school.user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
-						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
-						<%= link_to destroy_user_registration_path(@school.user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir unidade<% end %>
-		      </div>
-				</header>
+				<div class="tab text-center">
+			  	<button class="tab-btn" tab-data="address-data">
+				  	<span class="material-symbols-outlined md-20">location_on</span>
+				  	Endereço
+				  </button>
+				</div>
+
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:orders_page] %>" tab-data="history-data">
+			  		<span class="material-symbols-outlined md-20">history</span>
+			  		Histórico
+			  	</button>
+				</div>
+
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:stuffs_page] %>" tab-data="inventory-data">
+			  		<span class="material-symbols-outlined md-20">inventory</span>
+			  		Inventário
+			  	</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-					<div class="tabs m-b-10">	  
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>" tab-data="school-info-data">
-						  	<span class="material-symbols-outlined md-20">apartment</span>
-						  	Dados da unidade
-						  </button>
-						</div>
+  		<section id="school-info-data" class="tab-data <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Nome" %>
+  				<%= content_tag :dd, @school.name %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn" tab-data="address-data">
-						  	<span class="material-symbols-outlined md-20">location_on</span>
-						  	Endereço
-						  </button>
-						</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Login/E-mail" %>
+  				<%= content_tag :dd, @school.user.username %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:orders_page] %>" tab-data="history-data">
-					  		<span class="material-symbols-outlined md-20">history</span>
-					  		Histórico
-					  	</button>
-						</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Segmento" %>
+  				<%= content_tag :dd, @school.segment %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:stuffs_page] %>" tab-data="inventory-data">
-					  		<span class="material-symbols-outlined md-20">inventory</span>
-					  		Inventário
-					  	</button>
-						</div>
-					</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Telefone" %>
+  				<%= content_tag :dd, @school.phone %>
+  			<% end %>
+  		</section>
+      
+  		<section id="address-data" class="tab-data">
+      	<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Logradouro" %>
+  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
+  			<% end %>
 
-		  		<section id="school-info-data" class="tab-data <%= 'current' if params[:stuffs_page].nil? && params[:orders_page].nil? %>">
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Nome" %>
-		  				<%= content_tag :dd, @school.name %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Bairro" %>
+  				<%= content_tag :dd, @school.district %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Login/E-mail" %>
-		  				<%= content_tag :dd, @school.user.username %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "CEP" %>
+  				<%= content_tag :dd, @school.zip_code %>
+  			<% end %>
+  		</section>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Segmento" %>
-		  				<%= content_tag :dd, @school.segment %>
-		  			<% end %>
+  		<section id="history-data" class="tab-data <%= 'current' if params[:orders_page] %>">
+  			<%= render 'orders' %>
+  		</section>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Telefone" %>
-		  				<%= content_tag :dd, @school.phone %>
-		  			<% end %>
-		  		</section>
-		      
-		  		<section id="address-data" class="tab-data">
-		      	<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Logradouro" %>
-		  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
-		  			<% end %>
-
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Bairro" %>
-		  				<%= content_tag :dd, @school.district %>
-		  			<% end %>
-
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "CEP" %>
-		  				<%= content_tag :dd, @school.zip_code %>
-		  			<% end %>
-		  		</section>
-
-		  		<section id="history-data" class="tab-data <%= 'current' if params[:orders_page] %>">
-		  			<%= render 'orders' %>
-		  		</section>
-
-		  		<section id="inventory-data" class="tab-data <%= 'current' if params[:stuffs_page] %>">
-		  			<%= render 'stuffs' %>
-					</section>
-				</section>
-			</div>
-		</div>
+  		<section id="inventory-data" class="tab-data <%= 'current' if params[:stuffs_page] %>">
+  			<%= render 'stuffs' %>
+			</section>
+		</section>
 	</div>
 </div>

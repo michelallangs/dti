@@ -2,6 +2,10 @@
   <%= render "shared/main_menu" %>
 
   <div class="main-container">
+    <%= content_tag :div, class: "breadcrumbs" do %>
+      <%= render_breadcrumbs :tag => :i, :separator => '/' %>
+    <% end %>
+    
     <%= flash_message %>
     
     <div class="row">

@@ -1,124 +1,115 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Meu <span>perfil</span></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="actions">
+				<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+				<%= link_to edit_user_password_path(current_user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
+				<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir conta<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Meu <span>perfil</span></h1>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+			<div class="tabs m-b-10">	
+				<div class="tab text-center">
+			  	<button class="tab-btn current" tab-data="user-info-data">
+				  	<span class="material-symbols-outlined md-20">person</span>
+				  	Meus dados
+				  </button>
+				</div>
 
-					<div class="actions">
-						<%= link_to edit_user_registration_path, class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to edit_user_password_path(current_user), class: "btn-warning icon" do %><span class="material-symbols-outlined md-16">key</span>Trocar senha<% end %>
-						<%= link_to destroy_user_registration_path(current_user), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir conta<% end %>
-		      </div>
-				</header>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-					<div class="tabs m-b-10">	
-						<div class="tab text-center">
-					  	<button class="tab-btn current" tab-data="user-info-data">
-						  	<span class="material-symbols-outlined md-20">person</span>
-						  	Meus dados
-						  </button>
-						</div>
-
-						<% if is_school?(current_user) %>
-							<div class="tab text-center">
-						  	<button class="tab-btn" tab-data="address-data">
-							  	<span class="material-symbols-outlined md-20">location_on</span>
-							  	Meus dados
-							  </button>
-							</div>
-						<% end %>
-
-						<div class="tab text-center">
-					  	<button class="tab-btn" tab-data="history-data">
-						  	<span class="material-symbols-outlined md-20">history</span>
-						  	Histórico
-						  </button>
-						</div>
-
-						<% if is_school?(current_user) %>
-							<div class="tab text-center">
-						  	<button class="tab-btn" tab-data="inventory-data">
-						  		<span class="material-symbols-outlined md-20">inventory</span>
-						  		Inventário
-						  	</button>
-							</div>
-						<% end %>
+				<% if is_school?(current_user) %>
+					<div class="tab text-center">
+				  	<button class="tab-btn" tab-data="address-data">
+					  	<span class="material-symbols-outlined md-20">location_on</span>
+					  	Meus dados
+					  </button>
 					</div>
+				<% end %>
 
-		  		<section id="user-info-data" class="tab-data current">
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Nome" %>
-		  				<%= content_tag :dd, username %>
-		  			<% end %>
+				<div class="tab text-center">
+			  	<button class="tab-btn" tab-data="history-data">
+				  	<span class="material-symbols-outlined md-20">history</span>
+				  	Histórico
+				  </button>
+				</div>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Login" %>
-		  				<%= content_tag :dd, current_user.username %>
-		  			<% end %>
-
-		  			<% if is_admin?(current_user) %>
-		  				<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "E-mail" %>
-			  				<%= content_tag :dd, current_user.email %>
-			  			<% end %>
-		  			<% end %>
-
-		  			<% if is_school?(current_user) %>
-			  			<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "Segmento" %>
-			  				<%= content_tag :dd, @school.segment %>
-			  			<% end %>
-
-			  			<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "Telefone" %>
-			  				<%= content_tag :dd, @school.phone %>
-			  			<% end %>
-		  			<% end %>
-		  		</section>
-		      
-		      <% if is_school?(current_user) %>
-			  		<section id="address-data" class="tab-data">
-			  			<h3 class="m-b-25">Endereço</h3>
-
-			      	<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "Logradouro" %>
-			  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
-			  			<% end %>
-
-			  			<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "Bairro" %>
-			  				<%= content_tag :dd, @school.district %>
-			  			<% end %>
-
-			  			<%= content_tag :dl do %>
-			    			<%= content_tag :dt, "CEP" %>
-			  				<%= content_tag :dd, @school.zip_code %>
-			  			<% end %>
-			  		</section>
-			  	<% end %>
-
-		  		<section id="history-data" class="tab-data">
-		  			<%= render 'orders' %>
-		  		</section>
-
-		  		<% if is_school?(current_user) %>
-			  		<section id="inventory-data" class="tab-data">
-		  				<%= render 'stuffs' %>
-			  		</section>
-		      <% end %>
-				</section>
+				<% if is_school?(current_user) %>
+					<div class="tab text-center">
+				  	<button class="tab-btn" tab-data="inventory-data">
+				  		<span class="material-symbols-outlined md-20">inventory</span>
+				  		Inventário
+				  	</button>
+					</div>
+				<% end %>
 			</div>
-		</div>
+
+  		<section id="user-info-data" class="tab-data current">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Nome" %>
+  				<%= content_tag :dd, username %>
+  			<% end %>
+
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Login" %>
+  				<%= content_tag :dd, current_user.username %>
+  			<% end %>
+
+  			<% if is_admin?(current_user) %>
+  				<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "E-mail" %>
+	  				<%= content_tag :dd, current_user.email %>
+	  			<% end %>
+  			<% end %>
+
+  			<% if is_school?(current_user) %>
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Segmento" %>
+	  				<%= content_tag :dd, @school.segment %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Telefone" %>
+	  				<%= content_tag :dd, @school.phone %>
+	  			<% end %>
+  			<% end %>
+  		</section>
+      
+      <% if is_school?(current_user) %>
+	  		<section id="address-data" class="tab-data">
+	  			<h3 class="m-b-25">Endereço</h3>
+
+	      	<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Logradouro" %>
+	  				<%= content_tag :dd, "#{@school.address}, #{@school.address_number}" %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "Bairro" %>
+	  				<%= content_tag :dd, @school.district %>
+	  			<% end %>
+
+	  			<%= content_tag :dl do %>
+	    			<%= content_tag :dt, "CEP" %>
+	  				<%= content_tag :dd, @school.zip_code %>
+	  			<% end %>
+	  		</section>
+	  	<% end %>
+
+  		<section id="history-data" class="tab-data">
+  			<%= render 'orders' %>
+  		</section>
+
+  		<% if is_school?(current_user) %>
+	  		<section id="inventory-data" class="tab-data">
+  				<%= render 'stuffs' %>
+	  		</section>
+      <% end %>
+		</section>
 	</div>
 </div>

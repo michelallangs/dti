@@ -1,4 +1,7 @@
 class TurboDeviseController < ApplicationController
+  add_breadcrumb "meu perfil".html_safe, :profile_path, only: [:edit]
+  add_breadcrumb "editar dados da conta".html_safe, :edit_user_registration_path, only: [:edit]
+
   class Responder < ActionController::Responder
     def to_turbo_stream
       controller.render(options.merge(formats: :html))

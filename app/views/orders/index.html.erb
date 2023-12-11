@@ -1,143 +1,134 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Ordens de <span>serviço</span> <%= content_tag :i, registered_data(@orders.total_count) %></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="right-content">
+				<div class="action-buttons">
+					<% grid_view = params[:view] != "list" ? "active" : "" %>
+					<% list_view = params[:view] == "list" ? "active" : "" %>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Ordens de <span>serviço</span> <%= content_tag :i, registered_data(@orders.total_count) %></h1>
+					<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon #{grid_view}" do %><span class="material-symbols-outlined md-20">grid_view</span><% end %>
+					<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon #{list_view}" do %><span class="material-symbols-outlined md-20">table_rows</span><% end %>
+					<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
+					<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Abrir OS<% end %>
+				</div>
+			</div>
+		</header>
+	</div>
+</div>
 
-					<div class="right-content">
-						<div class="action-buttons">
-							<% grid_view = params[:view] != "list" ? "active" : "" %>
-							<% list_view = params[:view] == "list" ? "active" : "" %>
+<%= form_tag(orders_path, method: :get, class: "filters form") do %>
+	<%= hidden_field_tag :view, params[:view] %>
 
-							<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon #{grid_view}" do %><span class="material-symbols-outlined md-20">grid_view</span><% end %>
-							<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon #{list_view}" do %><span class="material-symbols-outlined md-20">table_rows</span><% end %>
-							<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
-							<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Abrir OS<% end %>
-						</div>
-					</div>
-				</header>
+	<div class="row">
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
 			</div>
 		</div>
 
-		<%= form_tag(orders_path, method: :get, class: "filters form") do %>
-			<%= hidden_field_tag :view, params[:view] %>
-
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search">
-						<%= search_field_tag :id, params[:id], placeholder: "Número da OS" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search" id="autocomplete-patrimony">
-						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, type: "search", title: "Digite S/P para pesquisar OS sem patrimônio" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search" id="autocomplete-name">
-						<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :status, options_for_select(list_status, params[:status]), include_blank: "Status..."  %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :o_type, options_for_select(list_types, params[:o_type]), include_blank: "Tipo de OS..."  %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :technician, options_for_select(@technicians, params[:technician]), include_blank: "Técnico responsável..." %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search" id="autocomplete-category">
-						<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
-						<% list_categories.each do |category| %>
-					    <%= content_tag :div, category, class: "search_list list_categories" %>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search" id="autocomplete-brand">
-						<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
-						<% list_brands.each do |brand| %>
-					    <%= content_tag :div, brand, class: "search_list list_brands" %>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search" id="autocomplete-spot">
-						<%= search_field_tag :spot, params[:spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
-						<% list_spots.each do |spot| %>
-					    <%= content_tag :div, spot, class: "search_list list_spots" %>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search date" id="start-date">
-						<%= text_field_tag :start_date, params[:start_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search date" id="end-date">
-						<%= text_field_tag :end_date, params[:end_date], placeholder: "Data final", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
-					</div>
-				</div>
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search">
+				<%= search_field_tag :id, params[:id], placeholder: "Número da OS" %>
 			</div>
+		</div>
 
-			<div class="row">
-				<div class="col-12 text-center">
-					<%= link_to orders_path, class: "btn-cancel" do %>Limpar filtros<% end %>
-				</div>
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search" id="autocomplete-patrimony">
+				<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio/Nº série", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, type: "search", title: "Digite S/P para pesquisar OS sem patrimônio" %>
 			</div>
+		</div>
 
-			<%= submit_tag "Buscar" %>
-		<% end %>
-
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} ordem(ns) de serviço encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
-
-		<% unless @orders.nil? || @orders.blank? %>
-			<div class="row">
-				<div class="col">
-					<div class="hidden-scrollbar <%= params[:view].presence %>">
-						<button class="prev-btn" title="Mover para esquerda"><span class="material-symbols-outlined">keyboard_double_arrow_left</span></button>
-						<button class="next-btn" title="Mover para direita"><span class="material-symbols-outlined">keyboard_double_arrow_right</span></button>
-						<section class="container-body <%= params[:view].presence %>" id="order-cards">
-							<%= render "order_card" %>
-						</section>
-					</div>
-
-					<%= paginate @orders, remote: true %>
-				</div>
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search" id="autocomplete-name">
+				<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
 			</div>
-		<% else %>
-			<h3 class="text-center m-t-50"><i>Nenhuma ordem de serviço encontrada.</i></h3>
-		<% end %>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :status, options_for_select(list_status, params[:status]), include_blank: "Status..."  %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :o_type, options_for_select(list_types, params[:o_type]), include_blank: "Tipo de OS..."  %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :technician, options_for_select(@technicians, params[:technician]), include_blank: "Técnico responsável..." %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search" id="autocomplete-category">
+				<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+				<% list_categories.each do |category| %>
+			    <%= content_tag :div, category, class: "search_list list_categories" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search" id="autocomplete-brand">
+				<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+				<% list_brands.each do |brand| %>
+			    <%= content_tag :div, brand, class: "search_list list_brands" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search" id="autocomplete-spot">
+				<%= search_field_tag :spot, params[:spot], list_spots: list_spots, placeholder: "Local de instalação. Ex.: secretaria, direção, lab..." %>
+				<% list_spots.each do |spot| %>
+			    <%= content_tag :div, spot, class: "search_list list_spots" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search date" id="start-date">
+				<%= text_field_tag :start_date, params[:start_date], placeholder: "Data inicial", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search date" id="end-date">
+				<%= text_field_tag :end_date, params[:end_date], placeholder: "Data final", autocomplete: "off", "data-date-format": "dd/mm/yyyy" %>
+			</div>
+		</div>
 	</div>
-</div>
+
+	<div class="row">
+		<div class="col-12 text-center">
+			<%= link_to orders_path, class: "btn-cancel" do %>Limpar filtros<% end %>
+		</div>
+	</div>
+
+	<%= submit_tag "Buscar" %>
+<% end %>
+
+<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} ordem(ns) de serviço encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+
+<% unless @orders.nil? || @orders.blank? %>
+	<div class="row">
+		<div class="col">
+			<div class="hidden-scrollbar <%= params[:view].presence %>">
+				<button class="prev-btn" title="Mover para esquerda"><span class="material-symbols-outlined">keyboard_double_arrow_left</span></button>
+				<button class="next-btn" title="Mover para direita"><span class="material-symbols-outlined">keyboard_double_arrow_right</span></button>
+				<section class="container-body <%= params[:view].presence %>" id="order-cards">
+					<%= render "order_card" %>
+				</section>
+			</div>
+
+			<%= paginate @orders, remote: true %>
+		</div>
+	</div>
+<% else %>
+	<h3 class="text-center m-t-50"><i>Nenhuma ordem de serviço encontrada.</i></h3>
+<% end %>

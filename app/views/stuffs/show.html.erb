@@ -1,79 +1,70 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Detalhes do<span> equipamento</span></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="actions">
+				<%= link_to edit_stuff_path(@stuff), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
+				<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+				<%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir equipamento<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Detalhes do<span> equipamento</span></h1>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+			<div class="tabs m-b-10">	  
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:page].nil? %>" tab-data="stuff-info-data">
+				  	<span class="material-symbols-outlined md-20">devices</span>
+				  	Dados do equipamento
+				  </button>
+				</div>
 
-					<div class="actions">
-						<%= link_to edit_stuff_path(@stuff), class: "btn-info icon" do %><span class="material-symbols-outlined md-16 md-light">edit</span>Editar dados<% end %>
-						<%= link_to :back, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
-						<%= link_to destroy_stuff_path(@stuff), method: :delete, data: { confirm: "Tem certeza? Essa ação é irreversível." }, class: "btn-alert icon" do %><span class="material-symbols-outlined md-16 md-light">close</span>Excluir equipamento<% end %>
-		      </div>
-				</header>
+				<div class="tab text-center">
+			  	<button class="tab-btn <%= 'current' if params[:page] %>" tab-data="history-data">
+			  		<span class="material-symbols-outlined md-20">history</span>
+			  		Histórico
+			  	</button>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-					<div class="tabs m-b-10">	  
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:page].nil? %>" tab-data="stuff-info-data">
-						  	<span class="material-symbols-outlined md-20">devices</span>
-						  	Dados do equipamento
-						  </button>
-						</div>
+  		<section id="stuff-info-data" class="tab-data <%= 'current' if params[:page].nil? %>">
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Patrimônio" %>
+  				<%= content_tag :dd, @stuff.patrimony.presence || "S/P" %>
+  			<% end %>
 
-						<div class="tab text-center">
-					  	<button class="tab-btn <%= 'current' if params[:page] %>" tab-data="history-data">
-					  		<span class="material-symbols-outlined md-20">history</span>
-					  		Histórico
-					  	</button>
-						</div>
-					</div>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Categoria" %>
+  				<%= content_tag :dd, @stuff.category %>
+  			<% end %>
 
-		  		<section id="stuff-info-data" class="tab-data <%= 'current' if params[:page].nil? %>">
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Patrimônio" %>
-		  				<%= content_tag :dd, @stuff.patrimony %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Marca/modelo" %>
+  				<%= content_tag :dd, @stuff.brand %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Categoria" %>
-		  				<%= content_tag :dd, @stuff.category %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Equipamento está no padrão?" %>
+  				<%= content_tag :dd, @stuff.defaulted %>
+  			<% end %>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Marca/modelo" %>
-		  				<%= content_tag :dd, @stuff.brand %>
-		  			<% end %>
+  			<%= content_tag :dl do %>
+    			<%= content_tag :dt, "Unidade" %>
+    			<%= content_tag :dd do %>
+  					<%= link_to school_path(@stuff.school), class: "link flex" do %>
+  						<%= @stuff.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
+  					<% end %>
+  				<% end %>
+  			<% end unless is_school?(current_user) %>
+  		</section>
 
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Equipamento está no padrão?" %>
-		  				<%= content_tag :dd, @stuff.defaulted %>
-		  			<% end %>
-
-		  			<%= content_tag :dl do %>
-		    			<%= content_tag :dt, "Unidade" %>
-		    			<%= content_tag :dd do %>
-		  					<%= link_to school_path(@stuff.school), class: "link flex" do %>
-		  						<%= @stuff.school.name %> <span class="material-symbols-outlined md-16">open_in_new</span>
-		  					<% end %>
-		  				<% end %>
-		  			<% end unless is_school?(current_user) %>
-		  		</section>
-
-		  		<section id="history-data" class="tab-data <%= 'current' if params[:page] %>">
-		  			<%= render 'orders' %>
-		  		</section>
-				</section>
-			</div>
-		</div>
+  		<section id="history-data" class="tab-data <%= 'current' if params[:page] %>">
+  			<%= render 'orders' %>
+  		</section>
+		</section>
 	</div>
 </div>

@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  add_breadcrumb "página inicial".html_safe, :home_path, title: "Página inicial"
   include ApplicationHelper
 	before_action :authenticate_user!
 	before_action :configure_permitted_parameters, if: :devise_controller?

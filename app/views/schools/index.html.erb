@@ -1,83 +1,74 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Lista de <span>unidades</span> <%= content_tag :i, registered_data(@schools.count) %></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="right-content">
+				<div class="action-buttons">
+					<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
+					<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar unidade<% end %>
+				</div>
+			</div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Lista de <span>unidades</span> <%= content_tag :i, registered_data(@schools.count) %></h1>
-
-					<div class="right-content">
-						<div class="action-buttons">
-							<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
-							<%= link_to new_school_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar unidade<% end %>
-						</div>
-					</div>
-				</header>
+<%= form_tag(schools_path, method: :get, class: "filters form") do %>
+	<div class="row">
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
+			</div>
+		</div>
+		
+		<div class="col-12 col-sm-6 col-lg-3">
+			<div class="search" id="autocomplete-name">
+				<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
 			</div>
 		</div>
 
-		<%= form_tag(schools_path, method: :get, class: "filters form") do %>
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
-					</div>
-				</div>
-				
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-name">
-						<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search">
-						<%= search_field_tag :email, params[:email], placeholder: "E-mail" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search">
-						<%= search_field_tag :district, params[:district], placeholder: "Bairro" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search">
-						<%= search_field_tag :zip_code, params[:zip_code], placeholder: "CEP" %>
-					</div>
-				</div>
-
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="search">
-						<div class="custom-select">
-							<%= select_tag :segment, options_for_select(list_segments, params[:segment]), include_blank: "Segmento..."  %>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12 text-center">
-					<%= link_to schools_path, class: "btn-cancel" do %>Limpar filtros<% end %>
-				</div>
-			</div>
-
-			<%= submit_tag ("Buscar") %>
-		<% end %>
-
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@schools.length} unidade(s) encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
-
-		<div class="row">
-			<div class="col">
-				<section class="container-body" id="schools-data">
-					<%= render 'schools' %>
-				</section>
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search">
+				<%= search_field_tag :email, params[:email], placeholder: "E-mail" %>
 			</div>
 		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search">
+				<%= search_field_tag :district, params[:district], placeholder: "Bairro" %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search">
+				<%= search_field_tag :zip_code, params[:zip_code], placeholder: "CEP" %>
+			</div>
+		</div>
+
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="search">
+				<div class="custom-select">
+					<%= select_tag :segment, options_for_select(list_segments, params[:segment]), include_blank: "Segmento..."  %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12 text-center">
+			<%= link_to schools_path, class: "btn-cancel" do %>Limpar filtros<% end %>
+		</div>
+	</div>
+
+	<%= submit_tag ("Buscar") %>
+<% end %>
+
+<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@schools.length} unidade(s) encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+
+<div class="row">
+	<div class="col">
+		<section class="container-body" id="schools-data">
+			<%= render 'schools' %>
+		</section>
 	</div>
 </div>

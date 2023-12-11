@@ -1,54 +1,48 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Cadastrar <span>equipamento</span></h1>
 
-	<div class="main-container">
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Cadastrar <span>equipamento</span></h1>
+			<div class="actions">
+      	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">done</span>Finalizar<% end %>
+        <%= link_to stuffs_path, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
+      </div>
+		</header>
+	</div>
+</div>
 
-					<div class="actions">
-		      	<%= link_to "#", onclick: "$('.form').submit()", data: { disable_with: "Aguarde..." }, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">done</span>Finalizar<% end %>
-		        <%= link_to stuffs_path, class: "btn-cancel icon" do %><span class="material-symbols-outlined md-16">undo</span>Voltar<% end %>
-		      </div>
-				</header>
-			</div>
-		</div>
+<div class="row">
+	<div class="col">
+		<section class="container-body">
+    	<%= flash_message %>
 
-		<div class="row">
-			<div class="col">
-				<section class="container-body">
-		    	<%= flash_message %>
+			<%= simple_form_for @stuff, url: new_stuff_path, html: { class: "form" } do |f| %>
+      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
 
-					<%= simple_form_for @stuff, url: new_stuff_path, html: { class: "form" } do |f| %>
-		      	<%= f.input :school_id, as: :hidden, label: false, input_html: { value: current_user.school.id }, wrapper: false if !is_admin?(current_user) %>
+    		<%= content_tag :div, "", class: "row" do %>
+    			<div class="col-12 col-lg-4 col-md-5 col-sm-6">
+  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
+    			</div>
+				<% end if is_admin?(current_user) %>
 
-		    		<%= content_tag :div, "", class: "row" do %>
-		    			<div class="col-12 col-lg-4 col-md-5 col-sm-6">
-		  					<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
-		    			</div>
-						<% end if is_admin?(current_user) %>
+      	<div class="row">
+					<div class="col-12 col-lg-4 col-md-5 col-sm-6">
+        		<%= f.input :patrimony, label: "Patrimônio", label_html: { class: "form-label" }, placeholder: "Deixe em branco caso não tenha" %>
+        	</div>      		
+      	</div>      		
 
-		      	<div class="row">
-							<div class="col-12 col-lg-4 col-md-5 col-sm-6">
-		        		<%= f.input :patrimony, label: "Patrimônio", label_html: { class: "form-label" }, placeholder: "Deixe em branco caso não tenha" %>
-		        	</div>      		
-	        	</div>      		
+      	<div class="row">
+					<div class="col-12 col-lg-4 col-md-5 col-sm-6">
+		      	<%= f.input :category, required: false, label: "Categoria", collection: list_categories, include_blank: "Selecione a categoria...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+					</div>	 
+				</div>	 
 
-		      	<div class="row">
-							<div class="col-12 col-lg-4 col-md-5 col-sm-6">
-				      	<%= f.input :category, required: false, label: "Categoria", collection: list_categories, include_blank: "Selecione a categoria...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-							</div>	 
-						</div>	 
-
-		      	<div class="row">
-							<div class="col-12 col-lg-4 col-md-5 col-sm-6">
-				      	<%= f.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
-							</div>	      		
-		      	</div>
-			    <% end %>
-				</section>
-			</div>
-		</div>
+      	<div class="row">
+					<div class="col-12 col-lg-4 col-md-5 col-sm-6">
+		      	<%= f.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+					</div>	      		
+      	</div>
+	    <% end %>
+		</section>
 	</div>
 </div>

@@ -25,7 +25,21 @@
     <div class="main">
       <span class="menu-icon material-symbols-outlined md-20">menu</span>
 
-      <%= yield %>
+      <div class="box main-panel">
+        <%= render "shared/main_menu" %>
+
+        <div class="main-container">
+          <%= content_tag :div, class: "breadcrumbs" do %>
+            <%= render_breadcrumbs :tag => :i, :separator => '/' %>
+          <% end unless request.path == "/" || request.path == "/pagina-inicial" %>
+
+          <%= render 'shared/spinner' %>
+
+          <%= flash_message %>
+
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

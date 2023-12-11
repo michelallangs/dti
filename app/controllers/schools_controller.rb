@@ -1,5 +1,8 @@
 class SchoolsController < ApplicationController
 	autocomplete :school, :name, full: true
+  add_breadcrumb "unidades".html_safe, :schools_path
+  add_breadcrumb "cadastrar unidade".html_safe, :new_school_path, only: [:new, :create]
+  add_breadcrumb "editar dados da unidade".html_safe, :edit_school_path, only: [:edit, :update]
 
 	def index
 		id = params[:id]
@@ -78,6 +81,8 @@ class SchoolsController < ApplicationController
 
   def show
     @school = School.find(params[:id])
+
+    add_breadcrumb "#{@school.usual_name}".html_safe, :school_path
     @orders = @school.orders.page(params[:orders_page]).per(5)
     @stuffs = @school.stuffs.page(params[:stuffs_page]).per(5)
 

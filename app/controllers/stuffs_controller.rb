@@ -2,6 +2,9 @@ class StuffsController < ApplicationController
 	autocomplete :stuff, :patrimony, full: true
   autocomplete :school, :name, full: true
   before_action :schools, only: [:new, :create, :edit, :update]
+  add_breadcrumb "equipamentos".html_safe, :stuffs_path
+  add_breadcrumb "cadastrar equipamento".html_safe, :new_stuff_path, only: [:new, :create]
+  add_breadcrumb "editar dados do equipamento".html_safe, :edit_stuff_path, only: [:edit, :update]
 
 	def index
 		id = params[:id]
@@ -86,6 +89,8 @@ class StuffsController < ApplicationController
 
   def show
     @stuff = Stuff.find(params[:id])
+
+    add_breadcrumb "#{@stuff.patrimony.presence || "S/P"}".html_safe, :stuff_path
     @orders = @stuff.orders.page(params[:page]).per(5)
 
     respond_to do |format|

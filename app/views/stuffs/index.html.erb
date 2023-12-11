@@ -1,81 +1,72 @@
-<div class="box main-panel">
-	<%= render "shared/main_menu" %>
+<div class="row">
+	<div class="col">
+		<header class="container-header">
+			<h1 class="header-title">Lista de <span>equipamentos</span> <%= content_tag :i, registered_data(@stuffs.count) %></h1>
 
-	<div class="main-container">
-		<%= render 'shared/spinner' %>
-		<%= flash_message %>
+			<div class="right-content">
+				<div class="action-buttons">
+					<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
+					<%= link_to new_stuff_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar equipamento<% end %>
+				</div>
+			</div>
+		</header>
+	</div>
+</div>
 
-		<div class="row">
-			<div class="col">
-				<header class="container-header">
-					<h1 class="header-title">Lista de <span>equipamentos</span> <%= content_tag :i, registered_data(@stuffs.count) %></h1>
-
-					<div class="right-content">
-						<div class="action-buttons">
-							<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
-							<%= link_to new_stuff_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Cadastrar equipamento<% end %>
-						</div>
-					</div>
-				</header>
+<%= form_tag(stuffs_path, method: :get, class: "filters form") do %>
+	<div class="row">
+		<div class="col-lg-3 col-md-6 col-sm-12">
+			<div class="custom-select">
+				<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
 			</div>
 		</div>
 
-		<%= form_tag(stuffs_path, method: :get, class: "filters form") do %>
-			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-12">
-					<div class="custom-select">
-						<%= select_tag :limit, options_for_select(["5", "10", "20", "50", "100"], selected: params[:limit]), include_blank: "Itens por página..." %>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-patrimony">
-						<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar OS sem patrimônio" %>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-category">
-						<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
-						<% list_categories.each do |category| %>
-					    <%= content_tag :div, category, class: "search_list list_categories" %>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-brand">
-						<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
-						<% list_brands.each do |brand| %>
-					    <%= content_tag :div, brand, class: "search_list list_brands" %>
-						<% end %>
-					</div>
-				</div>
-
-				<div class="col-12 col-sm-6 col-lg-3">
-					<div class="search" id="autocomplete-name">
-						<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
-					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="col-12 text-center">
-					<%= link_to stuffs_path, class: "btn-cancel" do %>Limpar filtros<% end %>
-				</div>
-			</div>
-
-			<%= submit_tag ("Buscar") %>
-		<% end %>
-
-		<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrado(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
-
-		<div class="row">
-			<div class="col">
-				<section class="container-body" id="stuffs-data">
-					<%= render 'stuffs' %>
-				</section>
+		<div class="col-12 col-sm-6 col-lg-3">
+			<div class="search" id="autocomplete-patrimony">
+				<%= autocomplete_field_tag :patrimony, params[:patrimony], autocomplete_stuff_patrimony_orders_path, placeholder: "Patrimônio", append_to: "#autocomplete-patrimony",'data-showNoMatches' => false, title: "Digite S/P para pesquisar OS sem patrimônio" %>
 			</div>
 		</div>
+
+		<div class="col-12 col-sm-6 col-lg-3">
+			<div class="search" id="autocomplete-category">
+				<%= search_field_tag :category, params[:category], placeholder: "Categoria. Ex.: PC, impressora, monitor.." %>
+				<% list_categories.each do |category| %>
+			    <%= content_tag :div, category, class: "search_list list_categories" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-12 col-sm-6 col-lg-3">
+			<div class="search" id="autocomplete-brand">
+				<%= search_field_tag :brand, params[:brand], placeholder: "Marca/modelo. Ex.: Acer, Dell, Positivo.." %>
+				<% list_brands.each do |brand| %>
+			    <%= content_tag :div, brand, class: "search_list list_brands" %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="col-12 col-sm-6 col-lg-3">
+			<div class="search" id="autocomplete-name">
+				<%= autocomplete_field_tag :name, params[:name], autocomplete_school_name_schools_path, placeholder: "Nome da unidade", append_to: "#autocomplete-name",'data-showNoMatches' => false %>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-12 text-center">
+			<%= link_to stuffs_path, class: "btn-cancel" do %>Limpar filtros<% end %>
+		</div>
+	</div>
+
+	<%= submit_tag ("Buscar") %>
+<% end %>
+
+<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@stuffs.length} equipamento(s) encontrado(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
+
+<div class="row">
+	<div class="col">
+		<section class="container-body" id="stuffs-data">
+			<%= render 'stuffs' %>
+		</section>
 	</div>
 </div>
