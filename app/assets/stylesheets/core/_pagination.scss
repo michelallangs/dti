@@ -60,11 +60,11 @@
     content: "\203A";
   }
 
-  .next:before {
+  .first:before {
     content: "\00AB";
   }
 
-  .next:before {
+  .last:before {
     content: "\00BB";
   }
 }
