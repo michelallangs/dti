@@ -1,4 +1,4 @@
 $('#order-cards').empty();
 $('#order-cards').html('<%= escape_javascript(render 'order_card') %>');
 $(".pagination").html('<%= escape_javascript(render 'order_pagination') %>');
-$('#registered-data').html('<%= escape_javascript(render 'registered_data') %>');
+$('#registered-data').html('<%= escape_javascript(render "shared/registered_data", paginate: @orders) %>');

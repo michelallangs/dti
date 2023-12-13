@@ -14,10 +14,18 @@ pt-BR:
           has_one: Não é possível excluir o registro pois existe um %{record} dependente
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
-      user: "usuário"
-      order: "ordem de serviço"
-      school: "unidade"
-      stuff: "equipamento"
+      user: 
+        one: "usuário"
+        other: "usuários"
+      order:
+        one: "ordem de serviço"
+        other: "ordens de serviço"
+      school:
+        one: "unidade"
+        other: "unidades"
+      stuff:
+        one: "equipamento"
+        other: "equipamentos"
     attributes:
       user:
         name: "nome"
@@ -163,7 +171,7 @@ pt-BR:
       one_page:
         display_entries:
           one: Exibindo <b>1</b> %{entry_name}
-          other: Exibindo <b>%{count}</b> %{entry_name}s
+          other: Exibindo <b>%{count}</b> %{entry_name}
           zero: Nenhum(a) %{entry_name} encontrado(a)
     select:
       prompt: Por favor selecione

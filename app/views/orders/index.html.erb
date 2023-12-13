@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col">
 		<header class="container-header">
-			<h1 class="header-title">Ordens de <span>serviço</span> <i id="registered-data"><%= render "registered_data" %></i></h1>
+			<h1 class="header-title">Ordens de <span>serviço</span> <i id="registered-data"><%= render "shared/registered_data", paginate: @orders %></i></h1>
 
 			<div class="right-content">
 				<div class="action-buttons">
