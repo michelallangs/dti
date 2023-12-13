@@ -64,7 +64,7 @@ class OrdersController < ApplicationController
       @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
     end
 
-    @orders = @orders.in_order_of(:status, list_status).order("id DESC").page(params[:page]).per(params[:limit])
+    @orders = @orders.in_order_of(:status, list_status).order("orders.id DESC").page(params[:page]).per(params[:limit])
 
     respond_to do |format|
       format.html

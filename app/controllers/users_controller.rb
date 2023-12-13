@@ -24,7 +24,7 @@ class UsersController < ApplicationController
       @users = @users.where(query, *values)
     end
 
-	 	@users = @users.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
+	 	@users = @users.order("#{params[:sort_by].nil? ? "users.id" : params[:sort_by]} ASC") 
 
     @users_paginate = @users.page(params[:page]).per(params[:limit])
 

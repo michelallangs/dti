@@ -1,4 +1,3 @@
----
 pt-BR:
   views:
     pagination:
@@ -16,6 +15,9 @@ pt-BR:
           has_many: Não é possível excluir o registro pois existem %{record} dependentes
     models:
       user: "usuário"
+      order: "ordem de serviço"
+      school: "unidade"
+      stuff: "equipamento"
     attributes:
       user:
         name: "nome"
@@ -155,6 +157,14 @@ pt-BR:
         one: 'Não foi possível gravar %{model}: 1 erro'
         other: 'Não foi possível gravar %{model}: %{count} erros'
   helpers:
+    page_entries_info:
+      more_pages:
+        display_entries: Exibindo <b>%{first}&nbsp;-&nbsp;%{last}</b> de um total de <b>%{total}</b>
+      one_page:
+        display_entries:
+          one: Exibindo <b>1</b> %{entry_name}
+          other: Exibindo <b>%{count}</b> %{entry_name}s
+          zero: Nenhum(a) %{entry_name} encontrado(a)
     select:
       prompt: Por favor selecione
     submit:

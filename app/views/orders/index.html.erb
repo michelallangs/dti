@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col">
 		<header class="container-header">
-			<h1 class="header-title">Ordens de <span>serviço</span> <%= content_tag :i, registered_data(@orders.total_count) %></h1>
+			<h1 class="header-title">Ordens de <span>serviço</span> <i id="registered-data"><%= render "registered_data" %></i></h1>
 
 			<div class="right-content">
 				<div class="action-buttons">
@@ -112,8 +112,6 @@
 
 	<%= submit_tag "Buscar" %>
 <% end %>
-
-<%= content_tag :p, "<strong class='m-r-5'>Resultados da busca:</strong> #{@orders.length} ordem(ns) de serviço encontrada(s).".html_safe, class: "flash flash-search inline m-b-0 m-t-25" unless @search.all?(&:blank?) %>
 
 <% unless @orders.nil? || @orders.blank? %>
 	<div class="row">

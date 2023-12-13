@@ -88,11 +88,4 @@ module ApplicationHelper
 
     return is_school?(user) ? user.school.usual_name : user.first_name
   end
-
-  def registered_data(data)
-    limit = params[:limit].to_i > data ? data : params[:limit]
-    content = params[:limit].blank? ? "(Total: #{data})" : "(exibindo #{limit} de #{data})"
-
-    return content
-  end
 end

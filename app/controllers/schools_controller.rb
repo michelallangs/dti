@@ -29,7 +29,7 @@ class SchoolsController < ApplicationController
     	@schools = @schools.where("schools.user_id = ?", current_user.id) if is_school?(current_user)
     end
 
-	 	@schools = @schools.order("#{params[:sort_by].nil? ? "id" : params[:sort_by]} ASC") 
+	 	@schools = @schools.order("#{params[:sort_by].nil? ? "schools.id" : params[:sort_by]} ASC") 
 
     @schools_paginate = @schools.page(params[:page]).per(params[:limit])
 

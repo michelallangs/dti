@@ -91,9 +91,9 @@ ready = function() {
   })
 
   $(document).ajaxStart(function() {
-    $(".spinner").fadeIn('slow');
+    $(".spinner").stop().fadeIn('slow');
   }).ajaxStop(function() {
-    $(".spinner").hide();
+    $(".spinner").stop().hide();
   });
 };
 
