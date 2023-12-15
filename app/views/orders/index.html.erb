@@ -5,11 +5,14 @@
 
 			<div class="right-content">
 				<div class="action-buttons">
-					<% grid_view = params[:view] != "list" ? "active" : "" %>
-					<% list_view = params[:view] == "list" ? "active" : "" %>
+					<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon active", id: "grid" do %>
+						<span class="material-symbols-outlined md-20">grid_view</span>
+					<% end %>
 
-					<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon #{grid_view}" do %><span class="material-symbols-outlined md-20">grid_view</span><% end %>
-					<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon #{list_view}" do %><span class="material-symbols-outlined md-20">table_rows</span><% end %>
+					<%= link_to request.params.merge(view: "list"), alt: "Modo de exibição: lista", title: "Modo de exibição: lista", class: "as-list btn-icon", id: "list" do %>
+						<span class="material-symbols-outlined md-20">table_rows</span>
+					<% end %>
+					
 					<%= link_to "#", alt: "Mostrar opções de pesquisa", title: "Mostrar opções de pesquisa", class: "btn-icon enable-filters" do %><span class="material-symbols-outlined md-16">search</span><% end %>
 					<%= link_to new_order_path, class: "btn-success icon" do %><span class="material-symbols-outlined md-16 md-light">add</span>Abrir OS<% end %>
 				</div>
@@ -19,8 +22,6 @@
 </div>
 
 <%= form_tag(orders_path, method: :get, class: "filters form") do %>
-	<%= hidden_field_tag :view, params[:view] %>
-
 	<div class="row">
 		<div class="col-lg-3 col-md-6 col-sm-12">
 			<div class="custom-select">

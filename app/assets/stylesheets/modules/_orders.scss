@@ -37,6 +37,10 @@
     	&.list {
     		overflow: initial;
     		height: auto;
+
+    		.prev-btn, .next-btn {
+    			display: none !important;
+    		}
     	}
 
     	.prev-btn, .next-btn {
