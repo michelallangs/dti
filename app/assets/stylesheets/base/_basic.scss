@@ -381,3 +381,47 @@ dl {
 	display: flex;
 	gap: 5px;
 }
+
+div[data-label="Status"] {
+  font-weight: 600;
+}
+
+div[data-status="em-aberto"] {
+  color: $success !important;
+}
+
+div[data-status="em-manutencao"] {
+  color: $warning !important;
+}
+
+div[data-status="para-retirada"] {
+  color: $purple !important;
+}
+
+div[data-status="concluido"] {
+  color: $info !important;
+}
+
+div[data-status="garantia"] {
+  color: $orange !important;
+}
+
+div[data-status="para-doacao"] {
+  color: $crimson !important;
+}
+
+div[data-status="aguardando-pecas"] {
+  color: $alert !important;
+}
+
+div[data-status="aguardando-descarte"] {
+  color: $light-copper !important;
+}
+
+div[data-status="descarte"] {
+  color: $copper !important;
+}
+
+div[data-status="cancelado"] {
+  color: #aaa !important;
+}

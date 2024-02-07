@@ -41,50 +41,6 @@
     animation: fadeIn;
     animation-duration: .5s;
     animation-timing-function: ease-in-out;
-
-    div[data-label="Status"] {
-      font-weight: 600;
-    }
-
-    div[data-status="em-aberto"] {
-      color: $success;
-    }
-
-    div[data-status="em-manutencao"] {
-      color: $warning;
-    }
-
-    div[data-status="para-retirada"] {
-      color: $purple;
-    }
-
-    div[data-status="concluido"] {
-      color: $info;
-    }
-
-    div[data-status="garantia"] {
-      color: $orange;
-    }
-
-    div[data-status="para-doacao"] {
-      color: $crimson;
-    }
-
-    div[data-status="aguardando-pecas"] {
-      color: $alert;
-    }
-
-    div[data-status="aguardando-descarte"] {
-      color: $light-copper;
-    }
-
-    div[data-status="descarte"] {
-      color: $copper;
-    }
-
-    div[data-status="cancelado"] {
-      color: #aaa;
-    }
   }
 
   @for $i from 1 through 100 {
