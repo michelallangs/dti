@@ -19,8 +19,8 @@ class OrdersController < ApplicationController
     status = params[:status]
     technician = params[:technician].blank? ? "" : params[:technician]
     o_type = params[:o_type]
-    start_date = params[:start_date].blank? ? params[:end_date] : params[:start_date]
-    end_date = params[:end_date].blank? ? params[:start_date] : params[:end_date]
+    start_date = params[:start_date]
+    end_date = params[:end_date]
     school = I18n.transliterate(params[:name]) if params[:name]
 
     @search = [id, patrimony, spot, category, brand, status, technician, o_type, start_date, end_date, school]
@@ -28,19 +28,22 @@ class OrdersController < ApplicationController
     @orders = Order.joins(:stuff, :school)
 
     if !@search.all?(&:blank?)
-      patrimony = patrimony.to_s.downcase == "s/p" ? "" 
-                                              : "%#{patrimony}%"
+      patrimony = patrimony.to_s.downcase == "s/p" ? "" : "%#{patrimony}%"
 
       query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
                lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND 
                lower(orders.o_type) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", 
-                "%#{technician}%", "%#{o_type}%", "%#{school}%"]
+      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{o_type}%", "%#{school}%"]
 
-      if !start_date.blank? || !end_date.blank?
-        query += " AND date(orders.created_at) BETWEEN ? AND ?"
-        values += [start_date.to_date, end_date.to_date]
+      if !start_date.blank?
+        query += " AND date(orders.created_at) = ?"
+        values += [start_date.to_date]
+      end
+
+      if !end_date.blank?
+        query += " AND date(orders.end_date) = ?"
+        values += [end_date.to_date]
       end
 
       if !id.blank?
@@ -54,15 +57,9 @@ class OrdersController < ApplicationController
       end
 
       @orders = @orders.where(query, *values)
-
-      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
-
-      if (start_date && end_date) && (start_date > end_date)
-        flash.now[:warning] = "A data inicial deve ser menor do que a final."
-      end
-    else
-      @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
     end
+    
+    @orders = @orders.where('orders.school_id = ?', current_user.school.id) if is_school?(current_user)
 
     @orders = @orders.in_order_of(:status, list_status).order("orders.id DESC").page(params[:page]).per(params[:limit])
 
