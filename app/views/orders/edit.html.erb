@@ -105,34 +105,34 @@
 	    			<div id="admin-data" class="tab-data <%= 'current' if is_admin?(current_user) %>">
 			      	<div class="row">
 			      		<div class="col-12 col-sm-4 col-lg-4">
-			      			<%= f.input :status, required: false, label: "Status", collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+			      			<%= f.input :status, required: false, label: "Status", selected: @status, collection: list_status, include_blank: "Selecione o status...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 								</div>	
 
 								<div class="col-12 col-sm-4 col-lg-4">
-			      			<%= f.input :o_type, required: false, label: "Tipo de OS", collection: list_types, include_blank: "Selecione o tipo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
+			      			<%= f.input :o_type, required: false, label: "Tipo de OS", selected: @o_type, collection: list_types, include_blank: "Selecione o tipo...", label_html: { class: "form-label" }, wrapper_html: { class: "custom-select" } %>
 								</div> 
 							</div>
 
 		      		<% if Stuff.find(@order.stuff_id).category == "PC/Notebook" %>
 								<div class="row m-t-25">
 									<div class="col-12 col-sm-4 col-lg-4">
-			      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+			      				<%= f.input :backup, required: false, label: "Necessário backup?", as: :radio_buttons, checked: @backup, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
 									</div>
 
 									<div class="col-12 col-sm-4 col-lg-4">
-			      				<%= s.input :defaulted, required: false, label: "O equipamento está padronizado?", as: :radio_buttons, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
+			      				<%= s.input :defaulted, required: false, label: "O equipamento está padronizado?", as: :radio_buttons, checked: @defaulted, collection: ['Sim', 'Não'], wrapper_html: { class: "boolean m-t-0" } %>
 									</div>
 								</div>
 							<% end %>
 
 			      	<div class="row m-t-25">
 			      		<div class="col-12 col-md-6 col-lg-8">
-		          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" }, input_html: { class: "tinymce" } %>
+		          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" }, input_html: { value: @performed_service, class: "tinymce" } %>
 		          		<%= tinymce %>
 		          	</div>     		
 
 								<div class="col-12 col-md-6 col-lg-4">
-		          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" }, input_html: { rows: "5", class: "tinymce" } %>
+		          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" }, input_html: { value: @obs, rows: "5", class: "tinymce" } %>
 		          		<%= tinymce %>
 		          	</div>    
 			      	</div>
@@ -142,11 +142,11 @@
 	      				<h3 class="uppercase highlight">Técnico responsável</h3>
 
 	      				<div class="col-12 col-sm-6 col-lg-4">
-		          		<%= f.input :removal_technicians, required: false, label: "Retirada", collection: @technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem retirou o equipamento?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
+		          		<%= f.input :removal_technicians, required: false, label: "Retirada", selected: @removal_technicians, collection: @technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem retirou o equipamento?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
 								</div>   		
 
 								<div class="col-12 col-sm-6 col-lg-4">
-									<%= f.input :maintenance_technicians, required: false, label: "Manutenção", collection: @technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem fez a manutenção?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
+									<%= f.input :maintenance_technicians, required: false, label: "Manutenção", selected: @maintenance_technicians, collection: @technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem fez a manutenção?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
 		          	</div>   
 
 			      	</div>
@@ -156,8 +156,8 @@
           			<h3 class="uppercase highlight">Data</h3>
           			
 		          	<div class="col content-inline">
-									<%= f.input :start_date, required: false, html5: true, label: "Inicial", label_html: { class: "form-label" } %>
-									<%= f.input :end_date, required: false, html5: true, label: "Final", label_html: { class: "form-label" }, wrapper_html: { class: "m-t-0" } %>
+									<%= f.input :start_date, required: false, html5: true, label: "Inicial", label_html: { class: "form-label" }, input_html: { value: @start_date } %>
+									<%= f.input :end_date, required: false, html5: true, label: "Final", label_html: { class: "form-label" }, wrapper_html: { class: "m-t-0" }, input_html: { value: @end_date } %>
 				      	</div>
           		</div>
 				    </div>

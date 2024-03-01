@@ -163,10 +163,17 @@ class OrdersController < ApplicationController
     @patrimony = params[:order][:stuff_attributes][:patrimony] || ""
     category = params[:order][:stuff_attributes][:category]
     brand = params[:order][:stuff_attributes][:brand]
-    defaulted = params[:order][:stuff_attributes][:defaulted]
+    @defaulted = params[:order][:stuff_attributes][:defaulted]
+    @status = params[:order][:status]
+    @o_type = params[:order][:o_type]
+    @backup = params[:order][:backup]
+    @performed_service = params[:order][:performed_service]
+    @obs = params[:order][:obs]
+    @removal_technicians = params[:order][:removal_technicians]
+    @maintenance_technicians = params[:order][:maintenance_technicians]
+    @start_date = params[:order][:start_date]
+    @end_date = params[:order][:end_date]
     school_id = params[:order][:school_id]
-    start_date = params[:order][:start_date]
-    end_date = params[:order][:end_date]
     stuff = Stuff.find_by_patrimony(@patrimony)
     stuff_school = stuff.school_id.to_s unless stuff.nil?
 
@@ -177,12 +184,24 @@ class OrdersController < ApplicationController
       end
     end
 
-    if !start_date.blank? && !end_date.blank? && start_date > end_date
+    if is_admin?(current_user) && ["Para retirada", "Concluído", "Para doação", "Aguardando descarte", "Descarte"].include?(@status)
+      if @maintenance_technicians == [""]
+        allow_update = false
+        message = "Por favor, defina o(s) técnico(s) responsável(is) pela manutenção."
+      elsif @end_date.blank?
+        allow_update = false
+        message = "Por favor, defina uma data final."
+      end
+
+      flash.now[:warning] = message 
+    end
+
+    if !@start_date.blank? && !@end_date.blank? && @start_date > @end_date
       allow_update = false
       flash.now[:warning] = "A data final deve ser maior do que a inicial."
     end
 
-    if (!start_date.blank? && start_date.to_datetime > Date.today) || (!end_date.blank? && end_date.to_datetime > Date.today)
+    if (!@start_date.blank? && @start_date.to_datetime > Date.today) || (!@end_date.blank? && @end_date.to_datetime > Date.today)
       allow_update = false
       flash.now[:warning] = "As datas inicial/final devem ser menores que a data de hoje."
     end
@@ -195,7 +214,7 @@ class OrdersController < ApplicationController
       @order_params = order_params.except(:stuff_attributes)
       stuff_update = true
     elsif stuff.nil? 
-      @new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id, defaulted: defaulted)
+      @new_stuff = Stuff.new(category: category, patrimony: @patrimony, brand: brand, school_id: school_id, defaulted: @defaulted)
       @order_params = order_params.except(:stuff_attributes)
     else
       @order_params = order_params
@@ -208,7 +227,7 @@ class OrdersController < ApplicationController
       end
 
       if stuff_update
-        stuff.update(category: category, brand: brand, defaulted: defaulted)
+        stuff.update(category: category, brand: brand, defaulted: @defaulted)
       end
 
       flash[:success] = "Dados da OS atualizados com sucesso!"
