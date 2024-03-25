@@ -154,6 +154,16 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @patrimony = @order.stuff.patrimony
+    @defaulted = @order.stuff.defaulted
+    @status = @order.status
+    @o_type = @order.o_type
+    @backup = @order.backup
+    @performed_service = @order.performed_service
+    @obs = @order.obs
+    @removal_technicians = @order.removal_technicians
+    @maintenance_technicians = @order.maintenance_technicians
+    @start_date = @order.start_date
+    @end_date = @order.end_date
   end
 
   def update

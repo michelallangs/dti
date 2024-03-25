@@ -10,7 +10,6 @@ ready = function() {
   var body = $(".container-body");
   var parentWidth = header.width();
   var sticky = header.offset().top;
-  console.log(parentWidth);
 
   function pinHeader() {
     if ($(".main-container").scrollTop() > sticky) {
