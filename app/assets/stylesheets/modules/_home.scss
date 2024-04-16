@@ -79,6 +79,82 @@
 				padding: 5px 25px;
 			}
 		}
+
+		.feature-card {
+			font-size: calc(4px + .8vw);
+			padding: calc(4px + 0.75vw) calc(4px + 1vw);
+    	border-radius: 5px;
+			height: calc(40px + 8vw);
+			background-color: white;
+    	display: flex;
+    	align-items: flex-end;
+    	justify-content: flex-start;
+    	flex-direction: column;
+    	overflow: hidden;
+    	position: relative;
+    	@include prefix(box-shadow, (rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px));
+
+    	&:after {
+    		content: "";
+    		width: 150%;
+    		height: 50%;
+    		position: absolute;
+    		left: -25%;
+    		transform: rotate(5deg);
+    	}
+
+    	&:after {
+    		bottom: -15%;
+    	}
+
+    	h1 {
+    		font-weight: 100;
+    	}
+
+    	p {
+    		font-weight: 300;
+    	}
+
+    	&.last-month {
+	    	&:after {
+	    		background-color: $purple;
+	    	}
+
+	    	* {
+	    		color: $purple;
+	    	}
+    	}
+
+    	&.last-2-months {
+	    	&:after {
+	    		background-color: $blue;
+	    	}
+
+	    	* {
+	    		color: $blue;
+	    	}
+    	}
+
+    	&.last-3-months {
+    		&:after {
+	    		background-color: $orange;
+	    	}
+
+	    	* {
+	    		color: $orange;
+	    	}
+    	}
+
+    	&.last-4-months {
+    		&:after {
+	    		background-color: $green;
+	    	}
+
+	    	* {
+	    		color: $green;
+	    	}
+    	}
+		}
 	}
 
 	&.profile {
