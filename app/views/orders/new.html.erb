@@ -41,7 +41,7 @@
 					<div id="school-data" class="tab-data current">
 		      	<div class="row">
 		      		<%= content_tag :div, "", class: "col-12 col-sm-6 col-md-4 col-lg-3" do %>
-	      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
+	      				<%= f.input :school_id, label: "Unidade", collection: @schools, include_blank: "Selecione a sua unidade...", label_html: { class: "form-label" }, input_html: { class: "select2-dropdown" } %>
 	    				<% end if is_admin?(current_user) %>
 
 		      		<div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -65,11 +65,11 @@
 	          	</div>
 
 	          	<div class="col-12 col-sm-4">
-	        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
+	        			<%= s.input :brand, required: false, label: "Marca/modelo", collection: list_brands, include_blank: "Selecione o modelo...", label_html: { class: "form-label" }, input_html: { class: "select2-dropdown" } %>
 	          	</div>
 
 	          	<div class="col-12 col-sm-4">
-	        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, input_html: { class: "chosen-select" } %>
+	        			<%= f.input :spot, required: false, label: "Local de instalação", collection: list_spots, include_blank: "Selecione o local de instalação...", label_html: { class: "form-label" }, input_html: { class: "select2-dropdown" } %>
 	          	</div>
 	        	</div>
 
@@ -116,11 +116,11 @@
       				<h3 class="uppercase highlight">Técnico responsável</h3>
 
       				<div class="col-12 col-sm-6 col-lg-4">
-	          		<%= f.input :removal_technicians, required: false, label: "Retirada", collection: @technicians, selected: @r_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem retirou o equipamento?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
+	          		<%= f.input :removal_technicians, required: false, label: "Retirada", collection: @technicians, selected: @r_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem retirou o equipamento?", title: "Pressione CTRL para marcar/desmarcar", class: "select2-dropdown" }, label_html: { class: "form-label" } %>
 							</div>   		
 
 							<div class="col-12 col-sm-6 col-lg-4">
-								<%= f.input :maintenance_technicians, required: false, label: "Manutenção", collection: @technicians, selected: @m_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem fez a manutenção?", title: "Pressione CTRL para marcar/desmarcar", class: "chosen-select" }, label_html: { class: "form-label" } %>
+								<%= f.input :maintenance_technicians, required: false, label: "Manutenção", collection: @technicians, selected: @m_technicians, include_blank: false, input_html: { multiple: true, "data-placeholder" => "Quem fez a manutenção?", title: "Pressione CTRL para marcar/desmarcar", class: "select2-dropdown" }, label_html: { class: "form-label" } %>
 	          	</div>   
 
 		      	</div>

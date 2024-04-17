@@ -1,5 +1,5 @@
 //= require tinymce
-//= require jquery3
+//= require jquery
 //= require popper
 //= require bootstrap
 //= require jquery.turbolinks
@@ -10,6 +10,7 @@
 //= require chartkick
 //= require Chart.bundle
 //= require chosen-jquery
+//= require select2-full
 
 //= require_tree .
 
@@ -44,6 +45,14 @@ ready = function() {
     branding: false,
     toolbar: "styleselect | bold italic underline | undo redo | aligncenter alignleft alignright | bullist numlist | table",
     plugins: "lists"
+  });
+
+  $(".select2-dropdown, .select2-dropdown-multiple").select2({
+    language: { 
+      "noResults": function(){
+         return "Nenhum dado encontrado";
+      }
+    }   
   });
 };
 
