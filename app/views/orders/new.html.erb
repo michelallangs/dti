@@ -76,7 +76,6 @@
 	          <div class="row m-t-25">
 	          	<div class="col">
 	          		<%= f.input :defect, required: false, label: "Defeito apresentado", as: :text, label_html: { class: "form-label" }, input_html: { class: "tinymce" } %>
-	          		<%= tinymce %>
 	          	</div>
 	          </div>
           </div>
@@ -105,12 +104,10 @@
 		      	<div class="row m-t-25">
 		      		<div class="col-12 col-md-6 col-lg-8">
 	          		<%= f.input :performed_service, required: false, label: "Serviço realizado", as: :text, label_html: { class: "form-label" }, input_html: { class: "tinymce" } %>
-	          		<%= tinymce %>
 	          	</div>     		
 
 							<div class="col-12 col-md-6 col-lg-4">
 	          		<%= f.input :obs, required: false, label: "Observações", as: :text, label_html: { class: "form-label" }, input_html: { rows: "5", class: "tinymce" } %>
-	          		<%= tinymce %>
 	          	</div>    
 		      	</div>
 

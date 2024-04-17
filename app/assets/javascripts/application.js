@@ -35,6 +35,16 @@ ready = function() {
   }).ajaxStop(function() {
     $(".spinner").stop().hide();
   });
+
+  tinymce.init({
+    selector: '.tinymce',  // change this value according to your HTML
+    license_key: 'gpl',
+    menubar: false,
+    resize: false,
+    branding: false,
+    toolbar: "styleselect | bold italic underline | undo redo | aligncenter alignleft alignright | bullist numlist | table",
+    plugins: "lists"
+  });
 };
 
 $(document).ready(ready);
