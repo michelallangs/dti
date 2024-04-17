@@ -9,7 +9,6 @@
 //= require bootstrap-datepicker
 //= require chartkick
 //= require Chart.bundle
-//= require chosen-jquery
 //= require select2-full
 
 //= require_tree .

@@ -30,7 +30,6 @@ gem 'kaminari'
 gem 'tinymce-rails'
 gem 'chartkick'
 gem 'groupdate'
-gem 'chosen-rails'
 gem "select2-rails"
 gem 'breadcrumbs_on_rails'
 
