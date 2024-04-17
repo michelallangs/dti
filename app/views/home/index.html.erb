@@ -29,6 +29,19 @@
 		</div>
 	</div>
 
+	<div class="row schools-orders-cards">
+		<h1 class="schools-orders-cards-title">Atendimentos por unidade nos últimos <span>3 meses</span></h1>
+
+		<% @schools.each do |s| %>
+			<div orders-count=<%= s.orders.count %> class="school-order-card col-12 col-md-6">
+				<div class="content">
+					<div class="title"><%= s.usual_name %></div>
+					<div class="text"><%= s.full_name %></div>
+				</div>
+			</div>
+		<% end %>
+	</div>
+
 	<div class="row m-t-25">
 		<div class="col-12">
 			<div class="card">

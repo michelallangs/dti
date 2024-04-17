@@ -155,6 +155,132 @@
 	    	}
     	}
 		}
+
+		.schools-orders-cards-title {
+			font-size: 2em;
+			line-height: 20px;
+			font-weight: 300;
+			text-transform: uppercase;
+			margin-bottom: 25px;
+
+			span {
+				font-weight: 600;
+			}
+
+			i {
+				display: block;
+				text-transform: none;
+				font-size: .5em;
+			}
+		}
+
+		.schools-orders-cards,
+		.schools-orders-cards * {
+		  padding-bottom: 0;
+		}
+
+		.schools-orders-cards {
+		  list-style: none;
+		  counter-reset: cardCount;
+		  font-family: sans-serif;
+		  --cardsGap: 1rem;
+		  padding-bottom: var(--cardsGap);
+		  margin: 50px 0;
+		}
+		
+		.schools-orders-cards .school-order-card {
+		  counter-increment: cardCount;
+		  display: flex;
+		  color: white;
+		  --labelOffset: 1rem;
+		  --arrowClipSize: 1.5rem;
+		  margin-top: var(--labelOffset);
+
+		  &:nth-of-type(4n+2)::before,
+		  &:nth-of-type(4n+2) .content,
+		  &:nth-of-type(4n+3)::before,
+		  &:nth-of-type(4n+3) .content {
+		  	background-color: $grey;
+		  }
+		}
+
+		.schools-orders-cards .school-order-card::before {
+		  content: attr(orders-count);
+		  background: white;
+		  color: $dark-blue;
+		  font-size: 2em;
+		  font-weight: 700;
+		  transform: translateY(calc(-1 * var(--labelOffset)));
+		  margin-right: calc(-1 * var(--labelOffset));
+		  z-index: 1;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  padding-inline: 0.5em;
+		}
+
+		.schools-orders-cards .school-order-card .content {
+		  background-color: white;
+		  --inlinePadding: 1em;
+		  --boxPadding: 1em;
+		  display: flex;
+		  flex-direction: column;
+		  padding: var(--boxPadding) calc(var(--inlinePadding) + var(--arrowClipSize))
+		    var(--boxPadding) calc(var(--inlinePadding) + var(--labelOffset));
+		  grid-template-areas:
+		    "icon title"
+		    "icon text";
+		  gap: 0.5em 1em;
+		  clip-path: polygon(
+		    0 0,
+		    calc(100% - var(--arrowClipSize)) 0,
+		    100% 50%,
+		    calc(100% - var(--arrowClipSize)) 100%,
+		    calc(100% - var(--arrowClipSize)) calc(100% + var(--cardsGap)),
+		    0 calc(100% + var(--cardsGap))
+		  );
+		  position: relative;
+		  width: 100%;
+		}
+
+		.schools-orders-cards .school-order-card .content::before {
+		  content: "";
+		  position: absolute;
+		  width: var(--labelOffset);
+		  height: var(--labelOffset);
+		  background: var(--cardColor);
+		  left: 0;
+		  bottom: 0;
+		  clip-path: polygon(0 0, 100% 0, 0 100%);
+		  filter: brightness(0.75);
+		}
+
+		.schools-orders-cards .school-order-card .content::after {
+		  content: "";
+		  position: absolute;
+		  height: var(--cardsGap);
+		  width: var(--cardsGap);
+		  background: linear-gradient(to right, rgba(0, 0, 0, 0.25), transparent 50%);
+		  left: 0;
+		  top: 100%;
+		}
+
+		.schools-orders-cards .school-order-card .icon {
+		  grid-area: icon;
+		  align-self: center;
+		  font-size: 2em;
+		}
+
+		.schools-orders-cards .school-order-card .content .title {
+		  grid-area: title;
+		  font-size: 1.25em;
+		  text-transform: uppercase;
+		  font-weight: 600;
+		}
+
+		.schools-orders-cards .school-order-card .content .text {
+		  grid-area: text;
+		}
 	}
 
 	&.profile {
