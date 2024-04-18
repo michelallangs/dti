@@ -1,16 +1,17 @@
 class HomeController < ApplicationController
-	helper_method [:orders_per_user]
+	helper_method [:orders_per_user, :orders_per_school]
 
 	def index
 		@users = User.where("is_technician = 'Sim'").order("name ASC")
 		@orders = Order.all
 		@orders = @orders.where('school_id = ?', current_user.school.id) if is_school?(current_user)
 		@last_orders = @orders.order("updated_at DESC").first(5)	
-		@orders_last_month = @orders.where(status: ["Em manutenção", "Para retirada", "Concluído"], updated_at: (Time.now - 1.month)..Time.now).count
-		@orders_last_2_months = @orders.where(status: ["Em manutenção", "Para retirada", "Concluído"], updated_at: (Time.now - 2.months)..(Time.now - 1.month)).count
-		@orders_last_3_months = @orders.where(status: ["Em manutenção", "Para retirada", "Concluído"], updated_at: (Time.now - 3.months)..(Time.now - 2.months)).count
-		@orders_last_4_months = @orders.where(status: ["Em manutenção", "Para retirada", "Concluído"], updated_at: (Time.now - 4.months)..(Time.now - 3.months)).count
-		@schools = School.left_joins(:orders).group(:id).where('orders.updated_at >= ? AND orders.updated_at < ?', Time.now - 3.months, Time.now).order('COUNT(orders.id) DESC')
+		status = ["Em manutenção", "Para retirada", "Concluído"]
+		@orders_last_month = @orders.where(status: status, updated_at: (Time.now - 1.month)..Time.now).count
+		@orders_last_2_months = @orders.where(status: status, updated_at: (Time.now - 2.months)..(Time.now - 1.month)).count
+		@orders_last_3_months = @orders.where(status: status, updated_at: (Time.now - 3.months)..(Time.now - 2.months)).count
+		@orders_last_4_months = @orders.where(status: status, updated_at: (Time.now - 4.months)..(Time.now - 3.months)).count
+		@schools = School.left_joins(:orders).group(:id).order('COUNT(orders.id) DESC').limit(10)
 	end
 
 	def profile
@@ -36,6 +37,10 @@ class HomeController < ApplicationController
 		users.map { |user|
 			{ user.first_name => orders.where("maintenance_technicians LIKE ? AND updated_at > ?", "%#{user.id}%", 30.days.ago).count }
 		}.reduce(:merge)
+	end
+
+	def orders_per_school(school)
+		school.orders.where(updated_at: (Time.now - 3.months)..Time.now).count
 	end
 end
 
