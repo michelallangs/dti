@@ -55,22 +55,27 @@
 
 .btn-success {
   background-color: $green;
+  box-shadow: 0 5px 20px -5px $green;
 }
 
 .btn-info {
   background-color: $blue;
+  box-shadow: 0 5px 20px -5px $blue;
 }
 
 .btn-cancel {
   background-color: #d6d6d6;
+  box-shadow: 0 5px 20px -5px #d6d6d6;
 }
 
 .btn-alert {
   background-color: $alert;
+  box-shadow: 0 5px 20px -5px $alert;
 }
 
 .btn-warning {
   background-color: $warning;
+  box-shadow: 0 5px 20px -5px $warning;
 }
 
 .btn-icon {

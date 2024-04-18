@@ -48,15 +48,16 @@ Rails.application.routes.draw do
   end
 
   controller :orders do
-    get    '/os',                       action: :index,             as: :orders
-    get    '/os/abrir-os',              action: :new,               as: :new_order
-    post   '/os/abrir-os',              action: :create,            as: false
-    get    '/os/editar-os/:id',         action: :edit,              as: :edit_order
-    patch  '/os/editar-os/:id',         action: :update,            as: false
-    put    '/os/editar-os/:id',         action: :update,            as: false
-    delete '/os/excluir-os/:id',        action: :destroy,           as: :destroy_order
-    get    '/os/:id',                   action: :show,              as: :order
-    get    '/os/imprimir-os/:id',       action: :print_order,       as: :print_order
+    get    '/os',                       action: :index,                  as: :orders
+    get    '/os/abrir-os',              action: :new,                    as: :new_order
+    post   '/os/abrir-os',              action: :create,                 as: false
+    get    '/os/editar-os/:id',         action: :edit,                   as: :edit_order
+    patch  '/os/editar-os/:id',         action: :update,                 as: false
+    put    '/os/editar-os/:id',         action: :update,                 as: false
+    delete '/os/excluir-os/:id',        action: :destroy,                as: :destroy_order
+    get    '/os/:id',                   action: :show,                   as: :order
+    get    '/os/imprimir-os/:id',       action: :print_order,            as: :print_order
+    get    '/imprimir-relatorio',    action: :print_orders_report,    as: :print_orders_report
   end
 
   controller :stuffs do

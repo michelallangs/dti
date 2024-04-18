@@ -693,8 +693,10 @@
 		}
 	}
 
-	&.print_order {
+	&.print_order,
+	&.print_orders_report {
 		font-size: 10px;
+		position: relative;
 
 		.print-area {
 			display: flex;
@@ -785,6 +787,200 @@
 				a img {
 					max-width: 75%;
 					margin: 0 auto;
+				}
+			}
+		}
+	}
+
+	&.print_orders_report {
+		.print-area {
+			overflow: hidden;
+
+			&:before {
+				content: "";
+				width: 50em;
+				height: 50em;
+				border-radius: 50%;
+				background-color: $dark-blue;
+				position: absolute;
+				top: -25em;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			> .content {
+				z-index: 10;
+				display: flex;
+				justify-content: center;
+				flex-direction: column;
+
+				header {
+					display: flex;
+					flex-direction: column;
+					gap: 0;
+
+					h1, p {
+						color: $primary-color;
+					}
+				}
+
+				.feature-card {
+					border-radius: 5px;
+					background-image: linear-gradient(#f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eee 100%);
+					padding: 25px;
+					min-height: 5em;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+					font-size: 1.5em;
+
+					h1, p {
+						color: $dark-blue;
+					}
+
+					h1 {
+						font-weight: 600;
+					}
+				}
+
+				footer {
+					padding: 15px 0;
+				}
+			}
+		}
+
+		.schools-orders-cards-title,
+		.orders-types-title {
+			font-size: 2em;
+			line-height: 20px;
+			font-weight: 300;
+			text-transform: uppercase;
+			color: $secondary-color;
+			margin-top: 15px;
+			text-align: center;
+
+			span {
+				font-weight: 600;
+			}
+
+			i {
+				display: block;
+				text-transform: none;
+				font-size: .5em;
+			}
+		}
+
+		.schools-orders-cards,
+		.schools-orders-cards * {
+		  padding-bottom: 0;
+		}
+
+		.schools-orders-cards {
+		  list-style: none;
+		  counter-reset: cardCount;
+		  font-family: sans-serif;
+		  --cardsGap: 1rem;
+		  padding-bottom: var(--cardsGap);
+		}
+		
+		.schools-orders-cards .school-order-card {
+		  counter-increment: cardCount;
+		  display: flex;
+		  color: white;
+		  --labelOffset: 1rem;
+		  --arrowClipSize: 1.5rem;
+		  margin-top: var(--labelOffset);
+		}
+
+		.schools-orders-cards .school-order-card::before {
+		  content: attr(orders-count);
+		  background: #f1f1f1;
+		  color: $dark-blue;
+		  font-size: 2em;
+		  font-weight: 700;
+		  transform: translateY(calc(-1 * var(--labelOffset)));
+		  margin-right: calc(-1 * var(--labelOffset));
+		  z-index: 1;
+		  display: flex;
+		  justify-content: center;
+		  align-items: center;
+		  padding-inline: 0.5em;
+		  border-radius: 5px;
+		}
+
+		.schools-orders-cards .school-order-card .content {
+		  border-radius: 5px;
+		  background-color: #f1f1f1;
+		  --inlinePadding: 1em;
+		  --boxPadding: 1em;
+		  display: flex;
+		  padding: var(--boxPadding) calc(var(--inlinePadding) + var(--arrowClipSize))
+		    var(--boxPadding) calc(var(--inlinePadding) + var(--labelOffset));
+		  grid-template-areas:
+		    "icon title"
+		    "icon text";
+		  gap: 0.5em 1em;
+		  position: relative;
+		  width: 100%;
+		  white-space: nowrap;
+		  align-items: center;
+		}
+
+		.schools-orders-cards .school-order-card .content::before {
+		  content: "";
+		  position: absolute;
+		  width: var(--labelOffset);
+		  height: var(--labelOffset);
+		  background: var(--cardColor);
+		  left: 0;
+		  bottom: 0;
+		  clip-path: polygon(0 0, 100% 0, 0 100%);
+		  filter: brightness(0.75);
+		}
+
+		.schools-orders-cards .school-order-card .icon {
+		  grid-area: icon;
+		  align-self: center;
+		  font-size: 2em;
+		}
+
+		.schools-orders-cards .school-order-card .content .title {
+		  grid-area: title;
+		  font-size: 1em;
+		  text-transform: uppercase;
+		  font-weight: 600;
+		}
+
+		.schools-orders-cards .school-order-card .content .text {
+		  grid-area: text;
+		  font-size: .75em;
+		}
+
+		.orders-types {
+			justify-content: center;
+			.order-type {
+				.content {
+					display: flex;
+					gap: 15px;
+					font-size: 1.25em;
+					align-items: center;
+					background-color: #f1f1f1;
+			    padding: 15px;
+			    border-radius: 5px;
+
+					.count {
+						width: 20px;
+						color: $dark-blue;
+						font-weight: 600;
+						font-size: 2em;
+						text-align: center;
+					}
+
+					.text {
+						width: calc(100% - 55px);
+						font-weight: 600;
+					}
 				}
 			}
 		}

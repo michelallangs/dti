@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
-  helper_method [:get_patrimony, :get_user, :order_updated_at, :created_by]
+  helper_method [:get_patrimony, :get_user, :order_updated_at, :created_by, :orders_per_school, :orders_by_type]
   before_action :stuff_category
   before_action :technicians, only: [:index, :new, :create, :edit, :update]
   before_action :schools, only: [:new, :create, :edit, :update]
   autocomplete :stuff, :patrimony, full: true
   autocomplete :school, :name, full: true
-  layout "print", only: :print_order
+  layout "print", only: [:print_order, :print_orders_report]
   add_breadcrumb "ordens de serviço".html_safe, :orders_path
   add_breadcrumb "abertura de os".html_safe, :new_order_path, only: [:new, :create]
   add_breadcrumb "editar dados da os".html_safe, :edit_order_path, only: [:edit, :update]
@@ -276,6 +276,16 @@ class OrdersController < ApplicationController
     @stuff_type = "#{@stuff.category} - #{@stuff.brand} (#{@order.spot})" 
   end
 
+  def print_orders_report
+    @orders = Order.all
+    status = ["Em manutenção", "Para retirada", "Concluído"]
+    @orders_last_month = @orders.where("status IN (?) AND updated_at > ?", status, 1.month.ago).count
+    @orders_last_2_months = @orders.where("status IN (?) AND updated_at >= ? AND updated_at < ?", status, 2.months.ago, 1.month.ago).count
+    @orders_last_3_months = @orders.where("status IN (?) AND updated_at > ? AND updated_at < ?", status, 3.months.ago, 2.months.ago).count
+
+    @schools = School.left_joins(:orders).where('orders.updated_at >= ?', 3.months.ago).group("schools.id").order("COUNT(orders.id) DESC").limit(10)
+  end
+
   def stuff_category
     @stuff_category = is_admin?(current_user) ? "CATEGORIA DO EQUIPAMENTO" : "Selecione a categoria do equipamento"
     return @stuff_category
@@ -322,5 +332,13 @@ class OrdersController < ApplicationController
   def schools
     @schools = School.all.collect {|s| [ s.name, s.id ] }
     @schools = @schools.sort_by {|label,code| Iconv.iconv('ascii//ignore//translit', 'utf-8', label).to_s}
+  end
+
+  def orders_per_school(school)
+    school.orders.where('orders.updated_at > ?', 3.months.ago).count
+  end
+
+  def orders_by_type(type)
+    Order.where(o_type: type).count
   end
 end

@@ -5,6 +5,10 @@
 
 			<div class="right-content">
 				<div class="action-buttons">
+					<%= link_to print_orders_report_path, alt: "Gerar relatório de OS", title: "Gerar relatório de OS", target: "_blank", class: "btn-icon" do %>
+						<span class="material-symbols-outlined md-20">summarize</span>
+					<% end if is_admin?(current_user) %>
+
 					<%= link_to request.params.merge(view: "grid"), alt: "Modo de exibição: quadros", title: "Modo de exibição: quadros", class: "as-grid btn-icon active", id: "grid" do %>
 						<span class="material-symbols-outlined md-20">grid_view</span>
 					<% end %>

@@ -1,0 +1,64 @@
+<div class="print-area print-orders-report">
+  <div class="content">
+    <header>
+      <h1>Relatório de atendimentos</h1>
+      <p>Total de ordens de serviços atendidas nos últimos meses</p>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <div class="feature-card last-month">
+            <h1><%= @orders_last_month %></h1>
+            <p><%= l(1.month.ago, format: '%B') %></p>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="feature-card last-2-months">
+            <h1><%= @orders_last_2_months %></h1>
+            <p><%= l(2.months.ago, format: '%B') %></p>
+          </div>
+        </div>
+
+        <div class="col-4">
+          <div class="feature-card last-3-months">
+            <h1><%= @orders_last_3_months %></h1>
+            <p><%= l(3.months.ago, format: '%B') %></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="row schools-orders-cards">
+        <h1 class="schools-orders-cards-title">Atendimentos por unidade nos últimos <span>3 meses</span></h1>
+
+        <% @schools.each do |s| %>
+          <div orders-count=<%= orders_per_school(s) %> class="school-order-card col-6">
+            <div class="content">
+              <div class="title"><%= s.usual_name %></div>
+              <div class="text"><%= s.full_name %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="row orders-types">
+        <h1 class="orders-types-title">Descritivo de chamados por <span>tipo</span></h1>
+
+        <% list_types.each do |lt| %>
+          <div class="order-type col-4">
+            <div class="content">
+              <div class="count"><%= orders_by_type(lt) %></div>
+              <div class="text"><%= lt %></div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <%= link_to image_tag("logo.png"), "https://taubate.sp.gov.br/", target: "_blank", class: 'logo-pref-taubate' %>
+    <p>SEED - Secretaria Municipal de Educação | CNPJ 45.176.005/0001-08 | Praça Oito de Maio, 37 - Centro - Taubaté - SP</p>
+  </footer>
+</div>
