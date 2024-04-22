@@ -3,28 +3,28 @@
 		<div class="col-3">
 			<div class="feature-card last-month">
 				<h1><%= @orders_last_month %></h1>
-				<p><%= l(Time.now - 1.month, format: '%B') %></p>
+				<p><%= l(1.month.ago, format: '%B') %></p>
 			</div>
 		</div>
 
 		<div class="col-3">
 			<div class="feature-card last-2-months">
 				<h1><%= @orders_last_2_months %></h1>
-				<p><%= l(Time.now - 2.month, format: '%B') %></p>
+				<p><%= l(2.month.ago, format: '%B') %></p>
 			</div>
 		</div>
 
 		<div class="col-3">
 			<div class="feature-card last-3-months">
 				<h1><%= @orders_last_3_months %></h1>
-				<p><%= l(Time.now - 3.month, format: '%B') %></p>
+				<p><%= l(3.months.ago, format: '%B') %></p>
 			</div>
 		</div>
 
 		<div class="col-3">
 			<div class="feature-card last-4-months">
 				<h1><%= @orders_last_4_months %></h1>
-				<p><%= l(Time.now - 4.month, format: '%B') %></p>
+				<p><%= l(4.months.ago, format: '%B') %></p>
 			</div>
 		</div>
 	</div>

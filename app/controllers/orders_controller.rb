@@ -279,9 +279,10 @@ class OrdersController < ApplicationController
   def print_orders_report
     @orders = Order.all
     status = ["Em manutenção", "Para retirada", "Concluído"]
-    @orders_last_month = @orders.where("status IN (?) AND updated_at > ?", status, 1.month.ago).count
-    @orders_last_2_months = @orders.where("status IN (?) AND updated_at >= ? AND updated_at < ?", status, 2.months.ago, 1.month.ago).count
-    @orders_last_3_months = @orders.where("status IN (?) AND updated_at > ? AND updated_at < ?", status, 3.months.ago, 2.months.ago).count
+    @orders_last_month = @orders.where("status IN (?) AND (EXTRACT(MONTH FROM updated_at))::integer = ?", status, 1.month.ago.month).count
+    @orders_last_2_months = @orders.where("status IN (?) AND (EXTRACT(MONTH FROM updated_at))::integer = ?", status, 2.months.ago.month).count
+    @orders_last_3_months = @orders.where("status IN (?) AND (EXTRACT(MONTH FROM updated_at))::integer = ?", status, 3.months.ago.month).count
+    @orders_last_4_months = @orders.where("status IN (?) AND (EXTRACT(MONTH FROM updated_at))::integer = ?", status, 4.months.ago.month).count
 
     @schools = School.left_joins(:orders).where('orders.updated_at >= ?', 3.months.ago).group("schools.id").order("COUNT(orders.id) DESC").limit(10)
   end
