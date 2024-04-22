@@ -339,6 +339,6 @@ class OrdersController < ApplicationController
   end
 
   def orders_by_type(type)
-    Order.where(o_type: type).count
+    Order.where("o_type = ? AND updated_at > ?", type, 3.months.ago).count
   end
 end
