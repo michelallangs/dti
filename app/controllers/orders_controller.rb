@@ -30,11 +30,11 @@ class OrdersController < ApplicationController
     if !@search.all?(&:blank?)
       patrimony = patrimony.to_s.downcase == "s/p" ? "" : "%#{patrimony}%"
 
-      query = "stuffs.patrimony LIKE ? AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
+      query = "(stuffs.patrimony LIKE ? OR orders.defect LIKE ? OR orders.performed_service LIKE ? OR orders.obs LIKE ?) AND lower(orders.spot) LIKE lower(?) AND lower(stuffs.category) LIKE lower(?) AND 
                lower(stuffs.brand) LIKE lower(?) AND orders.maintenance_technicians LIKE ? AND 
                lower(orders.o_type) LIKE lower(?) AND lower(schools.name_ascii) LIKE lower(?)"
 
-      values = [patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{o_type}%", "%#{school}%"]
+      values = [patrimony, patrimony, patrimony, patrimony, "%#{spot}%", "%#{category}%", "%#{brand}%", "%#{technician}%", "%#{o_type}%", "%#{school}%"]
 
       if !start_date.blank?
         query += " AND date(orders.created_at) = ?"
