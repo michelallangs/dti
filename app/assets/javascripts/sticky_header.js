@@ -6,7 +6,7 @@ ready = function() {
   });
 
   var header = $(".container-header");
-  var breadcrumbsH = $(".breadcrumbs").outerHeight()*3;
+  var breadcrumbsH = $(".breadcrumbs").outerHeight();
   var headerH = header.outerHeight();
   var body = $(".main-container");
   var parentWidth = header.width();
