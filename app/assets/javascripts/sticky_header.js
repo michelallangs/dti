@@ -6,8 +6,9 @@ ready = function() {
   });
 
   var header = $(".container-header");
+  var breadcrumbsH = $(".breadcrumbs").outerHeight()*3;
   var headerH = header.outerHeight();
-  var body = $(".container-body");
+  var body = $(".main-container");
   var parentWidth = header.width();
   var sticky = header.offset().top;
 
@@ -15,7 +16,7 @@ ready = function() {
     if ($(".main-container").scrollTop() > sticky) {
       header.addClass("sticky");
       header.width(parentWidth);
-      body.css("padding-top", headerH);
+      body.css("padding-top", headerH + breadcrumbsH);
     } else {
       header.removeClass("sticky");
       header.removeAttr("style");
