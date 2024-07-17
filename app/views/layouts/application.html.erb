@@ -22,7 +22,7 @@
   <body <%= body_info %>>
     <%= render 'shared/loading' %>
 
-    <%= render 'modals/no_vehicle' if request.path == "/" || request.path == "/pagina-inicial" %>
+    <%= render 'modals/home' if request.path == "/" || request.path == "/pagina-inicial" %>
 
     <div class="main">
       <span class="menu-icon material-symbols-outlined md-20">menu</span>
